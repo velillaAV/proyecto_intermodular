@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/translations/languagesInicioSesion.dart';
+import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 class Pantallainiciosesion extends StatefulWidget {
@@ -76,7 +77,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   void _contrasenaRecuperada(String valor) {
    String? _contrasenaRecu = Logicausuario.recuperarContrasena(valor);
 
-    if (_contrasenaRecu.isEmpty) {
+    if (_contrasenaRecu == null) {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) =>

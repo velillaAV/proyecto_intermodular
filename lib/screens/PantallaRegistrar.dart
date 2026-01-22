@@ -6,6 +6,7 @@ import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/UserControllers.dart';
+import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 
@@ -86,7 +87,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
    
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const PantallaInicioSesion()),
+        MaterialPageRoute(builder: (context) => const Pantallainiciosesion()),
       );
     }
   }
@@ -94,7 +95,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
   void _cancelar() { //Si el usuario pulsa cancelar se le envia de vuelta a Pantalla de Inicio de sesion
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const PantallaInicioSesion()),
+      MaterialPageRoute(builder: (context) => const Pantallainiciosesion()),
     );
   }
 
