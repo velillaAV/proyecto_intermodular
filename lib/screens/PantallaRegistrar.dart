@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/config/translations/users/languagesPantallaRegistrar.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/UserControllers.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
@@ -144,7 +145,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
           children: [
             SizedBox(width: Dimensiones.paddingEnano),
             Text(
-              Languagesregistrar.getTexto(Languagesregistrar.registrarse),
+              Languagespantallaregistrar.getTexto(Languagesregistrar.registrarse),
               style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
             ),
           ],
@@ -168,7 +169,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Languagesregistrar.getTexto(Languagesregistrar.tratamiento),
+                                Languagespantallaregistrar.getTexto(Languagesregistrar.tratamiento),
                                 style: TextStyle(fontSize: Dimensiones.paddingMediano),
                               ),
                               SizedBox(width: Dimensiones.paddingMediano),

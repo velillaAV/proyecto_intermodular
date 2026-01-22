@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/translations/languagesInicioSesion.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
+import 'package:proyecto_intermodular/controllers/GoogleControllers.dart';
+import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
+import 'package:proyecto_intermodular/screens/PantallaRegistrar.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 class Pantallainiciosesion extends StatefulWidget {
@@ -55,10 +58,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
       ScaffoldMessenger.of(context).showSnackBar(snackBarValidador);
     } else if (Logicausuario.confirmarAdmins(_nombre, _contrasena) == true ||
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const PantallaPrincipalAdmin()),
-      );
+      
     } else {
       Navigator.push(
         context,
@@ -81,7 +81,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) =>
-            AlertDialog(title: Text("Languagesiniciosesion.getTexto(Languagesiniciosesion.noExisteElUsuario)")),
+            AlertDialog(title: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noExisteElUsuario))),
       );
     } else {
       showDialog<String>(
@@ -90,7 +90,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
             AlertDialog(title: Row(
               children: [
                 Text(
-                  "Languagesiniciosesion.getTexto(Languagesiniciosesion.tuContrasenaEs)"
+                  Languagesiniciosesion.getTexto(Languagesiniciosesion.tuContrasenaEs)
                 ),
                 Text(_contrasenaRecu!)
               ],
@@ -132,7 +132,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
           children: [
             SizedBox(width: 10),
             Text(
-              "Languagesiniciosesion.getTexto(Languagesiniciosesion.titulo)",
+              Languagesiniciosesion.getTexto(Languagesiniciosesion.titulo),
               style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
             ),
           ],
@@ -174,7 +174,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                       TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: "Languagesiniciosesion.getTexto(Languagesiniciosesion.nombre)",
+                          labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombre),
                           helperMaxLines: 5,
                         ),
                         onChanged: (value) {
@@ -187,7 +187,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                         decoration: InputDecoration(
                           hoverColor: Color.fromARGB(255, 8, 113, 212),
                           border: OutlineInputBorder(),
-                          labelText: "Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasena)",
+                          labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasena),
                           helperMaxLines: 5,
                         ),
                         onChanged: (value) {
@@ -205,7 +205,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 SizedBox(height: 5),
                 ElevatedButton(
                   onPressed: () async {
-                    final userCredential = await UserControllers.loginGoogle();
+                    final userCredential = await GoogleControllers.loginGoogle();
                     _inicioSesionGoogle(userCredential);
                   },
                   style: CustomStyles.estiloBotones,
@@ -226,11 +226,11 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
               onPressed: () => showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
-                  title: Text("Languagesiniciosesion.getTexto(Languagesiniciosesion.recuperarContrasena)"),
+                  title: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.recuperarContrasena)),
                   content: TextFormField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: "Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreUsuario)",
+                      labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreUsuario),
                     ),
                     onFieldSubmitted: (value) {
                       _contrasenaRecuperada(value);
@@ -239,7 +239,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 ),
               ),
 
-              child: Text("Languagesiniciosesion.getTexto(Languagesiniciosesion.olvidasteContrasena)"),
+              child: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.olvidasteContrasena)),
             ),
           ],
         ),
