@@ -200,7 +200,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 ElevatedButton(
                   onPressed: _inicioSesion,
                   style: CustomStyles.estiloBotones,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text("Languagesiniciosesion.getTexto(Languagesiniciosesion.iniciarSesion)")]),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.iniciarSesion))]),
                 ),
                 SizedBox(height: 5),
                 ElevatedButton(
@@ -217,7 +217,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
             ElevatedButton(
               onPressed: _registrar,
               style: CustomStyles.estiloBotones,
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text("Languagesiniciosesion.getTexto(Languagesiniciosesion.registrarse)")]),
+              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.registrarse))]),
             ),
             //Aquí introducimos la opción de recuperar la contraseña incluyendo dos Alert Dialog, uno para pedir el usuario y otro para mostrar la contraseña en caso de que el usuario
             //sea correcto

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/translations/users/languagesPantallaRegistrar.dart';
+import 'package:proyecto_intermodular/config/utils/Camera.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/UserControllers.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
@@ -145,7 +146,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
           children: [
             SizedBox(width: Dimensiones.paddingEnano),
             Text(
-              Languagespantallaregistrar.getTexto(Languagesregistrar.registrarse),
+              Languagespantallaregistrar.getTexto(Languagespantallaregistrar.registrar),
               style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
             ),
           ],
@@ -169,7 +170,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Languagespantallaregistrar.getTexto(Languagesregistrar.tratamiento),
+                                Languagespantallaregistrar.getTexto(Languagespantallaregistrar.tratamiento),
                                 style: TextStyle(fontSize: Dimensiones.paddingMediano),
                               ),
                               SizedBox(width: Dimensiones.paddingMediano),
@@ -211,7 +212,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                 TextFormField(
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: Languagesregistrar.getTexto(Languagesregistrar.nombre),
+                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.nombre),
                                   ),
                                   onChanged: (value) {
                                     _nombre = value;
@@ -222,7 +223,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: Languagesregistrar.getTexto(Languagesregistrar.contrasena),
+                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.contrasena),
                                   ),
                                   onChanged: (value) {
                                     _contrasena = value;
@@ -233,7 +234,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: Languagesregistrar.getTexto(Languagesregistrar.repiteContrasena),
+                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.repitecontrasena),
                                   ),
                                   onChanged: (value) {
                                     _contrasenaRepetida = value;
@@ -242,10 +243,10 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                 SizedBox(height: Dimensiones.paddingMediano),
                                 Row(
                                   children: [
-                                    Text(Languagesregistrar.getTexto(Languagesregistrar.subeFoto)),
+                                    Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.subeFoto)),
                                     SizedBox(width: 30),
                                     FloatingActionButton.extended(
-                                      label: Text(Languagesregistrar.getTexto(Languagesregistrar.galeria)),
+                                      label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.galeria)),
                                       onPressed: () async {
                                         final path =
                                             await CameraGalleryService()
@@ -258,7 +259,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                     ),
                                     SizedBox(width: 30),
                                     FloatingActionButton.extended(
-                                      label: Text(Languagesregistrar.getTexto(Languagesregistrar.tomarFoto)),
+                                      label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.tomarFoto)),
                                       onPressed: () async {
                                         final path =
                                             await CameraGalleryService()
@@ -277,7 +278,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: Languagesregistrar.getTexto(Languagesregistrar.edad),
+                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.edad),
                                   ),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.digitsOnly
@@ -288,7 +289,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                 ),
                                 SizedBox(height: Dimensiones.paddingMediano),
                                 DropdownMenu(
-                                  label: Text(Languagesregistrar.getTexto(Languagesregistrar.lugarNacimiento)),
+                                  label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.lugarNacimiento)),
                                   initialSelection: listaLugares.first,
                                   onSelected: (String? value) {
                                     setState(() {
@@ -302,7 +303,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      Languagesregistrar.getTexto(Languagesregistrar.aceptarTerminos),
+                                      Languagespantallaregistrar.getTexto(Languagespantallaregistrar.aceptarTerminos),
                                       style: TextStyle(fontSize: Dimensiones.paddingMediano),
                                     ),
                                     Checkbox(
@@ -326,13 +327,13 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                     ElevatedButton(
                                       onPressed: _aceptar,
                                       style: CustomStyles.estiloBotones,
-                                      child: Row(children: [Text(Languagesregistrar.getTexto(Languagesregistrar.aceptar))]),
+                                      child: Row(children: [Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.aceptar))]),
                                     ),
                                     SizedBox(height: Dimensiones.paddingMediano),
                                     ElevatedButton(
                                       onPressed: _cancelar,
                                       style: CustomStyles.estiloBotones,
-                                      child: Row(children: [Text(Languagesregistrar.getTexto(Languagesregistrar.cancelar))]),
+                                      child: Row(children: [Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.cancelar))]),
                                     ),
                                   ],
                                 ),
