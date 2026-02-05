@@ -142,6 +142,16 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
     return Scaffold(
       
       appBar: AppBar(
+        flexibleSpace:  Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [const Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
+              stops: [0.0, 0.5, 1.0],
+            ),
+          ),
+        ),
         title: Row(
           children: [
             SizedBox(width: Dimensiones.paddingEnano),

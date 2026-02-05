@@ -9,7 +9,7 @@ class Logicausuario {
       edad: 19,
       lugarNacimiento: 'Zaragoza',
       fotoRuta: null,
-      isAdmin: false
+      isAdmin: false,
     ),
     User(
       nombre: "Alvaro",
@@ -18,13 +18,20 @@ class Logicausuario {
       edad: 21,
       lugarNacimiento: 'Zaragoza',
       fotoRuta: null,
-      isAdmin: false
+      isAdmin: false,
+    ),
+    User(
+      nombre: "Dario",
+      contrasena: "Dario",
+      genero: 'Sr',
+      edad: 19,
+      lugarNacimiento: 'Zaragoza',
+      fotoRuta: null,
+      isAdmin: false,
     ),
   ];
 
-  static final List<User> _listaAdmins = [
-    
-  ];
+  static final List<User> _listaAdmins = [];
 
   static final List<User> _listaUsuariosAdmins = [
     User(
@@ -34,7 +41,7 @@ class Logicausuario {
       edad: 19,
       lugarNacimiento: 'Zaragoza',
       fotoRuta: null,
-      isAdmin: false
+      isAdmin: false,
     ),
     User(
       nombre: "Alvaro",
@@ -43,7 +50,16 @@ class Logicausuario {
       edad: 21,
       lugarNacimiento: 'Zaragoza',
       fotoRuta: null,
-      isAdmin: false
+      isAdmin: false,
+    ),
+    User(
+      nombre: "Dario",
+      contrasena: "Dario",
+      genero: 'Sr',
+      edad: 19,
+      lugarNacimiento: 'Zaragoza',
+      fotoRuta: null,
+      isAdmin: false,
     ),
   ];
 
@@ -55,8 +71,8 @@ class Logicausuario {
       edad: 21,
       lugarNacimiento: 'Zaragoza',
       fotoRuta: null,
-      isAdmin: true
-    )
+      isAdmin: true,
+    ),
   ];
 
   static User usuarioActual = User(
@@ -66,7 +82,7 @@ class Logicausuario {
     edad: 0,
     lugarNacimiento: "lugarNacimiento",
     fotoRuta: "fotoRuta",
-    isAdmin: false
+    isAdmin: false,
   );
 
   static void anadirUsuarios(User usuarios) {
@@ -83,11 +99,11 @@ class Logicausuario {
     return _listaUsuarios;
   }
 
-  static List<User> getListaAdmins(){
+  static List<User> getListaAdmins() {
     return _listaAdmins;
   }
 
-  static List<User> getListaUsuariosAdmins(){
+  static List<User> getListaUsuariosAdmins() {
     return _listaUsuariosAdmins;
   }
 
@@ -95,25 +111,24 @@ class Logicausuario {
     return usuarioActual;
   }
 
-  static bool confirmarBloqueo(String nombre, String contrasena) { //Se confirma si el usuario esta bloqueado
+  static bool confirmarBloqueo(String nombre, String contrasena) {
+    //Se confirma si el usuario esta bloqueado
     bool validador = false;
 
     for (int i = 0; i < _listaUsuariosAdmins.length; i++) {
       User u = _listaUsuariosAdmins[i];
       if (u.getNombre() == nombre && u.getContrasena() == contrasena) {
-        if(u.isBlocked == true) {
+        if (u.isBlocked == true) {
           validador = true;
         }
-        
-        
       }
     }
 
     return validador;
   }
 
-
-  static bool confirmarUsuarios(String nombre, String contrasena) { //Estos tres metodos sirven para confirmar que las credenciales al iniciar sesion existan en el sistema, y de paso guardamos al usuario en una variable llamado usuario actual
+  static bool confirmarUsuarios(String nombre, String contrasena) {
+    //Estos tres metodos sirven para confirmar que las credenciales al iniciar sesion existan en el sistema, y de paso guardamos al usuario en una variable llamado usuario actual
     bool validador = false;
 
     for (int i = 0; i < _listaUsuarios.length; i++) {
@@ -127,7 +142,7 @@ class Logicausuario {
     return validador;
   }
 
-  static bool confirmarAdmins(String nombre, contrasena){
+  static bool confirmarAdmins(String nombre, contrasena) {
     bool validador = false;
 
     for (int i = 0; i < _listaAdmins.length; i++) {
@@ -140,8 +155,8 @@ class Logicausuario {
 
     return validador;
   }
-  
-  static bool confirmarAdmin(String nombre, contrasena){ 
+
+  static bool confirmarAdmin(String nombre, contrasena) {
     bool validador = false;
 
     for (int i = 0; i < _admin.length; i++) {
@@ -155,7 +170,8 @@ class Logicausuario {
     return validador;
   }
 
-  static bool mismoNombre(String nombre) { //Se comprueba si el usuario tiene el mismo nombre que otro usuario
+  static bool mismoNombre(String nombre) {
+    //Se comprueba si el usuario tiene el mismo nombre que otro usuario
     bool validador = false;
 
     for (int i = 0; i < _listaUsuarios.length; i++) {
@@ -183,7 +199,8 @@ class Logicausuario {
     return validador;
   }
 
-  static String? recuperarContrasena(String nombre) { //Sirve para devolver la contraseña al usuario
+  static String? recuperarContrasena(String nombre) {
+    //Sirve para devolver la contraseña al usuario
     String contrasena = " ";
     int contadorDiscordancia = 0;
     for (int i = 0; i < _listaUsuarios.length; i++) {
@@ -191,12 +208,12 @@ class Logicausuario {
       if (u.getNombre().compareTo(nombre) == 0) {
         contrasena = u.getContrasena();
       } else {
-
         contadorDiscordancia++;
       }
     }
 
-    if(contadorDiscordancia == _listaUsuarios.length) { //Si las discordancias son las mismas que la cantidad de usuario, significa que el nombre que ha puesto no existe
+    if (contadorDiscordancia == _listaUsuarios.length) {
+      //Si las discordancias son las mismas que la cantidad de usuario, significa que el nombre que ha puesto no existe
       return null;
     }
     return contrasena;

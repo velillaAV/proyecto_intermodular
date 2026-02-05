@@ -10,20 +10,31 @@ class PantallaPrincipal extends StatefulWidget {
 }
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
+  late String nombreUser = Logicausuario.getUsuarioActual().getNombre();
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
         drawer: MyDrawer(),
         appBar: AppBar(
+          flexibleSpace:  Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [const Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
+              stops: [0.0, 0.5, 1.0],
+            ),
+          ),
+        ),
                   title: Row(
             children: [
               SizedBox(width: 10),
-              Text('Pantalla Principal (Bayern Fan Page Demo)',
+              Text('ROAD TO THE FIFA WORLD CUP 26 APP',
               style:TextStyle(color:Color.fromARGB(255, 240, 240, 240)),
               ),
             ],
           ),
-                  backgroundColor: Color.fromARGB(255, 8, 113, 212),
+                  
       
         ),
         body: Container(
@@ -37,17 +48,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               SizedBox(height: 30,),
               Column(
                 children: [
-                  Text('Bienvenido a la Bayern Fan Page (Demo), ' + Logicausuario.getListaUsuarios().last.getNombre(), style: TextStyle(fontSize: 40),),
-                  SizedBox(height: 20,),
-                  Text("Esta pagina solamente es una demo, pero te resumo lo que puedes hacer de momento:", style: TextStyle(fontSize: 20),),
-                  SizedBox(height: 20,),
-                  Text("Quizzes", style: TextStyle(fontSize: 20),),
-                   SizedBox(height: 20,),
-                  Text("Ver resumenes de partidos historicos", style: TextStyle(fontSize: 20),),
-                   SizedBox(height: 20,),
-                  Text("Ver las leyendas mas representantes ", style: TextStyle(fontSize: 20),),
-                   SizedBox(height: 20,),
-                  Text("Y tan solo usando el menu de la izquierda", style: TextStyle(fontSize: 25),),
+                  Text('Bienvenido a la Road to the FIFA World Cup 26 App, $nombreUser', style: TextStyle(fontSize: 40),),
+                
                 
                 ]
               )

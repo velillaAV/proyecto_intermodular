@@ -125,8 +125,18 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(181, 226, 66, 66),
+      backgroundColor: Color.fromARGB(181, 255, 255, 255),
       appBar: AppBar(
+        flexibleSpace:  Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [const Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
+              stops: [0.0, 0.5, 1.0],
+            ),
+          ),
+        ),
         automaticallyImplyLeading: false,
         title: Row(
           children: [
@@ -137,7 +147,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
             ),
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 8, 113, 212),
+       
         actions: [
           DropdownButton<int>(
             icon: Icon(Icons.language),
@@ -160,7 +170,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
       body: Center(
         child: Column(
           children: [
-            Image.asset("images/logoEmpresa.png",
+            Image.asset("images/logoMundial2026.png",
                                 width: 200,
                                 height: 200,),
             SizedBox(height: 30),
