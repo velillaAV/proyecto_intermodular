@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaCrearLiga.dart';
+import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
@@ -16,12 +17,24 @@ class PantallaPrincipal extends StatefulWidget {
 
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
+
   void _elegirLiga(){
     Navigator.push(
       context, 
       MaterialPageRoute(builder: (context) => const Eleccionliga())
     );
   }
+
+  
+
+void _informacionMundialista() {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Pantallainformacionmundialista()),
+  );
+}
+
+
   late String nombreUser = Logicausuario.getUsuarioActual().getNombre();
   @override
   Widget build(BuildContext context) {
@@ -46,13 +59,12 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     'Bienvenido a la Road to the FIFA World Cup 26 App, $nombreUser',
                     style: TextStyle(fontSize: 40),
                   ),
-
                   SizedBox(height: 100),
                   Text("LIGAS FANTASY"),
                   Container(
-                    height: 70,
+                    height: 100,
                     width: 200,
-                    color: Colors.grey,
+                    color: const Color.fromARGB(255, 95, 95, 95),
                     child: TextButton(
                       onPressed: _elegirLiga,
                       child: Text("CREAR LIGA"),
@@ -86,14 +98,14 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _elegirLiga,
+
+                      onPressed: _informacionMundialista,
+
                       child: Text("INFORMACIÓN MUNDIALISTA"),
                     ),
                   )
-                  
                 ],
               ),
-
             ],
           ),
         ),
