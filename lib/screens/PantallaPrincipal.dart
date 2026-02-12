@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/screens/PantallaCrearLiga.dart';
+import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
@@ -20,6 +21,14 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     MaterialPageRoute(builder: (context) => const PantallaLigaEspecial()),
   );
 }
+
+void _informacionMundialista() {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Pantallainformacionmundialista()),
+  );
+}
+
   late String nombreUser = Logicausuario.getUsuarioActual().getNombre();
   @override
   Widget build(BuildContext context) {
@@ -108,7 +117,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _ligaEspecial,
+                      onPressed: _informacionMundialista,
                       child: Text("INFORMACIÓN MUNDIALISTA"),
                     ),
                   )
