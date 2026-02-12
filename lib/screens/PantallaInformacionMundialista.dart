@@ -48,6 +48,30 @@ class _PantallainformacionmundialistaState
             fit: BoxFit.fill,
           ),
         ),
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 50),
+              Text(
+                "Mundiales jugados en USA y/o en México",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/mexicoMundial86.jpg"),
+                  ),
+                ),
+                height: 210,
+                width: 300,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

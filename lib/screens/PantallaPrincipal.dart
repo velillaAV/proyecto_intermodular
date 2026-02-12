@@ -77,7 +77,6 @@ void _informacionMundialista() {
                     'Bienvenido a la Road to the FIFA World Cup 26 App, $nombreUser',
                     style: TextStyle(fontSize: 40),
                   ),
-
                   SizedBox(height: 100),
                   Text("LIGAS FANTASY"),
                   Container(
@@ -121,10 +120,8 @@ void _informacionMundialista() {
                       child: Text("INFORMACIÓN MUNDIALISTA"),
                     ),
                   )
-                  
                 ],
               ),
-
             ],
           ),
         ),
