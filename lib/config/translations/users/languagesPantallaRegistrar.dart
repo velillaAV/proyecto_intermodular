@@ -4,19 +4,19 @@ class Languagespantallaregistrar {
 
    static int idiomaSeleccionado = Languagesiniciosesion.idiomaSeleccionado;
 
-    static List<String> registrar = ['Registrarse', 'Register', ''];
-    static List<String> tratamiento = ['Tratamiento', 'Treatment', ''];
-    static List<String> nombre  = ['Nombre', 'Name', 'Nom'];
-    static List<String> contrasena = ['Contraseña', 'Password', 'Mot de passe'];
-    static List<String> repitecontrasena = ['Repite la Contraseña', 'Repeat the Password', 'Répéter le mot de passe'];
-    static List<String> subeFoto = ['Sube una foto', 'Upload a Photo', 'Téléchargez une photo'];
-    static List<String> galeria = ['Galeria', 'Gallery', 'Galerie'];
-    static List<String> tomarFoto =  ['Tomar foto', 'Gallery', 'Galerie'];
-    static List<String> edad = ['Edad', 'Gallery', 'Galerie'];
-    static List<String> aceptarTerminos = ['Aceptar Terminos', 'Gallery', 'Galerie'];
-    static List<String> lugarNacimiento = ['Lugar de Nacimiento', 'Gallery', 'Galerie'];
-    static List<String> aceptar = ['Aceptar', 'Gallery', 'Galerie'];
-    static List<String> cancelar = ['Cancelar', 'Gallery', 'Galerie'];
+    static List<String> registrar = ['Registrarse', 'Register'];
+    static List<String> tratamiento = ['Tratamiento', 'Treatment'];
+    static List<String> nombre  = ['Nombre', 'Name'];
+    static List<String> contrasena = ['Contraseña', 'Password'];
+    static List<String> repitecontrasena = ['Repite la Contraseña', 'Repeat the Password'];
+    static List<String> subeFoto = ['Sube una foto', 'Upload a Photo'];
+    static List<String> galeria = ['Galeria', 'Gallery'];
+    static List<String> tomarFoto =  ['Tomar foto', 'Gallery'];
+    static List<String> edad = ['Edad', 'Age'];
+    static List<String> aceptarTerminos = ['Aceptar Terminos', 'Acept Terms'];
+    static List<String> lugarNacimiento = ['Lugar de Nacimiento', 'Place of Birth'];
+    static List<String> aceptar = ['Aceptar', 'Acept'];
+    static List<String> cancelar = ['Cancelar', 'Cancel'];
 
 
 
