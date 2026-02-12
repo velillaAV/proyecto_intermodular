@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaCrearLiga.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
 class PantallaPrincipal extends StatefulWidget {
@@ -14,42 +16,18 @@ class PantallaPrincipal extends StatefulWidget {
 
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
-  void _ligaEspecial() {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const PantallaLigaEspecial()),
-  );
-}
+  void _elegirLiga(){
+    Navigator.push(
+      context, 
+      MaterialPageRoute(builder: (context) => const Eleccionliga())
+    );
+  }
   late String nombreUser = Logicausuario.getUsuarioActual().getNombre();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                const Color.fromARGB(255, 6, 58, 231),
-                Colors.red,
-                Colors.green,
-              ],
-              stops: [0.0, 0.5, 1.0],
-            ),
-          ),
-        ),
-        title: Row(
-          children: [
-            SizedBox(width: 10),
-            Text(
-              'ROAD TO THE FIFA WORLD CUP 26 APP',
-              style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
-            ),
-          ],
-        ),
-      ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(Dimensiones.paddingAppbar), child: Appbar()),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -76,7 +54,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _ligaEspecial,
+                      onPressed: _elegirLiga,
                       child: Text("CREAR LIGA"),
                     ),
                   ),
@@ -86,7 +64,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _ligaEspecial,
+                      onPressed: _elegirLiga,
                       child: Text("UNIRSE A LIGA"),
                     ),
                   ),
@@ -96,7 +74,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _ligaEspecial,
+                      onPressed: _elegirLiga,
                       child: Text("TUS LIGAS"),
                     ),
                   ),
@@ -108,7 +86,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
-                      onPressed: _ligaEspecial,
+                      onPressed: _elegirLiga,
                       child: Text("INFORMACIÓN MUNDIALISTA"),
                     ),
                   )
