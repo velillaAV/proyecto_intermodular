@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
-import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/PantallaCrearLiga.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
@@ -77,7 +77,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     color: Colors.grey,
                     child: TextButton(
                       onPressed: _ligaEspecial,
-                      child: Text("LIGAS ESPECIALES"),
+                      child: Text("CREAR LIGA"),
                     ),
                   ),
                 ],
