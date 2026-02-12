@@ -38,24 +38,25 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         Logicausuario.confirmarAdmins(_nombre, _contrasena) == false &&
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales));
-      final snackBarValidador = SnackBar(
+      final snackBarValidador1 = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
       );
+      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador1);
 
     } else if (Logicausuario.confirmarBloqueo(_nombre, _contrasena) == true) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado));
-      final snackBarValidador = SnackBar(
+      final snackBarValidador2 = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado)),
 
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador);
+      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador2);
      } else if (Logicausuario.confirmarUsuarios(_nombre, _contrasena) == false && Logicausuario.confirmarAdmins(_nombre, _contrasena) == false && Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales));
-      final snackBarValidador = SnackBar(
+      final snackBarValidador3 = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
 
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador);
+      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador3);
     } else if (Logicausuario.confirmarAdmins(_nombre, _contrasena) == true ||
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
       
@@ -120,7 +121,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   
   String _nombre = "";
   String _contrasena = "";
-  String? _contrasenaRecu = "";
+  String? _contrasenaRecu;
 
   @override
   Widget build(BuildContext context) {

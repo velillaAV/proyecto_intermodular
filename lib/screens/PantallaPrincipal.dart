@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
@@ -49,6 +50,15 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
               Column(
                 children: [
                   Text('Bienvenido a la Road to the FIFA World Cup 26 App, $nombreUser', style: TextStyle(fontSize: 40),),
+
+                  SizedBox(height: 100,),
+
+                  Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.grey,
+                    child: TextButton(onPressed: onPressed, child: Text("LIGAS ESPECIALES")),
+                  )
                 
                 
                 ]
