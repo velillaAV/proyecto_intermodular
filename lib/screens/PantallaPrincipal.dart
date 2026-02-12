@@ -80,7 +80,7 @@ void _informacionMundialista() {
                   SizedBox(height: 100),
                   Text("LIGAS FANTASY"),
                   Container(
-                    height: 70,
+                    height: 100,
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
