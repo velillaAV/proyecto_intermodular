@@ -72,7 +72,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                   SizedBox(height: 100),
                   Text("LIGAS FANTASY"),
                   Container(
-                    height: 200,
+                    height: 70,
                     width: 200,
                     color: Colors.grey,
                     child: TextButton(
@@ -80,8 +80,42 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                       child: Text("CREAR LIGA"),
                     ),
                   ),
+                  SizedBox(height: 30),
+                  Container(
+                    height: 70,
+                    width: 200,
+                    color: Colors.grey,
+                    child: TextButton(
+                      onPressed: _ligaEspecial,
+                      child: Text("UNIRSE A LIGA"),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Container(
+                    height: 70,
+                    width: 200,
+                    color: Colors.grey,
+                    child: TextButton(
+                      onPressed: _ligaEspecial,
+                      child: Text("TUS LIGAS"),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Text("INFORMACIÓN"),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 70,
+                    width: 200,
+                    color: Colors.grey,
+                    child: TextButton(
+                      onPressed: _ligaEspecial,
+                      child: Text("INFORMACIÓN MUNDIALISTA"),
+                    ),
+                  )
+                  
                 ],
               ),
+
             ],
           ),
         ),
