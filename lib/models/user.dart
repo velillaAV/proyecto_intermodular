@@ -1,3 +1,5 @@
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
+
 class User {
   String nombre;
   String contrasena;
@@ -5,6 +7,9 @@ class User {
   int edad;
   String lugarNacimiento;
   String? fotoRuta;
+  List<Modelousuario> usuario_ligas = [];
+  
+
 
   bool isAdmin;
   bool isBlocked = false;
@@ -73,4 +78,6 @@ class User {
   void blockear() {
     this.isBlocked = !isBlocked;
   }
+
+  
 }

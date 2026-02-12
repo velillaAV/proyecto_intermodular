@@ -72,9 +72,9 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                   SizedBox(height: 100),
                   Text("LIGAS FANTASY"),
                   Container(
-                    height: 200,
+                    height: 100,
                     width: 200,
-                    color: Colors.grey,
+                    color: const Color.fromARGB(255, 95, 95, 95),
                     child: TextButton(
                       onPressed: _ligaEspecial,
                       child: Text("CREAR LIGA"),
