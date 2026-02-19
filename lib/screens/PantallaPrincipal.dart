@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
-import 'package:proyecto_intermodular/screens/PantallaCrearLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
@@ -60,14 +59,16 @@ void _informacionMundialista() {
                     style: TextStyle(fontSize: 40),
                   ),
                   SizedBox(height: 100),
-                  Text("LIGAS FANTASY"),
+                  Text("LIGAS FANTASY" ,style: TextStyle(color: Colors.black, fontSize: 30)),
+                  SizedBox(height: 20,),
                   Container(
                     height: 100,
                     width: 200,
-                    color: const Color.fromARGB(255, 95, 95, 95),
+                    color: Colors.grey,
                     child: TextButton(
                       onPressed: _elegirLiga,
-                      child: Text("CREAR LIGA"),
+                      child: Text("CREAR LIGA" ,style: TextStyle(color: Colors.black)),
+                      
                     ),
                   ),
                   SizedBox(height: 30),
@@ -77,7 +78,7 @@ void _informacionMundialista() {
                     color: Colors.grey,
                     child: TextButton(
                       onPressed: _elegirLiga,
-                      child: Text("UNIRSE A LIGA"),
+                      child: Text("UNIRSE A LIGA", style: TextStyle(color: Colors.black)),
                     ),
                   ),
                   SizedBox(height: 30),
@@ -87,21 +88,20 @@ void _informacionMundialista() {
                     color: Colors.grey,
                     child: TextButton(
                       onPressed: _elegirLiga,
-                      child: Text("TUS LIGAS"),
+                      child: Text("TUS LIGAS" ,style: TextStyle(color: Colors.black)),
                     ),
                   ),
                   SizedBox(height: 30),
-                  Text("INFORMACIÓN"),
+                  Text("INFORMACIÓN" ,style: TextStyle(color: Colors.black, fontSize: 30)),
                   SizedBox(height: 10),
                   Container(
                     height: 70,
-                    width: 200,
+                    width: 250,
                     color: Colors.grey,
                     child: TextButton(
 
                       onPressed: _informacionMundialista,
-
-                      child: Text("INFORMACIÓN MUNDIALISTA"),
+                      child: Text("INFORMACIÓN MUNDIALISTA" ,style: TextStyle(color: Colors.black)),
                     ),
                   )
                 ],
