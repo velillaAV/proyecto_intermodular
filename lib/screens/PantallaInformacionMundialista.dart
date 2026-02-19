@@ -69,6 +69,24 @@ class _PantallainformacionmundialistaState
                 height: 210,
                 width: 300,
               ),
+              SizedBox(height: 20),
+              Text(
+                "Actuaciones memorables en mundiales",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/maradonaCup.jpg"),
+                  ),
+                ),
+                height: 210,
+                width: 300,
+              ),
             ],
           ),
         ),
