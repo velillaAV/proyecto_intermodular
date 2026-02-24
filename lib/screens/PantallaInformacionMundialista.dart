@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
+import 'package:proyecto_intermodular/widgets/ImageCarousel.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
 class Pantallainformacionmundialista extends StatefulWidget {
@@ -15,30 +18,9 @@ class _PantallainformacionmundialistaState
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.topRight,
-              colors: [
-                const Color.fromARGB(255, 6, 58, 231),
-                Colors.red,
-                Colors.green,
-              ],
-              stops: [0.0, 0.5, 1.0],
-            ),
-          ),
-        ),
-        title: Row(
-          children: [
-            SizedBox(width: 10),
-            Text(
-              'ROAD TO THE FIFA WORLD CUP 26 APP',
-              style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
-            ),
-          ],
-        ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+        child: Appbar(),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -60,15 +42,18 @@ class _PantallainformacionmundialistaState
                   color: Colors.black,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("images/mexicoMundial86.jpg"),
-                  ),
+              SizedBox(
+                height: 400,
+                width: 600,
+                child: ImageCarousel(
+                  imagePaths: [
+                    "images/mexicoMundial70.jpg",
+                    "images/mexicoMundial86.jpg",
+                    "images/estadosUnidosMundial94.jpg",
+                  ],
                 ),
-                height: 210,
-                width: 300,
               ),
+
               SizedBox(height: 20),
               Text(
                 "Actuaciones memorables en mundiales",
