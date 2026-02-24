@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class ImageCarousel extends StatefulWidget {
   /// Lista de rutas de imágenes locales (assets)
   final List<String> imagePaths;
-
-  const ImageCarousel({Key? key, required this.imagePaths}) : super(key: key);
+  final List<List<String>> descriptions;
+  const ImageCarousel({Key? key, required this.imagePaths, required this.descriptions}) : super(key: key);
 
   @override
   State<ImageCarousel> createState() => _ImageCarouselState();
@@ -50,13 +50,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
  
 
-  final List<List<String>> descriptions = [
-    ["La Copa Mundial de la FIFA México 1970 fue la novena edición de la Copa Mundial de Fútbol. Se celebró en México, entre el 31 de mayo y el 21 de junio."]
-    ,
-    ["La Copa Mundial de la FIFA México 1986 fue la decimotercera edición de la Copa Mundial de Fútbol. Se desarrolló entre el 31 de mayo y el 29 de junio."],
-    ["La Copa Mundial de la FIFA Estados Unidos 1994 fue la decimoquinta edición de la Copa Mundial de Fútbol, y se desarrolló en los Estados Unidos entre el 17 de junio y el 17 de julio de 1994.",
-    "Se eligió a Estados Unidos como sede del Mundial por primera vez en la historia, lo que generó gran polémica por ser un país sin tradición futbolística debido a la popularidad de otros deportes como el béisbol, el fútbol americano, el hockey sobre hielo y el baloncesto. "],
-  ];
+   
 
   // Función para ir a la imagen anterior
   void _previousPage() {
@@ -82,7 +76,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
         
           content: 
           
-          Text(descriptions[index].join("\n")),
+          Text(widget.descriptions[index].join("\n")),
           actions: [
             
             TextButton(
@@ -175,29 +169,29 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
         const SizedBox(height: 10),
 
-        /// =========================
-        /// Indicadores (los puntitos)
-        /// =========================
+        
+        // Indicadores (los puntitos)
+        
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
 
-          /// Generamos un indicador por cada imagen
+          // Generamos un indicador por cada imagen
           children: List.generate(widget.imagePaths.length, (index) {
             return AnimatedContainer(
-              /// Animación suave cuando cambia tamaño/color
+              // Animación suave cuando cambia tamaño/color
               duration: const Duration(milliseconds: 300),
 
               margin: const EdgeInsets.symmetric(horizontal: 4),
 
-              /// Si es la página actual → más grande
+              // Si es la página actual → más grande
               width: _currentPage == index ? 14 : 8,
               height: 8,
 
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
 
-                /// Azul si es la página activa
-                /// Gris si no lo es
+                // Azul si es la página activa
+                // Gris si no lo es
                 color: _currentPage == index
                     ? Colors.blue
                     : Colors.grey.shade400,
