@@ -33,7 +33,6 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noExistenUsuarios)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarNoHayUsuarios);
-
     } else if (Logicausuario.confirmarUsuarios(_nombre, _contrasena) == false &&
         Logicausuario.confirmarAdmins(_nombre, _contrasena) == false &&
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
@@ -42,24 +41,21 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarValidador1);
-
     } else if (Logicausuario.confirmarBloqueo(_nombre, _contrasena) == true) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado));
       final snackBarValidador2 = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado)),
-
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarValidador2);
      } else if (Logicausuario.confirmarUsuarios(_nombre, _contrasena) == false && Logicausuario.confirmarAdmins(_nombre, _contrasena) == false && Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales));
       final snackBarValidador3 = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
-
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarValidador3);
     } else if (Logicausuario.confirmarAdmins(_nombre, _contrasena) == true ||
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
-      
+      // Lógica para admins (actualmente vacía en tu código original)
     } else {
       Navigator.push(
         context,
@@ -93,13 +89,12 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 Text(
                   Languagesiniciosesion.getTexto(Languagesiniciosesion.tuContrasenaEs)
                 ),
-                Text(_contrasenaRecu!)
+                Text(_contrasenaRecu)
               ],
             )),
       );
     }
   }
-
 
   void _inicioSesionGoogle(userCredential) async {
     if (userCredential != null) {
@@ -114,10 +109,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
     setState(() {
       Languagesiniciosesion.idiomaSeleccionado = nuevoIdioma;
     });
-
   }
-
-  
   
   String _nombre = "";
   String _contrasena = "";
@@ -126,33 +118,28 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(181, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(181, 255, 255, 255),
       appBar: AppBar(
-        flexibleSpace:  Container(
-          decoration: BoxDecoration(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.topRight,
-              colors: [const Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
+              colors: [Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
               stops: [0.0, 0.5, 1.0],
             ),
           ),
         ),
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            SizedBox(width: 10),
-            Text(
-              Languagesiniciosesion.getTexto(Languagesiniciosesion.titulo),
-              style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
-            ),
-          ],
+        centerTitle: true,
+        title: const Text(
+          "ROAD TO THE FIFA WORLD CUP 26 APP",
+          style: TextStyle(color: Color.fromARGB(255, 240, 240, 240), fontSize: 16),
         ),
-       
         actions: [
           DropdownButton<int>(
-            icon: Icon(Icons.language),
-            items: [
+            icon: const Icon(Icons.language, color: Colors.white),
+            items: const [
               DropdownMenuItem(
                 value: 0,
                 child: Text("Español", style: TextStyle(color: Colors.black),)
@@ -169,90 +156,131 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         ],
       ),
       body: Center(
-        child: Column(
-          children: [
-            Image.asset("images/logoMundial2026.png",
-                                width: 200,
-                                height: 200,),
-            SizedBox(height: 30),
-            Column(
-              children: [
-                Container(
-                  width: 200,
-                  height: 200,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombre),
-                          helperMaxLines: 5,
-                        ),
-                        onChanged: (value) {
-                          _nombre = value;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hoverColor: Color.fromARGB(255, 8, 113, 212),
-                          border: OutlineInputBorder(),
-                          labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasena),
-                          helperMaxLines: 5,
-                        ),
-                        onChanged: (value) {
-                          _contrasena = value;
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: _inicioSesion,
-                  style: CustomStyles.estiloBotones,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.iniciarSesion))]),
-                ),
-                SizedBox(height: 5),
-                ElevatedButton(
-                  onPressed: () async {
-                    final userCredential = await GoogleControllers.loginGoogle();
-                    _inicioSesionGoogle(userCredential);
-                  },
-                  style: CustomStyles.estiloBotones,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.accederGoogle))]),
-                ),
-                SizedBox(height: 5),
-              ],
-            ),
-            ElevatedButton(
-              onPressed: _registrar,
-              style: CustomStyles.estiloBotones,
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.registrarse))]),
-            ),
-            //Aquí introducimos la opción de recuperar la contraseña incluyendo dos Alert Dialog, uno para pedir el usuario y otro para mostrar la contraseña en caso de que el usuario
-            //sea correcto
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () => showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.recuperarContrasena)),
-                  content: TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreUsuario),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // logo with subtle 3D effect and rounded corners
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 8.0,
+                      offset: Offset(0, 4),
                     ),
-                    onFieldSubmitted: (value) {
-                      _contrasenaRecuperada(value);
-                    },
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: Image.asset(
+                    "images/logoMundial2026.png",
+                    width: 180,
+                    height: 180,
                   ),
                 ),
               ),
+              const SizedBox(height: 30),
+              
+              SizedBox(
+                width: 250, 
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombre),
+                      ),
+                      onChanged: (value) {
+                        _nombre = value;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.grey[100],
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasena),
+                      ),
+                      onChanged: (value) {
+                        _contrasena = value;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 30),
+              
+              ElevatedButton(
+                onPressed: _inicioSesion,
+                style: CustomStyles.estiloBotonInicioSesion,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.iniciarSesion), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16))],
+                ),
+              ),
+              const SizedBox(height: 15),
+              
+              ElevatedButton(
+                onPressed: () async {
+                  final userCredential = await GoogleControllers.loginGoogle();
+                  _inicioSesionGoogle(userCredential);
+                },
+                style: CustomStyles.estiloBotonGoogle,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.accederGoogle), style: const TextStyle(fontWeight: FontWeight.w500))],
+                ),
+              ),
+              const SizedBox(height: 15),
 
-              child: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.olvidasteContrasena)),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: _registrar,
+                style: CustomStyles.estiloBotonRegistrarse,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.registrarse), style: const TextStyle(fontWeight: FontWeight.bold))],
+                ),
+              ),
+              
+              const SizedBox(height: 25),
+              
+              TextButton(
+                onPressed: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.recuperarContrasena)),
+                    content: TextFormField(
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        labelText: Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreUsuario),
+                      ),
+                      onFieldSubmitted: (value) {
+                        _contrasenaRecuperada(value);
+                      },
+                    ),
+                  ),
+                ),
+                child: Text(
+                  Languagesiniciosesion.getTexto(Languagesiniciosesion.olvidasteContrasena),
+                  style: const TextStyle(color: Color.fromARGB(255, 6, 58, 231), fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
