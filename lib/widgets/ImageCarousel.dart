@@ -102,6 +102,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
           // Stack permite superponer:
           // El PageView
           // Las flechas encima
+        
           children: [
             SizedBox(
               height: 250,
