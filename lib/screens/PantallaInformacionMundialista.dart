@@ -102,7 +102,16 @@ class _PantallainformacionmundialistaState
                     ],
                     [
                       "La Copa Mundial de la FIFA Estados Unidos 1994 fue la decimoquinta edición de la Copa Mundial de Fútbol, y se desarrolló en los Estados Unidos entre el 17 de junio y el 17 de julio de 1994.",
-                      "",
+                      "En el Grupo A, la anfitriona dejó una buena imagen tras empatar ante Suiza y ganar ante Colombia con el tan recordado gol en propia de Escobar, por su parte Suiza goleó 1-4 a Rumania, una Rumania que tras ganar a Estados Unidos se puso lider acompañado por Suiza como segunda y USA como mejor tercera",
+                      "En el Grupo B, la dupla brazuca Bebeto y Romario aterrorizaron el grupo con victorias ante Rusia y Camerún, pero contra los suecos, un gol de Kennet Andersson dejó el partido en empate, dejando a Brasil como primera y a Suecia segunda",
+                      "En el Grupo C, Alemania abrió el mundial con una victoria por la mínima ante Bolivia, y España empezó con un tropiezo trás empatar a 2 ante Corea debido a la expulsión de Nadal, pero el empate ante Alemania y la victoria ante Bolivia clasificaba a España"
+                      "El Grupo D fue el más igualado, Argentina comenzó goleando 4-0 a Grecia con hat trick de Batistuta, y Nigeria ganó a Bulgaria por 3-1, Argentina, después de vencer a Nigeria por la minima, vió como Maradona era expulsado trás dar positivo en dopaje",
+                      "Cosa que concluyó en la derrota ante Bulgaria por 0-2 dejando tanto a Nigeria, Bulgaria y Argentina con 6 puntos. En el Grupo E Italia empezó perdiendo ante Irlanda, pero después de una victoria ante Noruega y un empate ante México Italia pasaba como mejor tercera y México como primera",
+                      "En el Grupo F se vió otro empate a 6 puntos, entre Países Bajos, Bélgica y la sorprendente Arabia Saudita que lo consiguió gracias a un golazo técnico de Al Owairan ante Bélgica después de regatearse a 4 jugadores",
+                      "La vígente campeona Alemania dió paso a los Octavos ganando ante Bélgica con doblete de Völler y gol de Klinsmann, España por su parte, vencía contundentemente a Suiza con goles de Hierro, Luis Enrique y Beguiristain",
+                      "Suecia acabó con el sueño arabe con un doblete de la torre Kennet Andersson, la sorpresa fue Rumania que con un doblete de Dumitrescu eliminó a la Argentina del descalificado Maradona, Italia empezó mal ante Nigeria pero con un doblete de Baggio lograron remontar",
+                      "La Bulgaria de Stoichkov eliminó a México en pénaltis, Brasil lo tuvo crudo trás quedarse con uno menós ante Estados Unidos pero el gol de Bebeto les dió la clasificación, en cuartos de final los brazucas se adelantaron en la segunda parte con goles de Bebeto y Romário",
+                      "Pero los goles de Dennis Bergkamp y Aron Winter empataron el partido para Holanda, aún así, el golazo de falta de Branco sentenció el encuentro, clasificando a Brasil, Italia y España se midieron en duelo reñido"
                     ],
                   ],
                 ),
