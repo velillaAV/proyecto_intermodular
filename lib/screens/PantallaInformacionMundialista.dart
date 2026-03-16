@@ -63,7 +63,7 @@ class _PantallainformacionmundialistaState
                       "En los Cuartos de Final, Uruguay se enfrentó a los soviéticos y una gran actuacion de Ladislao Marzurkiewicz llevó el partido a la prórroga en donde con un gol pólemico de Víctor Esparrago, Uruguay pasaba a las semifinales",
                       "Uno de los encuentros más vistosos lo mostraron Inglaterra y Alemania que sería una revancha de la final del mundial anterior. Los goles de Mullery y Peters pusieron a los ingleses dos goles por delante en el marcador",
                       "Pero un gran gol de Beckenbauer y la insistencia de los germanos hizo que llegara el empate por parte de un cabezazo de Uwe Seeler que con una extraña parabola superó a Bonetti, y en la prórroga, Gerd Müller destronó a los campeones y le dio a Alemania el pase a la final."
-                      "Los anfitriones buscaron pasar a las semifinales ante Italia, y un tempranero gol de José González les dió esperanza que dudo poco o nada ya que los italianos empataron con fortuna antés del descanso, y en la segunda parte Italia se desató con un doblete de Riva y un gol de Rivera.",
+                          "Los anfitriones buscaron pasar a las semifinales ante Italia, y un tempranero gol de José González les dió esperanza que dudo poco o nada ya que los italianos empataron con fortuna antés del descanso, y en la segunda parte Italia se desató con un doblete de Riva y un gol de Rivera.",
                       "En el último encuentro de cuartos Perú y Brasil se midieron en un duelo sudamericano que Rivelino y Tostao encaminaron hacía la Canarinha, pero Gallardo recortó distancias. ",
                       "Tostao volvió a marcar para los brazucas y Cubillas recortaba de nuevo a favor de los peruanos, Jairzinho no se quisó ir sin marcar, y sentenció el partido con el 4-2 definitivo",
                       "En semifinales Uruguay planteó un partido duro ante Brasil en donde molieron a patadas a los brasileños, Cubilla adelantó a los charrúas, pero Clodoaldo empató al borde del descanso",
@@ -75,7 +75,6 @@ class _PantallainformacionmundialistaState
                       "Italia siendo el equivo más defensivo del certamen contra Brasil, el equipo más ofensivo, el Ying contra el Yang. Pelé adelantó a los brazucas con un potente cabezazo en el minuto 18, minutos después Bonisegna aprovechó un despiste defensivo para empatar la final",
                       "Al descanso brasileños y italianos empataban a 1, y en la segunda parte un potente zurdazo de Gérson desde fuera del área derribó la muralla italiana, y Jairzinho que siempre estaba listo para la fiesta puso el 3-1 encarrilando el partido para la verde amarela",
                       "Cuando el partido ya agonizaba, Brasil protagonizo una gran jugada colectiva, Pelé asistió a Carlos Arberto por la banda que con un tiro raso ponía el 4-1 definitivo. Brasil y O Rei Pelé conseguían el tercer mundial de su historia, agrandando la leyenda en ambas partes",
-                      
                     ],
                     [
                       "La Copa Mundial de la FIFA México 1986 fue la decimotercera edición de la Copa Mundial de Fútbol. Se desarrolló entre el 31 de mayo y el 29 de junio. Primeramente se iba a organizar en Colombia pero al final no lograron cumplir las exigencias de la FIFA",
@@ -98,14 +97,14 @@ class _PantallainformacionmundialistaState
                       "Después de realizar la mano de dios y con el estadio aún en schock, Maradona tras combinar con Burruchaga arrancó de medio campo y marcó el gol del siglo, Inglaterra contrarrestó a Argentina con la entrada de John Barnes que tras volver loca a la defensa asistió a Lineker para el 2-1 defintivo",
                       "En semifinales ante Bélgica Maradona volvió a brillar, con dos goles de gran calidad le dió el pase a la final a la albiceleste, en la otra semifinal un golazo de falta de Andy Brehme y otro de vaselina de Rudi Völler, hizo que Alemania eliminara a Francia y llegara a otra final.",
                       "En la gran final a los 22 minutos trás un centro de Burruchaga, el Tata Brown aprovechó la mala salida de Schumacher para marcar el 1-0, en la segunda parte, Valdano aumentó la renta para Argentina",
-                      "Alemania tiró de la épica, y en 3 minutos caóticos, Rudi Völler y Karl-Heinz Rummenigge empataron la final en dos saques de esquina, pero dos minutos después Burruchaga le dió el golpe final a Alemania marcando el 3-2 definitivo que cerraba uno de los mundiales más épicos"
+                      "Alemania tiró de la épica, y en 3 minutos caóticos, Rudi Völler y Karl-Heinz Rummenigge empataron la final en dos saques de esquina, pero dos minutos después Burruchaga le dió el golpe final a Alemania marcando el 3-2 definitivo que cerraba uno de los mundiales más épicos",
                     ],
                     [
                       "La Copa Mundial de la FIFA Estados Unidos 1994 fue la decimoquinta edición de la Copa Mundial de Fútbol, y se desarrolló en los Estados Unidos entre el 17 de junio y el 17 de julio de 1994.",
                       "En el Grupo A, la anfitriona dejó una buena imagen tras empatar ante Suiza y ganar ante Colombia con el tan recordado gol en propia de Escobar, por su parte Suiza goleó 1-4 a Rumania, una Rumania que tras ganar a Estados Unidos se puso lider acompañado por Suiza como segunda y USA como mejor tercera",
                       "En el Grupo B, la dupla brazuca Bebeto y Romario aterrorizaron el grupo con victorias ante Rusia y Camerún, pero contra los suecos, un gol de Kennet Andersson dejó el partido en empate, dejando a Brasil como primera y a Suecia segunda",
                       "En el Grupo C, Alemania abrió el mundial con una victoria por la mínima ante Bolivia, y España empezó con un tropiezo trás empatar a 2 ante Corea debido a la expulsión de Nadal, pero el empate ante Alemania y la victoria ante Bolivia clasificaba a España"
-                      "El Grupo D fue el más igualado, Argentina comenzó goleando 4-0 a Grecia con hat trick de Batistuta, y Nigeria ganó a Bulgaria por 3-1, Argentina, después de vencer a Nigeria por la minima, vió como Maradona era expulsado trás dar positivo en dopaje",
+                          "El Grupo D fue el más igualado, Argentina comenzó goleando 4-0 a Grecia con hat trick de Batistuta, y Nigeria ganó a Bulgaria por 3-1, Argentina, después de vencer a Nigeria por la minima, vió como Maradona era expulsado trás dar positivo en dopaje",
                       "Cosa que concluyó en la derrota ante Bulgaria por 0-2 dejando tanto a Nigeria, Bulgaria y Argentina con 6 puntos. En el Grupo E Italia empezó perdiendo ante Irlanda, pero después de una victoria ante Noruega y un empate ante México Italia pasaba como mejor tercera y México como primera",
                       "En el Grupo F se vió otro empate a 6 puntos, entre Países Bajos, Bélgica y la sorprendente Arabia Saudita que lo consiguió gracias a un golazo técnico de Al Owairan ante Bélgica después de regatearse a 4 jugadores",
                       "La vígente campeona Alemania dió paso a los Octavos ganando ante Bélgica con doblete de Völler y gol de Klinsmann, España por su parte, vencía contundentemente a Suiza con goles de Hierro, Luis Enrique y Beguiristain",
@@ -117,7 +116,7 @@ class _PantallainformacionmundialistaState
                       "Italia neutralizó el pénalti de Stoichkov con otro doblete más de Roberto Baggio, mientras que los brasileños se volvían a enfrentar a Suecia, esta vez un cabezazo de Romário le dio la victoria a la verde amarela, clasificando a la gran final",
                       "Como en México 70, Italia y Brasil se volvían a ver las caras, ambas selecciones con tres mundiales, lo que convertiriría al vencedor tetracampeon del mundo, en las primeras ocasiones Pagluica casí comete un error gravísimo, pero le acabó salvando el palo",
                       "El partido acabó llendose a los penaltis, Baresi y Marcio Santos fallaron los primeros lanzamientos, los 4 siguientes de ambos conjuntos entraron, hasta que Claudio Taffarel detuvo el de Daniele Massaro, Dunga marcó el suyo, dejando la responsabilidad en Roberto Baggio",
-                      "El astro italiano mandó su remate al cielo, el silencio recorrió las calles de Italia, y Brasil ganaba su cuarta copa del mundo."
+                      "El astro italiano mandó su remate al cielo, el silencio recorrió las calles de Italia, y Brasil ganaba su cuarta copa del mundo.",
                     ],
                   ],
                 ),
@@ -138,21 +137,23 @@ class _PantallainformacionmundialistaState
                 child: ImageCarousel(
                   imagePaths: [
                     "images/maradonaCup.jpg",
-                    "images/mexicoMundial86.jpg",
-                    "images/estadosUnidosMundial94.jpg",
+                    "images/jairzinho.jpg",
+                    "images/baggio.jpg",
                   ],
                   descriptions: [
                     [
-                                           
+                      "La actuación de Diego Maradona en la Copa Mundial de la FIFA 1986 es considerada una de las mejores actuaciones individuales de la historia del fútbol. Fue el líder absoluto de la albiceleste y participó directamente en 10 de los 14 goles del equipo (5 goles y 5 asistencias)." ,
+                      "En el debút ante corea dió 3 asistencias, 2 a Valdano y otra a Ruggeri, además de soportar las entradas de los coreanos. Contra Italia la vigente campeona,  marcó de vaselina ante Giovanni Galli para empatar el partido, y selló la fase de grupos con una asistencia al Burru ante Bulgaria",
+                      "Contra Uruguay su conducción y regates rompieron la defensa uruguaya aunque no marcó ni asistió, contra Inglaterra el Diego se desatió marcando la mano de dios y el gol del siglo ante Peter Shilton. En las semis, un doblete ante Bélgica certificó el pase de Argentina a la final",
+                      "En la gran final, después de que Alemania remontara un fuerte 2-0, Maradona dió una asistencia clave para Burruchaga que marcó el 3-2 que le daba el mundial a la albiceleste y aumentaba el hito del mismo Diego Armando"                    
                     ],
                     [
-                                         ],
+                    ],
                     [
                                           ],
                   ],
                 ),
               ),
-
             ],
           ),
         ),
