@@ -132,15 +132,27 @@ class _PantallainformacionmundialistaState
                   color: Colors.black,
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("images/maradonaCup.jpg"),
-                  ),
+              SizedBox(
+                height: 400,
+                width: 600,
+                child: ImageCarousel(
+                  imagePaths: [
+                    "images/maradonaCup.jpg",
+                    "images/mexicoMundial86.jpg",
+                    "images/estadosUnidosMundial94.jpg",
+                  ],
+                  descriptions: [
+                    [
+                                           
+                    ],
+                    [
+                                         ],
+                    [
+                                          ],
+                  ],
                 ),
-                height: 210,
-                width: 300,
               ),
+
             ],
           ),
         ),
