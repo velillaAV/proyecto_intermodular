@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
@@ -31,6 +32,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   }
 
   late String nombreUser = Logicausuario.getUsuarioActual().getNombre();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,83 +47,101 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
             child: Image.asset(
               "images/FondoMundial2026.jpg",
               fit: BoxFit.cover,
-              opacity: const AlwaysStoppedAnimation(0.2),
             ),
           ),
-          SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height,
-              ),
-              child: Center(
+
+          Positioned.fill(
+            child: Container(color: Colors.white.withOpacity(0.75)),
+          ),
+
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 30,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.4),
+                      blurRadius: 25,
+                      spreadRadius: 2,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(height: 30),
                     Text(
-                      'Bienvenido a la Road to the FIFA World Cup 26 App, $nombreUser',
-                      style: TextStyle(fontSize: 40),
+                      "Bienvenido, $nombreUser",
+                      style: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    SizedBox(height: 40),
-                    Text(
+
+                    const SizedBox(height: 5),
+
+                    const Text(
+                      "Road to the FIFA World Cup 26",
+                      style: TextStyle(fontSize: 15, color: Colors.black54),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    const Text(
                       "LIGAS FANTASY",
-                      style: TextStyle(color: Colors.black, fontSize: 30),
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      height: 70,
-                      width: 200,
-                      color: Colors.grey,
-                      child: TextButton(
-                        onPressed: _elegirLiga,
-                        child: Text(
-                          "CREAR LIGA",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 30),
-                    Container(
-                      height: 70,
-                      width: 200,
-                      color: Colors.grey,
-                      child: TextButton(
-                        onPressed: _elegirLiga,
-                        child: Text(
-                          "UNIRSE A LIGA",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
+
+                    const SizedBox(height: 20),
+
+                    ElevatedButton(
+                      onPressed: _elegirLiga,
+                      style: CustomStyles.estiloBotonInicioSesion,
+                      child: const Text("CREAR LIGA"),
                     ),
-                    SizedBox(height: 30),
-                    Container(
-                      height: 70,
-                      width: 200,
-                      color: Colors.grey,
-                      child: TextButton(
-                        onPressed: _elegirLiga,
-                        child: Text(
-                          "TUS LIGAS",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
+
+                    const SizedBox(height: 15),
+
+                    ElevatedButton(
+                      onPressed: _elegirLiga,
+                      style: CustomStyles.estiloBotonRegistrarse,
+                      child: const Text("UNIRSE A UNA LIGA"),
                     ),
-                    SizedBox(height: 30),
-                    Text(
+
+                    const SizedBox(height: 15),
+
+                    ElevatedButton(
+                      onPressed: _elegirLiga,
+                      style: CustomStyles.estiloBotonRojo,
+                      child: const Text("TUS LIGAS"),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    const Text(
                       "INFORMACIÓN",
-                      style: TextStyle(color: Colors.black, fontSize: 30),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      height: 70,
-                      width: 250,
-                      color: Colors.grey,
-                      child: TextButton(
-                        onPressed: _informacionMundialista,
-                        child: Text(
-                          "INFORMACIÓN MUNDIALISTA",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    ElevatedButton(
+                      onPressed: _informacionMundialista,
+                      style: CustomStyles.estiloBotonGoogle,
+                      child: const Text("INFORMACIÓN MUNDIALISTA"),
                     ),
                   ],
                 ),
