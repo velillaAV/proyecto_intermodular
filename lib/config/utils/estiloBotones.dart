@@ -39,4 +39,13 @@ class CustomStyles {
     side: const BorderSide(color: Colors.grey, width: 1),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
   );
+
+  static ButtonStyle estiloTarjetaLiga = ElevatedButton.styleFrom(
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.black,
+    elevation: 6,
+    minimumSize: const Size(double.infinity, 120),
+    padding: const EdgeInsets.all(20),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  );
 }

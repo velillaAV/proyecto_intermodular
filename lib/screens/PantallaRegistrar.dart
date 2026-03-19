@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/colors.dart';
@@ -10,7 +9,6 @@ import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/UserControllers.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
-
 
 class PantallaRegistrar extends StatefulWidget {
   const PantallaRegistrar({super.key});
@@ -25,99 +23,19 @@ const List<String> listaLugares = <String>[
   'Teruel',
   'Frankfurt',
 ];
+
 typedef EntradaMenu = DropdownMenuEntry<String>;
 
 class _PantallaRegistrarState extends State<PantallaRegistrar> {
-  
-
-
-  void _aceptar() {
-    if (_nombre.isEmpty) { //Los 4 primeros son simples, si los campos estan vacios, saltan
-      print("El campo (nombre) está vacio");
-      const snackBarNombre = SnackBar(
-        content: Text("El campo (nombre) está vacio"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarNombre);
-
-    } else if (_contrasena.isEmpty) {
-      print("El campo (contraseña) está vacio");
-      const snackBarContrasena = SnackBar(
-        content: Text("El campo (contraseña) está vacio"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarContrasena);
-
-    } else if (_contrasenaRepetida.isEmpty) {
-      print("El campo (contraseña repetida) está vacio");
-      const snackBarContrasena = SnackBar(
-        content: Text("El campo (contraseña) está vacio"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarContrasena);
-
-    } else if (_edad == 0) {
-      print("El campo (edad) está vacio");
-      const snackBarEdad = SnackBar(
-        content: Text("El campo (edad) está vacio"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarEdad);
-
-    } else if (_contrasena != _contrasenaRepetida) { //Si la contraseña repetida no es la mimsa que la otra salta
-      print("La contraseña no es igual que la repetida");
-      const snackBarContrasenaRepetida = SnackBar(
-        content: Text("La contraseña no es igual que la repetida"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarContrasenaRepetida);
-
-    } else if (!_tickONo) { //Si no ha aceptado los terminos salta
-      print("No están aceptados los terminos");
-      const snackBarTerminos = SnackBar(
-        content: Text("No están aceptados los terminos"),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarTerminos);
-
-    } else if(Logicausuario.mismoNombre(_nombre)) { //Si existe un usuario con el mismo nombre salta
-      const snackBarUsuario = SnackBar(
-        content: Text("El usuario ya existe")
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarUsuario);
-
-    } 
-    
-     
-    
-    else { //Si todo esta correcto, se crea el usuario
-      UserControllers.creacionYInsercionDeUsuario(_nombre, _contrasena, _edad, _tratamiento, _lugarNacimiento, _fotoRuta, false); //Con este metodo de UserControllers, se crea y se inserta el usuario a la vez
-   
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Pantallainiciosesion()),
-      );
-    }
-  }
-
-  void _cancelar() { //Si el usuario pulsa cancelar se le envia de vuelta a Pantalla de Inicio de sesion
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Pantallainiciosesion()),
-    );
-  }
-
-  String _nombre = "";
-
-  String _contrasena = "";
-
-  String _contrasenaRepetida = "";
-
-  String _tratamiento = "Sr";
-
+  String _nombre = '';
+  String _contrasena = '';
+  String _contrasenaRepetida = '';
+  String _tratamiento = 'Sr';
   int _edad = 0;
-
   String _lugarNacimiento = listaLugares.first;
-
   bool _tickONo = false;
-
   String? _fotoRuta;
 
-//Inicializamos la lista desplegable que usaremos para el lugar de nacimiento
   static final List<EntradaMenu> menuEntries =
       UnmodifiableListView<EntradaMenu>(
         listaLugares.map<EntradaMenu>(
@@ -125,30 +43,131 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
         ),
       );
 
-  @override
-  Widget build(BuildContext context) {
-    Color colorBotonTick(Set<WidgetState> states) {
-      const Set<WidgetState> interactiveStates = <WidgetState>{
-        WidgetState.pressed,
-        WidgetState.hovered,
-        WidgetState.focused,
-      };
-      if (states.any(interactiveStates.contains)) {
-        return Colors.blue;
-      }
-      return Colors.red;
+  // ── Helpers ───────────────────────────────────────────────────────────────
+
+  void _snack(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(mensaje)),
+    );
+  }
+
+  void _irA(Widget pantalla) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => pantalla),
+    );
+  }
+
+  SizedBox _gap() => SizedBox(height: Dimensiones.paddingMediano);
+
+  Widget _radioBtn(String valor) {
+    return Row(
+      children: [
+        Radio<String>(
+          value: valor,
+          groupValue: _tratamiento,
+          onChanged: (value) => setState(() => _tratamiento = value!),
+        ),
+        Text(valor),
+      ],
+    );
+  }
+
+  Widget _campoTexto({
+    required String label,
+    required void Function(String) onChanged,
+    bool obscureText = false,
+    bool soloNumeros = false,
+  }) {
+    return TextFormField(
+      obscureText: obscureText,
+      keyboardType: soloNumeros ? TextInputType.number : null,
+      inputFormatters:
+          soloNumeros ? [FilteringTextInputFormatter.digitsOnly] : null,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: label,
+      ),
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _botonFoto(String label, Future<String?> Function() accion) {
+    return FloatingActionButton.extended(
+      label: Text(label),
+      onPressed: () async {
+        final path = await accion();
+        if (path == null) return;
+        setState(() => _fotoRuta = path);
+      },
+    );
+  }
+
+  // ── Lógica ────────────────────────────────────────────────────────────────
+
+  void _aceptar() {
+    if (_nombre.isEmpty) {
+      return _snack("El campo (nombre) está vacio");
+    }
+    if (_contrasena.isEmpty) {
+      return _snack("El campo (contraseña) está vacio");
+    }
+    if (_contrasenaRepetida.isEmpty) {
+      return _snack("El campo (contraseña) está vacio");
+    }
+    if (_edad == 0) {
+      return _snack("El campo (edad) está vacio");
+    }
+    if (_contrasena != _contrasenaRepetida) {
+      return _snack("La contraseña no es igual que la repetida");
+    }
+    if (!_tickONo) {
+      return _snack("No están aceptados los terminos");
+    }
+    if (Logicausuario.mismoNombre(_nombre)) {
+      return _snack("El usuario ya existe");
     }
 
+    UserControllers.creacionYInsercionDeUsuario(
+      _nombre,
+      _contrasena,
+      _edad,
+      _tratamiento,
+      _lugarNacimiento,
+      _fotoRuta,
+      false,
+    );
+    _irA(const Pantallainiciosesion());
+  }
+
+  void _cancelar() => _irA(const Pantallainiciosesion());
+
+  Color _colorBotonTick(Set<WidgetState> states) {
+    const Set<WidgetState> interactiveStates = <WidgetState>{
+      WidgetState.pressed,
+      WidgetState.hovered,
+      WidgetState.focused,
+    };
+    if (states.any(interactiveStates.contains)) return Colors.blue;
+    return Colors.red;
+  }
+
+  // ── Build ─────────────────────────────────────────────────────────────────
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        flexibleSpace:  Container(
-          decoration: BoxDecoration(
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.topRight,
-              colors: [const Color.fromARGB(255, 6, 58, 231), Colors.red, Colors.green],
-              stops: [0.0, 0.5, 1.0],
+              colors: [
+                Color.fromARGB(255, 6, 58, 231),
+                Colors.red,
+                Colors.green,
+              ],
             ),
           ),
         ),
@@ -156,14 +175,15 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
           children: [
             SizedBox(width: Dimensiones.paddingEnano),
             Text(
-              Languagespantallaregistrar.getTexto(Languagespantallaregistrar.registrar),
-              style: TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
+              Languagespantallaregistrar.getTexto(
+                Languagespantallaregistrar.registrar,
+              ),
+              style: const TextStyle(color: Color.fromARGB(255, 240, 240, 240)),
             ),
           ],
         ),
         backgroundColor: Colorcetes.appBarColor,
       ),
-
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -176,176 +196,162 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                     children: [
                       Column(
                         children: [
+                          // Tratamiento
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Languagespantallaregistrar.getTexto(Languagespantallaregistrar.tratamiento),
-                                style: TextStyle(fontSize: Dimensiones.paddingMediano),
+                                Languagespantallaregistrar.getTexto(
+                                  Languagespantallaregistrar.tratamiento,
+                                ),
+                                style: TextStyle(
+                                    fontSize: Dimensiones.paddingMediano),
                               ),
                               SizedBox(width: Dimensiones.paddingMediano),
-                              Row(
-                                children: [
-                                  Radio<String>(
-                                    value: "Sr",
-                                    groupValue: _tratamiento,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _tratamiento = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text("Sr"),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio<String>(
-                                    value: "Sra",
-                                    groupValue: _tratamiento,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _tratamiento = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text("Sra"),
-                                ],
-                              ),
+                              _radioBtn('Sr'),
+                              _radioBtn('Sra'),
                             ],
                           ),
-                          SizedBox(height: Dimensiones.paddingMediano),
-                          Container(
+
+                          _gap(),
+
+                          SizedBox(
                             width: 500,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.nombre),
+                                _campoTexto(
+                                  label: Languagespantallaregistrar.getTexto(
+                                    Languagespantallaregistrar.nombre,
                                   ),
-                                  onChanged: (value) {
-                                    _nombre = value;
-                                  },
+                                  onChanged: (value) => _nombre = value,
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
-                                TextFormField(
+
+                                _gap(),
+
+                                _campoTexto(
+                                  label: Languagespantallaregistrar.getTexto(
+                                    Languagespantallaregistrar.contrasena,
+                                  ),
+                                  onChanged: (value) => _contrasena = value,
                                   obscureText: true,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.contrasena),
-                                  ),
-                                  onChanged: (value) {
-                                    _contrasena = value;
-                                  },
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
-                                TextFormField(
+
+                                _gap(),
+
+                                _campoTexto(
+                                  label: Languagespantallaregistrar.getTexto(
+                                    Languagespantallaregistrar.repitecontrasena,
+                                  ),
+                                  onChanged: (value) =>
+                                      _contrasenaRepetida = value,
                                   obscureText: true,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.repitecontrasena),
-                                  ),
-                                  onChanged: (value) {
-                                    _contrasenaRepetida = value;
-                                  },
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
+
+                                _gap(),
+
                                 Row(
                                   children: [
-                                    Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.subeFoto)),
-                                    SizedBox(width: 30),
-                                    FloatingActionButton.extended(
-                                      label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.galeria)),
-                                      onPressed: () async {
-                                        final path =
-                                            await CameraGalleryService()
-                                                .selectPhoto();
-                                        if (path == null) return;
-                                        setState(() {
-                                          _fotoRuta = path;
-                                        });
-                                      },
+                                    Text(
+                                      Languagespantallaregistrar.getTexto(
+                                        Languagespantallaregistrar.subeFoto,
+                                      ),
                                     ),
-                                    SizedBox(width: 30),
-                                    FloatingActionButton.extended(
-                                      label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.tomarFoto)),
-                                      onPressed: () async {
-                                        final path =
-                                            await CameraGalleryService()
-                                                .takePhoto();
-                                        if (path == null) return;
-                                        setState(() {
-                                          _fotoRuta = path;
-                                        });
-                                      },
+                                    const SizedBox(width: 30),
+                                    _botonFoto(
+                                      Languagespantallaregistrar.getTexto(
+                                        Languagespantallaregistrar.galeria,
+                                      ),
+                                      CameraGalleryService().selectPhoto,
+                                    ),
+                                    const SizedBox(width: 30),
+                                    _botonFoto(
+                                      Languagespantallaregistrar.getTexto(
+                                        Languagespantallaregistrar.tomarFoto,
+                                      ),
+                                      CameraGalleryService().takePhoto,
                                     ),
                                   ],
                                 ),
 
-                                SizedBox(height: Dimensiones.paddingMediano),
-                                TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    labelText: Languagespantallaregistrar.getTexto(Languagespantallaregistrar.edad),
+                                _gap(),
+
+                                _campoTexto(
+                                  label: Languagespantallaregistrar.getTexto(
+                                    Languagespantallaregistrar.edad,
                                   ),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  onChanged: (value) {
-                                    _edad = int.parse(value);
-                                  },
+                                  onChanged: (value) =>
+                                      _edad = int.tryParse(value) ?? 0,
+                                  soloNumeros: true,
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
+
+                                _gap(),
+
                                 DropdownMenu(
-                                  label: Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.lugarNacimiento)),
+                                  label: Text(
+                                    Languagespantallaregistrar.getTexto(
+                                      Languagespantallaregistrar.lugarNacimiento,
+                                    ),
+                                  ),
                                   initialSelection: listaLugares.first,
                                   onSelected: (String? value) {
-                                    setState(() {
-                                      _lugarNacimiento = value!;
-                                    });
+                                    setState(
+                                        () => _lugarNacimiento = value!);
                                   },
                                   dropdownMenuEntries: menuEntries,
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
+
+                                _gap(),
+
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      Languagespantallaregistrar.getTexto(Languagespantallaregistrar.aceptarTerminos),
-                                      style: TextStyle(fontSize: Dimensiones.paddingMediano),
+                                      Languagespantallaregistrar.getTexto(
+                                        Languagespantallaregistrar.aceptarTerminos,
+                                      ),
+                                      style: TextStyle(
+                                          fontSize: Dimensiones.paddingMediano),
                                     ),
                                     Checkbox(
                                       checkColor: Colors.white,
                                       fillColor:
                                           WidgetStateProperty.resolveWith(
-                                            colorBotonTick,
-                                          ),
+                                              _colorBotonTick),
                                       value: _tickONo,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _tickONo = value!;
-                                        });
+                                      onChanged: (value) {
+                                        setState(() => _tickONo = value!);
                                       },
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: Dimensiones.paddingMediano),
-                                Column(
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: _aceptar,
-                                      style: CustomStyles.estiloBotones,
-                                      child: Row(children: [Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.aceptar))]),
+
+                                _gap(),
+
+                                ElevatedButton(
+                                  onPressed: _aceptar,
+                                  style: CustomStyles.estiloBotonRegistrarse,
+                                  child: Text(
+                                    Languagespantallaregistrar.getTexto(
+                                      Languagespantallaregistrar.aceptar,
                                     ),
-                                    SizedBox(height: Dimensiones.paddingMediano),
-                                    ElevatedButton(
-                                      onPressed: _cancelar,
-                                      style: CustomStyles.estiloBotones,
-                                      child: Row(children: [Text(Languagespantallaregistrar.getTexto(Languagespantallaregistrar.cancelar))]),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+
+                                SizedBox(height: Dimensiones.paddingEnano),
+
+                                ElevatedButton(
+                                  onPressed: _cancelar,
+                                  style: CustomStyles.estiloBotonRojo,
+                                  child: Text(
+                                    Languagespantallaregistrar.getTexto(
+                                      Languagespantallaregistrar.cancelar,
                                     ),
-                                  ],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ],
                             ),
