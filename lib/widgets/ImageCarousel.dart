@@ -71,21 +71,23 @@ class _ImageCarouselState extends State<ImageCarousel> {
       context: context,
       builder: (context) {
        
-        return AlertDialog(
-        title: const Text("Información"),
-        
-          content: 
+        return SingleChildScrollView(
+          child: AlertDialog(
+          title: const Text("Información"),
           
-          Text(widget.descriptions[index].join("\n")),
-          actions: [
+            content: 
             
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text("Cerrar"),
-            ),
-          ],
+            Text(widget.descriptions[index].join("\n")),
+            actions: [
+              
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Cerrar"),
+              ),
+            ],
+          ),
         );
       },
     );
