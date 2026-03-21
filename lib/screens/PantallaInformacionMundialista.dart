@@ -147,10 +147,77 @@ class _PantallainformacionmundialistaState
                       "Contra Uruguay su conducción y regates rompieron la defensa uruguaya aunque no marcó ni asistió, contra Inglaterra el Diego se desatió marcando la mano de dios y el gol del siglo ante Peter Shilton. En las semis, un doblete ante Bélgica certificó el pase de Argentina a la final",
                       "En la gran final, después de que Alemania remontara un fuerte 2-0, Maradona dió una asistencia clave para Burruchaga que marcó el 3-2 que le daba el mundial a la albiceleste y aumentaba el hito del mismo Diego Armando"                    
                     ],
-                    [
+                    [ 
+                      "La actuación de Jairzinho en el Mundial de 1970 es una de las más impresionantes en la historia del fútbol. Conocido como “el Huracán de la Derecha”, fue una pieza clave del legendario equipo de Selección de fútbol de Brasil que conquistó el torneo.",
+                      "Lo que hace su desempeño especialmente memorable es que logró marcar al menos un gol en cada uno de los partidos que disputó, un récord que muy pocos jugadores han conseguido en una sola Copa del Mundo. Desde el primer encuentro, Jairzinho mostró su potencia, velocidad y capacidad goleadora",
+                      "En la fase de grupos, anotó contra Checoslovaquia, Inglaterra y Rumanía, siendo decisivo en todos ellos. Especialmente recordado es su gol frente a Inglaterra, vigente campeona en ese momento, donde su fuerza física y determinación rompieron la defensa rival.",
+                      "En la fase eliminatoria, Jairzinho continuó su racha goleadora. Marcó en los cuartos de final contra Perú, en semifinales frente a Uruguay, y no podía faltar su gol en la final ante la selección italiana.",
+                      "En ese último encuentro, contribuyó a la victoria por 4-1, que consolidó a Brasil como tricampeón del mundo y le permitió quedarse definitivamente con el trofeo Jules Rimet (COPA DEL MUNDO). Con todo eso la actuación de Jairzinho se convirtió en una de las más infravaloradas y poco recordadas"
                     ],
-                    [
+                    [ "La actuación de Roberto Baggio en la Copa Mundial de la FIFA 1994 es una de las más recordadas y contradictorias en la historia del fútbol, marcada por un inicio discreto, una fase final brillante y un desenlace dramático.",
+                      "En la fase de grupos, su rendimiento fue irregular y generó críticas. Italia tuvo dificultades para avanzar y Baggio no logró destacar en los primeros partidos, lo que llevó a cuestionamientos sobre su estado físico y su influencia en el juego.",
+                      "A partir de los octavos de final, Baggio se transformó en el jugador decisivo del torneo. Marcó dos goles clave contra Nigeria incluido el empate agónico que llevó el partido a la prórroga, y continuó con goles determinantes frente a España en cuartos de final y contra Bulgaria en semifinales.",
+                      "En la final contra Brasil, disputada tras un torneo agotador y con Baggio físicamente mermado, el partido terminó sin goles y se decidió en la tanda de penaltis. Ahí llegó lo más trágico de su carrera: Baggio falló el último penalti, enviando el balón a las nubes, lo que dio el título a Brasil."
                                           ],
+                  ],
+                ),
+              ),
+               SizedBox(height: 20),
+              Text(
+                "PLAYOFFS EUROPEOS",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+                SizedBox(
+                height: 400,
+                width: 600,
+                child: ImageCarousel(
+                  imagePaths: [
+                    "images/rutaA.png",
+                    "images/rutaB.png",
+                    "images/rutaC.png",
+                    "images/rutaD.png"
+                  ],
+                  descriptions: [
+                    [
+                      "Esta semana en la ruta A de los play offs europeos, Italia, Gales, Irlanda de Norte y Bosnia buscaran su pase al mundial, y aquí te hablo de las 4 selecciones y sus oportunidades." ,
+                      "Gennaro Gattuso que ya dió su convocatoria para la Azurra quiere enmendar el paso mundialista de los ultimos años de Italia, fase de grupos en 2010 y 2014, eliminada en clasificatorios por Suecia en 2018 y Macedonia del Norte en 2022",
+                      "Repasando la convocatoria, el extremo ex de la Juve ahora jugador del Liverpool Federico Chiesa vuelve tras una ausencia de 2 años en la selección, y con ganas de volver al nivel de esa Eurocopa 2021, en donde vacunaba a cualquiera.",
+                      "Parte por parte, en porteria Donnarumma no tiene cambio, aunque Valverde lo haya vacilado en Champions, en una defensa revejuvenecida, volverá del lesión Giorgio Scalvini, que se juntaran al grupo de los defensas promesa junto a Diego Coppola y Marco Palestra del Cagliari",
+                      "aún así, Alessandro Bastoni y el firme Gianluca Mancini lideraran la zaga. El polivalente Dimarco que se está marcando un temporadón y Di Lorenzo ocuparan sus respectivos laterales. En el centro del campo Nicolo Barella, Sandro Tonali y Manuel Locatelli serían la apuesta de Gattuso para manejar el partido",
+                      "Chiesa y Politano se disputaran la banda derecha, mientras que el prometedor Pio (el pollito Pio) Esposito se ha hecho un hueco en la punta de ataque, probablemente acompañado de Mateo Retegui, todo es problable para que Italia clasifique, pero recuerden, nunca apuesten por Italia."
+                      "    ",
+                      "Por parte de Irlanda del Norte es mal augurio que principalmente sus jugadores más resltables son sus dos laterales, Connor Bradley y Trai Hume, pero para añadirle más picante, dire algunos jugadores que podrían sorpender.",
+                      "Para empezar el delantero del West Bromwich Albion, Isaac Price lleva 7 goles y 1 asistencia e intenta evitar el descenso de los suyos. En la defensa también hay otros nombres propios, como el defensa del Sunderland Daniel Ballard, o el lateral ex Watford Jamal Lewis.",
+                      "Con todo esto Irlanda del Norte intentaran vestirse de Macedonios y eliminar a Italia, aunque al final acabaremos viendo Catenaccio vs Brexit, lo cual será un entretenido duelo de todas maneras",
+                      "      ",
+                      "Los galeses que siguen en el proceso Post-Bale, han encontrado nuevos faros en el ataque como Harry Wilson dell Fulham, la bala Daniel James del Leeds United, David Brooks. Brenan Jonhson, si es como cuando ibas a elegir un chupachus de niño, hay de todos los sabores",
+                      "En el centro del campo, Nathan Ampadu si se diera la ocasión, repeteria mundial. Y en la defensa Ben Cabango tiene esos vibes que desprendia Ashley Williams en la Eurocopa de 2016 en la que Gales llegó a semifinales.",
+                      "Hay cierta fe en esta Gales, tiene mucho juego ofensivo en el tintero, y pueden ganarle con poca dificultad a Bosnia, pero la problable final contra Italia esta fuera de su rango, pero en el decimo aniversario de las semifinales de Gales en la Euro 2016 todo puede pasar. ",
+                      "       ",
+                      "Para acabar estaría la Bosnia de Edin Dzeko, la mistica de esta selección nunca se la quitaran, pero los Miralem Pjanec, Hasan Salihadmidzic, Zvejdan Misimovic o Vedad Ibisevic ya no están.",
+                      "Las bazas más claras de los bosnios, son su delantera la cual tiene bastantes opciones, el mismo Edin Dzeko que está destinado ha jugar su segundo mundial después de 2014, a su lado Tabakovic y Erdem Demirovic, ambos delanteros de la Bundes con mucho talento.",
+                      "Bosnia puede darle pelea a Gales, pero si llegarán a vencerles como siempre, lo llegarían a tener bastante jodido en una posible final ante Italia."
+
+                    ],
+                    [ 
+                      "La actuación de Jairzinho en el Mundial de 1970 es una de las más impresionantes en la historia del fútbol. Conocido como “el Huracán de la Derecha”, fue una pieza clave del legendario equipo de Selección de fútbol de Brasil que conquistó el torneo.",
+                      "Lo que hace su desempeño especialmente memorable es que logró marcar al menos un gol en cada uno de los partidos que disputó, un récord que muy pocos jugadores han conseguido en una sola Copa del Mundo. Desde el primer encuentro, Jairzinho mostró su potencia, velocidad y capacidad goleadora",
+                      "En la fase de grupos, anotó contra Checoslovaquia, Inglaterra y Rumanía, siendo decisivo en todos ellos. Especialmente recordado es su gol frente a Inglaterra, vigente campeona en ese momento, donde su fuerza física y determinación rompieron la defensa rival.",
+                      "En la fase eliminatoria, Jairzinho continuó su racha goleadora. Marcó en los cuartos de final contra Perú, en semifinales frente a Uruguay, y no podía faltar su gol en la final ante la selección italiana.",
+                      "En ese último encuentro, contribuyó a la victoria por 4-1, que consolidó a Brasil como tricampeón del mundo y le permitió quedarse definitivamente con el trofeo Jules Rimet (COPA DEL MUNDO). Con todo eso la actuación de Jairzinho se convirtió en una de las más infravaloradas y poco recordadas"
+                    ],
+                    [ "La actuación de Roberto Baggio en la Copa Mundial de la FIFA 1994 es una de las más recordadas y contradictorias en la historia del fútbol, marcada por un inicio discreto, una fase final brillante y un desenlace dramático.",
+                      "En la fase de grupos, su rendimiento fue irregular y generó críticas. Italia tuvo dificultades para avanzar y Baggio no logró destacar en los primeros partidos, lo que llevó a cuestionamientos sobre su estado físico y su influencia en el juego.",
+                      "A partir de los octavos de final, Baggio se transformó en el jugador decisivo del torneo. Marcó dos goles clave contra Nigeria incluido el empate agónico que llevó el partido a la prórroga, y continuó con goles determinantes frente a España en cuartos de final y contra Bulgaria en semifinales.",
+                      "En la final contra Brasil, disputada tras un torneo agotador y con Baggio físicamente mermado, el partido terminó sin goles y se decidió en la tanda de penaltis. Ahí llegó lo más trágico de su carrera: Baggio falló el último penalti, enviando el balón a las nubes, lo que dio el título a Brasil."
+                                          ],
+                    [
+
+                                          ]                      
                   ],
                 ),
               ),
