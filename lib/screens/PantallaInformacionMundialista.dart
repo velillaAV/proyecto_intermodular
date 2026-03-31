@@ -288,6 +288,83 @@ class _PantallainformacionmundialistaState
                     ],
                   ),
                 ),
+                SizedBox(height: 20),
+                Text(
+                  "FINAL PLAY OFFS",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                  SizedBox(
+                  height: 400,
+                  width: 600,
+                  child: ImageCarousel(
+                    imagePaths: [
+                      "images/finalrutaA.png",
+                      "images/finalrutaB.png",
+                      "images/finalrutaC.png",
+                      "images/finalrutaD.png",
+                      "images/finalesrutaRD.png"
+                    ],
+                    descriptions: [
+                      [
+                        "En el encuentro entre Irlanda del Norte y Italia, como era de esperarse, Italia salió a por todas, y sus dos puntas Retegui y Moise Kean llegaron a conectar bastante bien, trás una cagada de Terry Devlin Matteo Retegui pudó haber marcado el primero, pero el portero se le adelantó",
+                        "Y no fue en la segunda parte que trás un despeje de Isaac Price, Sandro Tonali enganchó una gran volea que supero a Pierce Charles y adelantaba a Italia. Moise Kean que había tenido un montón de oportunidades incluyendo una chilena, marcó en los últimos minutos para sentenciar.",
+                        "En la otra semifinal, los bosnios plantearon un partido trabado en donde les sacaron 3 tarjetas amarillas solamente en la primera parte, pero en la segunda, Daniel James aprovechó un error garrafal de un jugador bosnio, para clavarla en el angulo y adelantar a los galeses",
+                        "A partir de ahí Bosnia cambió a un estilo más ofensivo y Ermedin Demirovic tuvó el empate pero el travesaño se lo impidió, Nikola Vasijl mantuvo las esperanzas bosnias deteniendo el doblete de Daniel James, y cuando todo parecia perdido, como una eminencia apareció Edin Dzeko",
+                        "Kerim Alajbegovic puso el córner al área, y Edin Dzeko cabeceó hacía atrás el balón que acabo entrando en la porteria, y sin celebrarlo euforicamente porque ya no le da más el body, Bosnia empataba la eliminatoria. Bosnia sufrió toda la prórroga en donde su defensa fue protagonista.",
+                        "Los penaltis no empezaron bien para los bosnios, ya que Ermedin Demirovic fallaba el primero y Harry Wilson ponía a Gales por delante en la tanda, Tabakovic y Harris ambos anotaron sus lanzamientos, y trás el acierto de Basic, Nikola Vasijl tuvo otra oportunidad para empatar la tanda",
+                        "Pero Brennan Johnson que tenía remanente de la mala suerte Spurs, terminó mandandó el balón a las nubes, empatando la tanda el mismo, Hadziahmetovic marcó, y Nikola Vasijl se volvía a vestir de heróe parando el tiro de Neco Williams y el mismo Kerim Alajbegovic que asistió a Dzeko se llevaba la resposabilidad",
+                        "Y con un buen lanzamiento Bosnia pasaba a la final de la ruta A de los play offs, en donde junto a Italia querran pasar al mundial después de 12 años sin jugarlo"
+
+        
+                      ],
+                      [ 
+                        "Los suecos empezarón fuerte ante Ucrania, a los 5 minutos y gran pase de Benjamin Nygren dejó a Victor Gyokeres rematando solo frente a porteria, poniendo el 0-1, Gabriel Gudmunsson se subió a la moto y con un gran sprint estuvó a punto de poner tierra de por medio, pero el palo dijo que no",
+                        "En la segunda parte, con un saque milagroso del portero sueco Kristoffer Nordfeldt asistió a Gyokeres que después de escuchar las críticas, marcaba su doblete poniendo el segundo en el marcador, Gyokeres que aún seguía con hambre, se construyó el mismo una jugada que acabó en un pénalti que el mismo marcaría",
+                        "Tras el hat trick de Gyokeres, el partido ya estaba sentenciado aún así Matviy Ponomarenko marcaba el gol de la honra para Ucrania, y dejaba con un 1-3 el resultado final, pasando Suecia a la final sin ninguna molestia",
+                        "En la otra semifinal, Hysaj sacó bajo la línea un gran cabezazo de Jan Bednarek, y en los últimos suspiros de la primera parte tras una cagada del mismo Jan Bednarek, Arber Hoxha aprovechó para quitarse a Grabara del medio adelantando a Albania",
+                        "En la segunda parte, un gran remate de Piotr Zielinski se marchó por poco del la escuadra de la porteria albanesa, y poco después Nedim Bajrami falló una ocasión clarísima que les acabó pasando factura, ya que a lo 'Dzeko' Lewandowski empataba el partido de cabeza",
+                        "y en el 72, con otro zapatazo Piotr Zielinski esta vez no falló culminando una gran remontada polaca que se quedaba con su pase a la final de los play offs",
+
+                      ],
+                      [ 
+                        "En un partido bastante reñido, Martin Valjent abrió el marcador a favor de Eslovaquia con un gran cabezazo a los 6 minutos, pero Kosovo reaccionó y Veldin Hodza empataba en el 21 el partido",
+                        "A minutos del final de la primera parte, una falta de entendimiento provocó que un tiro libre de Lukas Haraslin que no llevaba mucho peligro acabara en gol, aún así en el inicio de la segunda mitad Fisnik Asllani con un cabezazo hermoso empataba de nuevo",
+                        "Y para aumentar la locura, Florent Muslija marcaba de tiro libre para finalmente remontar el partido a favor de Kosovo, en el 73, Dubravka detuvo bien el remate de Hajdari, pero el rebote le cayó a Kreshnik Hajziri que marcaba un 2-4 sensacional",
+                        "David Strelec cerraba un partidazo marcando el 3-4 en el 93, que dejaba aún así a Kosovo en la final",
+                        "Turquía y Rumania abrieron los play offs jugando a las 18:00, a los 22 minutos Ianis Hagi se encontró con una buena ocasión que acabó mandandó demasiado alto, mientras que Kenan Yildiz y Arda Güler ya empezaban a hacer de las suyas, pero sin acertar en la punteria",
+                        "Y no fue hasta la segunda parte en donde con un pase armonioso de Güler, Ferdi Kadioglu marcaba el primero del encuentro adelantando a Turquía, los turcos siguieron intentando, pero un remate de Yildiz que pegó en el travesaño y las paradas del guardameta del Celta Radu mantuvieron el resultado",
+                        "Por parte de los rumanos, se encontraron con el palos tras el remates de Ratiu y con eso, Turquía se acercaba más de clasificar al mundial"
+
+                       
+                                            ],
+                      [
+                        "En el partido entre republicas, se vió una primera parte de locura, en donde todo empezó trás un penalti sobre Nathan Collins provocado por Vladimir Darida, que evidentemente Troy Parrot se encargó de marcar para adelantar a los irlandeses y trás una jugada con muchas carambolas, Matej Kovar marcó en propia",
+                        "Republica Checa que a los 23 minutos ya perdía 0-2, volvía a ver la esperanza tras que el arbitro pitara penalti debido a un claro agarrón sobre Ladislav Krejci que Patrick Schick marcaría con una clase inigualable para recortar distancias",
+                        "Ya en los últimos minutos, con un gran testarazo, el mismo Ladislav Krejci marcaba el empate que mandaba el encuentro a la prórroga, en donde Tomas Soucek la tuvo para poner la remontada, pero trás un mal remate la acabó mandando a las nubes y con eso el partido se iba a los penaltis",
+                        "En la tanda el pobre Matej Kovar que se había marcado en propia, detuvo el lanzamiento de Alan Browne dejando la responsabilidad a Jan Kliment que marcaba un gran penalti para mandar a los checos a la final",
+                        "En la otra semifinal se vió el partido más desigual en donde Stole Dimitrievski tuvo que detener un potente remate de Hojbjerg que iba a ser el 1-0, pero en la segunda parte, en una jugada llena de errores de ambos equipos, Mikkel Damsgaard marcaba el 1-0 a favor de los daneses",
+                        "9 minutos después trás un gran centro de Mikkel Damsgaard, este asistió a un Gustav Isaksen que un minuto después aprovechó el rechace de un gran paradón de Dimitrievski para marcar un doblete fulminante que Christian Norgaard evitando que Eriksen marcara un gol olímpico, puso el 4-0 definitivo",
+                        "Haciendo que Republica Checa se vea con la Dinamarca del potencial para disputarse el pase al mundial"
+        
+                                            ],
+                      [
+                        "En los play offs del resto del mundo, Bolivia se enfrentaba a Surinam en un partido en donde Bolivia empezó fuerte con un gran disparo de Roberto Fernadéz que repeló el guardameta de Surinam",
+                        "Trás otra jugada de calidad de Bolivia, Monteiro acabó rematando hacía atrás, fallando estrepitosamente, el partido continuó su rumbo, y Guillermo Viscarra salvaba a Bolivia con una gran parada que evitaba el 0-1",
+                        "Ya en la segunda parte, Van Gelderen aprovechó una pelota suelta y marcaba el primero para adelantar a Surinam, pero el espiritu boliviano seguía firme y en el 72 Paniagua con un tiro ajustadísimo al palo largo marcaba el empate para Bolivia",
+                        "Poco después Miguelito marcaba de penalti el 2-1 que certificaba la remontada de Bolivia, que con el corazón más encendido que nunca pasan a la final a enfrentarse a Irak",
+                        "En la otra ruta, Nueva Caledonia se enfrentaba a los Reggie Boyz Jamaica, y como era de esperarse, Jamaica dominó el partido y Bailey Cadamarteri aprovechó un balón muerto en el área para marcar el 1-0",
+                        "Los caledonios, probaron suerte y con un tiro desde su campo Athale casí marca un golazo que empataría el encuentro, el resto del partido los porteros se convirtieron en las figuras del partido, manteniendo el 1-0 hasta el final, cosa que dejaba a Jamaica en la final ante Republica del Congo",
+
+                       
+        
+                                            ],                                             
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
