@@ -317,7 +317,11 @@ class _PantallainformacionmundialistaState
                         "Kerim Alajbegovic puso el córner al área, y Edin Dzeko cabeceó hacía atrás el balón que acabo entrando en la porteria, y sin celebrarlo euforicamente porque ya no le da más el body, Bosnia empataba la eliminatoria. Bosnia sufrió toda la prórroga en donde su defensa fue protagonista.",
                         "Los penaltis no empezaron bien para los bosnios, ya que Ermedin Demirovic fallaba el primero y Harry Wilson ponía a Gales por delante en la tanda, Tabakovic y Harris ambos anotaron sus lanzamientos, y trás el acierto de Basic, Nikola Vasijl tuvo otra oportunidad para empatar la tanda",
                         "Pero Brennan Johnson que tenía remanente de la mala suerte Spurs, terminó mandandó el balón a las nubes, empatando la tanda el mismo, Hadziahmetovic marcó, y Nikola Vasijl se volvía a vestir de heróe parando el tiro de Neco Williams y el mismo Kerim Alajbegovic que asistió a Dzeko se llevaba la resposabilidad",
-                        "Y con un buen lanzamiento Bosnia pasaba a la final de la ruta A de los play offs, en donde junto a Italia querran pasar al mundial después de 12 años sin jugarlo"
+                        "Y con un buen lanzamiento Bosnia pasaba a la final de la ruta A de los play offs, en donde junto a Italia querran pasar al mundial después de 12 años sin jugarlo",
+                        "Bosnia y Italia, ambas que no pisaban un mundial desde 2014 tenían la oportunidad de hacerlo. Y en los primeros minutos, tras un error en el saque de Vasijl, Moise Kean la mandó a la escuadra abriendo el marcador, pero en el minuto 40, tras una entrada brusca a Memic, Bastoni se hacía expulsar tontamente",
+                        "En la segunda parte, Moise Kean pudo doblar la ventaja pero a pesar de haber hecho un buen sprint, su remate se fue por encima del larguero, y Bosnia lo aprovechó minutos después, ya que Haris Tabakovic mandaba el partido a una prórroga que Italia buscaba evitar.",
+                        "En la prórroga una gran parada de Vasijl evita que Italia marcara, Benjamin Tahirovic fue el que pudo materializar la ocasión más clara de la prórroga, pero su remate se fue rozando el palo. A Italia le serbian los penaltis recordandonos a esa Eurocopa de 2021, pero esta vez seria distinto",
+                        "Pio Esposito mandó el balón a la grada, Bosnia no falló, pero Bryan Cristante y su remate al larguero, dictaron una pena repentina para Italia, que se encargó de certificarla Esmir Bajraktarevic. Italia seguía sin ir al mundial después de 12 años, y Bosnia volvía trás 12 años."
 
         
                       ],
@@ -328,6 +332,9 @@ class _PantallainformacionmundialistaState
                         "En la otra semifinal, Hysaj sacó bajo la línea un gran cabezazo de Jan Bednarek, y en los últimos suspiros de la primera parte tras una cagada del mismo Jan Bednarek, Arber Hoxha aprovechó para quitarse a Grabara del medio adelantando a Albania",
                         "En la segunda parte, un gran remate de Piotr Zielinski se marchó por poco del la escuadra de la porteria albanesa, y poco después Nedim Bajrami falló una ocasión clarísima que les acabó pasando factura, ya que a lo 'Dzeko' Lewandowski empataba el partido de cabeza",
                         "y en el 72, con otro zapatazo Piotr Zielinski esta vez no falló culminando una gran remontada polaca que se quedaba con su pase a la final de los play offs",
+                        "En la gran final, Suecia empezó de forma energica, Ayari con un gran taconazo, asistió a Elanga que la clavaba en la escuadra marcando el primero, Polonia no tardó en espabilarse, y Nicola Zalewski marcaba el empate 14 minutos después.",
+                        "Antes del descanso Gustaf Lagerbielke con un gran testarazo volvía a poner por delante a Suecia, el partido que ya era un tira y afloja siguió con la misma dinamica y en la segunda parte Swiderski volvía a empatar el partido, y no fue hasta el final del partido cuando se definiria",
+                        "En el minuto 87, después de una parada de Grabara, Zeneli le pegó al palo, el balón salió rebotado, y un Gyokeres que se estaba redimiendo de la fase clasificatoria, marcaba un gol agonico, que mandaba a Suecia al mundial 8 años después"
 
                       ],
                       [ 
@@ -337,7 +344,9 @@ class _PantallainformacionmundialistaState
                         "David Strelec cerraba un partidazo marcando el 3-4 en el 93, que dejaba aún así a Kosovo en la final",
                         "Turquía y Rumania abrieron los play offs jugando a las 18:00, a los 22 minutos Ianis Hagi se encontró con una buena ocasión que acabó mandandó demasiado alto, mientras que Kenan Yildiz y Arda Güler ya empezaban a hacer de las suyas, pero sin acertar en la punteria",
                         "Y no fue hasta la segunda parte en donde con un pase armonioso de Güler, Ferdi Kadioglu marcaba el primero del encuentro adelantando a Turquía, los turcos siguieron intentando, pero un remate de Yildiz que pegó en el travesaño y las paradas del guardameta del Celta Radu mantuvieron el resultado",
-                        "Por parte de los rumanos, se encontraron con el palos tras el remates de Ratiu y con eso, Turquía se acercaba más de clasificar al mundial"
+                        "Por parte de los rumanos, se encontraron con el palos tras el remates de Ratiu y con eso, Turquía se acercaba más de clasificar al mundial",
+                        "En la gran final para el repechaje Kosovo tuvo la primera con un gran remate de Fisnik Asllani que primero detuvo Cakir y que luego pegó en el larguero, poco después con una gran jugada de Yildiz, Akturkoglu se quedaba solo frente a la porteria, pero un mal control de su parte hizo que no pudiera tirar",
+                        "Ya en la segunda parte, Kokcu estaba a nada de marcar el primero, pero el mismo Akturkoglu le quitó el gol para marcar el suyo propio, adelantando de todas formas a Turquía en el marcador, Kenan Yildiz siguió con su masterclass, y a pesar de que pudo haber marcado, Turquía ganó y clasificaba al mundial",
 
                        
                                             ],
@@ -348,7 +357,11 @@ class _PantallainformacionmundialistaState
                         "En la tanda el pobre Matej Kovar que se había marcado en propia, detuvo el lanzamiento de Alan Browne dejando la responsabilidad a Jan Kliment que marcaba un gran penalti para mandar a los checos a la final",
                         "En la otra semifinal se vió el partido más desigual en donde Stole Dimitrievski tuvo que detener un potente remate de Hojbjerg que iba a ser el 1-0, pero en la segunda parte, en una jugada llena de errores de ambos equipos, Mikkel Damsgaard marcaba el 1-0 a favor de los daneses",
                         "9 minutos después trás un gran centro de Mikkel Damsgaard, este asistió a un Gustav Isaksen que un minuto después aprovechó el rechace de un gran paradón de Dimitrievski para marcar un doblete fulminante que Christian Norgaard evitando que Eriksen marcara un gol olímpico, puso el 4-0 definitivo",
-                        "Haciendo que Republica Checa se vea con la Dinamarca del potencial para disputarse el pase al mundial"
+                        "Haciendo que Republica Checa se vea con la Dinamarca del potencial para disputarse el pase al mundial",
+                        "En la final, Republica Checa se adelantó a los 3 minutos con una volea impresionante de Pavel Sulc que dejaba a Dinamarca sin palabras, Pavel Sulc y Matej Kover se convirtieron en los protagonistas de la primera parte, Kovar parando un gran tiro libre y Pavel Sulc deslumbrando con su visión de juego.",
+                        "Cosa que pudo haber hecho que Republica Checa pusiera tierra de por medio, pero Lukas Provod no pudo materializar la ocasión. En el 71, Joachim Anderser ponía las tablas en el marcador con un gran cabezazo, llevando el partido a la prórroga",
+                        "En la prórroga, Ladislav Krejci que fue clave contra Republica de Irlanda marcaba el 2-1 en el 100 de partido, pero el delantero el Bodo/Glimt Kasper Hogh empató en el 110 haciendo su tan conocida celebración cosa que llevó el partido a la tanda de penaltis",
+                        "Dinamarca falló 3 penaltis en la tanda, Republica Checa solo 1, y con el lanzamiento acertado de Michel Sadilek, Republica Checa volvía al mundial 20 años después."
         
                                             ],
                       [
@@ -358,6 +371,11 @@ class _PantallainformacionmundialistaState
                         "Poco después Miguelito marcaba de penalti el 2-1 que certificaba la remontada de Bolivia, que con el corazón más encendido que nunca pasan a la final a enfrentarse a Irak",
                         "En la otra ruta, Nueva Caledonia se enfrentaba a los Reggie Boyz Jamaica, y como era de esperarse, Jamaica dominó el partido y Bailey Cadamarteri aprovechó un balón muerto en el área para marcar el 1-0",
                         "Los caledonios, probaron suerte y con un tiro desde su campo Athale casí marca un golazo que empataría el encuentro, el resto del partido los porteros se convirtieron en las figuras del partido, manteniendo el 1-0 hasta el final, cosa que dejaba a Jamaica en la final ante Republica del Congo",
+                        "En la primera final del play off, Jamaica se enfrentaba a una Republica del Congo que queria volver al mundial después de 52 años, y Cédric Bakambu inició el sueño a los 9 minutos, pero se lo anularon por fuera de juego",
+                        "Era de esperar que Republica del Congo dominara el encuentro, pero Jamaica pudo haberse adelantado con un remate de Kasey Palmer que acabó en córner. O el disparo lejano de Leon Bailey que se fue rozando el palo",
+                        "Bakambu, tuvo la oportunidad de finalmente a marcar, pero su remate lo acabó parando el guardameta Jamaicano. El partido se fue a la prórroga, y Tuanzebe marcaba el gol que mandaba a Republica del Congo al mundial",
+                        "En la segunda final del play off, Bolivia quería rozar el milagro ante una Irak que quería volver a pisar el mundial desde el 86, Irak empezó dominando y con un gran tiro libre de Al-Hamadi que sacaba con una gran parada de Viscarra, Irak hacia una demostración de intenciones",
+                        "Y pocos minutos después el mismo Al-Hamadi marcaba de cabeza para adelantar a Irak, Bolivia recuperó la fé después de que Paniagua volviera a iluminar el camino con un gran gol por la escuadra, camino que se encargó de oscurecer el capitán de Irak Aymen Hussein, que con su gol, mandaba a Irak al mundial"
 
                        
         
