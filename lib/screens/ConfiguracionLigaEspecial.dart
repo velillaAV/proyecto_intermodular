@@ -1,24 +1,35 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
-class Liganormal extends StatefulWidget {
-  const Liganormal({super.key});
+class ConfiguracionLigaEspecial extends StatefulWidget {
+  const ConfiguracionLigaEspecial({super.key});
+  
 
   @override
-  State<Liganormal> createState() => _LiganormalState();
+  State<ConfiguracionLigaEspecial> createState() => _ConfiguracionLigaEspecialState();
 }
 
-class _LiganormalState extends State<Liganormal> {
+class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
   String nombreLiga = "";
   int numParticipantes=0;
   String propietario = "";
-  bool clausulas = true;
+ 
 
   void _enviarLiga() {
-
+    Modeloligaespecial ligaNueva =  Modeloligaespecial(id_liga: Logicaligas.getLigasEspeciales().length + 1, cod_invitacion: Logicaligas.getLigas().length + 1, propietario: Logicausuario.usuarioActual);
+     Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SeleccionPais(liga: ligaNueva,)),
+    );
   }
 
   @override
@@ -63,21 +74,6 @@ class _LiganormalState extends State<Liganormal> {
                   numParticipantes=int.tryParse(value) ?? 0;
                 },
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Cláusulas"),
-                Checkbox(
-                  value: clausulas,
-                  onChanged: (bool? valor) {
-                    if (valor == null) return;
-                    setState(() {
-                      clausulas = valor;
-                    });
-                  },
-                ),
-              ],
             ),
             TextButton(
                 onPressed: _enviarLiga,

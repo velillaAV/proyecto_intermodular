@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
+class SeleccionPais extends StatefulWidget {
+  const SeleccionPais({super.key, required this.liga});
+  final Modeloligaespecial liga;
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<SeleccionPais> createState() => _SeleccionPaisState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _SeleccionPaisState extends State<SeleccionPais> {
+  bool isPicked = false;
+  int indexGeneral = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,28 +31,147 @@ class _MyWidgetState extends State<MyWidget> {
             fit: BoxFit.fill,
           ),
         ),
-        child: Center(
-          child: Column(
-            children: [
-              SizedBox(height: 30),
-              Column(
-                children: [
-                  Text('SELECCIONA TU PAÍS', style: TextStyle(fontSize: 40)),
-                  SizedBox(height: 100),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Europa',
-                        style: TextStyle(fontSize: 40),
-                      ),
-                    ],
-                  ),
-                ],
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.all(12),
+                itemCount: widget.liga.listaSelecciones.length,
+                itemBuilder: (context, index) {
+                  final seleccion = widget.liga.listaSelecciones[index];
+                  final isSelected = indexGeneral == index;
+
+                  return GestureDetector(
+                    onTap: seleccion.usuario != null
+                        ? null
+                        : () {
+                            setState(() {
+                              indexGeneral = index;
+                            });
+                          },
+
+                    child: seleccion.usuario == null
+                        ? AnimatedContainer(
+                            duration: const Duration(milliseconds: 250),
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colorcetes.selectionColor
+                                  : Colorcetes.cardColors,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.white
+                                    : Colors.black,
+                                width: 2,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  seleccion.escudo!,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        seleccion.nombre,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        : Opacity(
+                          opacity: 0.5,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: Colorcetes.cardColors,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              padding: const EdgeInsets.all(12),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    seleccion.escudo!,
+                                    width: 50,
+                                    height: 50,
+                                  ),
+                                  SizedBox(width: 12),
+                                  Expanded(
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                          
+                                      children: [
+                                        
+                                        Text(
+                                          seleccion.nombre,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(height: 1,),
+                                        SizedBox(width: 600,),
+                                        Icon(
+                                          Icons.lock,
+                                          size: 40,
+                                          color: Colors.white70,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ),
+                  );
+                },
               ),
-            ],
-          ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: indexGeneral == -1
+                      ? null
+                      : () {
+                          final seleccion =
+                              widget.liga.listaSelecciones[indexGeneral];
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text("País seleccionado"),
+                              content: Text("Has elegido ${seleccion.nombre}"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("OK"),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                  child: const Text("Confirmar selección"),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
+import 'package:proyecto_intermodular/screens/ConfiguracionLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/LigaNormal.dart';
+import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
@@ -17,6 +19,13 @@ class _EleccionligaState extends State<Eleccionliga> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Liganormal()),
+    );
+  }
+
+  void _ligaEspecial() {
+     Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const ConfiguracionLigaEspecial()),
     );
   }
 
@@ -95,7 +104,7 @@ class _EleccionligaState extends State<Eleccionliga> {
                     descripcion:
                         "Escoge una selección y juega solo con sus jugadores",
                     colorTitulo: Colors.blue,
-                    onPressed: () {},
+                    onPressed: _ligaEspecial,
                   ),
                 ],
               ),
