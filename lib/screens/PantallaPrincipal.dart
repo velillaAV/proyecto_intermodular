@@ -3,6 +3,7 @@ import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
+import 'package:proyecto_intermodular/screens/UnirseLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
@@ -19,6 +20,13 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const Eleccionliga()),
+    );
+  }
+
+  void _unirseLiga() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const UnirseLigaNormal()),
     );
   }
 
@@ -113,7 +121,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                     const SizedBox(height: 15),
 
                     ElevatedButton(
-                      onPressed: _elegirLiga,
+                      onPressed: _unirseLiga,
                       style: CustomStyles.estiloBotonRegistrarse,
                       child: const Text("UNIRSE A UNA LIGA"),
                     ),

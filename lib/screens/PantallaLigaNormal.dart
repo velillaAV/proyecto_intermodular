@@ -4,6 +4,7 @@ import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/services/logicaUsuarios.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 
 class PantallaLigaNormal extends StatefulWidget {
   const PantallaLigaNormal({
@@ -28,8 +29,9 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
   void initState() {
     super.initState();
 
-    _jugadores = Logicausuario.getListaUsuarios();
     _usuarioActual = Logicausuario.getUsuarioActual();
+    final ligaActual = Logicaligas.buscarLigaPorNombre(widget.ligaNombre);
+    _jugadores = ligaActual?.getParticipantes() ?? Logicausuario.getListaUsuarios();
   }
 
   void _onItemTapped(int index) {

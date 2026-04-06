@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
-import 'package:proyecto_intermodular/widgets/Appbar.dart';
-import 'package:proyecto_intermodular/widgets/drawer.dart';
-import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
+import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
+import 'package:proyecto_intermodular/widgets/drawer.dart';
 
-class Liganormal extends StatefulWidget {
-  const Liganormal({super.key});
+class UnirseLigaNormal extends StatefulWidget {
+  const UnirseLigaNormal({super.key});
 
   @override
-  State<Liganormal> createState() => _LiganormalState();
+  State<UnirseLigaNormal> createState() => _UnirseLigaNormalState();
 }
 
-class _LiganormalState extends State<Liganormal> {
-  String nombreLiga = "";
-  int numParticipantes = 0;
-  bool clausulas = true;
+class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
+  String nombreLiga = '';
 
   void _mostrarMensaje(String mensaje) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -28,19 +25,21 @@ class _LiganormalState extends State<Liganormal> {
 
   void _enviarLiga() {
     final nombre = nombreLiga.trim();
+
     if (nombre.isEmpty) {
       _mostrarMensaje('Por favor ingresa un nombre de liga.');
       return;
     }
 
-    if (Logicaligas.existeLigaNombre(nombre)) {
-      _mostrarMensaje(
-          'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.');
+    final ligaExistente = Logicaligas.buscarLigaPorNombre(nombre);
+
+    if (ligaExistente == null) {
+      _mostrarMensaje('No existe ninguna liga con ese nombre.');
       return;
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.crearLigaNormal(nombre, usuarioActual);
+    Logicaligas.unirUsuarioALiga(nombre, usuarioActual);
 
     Navigator.push(
       context,
@@ -60,7 +59,6 @@ class _LiganormalState extends State<Liganormal> {
       ),
       body: Stack(
         children: [
-          // 🔹 Fondo
           Positioned.fill(
             child: Image.asset(
               'images/FondoMundial2026.jpg',
@@ -72,8 +70,6 @@ class _LiganormalState extends State<Liganormal> {
               color: Colors.white.withOpacity(0.85),
             ),
           ),
-
-          // 🔹 Contenido
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -94,16 +90,19 @@ class _LiganormalState extends State<Liganormal> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Text(
-                      "Crear liga",
+                      'Unirse a una liga',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
-                    // 🔹 Nombre
+                    const Text(
+                      'Ingresa el nombre exacto de la liga para unirte.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                    ),
+                    const SizedBox(height: 20),
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Nombre de la liga',
@@ -117,54 +116,11 @@ class _LiganormalState extends State<Liganormal> {
                         nombreLiga = value;
                       },
                     ),
-
-                    const SizedBox(height: 15),
-
-                    // 🔹 Participantes
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      decoration: InputDecoration(
-                        labelText: 'Número de participantes',
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        numParticipantes = int.tryParse(value) ?? 0;
-                      },
-                    ),
-
-                    const SizedBox(height: 15),
-
-                    // 🔹 Checkbox
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Cláusulas"),
-                        Checkbox(
-                          value: clausulas,
-                          onChanged: (bool? valor) {
-                            if (valor == null) return;
-                            setState(() {
-                              clausulas = valor;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 15),
-
-                    // 🔹 Botón
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       style: CustomStyles.estiloBotonInicioSesion,
                       onPressed: _enviarLiga,
-                      child: const Text("Crear liga"),
+                      child: const Text('Unirse a liga'),
                     ),
                   ],
                 ),

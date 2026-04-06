@@ -9,14 +9,19 @@ class Liga {
   int id_liga;
   int cod_invitacion;
   User propietario;
+  String nombreLiga;
   List<User> participantes = [];
   List<Modelojugador> mercado = [];
 
 
-  Liga({required this.id_liga, required this.cod_invitacion, required this.propietario});
+  Liga({
+    required this.id_liga,
+    required this.cod_invitacion,
+    required this.propietario,
+    required this.nombreLiga,
+  });
 
-
-  void _insertarPropietario() {
+  void insertarPropietario() {
     participantes.add(propietario);
   }
 
@@ -30,6 +35,10 @@ class Liga {
 
   User getPropietario(){
     return propietario;
+  }
+
+  String getNombreLiga(){
+    return nombreLiga;
   }
 
   List<User> getParticipantes(){
@@ -50,6 +59,10 @@ class Liga {
 
   void setPropietario(User propietario){
     this.propietario = propietario;
+  }
+
+  void setNombreLiga(String nombreLiga){
+    this.nombreLiga = nombreLiga;
   }
 
   void setParticipantes(List<User> participantes){
