@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
+import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
@@ -18,9 +20,9 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
   String nombreLiga = '';
 
   void _mostrarMensaje(String mensaje) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensaje)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensaje)));
   }
 
   void _enviarLiga() {
@@ -36,17 +38,36 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     if (ligaExistente == null) {
       _mostrarMensaje('No existe ninguna liga con ese nombre.');
       return;
+    } else if (Logicaligas.getLigasNormales().contains(ligaExistente)) {
+      final usuarioActual = Logicausuario.getUsuarioActual();
+      if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PantallaLigaNormal(ligaNombre: nombre),
+          ),
+        );
+      } else  {
+      _mostrarMensaje('Ya estas en esta liga.');
+      return;
+      }
+    } else {
+      final usuarioActual = Logicausuario.getUsuarioActual();
+
+     if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+         Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              SeleccionPais(liga: ligaExistente as Modeloligaespecial),
+        ),
+      );
+      } else {
+      _mostrarMensaje('Ya estas en esta liga.');
+      return;
+      }
+     
     }
-
-    final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.unirUsuarioALiga(nombre, usuarioActual);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => PantallaLigaNormal(ligaNombre: nombre),
-      ),
-    );
   }
 
   @override
@@ -66,9 +87,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
             ),
           ),
           Positioned.fill(
-            child: Container(
-              color: Colors.white.withOpacity(0.85),
-            ),
+            child: Container(color: Colors.white.withOpacity(0.85)),
           ),
           Center(
             child: Padding(

@@ -22,11 +22,28 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
   String nombreLiga = "";
   int numParticipantes=0;
   String propietario = "";
- 
+
+  void _mostrarMensaje(String mensaje) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(mensaje)),
+    );
+  }
 
   void _enviarLiga() {
-    Modeloligaespecial ligaNueva =  Modeloligaespecial(id_liga: Logicaligas.getLigasEspeciales().length + 1, cod_invitacion: Logicaligas.getLigas().length + 1, propietario: Logicausuario.usuarioActual, nombreLiga: nombreLiga);
-    Logicaligas.getLigas().add(ligaNueva);
+     final nombre = nombreLiga.trim();
+    if (nombre.isEmpty) {
+      _mostrarMensaje('Por favor ingresa un nombre de liga.');
+      return;
+    }
+
+    if (Logicaligas.existeLigaNombre(nombre)) {
+      _mostrarMensaje(
+          'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.');
+      return;
+    }
+
+    final usuarioActual = Logicausuario.getUsuarioActual();
+    final ligaNueva = Logicaligas.crearLigaEspecial(nombre, usuarioActual);
      Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SeleccionPais(liga: ligaNueva,)),

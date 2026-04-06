@@ -12,6 +12,7 @@ class _AppbarState extends State<Appbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

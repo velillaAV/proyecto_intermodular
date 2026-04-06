@@ -3,10 +3,9 @@ import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/screens/ConfiguracionLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/LigaNormal.dart';
-import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
-import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
+
 
 class Eleccionliga extends StatefulWidget {
   const Eleccionliga({super.key});

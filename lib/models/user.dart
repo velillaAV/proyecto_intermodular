@@ -79,5 +79,11 @@ class User {
     this.isBlocked = !isBlocked;
   }
 
+  Modelousuario unirLiga() {
+    Modelousuario nuevoEquipo = Modelousuario();
+    usuario_ligas.add(nuevoEquipo);
+    return nuevoEquipo;
+  }
+
   
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
@@ -61,9 +63,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                   : Colorcetes.cardColors,
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: isSelected
-                                    ? Colors.white
-                                    : Colors.black,
+                                color: isSelected ? Colors.white : Colors.black,
                                 width: 2,
                               ),
                             ),
@@ -81,7 +81,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        seleccion.nombre,
+                                        seleccion.nombre!,
                                         style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
@@ -94,8 +94,8 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                             ),
                           )
                         : Opacity(
-                          opacity: 0.5,
-                          child: Container(
+                            opacity: 0.5,
+                            child: Container(
                               decoration: BoxDecoration(
                                 color: Colorcetes.cardColors,
                                 borderRadius: BorderRadius.circular(16),
@@ -114,18 +114,17 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                          
+
                                       children: [
-                                        
                                         Text(
-                                          seleccion.nombre,
+                                          seleccion.nombre!,
                                           style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        SizedBox(height: 1,),
-                                        SizedBox(width: 600,),
+                                        SizedBox(height: 1),
+                                        SizedBox(width: 600),
                                         Icon(
                                           Icons.lock,
                                           size: 40,
@@ -137,7 +136,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                 ],
                               ),
                             ),
-                        ),
+                          ),
                   );
                 },
               ),
@@ -151,8 +150,17 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                   onPressed: indexGeneral == -1
                       ? null
                       : () {
+                         
+                          widget.liga.listaSelecciones[indexGeneral].usuario =
+                              Logicausuario.getUsuarioActual().unirLiga();
+
                           final seleccion =
                               widget.liga.listaSelecciones[indexGeneral];
+                          Logicausuario.getUsuarioActual()
+                                  .usuario_ligas
+                                  .last
+                                  .equipo =
+                              seleccion;
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
@@ -160,7 +168,15 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                               content: Text("Has elegido ${seleccion.nombre}"),
                               actions: [
                                 TextButton(
-                                  onPressed: () => Navigator.pop(context),
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PantallaLigaEspecial(
+                                            ligaNombre: widget.liga.nombreLiga,
+                                          ),
+                                    ),
+                                  ),
                                   child: const Text("OK"),
                                 ),
                               ],

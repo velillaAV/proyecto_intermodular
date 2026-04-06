@@ -1,3 +1,5 @@
+import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+
 import '../models/liga.dart';
 import '../models/user.dart';
 
@@ -53,6 +55,19 @@ class Logicaligas {
     return nuevaLiga;
   }
 
+   static Modeloligaespecial crearLigaEspecial(String nombre, User propietario) {
+    final nuevaLiga = Modeloligaespecial(
+      id_liga: _listaLigas.length + 1,
+      cod_invitacion: _listaLigas.length + 100,
+      propietario: propietario,
+      nombreLiga: nombre.trim(),
+    );
+    nuevaLiga.insertarPropietario();
+    _listaLigas.add(nuevaLiga);
+    _listaLigasEspeciales.add(nuevaLiga);
+    return nuevaLiga;
+  }
+
   static bool unirUsuarioALiga(String nombre, User usuario) {
     final liga = buscarLigaPorNombre(nombre);
     if (liga == null) {
@@ -61,8 +76,10 @@ class Logicaligas {
     final yaEsParticipante = liga.participantes
         .any((participante) => participante.getNombre() == usuario.getNombre());
     if (!yaEsParticipante) {
-      liga.participantes.add(usuario);
+      liga.participantes.add(usuario); 
+      return true;
     }
-    return true;
+    return false;
+   
   }
 }

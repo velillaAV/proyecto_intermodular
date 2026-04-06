@@ -57,10 +57,12 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
       // Lógica para admins (actualmente vacía en tu código original)
     } else {
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
+         (route) => false,
       );
+      
     }
   }
 

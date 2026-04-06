@@ -3,7 +3,8 @@ import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 
 class Modelousuario {
 
-  List<Modeloequipo> equipo = [];
+  Modeloequipo equipo = Modeloequipo(equipo: []);
   List<Modelopredicciones> predicciones = [];
+
 }
 
