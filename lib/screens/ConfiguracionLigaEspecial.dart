@@ -25,7 +25,8 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
  
 
   void _enviarLiga() {
-    Modeloligaespecial ligaNueva =  Modeloligaespecial(id_liga: Logicaligas.getLigasEspeciales().length + 1, cod_invitacion: Logicaligas.getLigas().length + 1, propietario: Logicausuario.usuarioActual);
+    Modeloligaespecial ligaNueva =  Modeloligaespecial(id_liga: Logicaligas.getLigasEspeciales().length + 1, cod_invitacion: Logicaligas.getLigas().length + 1, propietario: Logicausuario.usuarioActual, nombreLiga: nombreLiga);
+    Logicaligas.getLigas().add(ligaNueva);
      Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SeleccionPais(liga: ligaNueva,)),
