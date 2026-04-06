@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
+import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 
 class Liganormal extends StatefulWidget {
   const Liganormal({super.key});
@@ -18,7 +19,12 @@ class _LiganormalState extends State<Liganormal> {
   bool clausulas = true;
 
   void _enviarLiga() {
-
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PantallaLigaNormal(ligaNombre: nombreLiga),
+      ),
+    );
   }
 
   @override
