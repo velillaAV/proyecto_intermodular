@@ -10,6 +10,7 @@ class Liga {
   int cod_invitacion;
   User propietario;
   String nombreLiga;
+  String  fase = "Fase de Grupos: Jornada 1";
   List<User> participantes = [];
   List<Modelojugador> mercado = [];
 
@@ -71,5 +72,29 @@ class Liga {
 
   void setMercado(List<Modelojugador> mercado){
     this.mercado = mercado;
+  }
+
+  void avanzarFase(int jornada) {
+    if (jornada == 2) {
+        fase = "Fase de Grupos: Jornada 2";
+    }
+    if (jornada == 3) {
+        fase = "Fase de Grupos: Jornada 3";
+    }
+    if (jornada == 4) {
+        fase = "Dieciseisavos";
+    }
+    if (jornada == 5) {
+        fase = "Octavos de final";
+    }
+    if (jornada == 6) {
+        fase = "Cuartos de Final";
+    }
+    if (jornada == 7) {
+        fase = "Semifinal";
+    }
+    if (jornada == 8) {
+        fase = "Final";
+    }
   }
 }

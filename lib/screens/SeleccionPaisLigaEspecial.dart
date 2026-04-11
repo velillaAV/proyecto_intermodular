@@ -150,7 +150,6 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                   onPressed: indexGeneral == -1
                       ? null
                       : () {
-                         
                           widget.liga.listaSelecciones[indexGeneral].usuario =
                               Logicausuario.getUsuarioActual().unirLiga();
 
@@ -173,7 +172,11 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           PantallaLigaEspecial(
-                                            ligaNombre: widget.liga.nombreLiga,
+                                            liga: widget.liga,
+                                            usuario:
+                                                Logicausuario.getUsuarioActual()
+                                                    .usuario_ligas
+                                                    .last,
                                           ),
                                     ),
                                   ),
