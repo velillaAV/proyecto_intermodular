@@ -3,13 +3,12 @@ import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
+import 'package:proyecto_intermodular/widgets/Alineacion.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
-import 'package:proyecto_intermodular/widgets/CardJugador.dart';
 import 'package:proyecto_intermodular/widgets/Clasificacion.dart';
+import 'package:proyecto_intermodular/widgets/Predicciones.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
-import 'package:proyecto_intermodular/models/user.dart';
-import 'package:proyecto_intermodular/services/logicaUsuarios.dart';
-import 'package:proyecto_intermodular/services/LogicaLigas.dart';
+
 
 class PantallaLigaEspecial extends StatefulWidget {
   const PantallaLigaEspecial({super.key, required this.liga, required this.usuario});
@@ -23,7 +22,7 @@ class PantallaLigaEspecial extends StatefulWidget {
 
 class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
   int _selectedIndex = 0;
-  
+  int _bottomIndex = 1;
   
   
 
@@ -32,26 +31,53 @@ class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
   
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+   
 
     if (index == 0) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
       );
-   
+
+  } else  {
+    if(index == 1) {
+      setState(() {
+      _selectedIndex = index -1;
+      _bottomIndex = index;
+    });
+    }
+
+
+
+    if(index == 2) {
+      setState(() {
+      _selectedIndex = index -1;
+      _bottomIndex = index;
+    });
+    }
+
+
+    if(index == 3) {
+      setState(() {
+      _selectedIndex = index -1;
+      _bottomIndex = index;
+    });
+    }
+     
   }
   }
   @override
   Widget build(BuildContext context) {
+   
 
+    
     final List<Widget> _pantallas = [
-      Clasificacion(liga: widget.liga)
+      Clasificacion(liga: widget.liga),
+      Alineacion(usuario: widget.usuario, liga: widget.liga),
+      Predicciones()
       
   ];
-    Widget pantalla = Clasificacion(liga: widget.liga);
+    Widget pantalla = _pantallas[_selectedIndex];
     widget.liga.nombreLiga.trim().isNotEmpty
         ? widget.liga.nombreLiga
         : 'LIGA FANTASY';
@@ -64,7 +90,7 @@ class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
       ),
       body: pantalla,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
+        currentIndex: _bottomIndex,
         selectedItemColor: Colors.blue.shade900,
         unselectedItemColor: Colors.black87,
         type: BottomNavigationBarType.fixed,

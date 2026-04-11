@@ -8,4 +8,6 @@ class Modeloequipo {
   Modelousuario? usuario;
   final String? escudo;
   Modeloequipo({this.nombre, this.usuario, required this.equipo, this.escudo});
+
+  
 }
