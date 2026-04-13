@@ -7,10 +7,7 @@ import 'package:proyecto_intermodular/services/logicaUsuarios.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 
 class PantallaLigaNormal extends StatefulWidget {
-  const PantallaLigaNormal({
-    super.key,
-    required this.ligaNombre,
-  });
+  const PantallaLigaNormal({super.key, required this.ligaNombre});
 
   final String ligaNombre;
 
@@ -31,7 +28,8 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
 
     _usuarioActual = Logicausuario.getUsuarioActual();
     final ligaActual = Logicaligas.buscarLigaPorNombre(widget.ligaNombre);
-    _jugadores = ligaActual?.getParticipantes() ?? Logicausuario.getListaUsuarios();
+    _jugadores =
+        ligaActual?.getParticipantes() ?? Logicausuario.getListaUsuarios();
   }
 
   void _onItemTapped(int index) {
@@ -45,14 +43,11 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
   }
 
   Widget _buildJugadorCard(User jugador, int index) {
-    final esUsuarioActual =
-        jugador.getNombre() == _usuarioActual.getNombre();
+    final esUsuarioActual = jugador.getNombre() == _usuarioActual.getNombre();
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       color: esUsuarioActual
           ? Colors.blue.shade100
           : Colors.white.withOpacity(0.92),
@@ -87,10 +82,7 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
                   const SizedBox(height: 4),
                   Text(
                     esUsuarioActual ? 'Tú' : 'Jugador',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade700,
-                    ),
+                    style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
                   ),
                 ],
               ),
@@ -98,10 +90,7 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
             const SizedBox(width: 12),
             const Text(
               '0', // puntos (backend futuro)
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -130,9 +119,7 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
             ),
           ),
           Positioned.fill(
-            child: Container(
-              color: Colors.white.withOpacity(0.75),
-            ),
+            child: Container(color: Colors.white.withOpacity(0.75)),
           ),
           SafeArea(
             child: Column(
@@ -184,7 +171,6 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
 
                 const SizedBox(height: 10),
 
-                // 🔥 LISTA DE JUGADORES (SIN ERRORES)
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -215,22 +201,13 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
         type: BottomNavigationBarType.fixed,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Inicio',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
           BottomNavigationBarItem(
             icon: Icon(Icons.emoji_events),
             label: 'Clasificación',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: 'Mercado',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'Equipo',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Mercado'),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'Equipo'),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
             label: 'Predicciones',
