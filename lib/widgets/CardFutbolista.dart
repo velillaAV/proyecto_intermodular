@@ -19,7 +19,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
   Widget build(BuildContext context) {
     return widget.usuario.alineacion.elementAt(widget.posicion) == null
         ? GestureDetector(
-            onTap: () {
+          onTap: () {
               if (widget.posicion == 0) {
                 showDialog<String>(
                   context: context,
@@ -59,6 +59,126 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                     ),
                   ),
                 );
+              } else
+              if(widget.posicion > 0 && widget.posicion < 5)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "DEF")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "DEF")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
+              } else
+               if(widget.posicion > 4 && widget.posicion < 8)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "CEN")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "CEN")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
+              } else
+              if(widget.posicion > 7 && widget.posicion < 11)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "DEL")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "DEL")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
               }
             },
             child: Container(
@@ -73,6 +193,168 @@ class _CardFutbolistaState extends State<CardFutbolista> {
             ),
           )
         :GestureDetector(
+           onTap: () {
+              if (widget.posicion == 0) {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "POR")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "POR")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              } else
+              if(widget.posicion > 0 && widget.posicion < 5)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "DEF")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "DEF")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
+              } else
+               if(widget.posicion >= 5 && widget.posicion < 8)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "CEN")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "CEN")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
+              } else
+              if(widget.posicion >= 8 && widget.posicion < 11)  {
+                 showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: Text("CAMBIAR JUGADOR"),
+                    content: Container(
+                      width: 1600,
+                      height: 1600,
+                      color: const Color.fromARGB(255, 95, 96, 96),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.usuario.equipo.equipo
+                                  .where((x) => x.posicion == "DEL")
+                                  .length,
+                              itemBuilder: (context, index) {
+                                return CardFutbolista2(
+                                  posicion: widget.posicion,
+                                  usuario: widget.usuario,
+                                  jugador: widget.usuario.equipo.equipo
+                                      .where((x) => x.posicion == "DEL")
+                                      .elementAt(index),
+                                  actualizar: () {
+                                    setState(() {
+                                      Navigator.pop(context);
+                                    });
+                                    
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );  
+              }
+            },
             child: Container(
               width: 150,
               height: 150,
