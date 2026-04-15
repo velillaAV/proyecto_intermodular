@@ -60,39 +60,39 @@ class _AlineacionState extends State<Alineacion> {
                     ],
                   ),
                 ),
-      
-                
+
                 Column(
                   children: [
-                    CardFutbolista(usuario: widget.usuario, posicion: 0),
-                    SizedBox(height: 50,),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 0)),
+                    SizedBox(height: 50,), 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CardFutbolista(usuario: widget.usuario, posicion: 1),
-                        CardFutbolista(usuario: widget.usuario, posicion: 2),
-                        CardFutbolista(usuario: widget.usuario, posicion: 3),
-                        CardFutbolista(usuario: widget.usuario, posicion: 4),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 1)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 2)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 3)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 4)),
                       ],
                     ),
                     SizedBox(height: 50,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CardFutbolista(usuario: widget.usuario, posicion: 5),
-                        CardFutbolista(usuario: widget.usuario, posicion: 6),
-                        CardFutbolista(usuario: widget.usuario, posicion: 7),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 5)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 6)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 7)),
                       ],
                     ),
                     SizedBox(height: 50,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CardFutbolista(usuario: widget.usuario, posicion: 8),
-                        CardFutbolista(usuario: widget.usuario, posicion: 9),
-                        CardFutbolista(usuario: widget.usuario, posicion: 10),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child: CardFutbolista(usuario: widget.usuario, posicion: 8)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child:CardFutbolista(usuario: widget.usuario, posicion: 9)),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.22, child:CardFutbolista(usuario: widget.usuario, posicion: 10)),
                       ],
-                    ),
+                    ), 
+      
                   ],
                 ),
               ],
