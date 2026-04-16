@@ -12,6 +12,9 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
+console.log("USER:", process.env.DB_USER);
+console.log("PASS:", process.env.DB_PASSWORD);
+
 // Función para obtener una conexión
 const getConnection = async () => {
   try {
