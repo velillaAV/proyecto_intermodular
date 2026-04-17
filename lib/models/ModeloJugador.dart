@@ -18,11 +18,11 @@ class Modelojugador {
     required this.fotoRutaJugador,
     required this.posicion,
   });
-  void _puntuar(int puntuacion) {
+  void puntuar(int puntuacion) {
     puntos = puntuacion;
   }
 
-  void _guardarPuntuacion() {
+  void guardarPuntuacion() {
     puntos_fase.add(puntos);
   }
 }

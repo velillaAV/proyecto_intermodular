@@ -4,9 +4,10 @@ import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/widgets/CardFutbolista.dart';
 
 class Alineacion extends StatefulWidget {
-  const Alineacion({super.key, required this.usuario, required this.liga});
+  const Alineacion({super.key, required this.usuario, required this.liga, required this.actualizar});
   final Modelousuario usuario;
   final Liga liga;
+  final void Function() actualizar;
   @override
   State<Alineacion> createState() => _AlineacionState();
 }

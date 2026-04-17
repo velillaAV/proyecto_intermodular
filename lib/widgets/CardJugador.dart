@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 class CardJugador extends StatefulWidget {
-  const CardJugador({super.key, required this.jugador, required this.indexPlayer, });
+  const CardJugador({super.key, required this.jugador, required this.indexPlayer, required this.usuario, });
   final User jugador;
+  final Modelousuario usuario;
   final int indexPlayer;
   @override
   State<CardJugador> createState() => _CardJugadorState();
@@ -64,8 +66,8 @@ class _CardJugadorState extends State<CardJugador> {
               ),
             ),
             const SizedBox(width: 12),
-            const Text(
-              '0', // puntos (backend futuro)
+             Text(
+              widget.jugador.usuario_ligas.last.puntos.toString(),
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

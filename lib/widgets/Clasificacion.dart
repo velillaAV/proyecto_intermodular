@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/widgets/CardJugador.dart';
 
 class Clasificacion extends StatefulWidget {
-  const Clasificacion({super.key, required this.liga});
+  const Clasificacion({super.key, required this.liga, required this.usuario, required this.actualizar});
   final Liga liga;
+  final Modelousuario usuario;
+  final void Function() actualizar;
   @override
   State<Clasificacion> createState() => _ClasificacionState();
 }
@@ -81,11 +84,13 @@ class _ClasificacionState extends State<Clasificacion> {
                             child: Text('No hay jugadores en la liga'),
                           )
                         : ListView.builder(
+                            
                             itemCount: widget.liga.participantes.length,
                             itemBuilder: (context, index) {
+                              widget.actualizar();
                               return CardJugador(
                                 jugador: widget.liga.participantes[index],
-                                indexPlayer: index,
+                                indexPlayer: index, usuario: widget.usuario,
                               );
                             },
                           ),

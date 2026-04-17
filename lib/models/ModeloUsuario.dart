@@ -7,6 +7,16 @@ class Modelousuario {
   Modeloequipo equipo = Modeloequipo(equipo: []);
   List<Modelojugador?> alineacion = [null, null, null, null, null, null, null, null, null, null, null];
   List<Modelopredicciones> predicciones = [];
+  int puntos = 0;
+  List<int> puntos_fase = [];
+
+  void puntuar(int puntuacion) {
+    puntos = puntuacion;
+  }
+
+  void guardarPuntuacion() {
+    puntos_fase.add(puntos);
+  }
 
 }
 

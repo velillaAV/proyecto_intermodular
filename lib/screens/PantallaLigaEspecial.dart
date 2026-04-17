@@ -72,9 +72,11 @@ class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
 
     
     final List<Widget> _pantallas = [
-      Clasificacion(liga: widget.liga),
-      Alineacion(usuario: widget.usuario, liga: widget.liga),
-      Predicciones()
+      Clasificacion(liga: widget.liga, usuario: widget.usuario, actualizar: () {  },),
+      Alineacion(usuario: widget.usuario, liga: widget.liga, actualizar: () {  },),
+      Predicciones(liga: widget.liga, usuario: widget.usuario, actualizar: () { setState(() {
+        
+      }); },)
       
   ];
     Widget pantalla = _pantallas[_selectedIndex];
