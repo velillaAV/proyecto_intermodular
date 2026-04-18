@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
+import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
-import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
@@ -41,11 +41,11 @@ class _LiganormalState extends State<Liganormal> {
 
     final usuarioActual = Logicausuario.getUsuarioActual();
     Logicaligas.crearLigaNormal(nombre, usuarioActual);
-
+    usuarioActual.unirLiga();
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PantallaLigaNormal(ligaNombre: nombre),
+        builder: (context) => PantallaOtorgacionDeEquipo(liga: Logicaligas.buscarLigaPorNombre(nombre)!, usuario: usuarioActual.usuario_ligas.last,)
       ),
     );
   }

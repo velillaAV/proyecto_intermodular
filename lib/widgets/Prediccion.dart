@@ -64,19 +64,21 @@ class _PrediccionState extends State<Prediccion> {
                 .golesLocal).isEven ||
              marcadorB.compareTo(Logicapredicciones.listaPredicciones
                 .elementAt(widget.posicion)
-                .golesVisitante).isEven) {
+                .golesVisitante).isOdd) {
                  widget.usuario.puntuar(1);
-          if(marcadorA.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesLocal).isEven) {
+         
                      colorLocal = Colors.green;
                      colorVisitante = Colors.red;
-                } else  {
-                     colorLocal = Colors.red;
-                     colorVisitante = Colors.green;
-                }
+              
+                  
+                
 
+        }   else  {
+                    colorLocal = Colors.red;
+                     colorVisitante = Colors.green;
         }
+        
+       
       }
     }
     widget.actualizar();

@@ -6,7 +6,6 @@ import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
-import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 

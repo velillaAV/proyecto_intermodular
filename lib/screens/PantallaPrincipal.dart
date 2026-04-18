@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/screens/EleccionLiga.dart';
 import 'package:proyecto_intermodular/screens/PantallaInformacionMundialista.dart';
 import 'package:proyecto_intermodular/screens/UnirseLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
-import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
 class PantallaPrincipal extends StatefulWidget {

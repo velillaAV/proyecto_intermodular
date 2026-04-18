@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
+import 'package:proyecto_intermodular/models/liga.dart';
+import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
+import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
+import 'package:proyecto_intermodular/widgets/CardFutbolista4.dart';
+
+class PantallaOtorgacionDeEquipo extends StatefulWidget {
+  const PantallaOtorgacionDeEquipo({
+    super.key,
+    required this.usuario,
+    required this.liga,
+  });
+  final Modelousuario usuario;
+  final Liga liga;
+  @override
+  State<PantallaOtorgacionDeEquipo> createState() =>
+      _PantallaOtorgacionDeEquipoState();
+}
+
+class _PantallaOtorgacionDeEquipoState
+    extends State<PantallaOtorgacionDeEquipo> {
+  @override
+  Widget build(BuildContext context) {
+    List<Modelojugador> equipoOtorgado = Logicajugadores().otorgarEquipo();
+    double valorEquipo = 0;
+    for (int i = 0; i < equipoOtorgado.length; i++) {
+      valorEquipo += equipoOtorgado[i].valor_venta;
+    }
+
+    void _aceptarEquipo() {
+      widget.usuario.equipo.equipo = equipoOtorgado;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              PantallaLigaNormal(liga: widget.liga, usuario: widget.usuario),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+        child: Appbar(),
+      ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'images/FondoMundial2026.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: Container(color: Colors.white.withOpacity(0.75)),
+          ), Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(width: 10),
+                      Text(
+                        widget.liga.participantes.last.nombre,
+                        style: TextStyle(color: Colors.black, fontSize: 38),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("VALOR EQUIPO", style: TextStyle(color: Colors.black)),
+                  SizedBox(height: 5),
+                  Text(
+                    valorEquipo.toString(),
+                    style: TextStyle(color: Colors.black, fontSize: 24),
+                  ),
+                  SizedBox(height: 15),
+                ],
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                itemCount: 14, // tu lista real
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, // 4 columnas como en la imagen
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.75, // ajusta según tu card
+                ),
+                itemBuilder: (context, index) {
+                  return CardFutbolista4(
+                    jugador: equipoOtorgado[index],
+                  ); // tu widget existente
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _aceptarEquipo,
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              ),
+              child: const Text("Aceptar"),
+            ),
+          ],
+        ),
+        ]
+      ),
+    );
+  }
+}

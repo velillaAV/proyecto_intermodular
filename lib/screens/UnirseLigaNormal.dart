@@ -11,7 +11,6 @@ import 'package:proyecto_intermodular/widgets/drawer.dart';
 
 class UnirseLigaNormal extends StatefulWidget {
   const UnirseLigaNormal({super.key});
-
   @override
   State<UnirseLigaNormal> createState() => _UnirseLigaNormalState();
 }
@@ -41,10 +40,11 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     } else if (Logicaligas.getLigasNormales().contains(ligaExistente)) {
       final usuarioActual = Logicausuario.getUsuarioActual();
       if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+        Logicausuario.getUsuarioActual().unirLiga();
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PantallaLigaNormal(ligaNombre: nombre),
+            builder: (context) => PantallaLigaNormal(liga: Logicaligas.buscarLigaPorNombre(nombre)!, usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,),
           ),
         );
       } else  {

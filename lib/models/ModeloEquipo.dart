@@ -4,7 +4,7 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 class Modeloequipo {
 
   final String? nombre;
-  final List<Modelojugador> equipo;
+  List<Modelojugador> equipo;
   Modelousuario? usuario;
   final String? escudo;
   Modeloequipo({this.nombre, this.usuario, required this.equipo, this.escudo});
