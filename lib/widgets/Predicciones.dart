@@ -73,12 +73,13 @@ class _PrediccionesState extends State<Predicciones> {
             Expanded(
               child: ListView.builder(
                 itemCount: Logicapredicciones()
-                    .prediccionesSegunRonda(widget.liga.fase)
+                    .prediccionesSegunRondaYUsuario(widget.liga.fase, widget.usuario)
                     .length,
                 itemBuilder: (context, index) {
+                  int i = index;
                   return Prediccion(
                     prediccion: Logicapredicciones()
-                        .prediccionesSegunRonda(widget.liga.fase)
+                        .prediccionesSegunRondaYUsuario(widget.liga.fase, widget.usuario)
                         .elementAt(index),
                     usuario: widget.usuario,
                     actualizar: () {
@@ -86,7 +87,7 @@ class _PrediccionesState extends State<Predicciones> {
                       
                       });
                     },
-                    posicion: index,
+                    posicion: i,
                   );
                 },
               ),

@@ -25,7 +25,11 @@ class _PantallaOtorgacionDeEquipoState
     extends State<PantallaOtorgacionDeEquipo> {
   @override
   Widget build(BuildContext context) {
+
+    
     List<Modelojugador> equipoOtorgado = Logicajugadores().otorgarEquipo();
+
+    
     double valorEquipo = 0;
     for (int i = 0; i < equipoOtorgado.length; i++) {
       valorEquipo += equipoOtorgado[i].valor_venta;

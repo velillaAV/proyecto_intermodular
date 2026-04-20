@@ -1,6 +1,7 @@
 
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 
 class Liga {

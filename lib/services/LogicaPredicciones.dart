@@ -1,4 +1,5 @@
 import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
 class Logicapredicciones {
   static final listaPredicciones = [
@@ -39,12 +40,12 @@ class Logicapredicciones {
         Logicapredicciones.listaPredicciones.elementAt(3).golesVisitante = 2;
   }
 
-  List<Modelopredicciones> prediccionesSegunRonda(String fase) {
+  List<Modelopredicciones> prediccionesSegunRondaYUsuario(String fase, Modelousuario usuario) {
     insertarResultado();
     List<Modelopredicciones> listaFase = [];
 
     for (Modelopredicciones prediccion in Logicapredicciones.listaPredicciones) {
-        if(fase == prediccion.fase) {
+        if(fase == prediccion.fase ) {
           listaFase.add(prediccion);
         }
     }

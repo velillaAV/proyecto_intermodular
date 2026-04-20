@@ -11,7 +11,7 @@ class Modelousuario {
   List<int> puntos_fase = [];
 
   void puntuar(int puntuacion) {
-    puntos = puntuacion;
+    puntos += puntuacion;
   }
 
   void guardarPuntuacion() {

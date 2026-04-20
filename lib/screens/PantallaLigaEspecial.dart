@@ -9,10 +9,13 @@ import 'package:proyecto_intermodular/widgets/Clasificacion.dart';
 import 'package:proyecto_intermodular/widgets/Predicciones.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 
-
 class PantallaLigaEspecial extends StatefulWidget {
-  const PantallaLigaEspecial({super.key, required this.liga, required this.usuario});
-  
+  const PantallaLigaEspecial({
+    super.key,
+    required this.liga,
+    required this.usuario,
+  });
+
   final Liga liga;
   final Modelousuario usuario;
 
@@ -23,62 +26,62 @@ class PantallaLigaEspecial extends StatefulWidget {
 class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
   int _selectedIndex = 0;
   int _bottomIndex = 1;
-  
-  
-
-  
-
-  
 
   void _onItemTapped(int index) {
-   
-
     if (index == 0) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
       );
+    } else {
+      if (index == 1) {
+        setState(() {
+          _selectedIndex = index - 1;
+          _bottomIndex = index;
+        });
+      }
 
-  } else  {
-    if(index == 1) {
-      setState(() {
-      _selectedIndex = index -1;
-      _bottomIndex = index;
-    });
+      if (index == 2) {
+        setState(() {
+          _selectedIndex = index - 1;
+          _bottomIndex = index;
+        });
+      }
+
+      if (index == 3) {
+        setState(() {
+          _selectedIndex = index - 1;
+          _bottomIndex = index;
+        });
+      }
     }
-
-
-
-    if(index == 2) {
-      setState(() {
-      _selectedIndex = index -1;
-      _bottomIndex = index;
-    });
-    }
-
-
-    if(index == 3) {
-      setState(() {
-      _selectedIndex = index -1;
-      _bottomIndex = index;
-    });
-    }
-     
   }
-  }
+
   @override
   Widget build(BuildContext context) {
-   
-
-    
     final List<Widget> _pantallas = [
-      Clasificacion(liga: widget.liga, usuario: widget.usuario, actualizar: () {  },),
-      Alineacion(usuario: widget.usuario, liga: widget.liga, actualizar: () {  },),
-      Predicciones(liga: widget.liga, usuario: widget.usuario, actualizar: () { setState(() {
-        
-      }); },)
-      
-  ];
+      Clasificacion(
+        liga: widget.liga,
+        usuario: widget.usuario,
+        actualizar: () {
+          
+        },
+      ),
+      Alineacion(
+        usuario: widget.usuario,
+        liga: widget.liga,
+        actualizar: () {
+          setState(() {});
+        },
+      ),
+      Predicciones(
+        liga: widget.liga,
+        usuario: widget.usuario,
+        actualizar: () {
+          setState(() {});
+        },
+      ),
+    ];
     Widget pantalla = _pantallas[_selectedIndex];
     widget.liga.nombreLiga.trim().isNotEmpty
         ? widget.liga.nombreLiga

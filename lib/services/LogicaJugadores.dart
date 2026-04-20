@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
 class Logicajugadores {
 

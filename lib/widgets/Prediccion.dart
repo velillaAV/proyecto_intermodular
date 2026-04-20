@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
@@ -32,61 +31,96 @@ class _PrediccionState extends State<Prediccion> {
   void _updateScore() {
     marcadorA = int.tryParse(_equipoLocalController.text) ?? 0;
     marcadorB = int.tryParse(_equipoVisitanteController.text) ?? 0;
-    widget.prediccion.golesLocal = marcadorA;
-    widget.prediccion.golesVisitante = marcadorB;
+   
   }
 
   void _enviarPrediccion() {
-    widget.usuario.predicciones.add(widget.prediccion);
-
-    if (marcadorA.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesLocal).isEven
-             &&
-        marcadorB.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesVisitante).isEven) {
-      widget.usuario.puntuar(3);
-      colorLocal = Colors.green;
-      colorVisitante = Colors.green;
-    } else {
-      if (marcadorA.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesLocal).isOdd &&
-          marcadorB.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesVisitante).isOdd) {
-          colorLocal = Colors.red;
-          colorVisitante = Colors.red;
-      } else {
-        if (marcadorA.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesLocal).isEven ||
-             marcadorB.compareTo(Logicapredicciones.listaPredicciones
-                .elementAt(widget.posicion)
-                .golesVisitante).isOdd) {
-                 widget.usuario.puntuar(1);
-         
-                     colorLocal = Colors.green;
-                     colorVisitante = Colors.red;
-              
-                  
-                
-
-        }   else  {
-                    colorLocal = Colors.red;
-                     colorVisitante = Colors.green;
-        }
+    
+    widget.prediccion.comprobacion(marcadorA, marcadorB);
+    if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarLocal == true) {
+      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == true) {
+        colorLocal = Colors.green;
+        colorVisitante = Colors.green;
+        widget.usuario.puntuar(3);
         
-       
       }
-    }
+      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == false) {
+        colorLocal = Colors.green;
+        colorVisitante = Colors.red;
+        widget.usuario.puntuar(1);
+        
+      }
+    }    
+    if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarLocal == false) {
+      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == false) {
+        colorLocal = Colors.red;
+        colorVisitante = Colors.red;
+       
+        
+      } 
+       if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == true) {
+        colorLocal = Colors.red;
+        colorVisitante = Colors.green;
+        widget.usuario.puntuar(1);
+        
+      }
+    } 
+   
+    widget.usuario.predicciones.insert(widget.posicion, widget.prediccion);
     widget.actualizar();
   }
    
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return 
+    widget.usuario.predicciones.any((element) => element == widget.prediccion,)
+    
+   ?Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Equipo A
+          Container(
+            width: 450,
+            color: Colors.grey,
+            child: Row(
+              children: [
+                Image.asset(
+                  widget.prediccion.equipoLocal,
+                  width: 140,
+                  height: 140,
+                ),
+                Container(
+                  width: 60,
+                  color: widget.prediccion.verificarLocal == true
+                  ?Colors.green: Colors.red,
+                  child: Text(marcadorA.toString()),
+                ),
+                const SizedBox(width: 20),
+
+                const Text("-", style: TextStyle(fontSize: 20)),
+
+                const SizedBox(width: 20),
+                Container(
+                  width: 60,
+                  color: widget.prediccion.verificarVisitante == true
+                  ?Colors.green: Colors.red,
+                  child: Text(marcadorB.toString()),
+                ),
+                Image.asset(
+                  widget.prediccion.equipoVisitante,
+                  width: 140,
+                  height: 140,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+        ],
+      ),
+    ): Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         
