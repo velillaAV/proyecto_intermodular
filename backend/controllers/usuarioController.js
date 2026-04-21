@@ -29,15 +29,17 @@ const getUsuarioById = async (req, res) => {
 // Crear nuevo usuario
 const createUsuario = async (req, res) => {
   try {
-    const { nombre, email } = req.body;
-    if (!nombre || !email) {
-      return res.status(400).json({ error: 'Nombre y email son requeridos' });
+    const usuario = req.body;
+
+    if (!usuario.nombre || !usuario.contrasena) {
+      return res.status(400).json({ error: 'Nombre y contraseña son requeridos' });
     }
-    const usuario = await Usuario.create(nombre, email);
-    res.status(201).json(usuario);
+
+    const nuevoUsuario = await Usuario.create(usuario);
+    res.status(201).json(nuevoUsuario);
   } catch (error) {
-    console.error('Error al crear usuario:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -69,10 +71,27 @@ const deleteUsuario = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  try {
+    const { nombre, contrasena } = req.body;
+
+    const usuario = await Usuario.getByNombre(nombre);
+
+    if (!usuario || usuario.contrasena !== contrasena) {
+      return res.status(401).json({ error: 'Credenciales incorrectas' });
+    }
+
+    res.json(usuario);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getUsuarios,
   getUsuarioById,
   createUsuario,
   updateUsuario,
-  deleteUsuario
+  deleteUsuario,
+  login
 };
