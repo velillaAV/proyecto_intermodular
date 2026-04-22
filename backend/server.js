@@ -11,9 +11,11 @@ app.use(express.json());
 
 // Importar rutas
 const usuarioRoutes = require('./routes/usuarios');
+const jugadorRoutes = require('./routes/jugadores');
 
 // Usar rutas
 app.use('/usuarios', usuarioRoutes);
+app.use('/jugadores', jugadorRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {

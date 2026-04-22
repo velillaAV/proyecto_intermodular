@@ -23,13 +23,42 @@ class PantallaOtorgacionDeEquipo extends StatefulWidget {
 
 class _PantallaOtorgacionDeEquipoState
     extends State<PantallaOtorgacionDeEquipo> {
+  List<Modelojugador> equipoOtorgado = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadEquipo();
+  }
+
+  Future<void> _loadEquipo() async {
+    try {
+      List<Modelojugador> equipo = await Logicajugadores().otorgarEquipo();
+      setState(() {
+        equipoOtorgado = equipo;
+        isLoading = false;
+      });
+    } catch (e) {
+      // Handle error
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+          child: Appbar(),
+        ),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
 
-    
-    List<Modelojugador> equipoOtorgado = Logicajugadores().otorgarEquipo();
-
-    
     double valorEquipo = 0;
     for (int i = 0; i < equipoOtorgado.length; i++) {
       valorEquipo += equipoOtorgado[i].valor_venta;

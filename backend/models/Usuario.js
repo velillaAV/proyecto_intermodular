@@ -59,34 +59,48 @@ class Usuario {
     }
   }
 
-  static async create(usuario) {
+  static async update(id, nombre, lugarNacimiento) {
     const connection = await getConnection();
     try {
-      const [result] = await connection.execute(
-        `INSERT INTO usuarios 
-        (nombre, contrasena, genero, edad, lugarNacimiento, fotoRuta, isAdmin) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [
-          usuario.nombre,
-          usuario.contrasena,
-          usuario.genero,
-          usuario.edad,
-          usuario.lugarNacimiento,
-          usuario.fotoRuta,
-          usuario.isAdmin
-        ]
+      await connection.execute(
+        'UPDATE usuarios SET nombre = ?, lugarNacimiento = ? WHERE id = ?',
+        [nombre, lugarNacimiento, id]
       );
+      return await Usuario.getById(id);
+    } finally {
+      connection.release();
+    }
+  }
 
+  static async delete(id) {
+    const connection = await getConnection();
+    try {
+      await connection.execute('DELETE FROM usuarios WHERE id = ?', [id]);
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async getById(id) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM usuarios WHERE id = ?',
+        [id]
+      );
+      if (rows.length === 0) return null;
+
+      const row = rows[0];
       return new Usuario(
-        result.insertId,
-        usuario.nombre,
-        usuario.contrasena,
-        usuario.genero,
-        usuario.edad,
-        usuario.lugarNacimiento,
-        usuario.fotoRuta,
-        usuario.isAdmin,
-        false
+        row.id,
+        row.nombre,
+        row.contrasena,
+        row.genero,
+        row.edad,
+        row.lugarNacimiento,
+        row.fotoRuta,
+        row.isAdmin,
+        row.isBlocked
       );
     } finally {
       connection.release();

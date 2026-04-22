@@ -47,11 +47,11 @@ const createUsuario = async (req, res) => {
 const updateUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const { nombre, email } = req.body;
-    if (!nombre || !email) {
-      return res.status(400).json({ error: 'Nombre y email son requeridos' });
+    const { nombre, lugarNacimiento } = req.body;
+    if (!nombre || !lugarNacimiento) {
+      return res.status(400).json({ error: 'Nombre y lugar de nacimiento son requeridos' });
     }
-    const usuario = await Usuario.update(id, nombre, email);
+    const usuario = await Usuario.update(id, nombre, lugarNacimiento);
     res.json(usuario);
   } catch (error) {
     console.error('Error al actualizar usuario:', error);
