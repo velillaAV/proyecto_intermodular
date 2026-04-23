@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
+//Carta que aparece al seleccionar un jugador para la plantilla
+
 class CardFutbolista2 extends StatefulWidget {
   const CardFutbolista2({
     super.key,

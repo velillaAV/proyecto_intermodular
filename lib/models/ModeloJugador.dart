@@ -7,6 +7,7 @@ class Modelojugador {
   double valor_venta;
   double valor_clausula;
   List<int> puntos_fase = [];
+  List<double> pujas = [];
   final String fotoRutaJugador;
 
   Modelojugador({

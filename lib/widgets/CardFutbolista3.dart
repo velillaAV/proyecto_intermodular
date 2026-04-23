@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
+import 'package:proyecto_intermodular/models/liga.dart';
+
+//Carta de jugador que aparece en el mercado
 
 class CardFutbolista3 extends StatefulWidget {
   const CardFutbolista3({
@@ -8,18 +11,76 @@ class CardFutbolista3 extends StatefulWidget {
     required this.usuario,
     required this.jugador,
     required this.actualizar,
+    required this.liga,
   });
   final Modelousuario usuario;
   final Modelojugador jugador;
+  final Liga liga;
   final void Function() actualizar;
   @override
   State<CardFutbolista3> createState() => _CardFutbolista3State();
 }
 
 class _CardFutbolista3State extends State<CardFutbolista3> {
+  void _pujar() {
+    final snackBarValidadorValor = SnackBar(
+      content: Text(
+        "No tienes el dinero suficiente para pujar por este jugador",
+      ),
+    );
+    final snackBarValidadorValor2 = SnackBar(
+      content: Text("Ese valor es menor que el definido del jugador"),
+    );
+    double puja = widget.jugador.valor_venta;
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("¿Quieres pujar por este jugador?"),
+        content: TextField(
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          onChanged: (value) => puja = double.parse(value),
+          decoration: InputDecoration(
+            hintText: widget.jugador.valor_venta.toString(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => {
+              if (widget.usuario.saldo < puja)
+                {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor),
+                }
+              else if (puja < widget.jugador.valor_venta)
+                {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor2),
+                }
+              else
+                {
+                  
+                      widget.jugador.pujas.add(puja),
+                      widget.usuario.restarSaldo(puja),
+                      widget.usuario.equipo.equipo.add(widget.jugador),
+                      Navigator.pop(context),
+                    
+                },
+            },
+            child: Text("Aceptar"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.black,
       child: Row(
         children: [
           Stack(
@@ -107,32 +168,6 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
                     ),
 
                     const SizedBox(width: 15),
-
-                    const Icon(
-                      Icons.arrow_drop_up,
-                      color: Colors.green,
-                      size: 16,
-                    ),
-
-                    const SizedBox(width: 15),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Clausula",
-                          style: TextStyle(fontSize: 10, color: Colors.white54),
-                        ),
-                        Text(
-                          widget.jugador.valor_clausula.toString(),
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ],
@@ -140,12 +175,13 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
           ),
 
           // Porcentaje
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(6),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: _pujar,
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
             ),
+            child: const Text("Pujar"),
           ),
         ],
       ),

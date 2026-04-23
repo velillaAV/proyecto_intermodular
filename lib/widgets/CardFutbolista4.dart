@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+
+
+//Carta de jugador que aparece cuando el usuario recibe un equipo en la liga normal
+
 class CardFutbolista4 extends StatefulWidget {
   const CardFutbolista4({super.key, required this.jugador});
   final Modelojugador jugador;
   @override
   State<CardFutbolista4> createState() => _CardFutbolista4State();
 }
+
 
 class _CardFutbolista4State extends State<CardFutbolista4> {
   @override

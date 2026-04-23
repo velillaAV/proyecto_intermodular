@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/widgets/CardFutbolista2.dart';
 
+//Carta que aparece en la alineación de la plantilla
+
 class CardFutbolista extends StatefulWidget {
   const CardFutbolista({
     super.key,
