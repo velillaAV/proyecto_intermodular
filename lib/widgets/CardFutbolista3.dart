@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 
@@ -25,7 +26,7 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
   void _pujar() {
     final snackBarValidadorValor = SnackBar(
       content: Text(
-        "No tienes el dinero suficiente para pujar por este jugador",
+        "Esa puja supera tu saldo",
       ),
     );
     final snackBarValidadorValor2 = SnackBar(
@@ -62,12 +63,8 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
                 }
               else
                 {
-                  
-                      widget.jugador.pujas.add(puja),
-                      widget.usuario.restarSaldo(puja),
-                      widget.usuario.equipo.equipo.add(widget.jugador),
-                      Navigator.pop(context),
-                    
+                  widget.jugador.pujas.add(Puja(widget.usuario, puja)),
+                  Navigator.pop(context),
                 },
             },
             child: Text("Aceptar"),
@@ -79,6 +76,8 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
 
   @override
   Widget build(BuildContext context) {
+    widget.liga.comprobarSubastas();
+    widget.actualizar();
     return Container(
       color: Colors.black,
       child: Row(
@@ -186,5 +185,6 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
         ],
       ),
     );
+    
   }
 }

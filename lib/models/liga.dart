@@ -1,6 +1,7 @@
 
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 
@@ -207,4 +208,32 @@ class Liga {
         fase = "Final";
     }
   }
+  void comprobarSubastas() {
+  for (var jugador in mercado) {
+    if (DateTime.now().isAfter(jugador.fechaFinSubasta)) {
+      resolverSubasta(jugador);
+    }
+  }
+}
+
+void resolverSubasta(Modelojugador jugador) {
+  if (jugador.pujas.isEmpty) return;
+
+  Puja mejorPuja = jugador.pujas.reduce(
+    (a, b) => a.cantidad > b.cantidad ? a : b,
+  );
+
+  // Dar jugador al ganador
+  mejorPuja.usuario.equipo.equipo.add(jugador);
+
+  // devolver dinero a los perdedores
+  for (var puja in jugador.pujas) {
+    if (puja.usuario != mejorPuja.usuario) {
+      puja.usuario.sumarSaldo(puja.cantidad);
+    }
+  }
+
+  // Limpiar pujas
+  jugador.pujas.clear();
+}
 }

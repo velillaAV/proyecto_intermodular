@@ -1,3 +1,5 @@
+import 'package:proyecto_intermodular/models/ModeloPuja.dart';
+
 class Modelojugador {
   final int id_jugador;
   final String nombre;
@@ -7,8 +9,9 @@ class Modelojugador {
   double valor_venta;
   double valor_clausula;
   List<int> puntos_fase = [];
-  List<double> pujas = [];
+  List<Puja> pujas = [];
   final String fotoRutaJugador;
+  DateTime fechaFinSubasta = DateTime.now().add(Duration(days: 1));
 
   Modelojugador({
     required this.id_jugador,
