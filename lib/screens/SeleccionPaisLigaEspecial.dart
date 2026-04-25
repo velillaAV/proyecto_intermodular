@@ -160,6 +160,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                   .last
                                   .equipo =
                               seleccion;
+                          Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = widget.liga;
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(

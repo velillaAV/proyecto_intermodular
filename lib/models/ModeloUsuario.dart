@@ -1,6 +1,7 @@
 import 'package:proyecto_intermodular/models/ModeloEquipo.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
+import 'package:proyecto_intermodular/models/liga.dart';
 
 class Modelousuario {
 
@@ -10,6 +11,7 @@ class Modelousuario {
   List<Modelopredicciones> predicciones = [];
   int puntos = 0;
   List<int> puntos_fase = [];
+  late Liga ligaPerteneciente;
 
   void puntuar(int puntuacion) {
     puntos += puntuacion;

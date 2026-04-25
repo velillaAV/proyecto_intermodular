@@ -10,7 +10,7 @@ class Modelojugador {
   double valor_clausula;
   List<int> puntos_fase = [];
   List<Puja> pujas = [];
-  DateTime fechaFinSubasta = DateTime.now().add(Duration(days: 1));
+  DateTime fechaFinSubasta = DateTime.now().add(Duration(minutes: 1));
 
   Modelojugador({
     required this.id_jugador,

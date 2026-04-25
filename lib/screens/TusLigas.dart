@@ -32,14 +32,17 @@ class _TusLigasState extends State<TusLigas> {
   }
 
   void _navegarALiga(Liga liga) {
+      final usuarioActual = Logicausuario.getUsuarioActual();
+       int pos = usuarioActual.usuario_ligas.indexWhere((us) => us.ligaPerteneciente == liga);
     // Verificar si es una liga normal o especial
     if (Logicaligas.getLigasNormales().contains(liga)) {
+       
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PantallaLigaNormal(
             liga: liga,
-            usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
+            usuario: Logicausuario.getUsuarioActual().usuario_ligas[pos]
           ),
         ),
       );
@@ -50,7 +53,7 @@ class _TusLigasState extends State<TusLigas> {
         MaterialPageRoute(
           builder: (context) => PantallaLigaEspecial(
             liga: liga,
-            usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
+            usuario: Logicausuario.getUsuarioActual().usuario_ligas[pos],
           ),
         ),
       );

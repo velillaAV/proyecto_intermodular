@@ -41,6 +41,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
       final usuarioActual = Logicausuario.getUsuarioActual();
       if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
         Logicausuario.getUsuarioActual().unirLiga();
+        Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = ligaExistente;
         Navigator.push(
           context,
           MaterialPageRoute(
