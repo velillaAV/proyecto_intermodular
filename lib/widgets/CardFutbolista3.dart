@@ -23,6 +23,9 @@ class CardFutbolista3 extends StatefulWidget {
 }
 
 class _CardFutbolista3State extends State<CardFutbolista3> {
+  Color colorPosicion = Colors.orange;
+
+
   void _pujar() {
     final snackBarValidadorValor = SnackBar(
       content: Text(
@@ -76,18 +79,35 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
 
   @override
   Widget build(BuildContext context) {
+    if(widget.jugador.posicion == "DEF") {
+      colorPosicion = Colors.deepPurple;
+    } else  {
+      if(widget.jugador.posicion == "CEN") {
+        colorPosicion = Colors.blue;
+      } else  {
+        if(widget.jugador.posicion == "DEL") {
+          colorPosicion = Colors.green;
+        }
+      }
+    }
+
     widget.liga.comprobarSubastas();
     widget.actualizar();
     return Container(
+      decoration: BoxDecoration(
       color: Colors.black,
+      border: Border.all(color: Colors.white)
+
+      ),
+      
       child: Row(
         children: [
           Stack(
             children: [
               Container(
-                width: 60,
-                height: 60,
-                child: Image.asset(widget.jugador.fotoRutaJugador),
+                width: 0,
+                height: 0,
+               
               ),
               Positioned(
                 top: 0,
@@ -119,7 +139,7 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: colorPosicion,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(

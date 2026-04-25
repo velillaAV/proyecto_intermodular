@@ -7,7 +7,6 @@ class Jugador {
     this.pais = pais;
     this.valor_clausula = valor_clausula;
     this.valor_venta = valor_venta;
-    this.fotoRutaJugador = fotoRutaJugador;
     this.posicion = posicion;
   }
 
@@ -21,7 +20,6 @@ class Jugador {
         row.pais,
         row.valor_clausula,
         row.valor_venta,
-        row.fotoRutaJugador,
         row.posicion
       ));
     } finally {
@@ -42,7 +40,6 @@ class Jugador {
         row.pais,
         row.valor_clausula,
         row.valor_venta,
-        row.fotoRutaJugador,
         row.posicion
       ));
     } finally {
@@ -54,8 +51,8 @@ class Jugador {
     const connection = await getConnection();
     try {
       const [result] = await connection.execute(
-        'INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, fotoRutaJugador, posicion) VALUES (?, ?, ?, ?, ?, ?)',
-        [jugador.nombre, jugador.pais, jugador.valor_clausula, jugador.valor_venta, jugador.fotoRutaJugador, jugador.posicion]
+        'INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALUES (?, ?, ?, ?, ?)',
+        [jugador.nombre, jugador.pais, jugador.valor_clausula, jugador.valor_venta, jugador.posicion]
       );
       return new Jugador(result.insertId, ...Object.values(jugador));
     } finally {

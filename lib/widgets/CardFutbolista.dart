@@ -21,7 +21,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
   Widget build(BuildContext context) {
     return widget.usuario.alineacion.elementAt(widget.posicion) == null
         ? GestureDetector(
-          onTap: () {
+            onTap: () {
               if (widget.posicion == 0) {
                 showDialog<String>(
                   context: context,
@@ -50,7 +50,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -61,9 +60,8 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                     ),
                   ),
                 );
-              } else
-              if(widget.posicion > 0 && widget.posicion < 5)  {
-                 showDialog<String>(
+              } else if (widget.posicion > 0 && widget.posicion < 5) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -90,7 +88,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -100,10 +97,9 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
-              } else
-               if(widget.posicion > 4 && widget.posicion < 8)  {
-                 showDialog<String>(
+                );
+              } else if (widget.posicion > 4 && widget.posicion < 8) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -130,7 +126,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -140,10 +135,9 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
-              } else
-              if(widget.posicion > 7 && widget.posicion < 11)  {
-                 showDialog<String>(
+                );
+              } else if (widget.posicion > 7 && widget.posicion < 11) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -170,7 +164,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -180,12 +173,12 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
+                );
               }
             },
             child: Container(
               width: 140,
-              height: 140,
+              height: 80,
               decoration: BoxDecoration(
                 color: Colors.grey,
                 border: Border.all(color: Colors.white),
@@ -194,8 +187,8 @@ class _CardFutbolistaState extends State<CardFutbolista> {
               child: Icon(Icons.add, color: Colors.white),
             ),
           )
-        :GestureDetector(
-           onTap: () {
+        : GestureDetector(
+            onTap: () {
               if (widget.posicion == 0) {
                 showDialog<String>(
                   context: context,
@@ -224,7 +217,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -235,9 +227,8 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                     ),
                   ),
                 );
-              } else
-              if(widget.posicion > 0 && widget.posicion < 5)  {
-                 showDialog<String>(
+              } else if (widget.posicion > 0 && widget.posicion < 5) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -264,7 +255,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -274,10 +264,9 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
-              } else
-               if(widget.posicion >= 5 && widget.posicion < 8)  {
-                 showDialog<String>(
+                );
+              } else if (widget.posicion >= 5 && widget.posicion < 8) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -304,7 +293,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -314,10 +302,9 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
-              } else
-              if(widget.posicion >= 8 && widget.posicion < 11)  {
-                 showDialog<String>(
+                );
+              } else if (widget.posicion >= 8 && widget.posicion < 11) {
+                showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: Colors.white,
@@ -344,7 +331,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                    
                                   },
                                 );
                               },
@@ -354,12 +340,12 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                       ),
                     ),
                   ),
-                );  
+                );
               }
             },
             child: Container(
               width: 150,
-              height: 150,
+              height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: Colors.black,
@@ -374,46 +360,37 @@ class _CardFutbolistaState extends State<CardFutbolista> {
               child: Stack(
                 children: [
                   //Puntos
-                   Positioned(
+                  Positioned(
                     top: 10,
                     left: 10,
                     child: Text(
-                          widget.usuario.alineacion
-                              .elementAt(widget.posicion)!
-                              .puntos.toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                      widget.usuario.alineacion
+                          .elementAt(widget.posicion)!
+                          .puntos
+                          .toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-
 
                   // Pais
                   Positioned(
                     top: 0,
                     right: 0,
                     child: Image.asset(
-                      widget.usuario.alineacion.elementAt(widget.posicion)!.pais,
+                      widget.usuario.alineacion
+                          .elementAt(widget.posicion)!
+                          .pais,
                       width: 30,
                     ),
                   ),
 
                   // IMAGEN JUGADOR
-                  Positioned(
-                    top: 30,
-                    left: 20,
-                    right: 20,
-                    child: Image.asset(
-                      widget.usuario.alineacion
-                          .elementAt(widget.posicion)!
-                          .fotoRutaJugador,
-                      height: 90,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                 
 
                   // NOMBRE Y EQUIPO
                   Positioned(
@@ -439,6 +416,6 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                 ],
               ),
             ),
-          ); 
+          );
   }
 }

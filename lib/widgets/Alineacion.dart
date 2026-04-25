@@ -24,13 +24,12 @@ class _AlineacionState extends State<Alineacion> {
           Positioned.fill(
             child: Container(color: Colors.white.withOpacity(0.5)),
           ),
-          SafeArea(
-            child: Column(
+          Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 22,
-                    vertical: 18,
+                    horizontal: 0,
+                    vertical: 0,
                   ),
                   child: Row(
                     children: [
@@ -93,12 +92,13 @@ class _AlineacionState extends State<Alineacion> {
                         SizedBox(width: MediaQuery.of(context).size.width * 0.22, child:CardFutbolista(usuario: widget.usuario, posicion: 10)),
                       ],
                     ), 
+                     SizedBox(height: 150,),
       
                   ],
                 ),
               ],
             ),
-          ),
+          
         ],
       ),
     );

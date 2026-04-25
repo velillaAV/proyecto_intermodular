@@ -18,7 +18,6 @@ class Logicajugadores {
         pais: json['pais'],
         valor_clausula: json['valor_clausula'].toDouble(),
         valor_venta: json['valor_venta'].toDouble(),
-        fotoRutaJugador: json['fotoRutaJugador'],
         posicion: json['posicion'],
       )).toList();
     } else {
@@ -36,7 +35,6 @@ class Logicajugadores {
         pais: json['pais'],
         valor_clausula: json['valor_clausula'].toDouble(),
         valor_venta: json['valor_venta'].toDouble(),
-        fotoRutaJugador: json['fotoRutaJugador'],
         posicion: json['posicion'],
       )).toList();
     } else {

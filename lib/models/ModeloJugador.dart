@@ -10,7 +10,6 @@ class Modelojugador {
   double valor_clausula;
   List<int> puntos_fase = [];
   List<Puja> pujas = [];
-  final String fotoRutaJugador;
   DateTime fechaFinSubasta = DateTime.now().add(Duration(days: 1));
 
   Modelojugador({
@@ -19,7 +18,6 @@ class Modelojugador {
     required this.pais,
     required this.valor_clausula,
     required this.valor_venta,
-    required this.fotoRutaJugador,
     required this.posicion,
   });
   void puntuar(int puntuacion) {

@@ -21,8 +21,22 @@ class CardFutbolista2 extends StatefulWidget {
 }
 
 class _CardFutbolista2State extends State<CardFutbolista2> {
+
+   Color colorPosicion = Colors.orange;
   @override
   Widget build(BuildContext context) {
+     if(widget.jugador.posicion == "DEF") {
+      colorPosicion = Colors.deepPurple;
+    } else  {
+      if(widget.jugador.posicion == "CEN") {
+        colorPosicion = Colors.blue;
+      } else  {
+        if(widget.jugador.posicion == "DEL") {
+          colorPosicion = Colors.green;
+        }
+      }
+    }
+
     return GestureDetector(
       onTap: () {
         if (widget.usuario.alineacion.elementAt(widget.posicion) == null) {
@@ -52,9 +66,8 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
             Stack(
               children: [
                 Container(
-                  width: 60,
-                  height: 60,
-                  child: Image.asset(widget.jugador.fotoRutaJugador),
+                  width: 0,
+                  height: 0,
                 ),
                 Positioned(
                   top: 0,
@@ -86,7 +99,7 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.orange,
+                          color: colorPosicion,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(

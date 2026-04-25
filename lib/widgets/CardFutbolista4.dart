@@ -36,17 +36,7 @@ class _CardFutbolista4State extends State<CardFutbolista4> {
             child: Image.asset(widget.jugador.pais, width: 30),
           ),
 
-          // IMAGEN JUGADOR
-          Positioned(
-            top: 30,
-            left: 20,
-            right: 20,
-            child: Image.asset(
-              widget.jugador.fotoRutaJugador,
-              height: 90,
-              fit: BoxFit.contain,
-            ),
-          ),
+  
 
           // NOMBRE Y EQUIPO
           Positioned(

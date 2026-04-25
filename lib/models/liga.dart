@@ -15,13 +15,12 @@ class Liga {
   String  fase = "Fase de Grupos: Jornada 1";
   List<User> participantes = [];
   List<Modelojugador> mercado = [
-    Modelojugador(
+   Modelojugador(
           id_jugador: 1,
           nombre: "Nikola Vasijl",
           pais: "images/logoBosnia.png",
           valor_clausula: 14000000,
           valor_venta: 4000000,
-          fotoRutaJugador: "images/nikolaVasijl.png",
           posicion: "POR",
         ),
         Modelojugador(
@@ -30,7 +29,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 8000000,
           valor_venta: 1000000,
-          fotoRutaJugador: "images/martinZlomislic.png",
           posicion: "POR",
         ),
         Modelojugador(
@@ -39,7 +37,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 18000000,
           valor_venta: 6000000,
-          fotoRutaJugador: "images/seadKolasinac.png",
           posicion: "DEF",
         ),
         Modelojugador(
@@ -48,7 +45,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 40000000,
           valor_venta: 20000000,
-          fotoRutaJugador: "images/tarikMuharemovic.png",
           posicion: "DEF",
         ),
         Modelojugador(
@@ -57,7 +53,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 38000000,
           valor_venta: 18000000,
-          fotoRutaJugador: "images/amarDedic.png",
           posicion: "DEF",
         ),
          Modelojugador(
@@ -66,7 +61,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 8000000,
           valor_venta: 2000000,
-          fotoRutaJugador: "images/nikolaKatic.png",
           posicion: "DEF",
         ),
         Modelojugador(
@@ -75,7 +69,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 12000000,
           valor_venta: 4000000,
-          fotoRutaJugador: "images/benjaminTahirovic.png",
           posicion: "CEN",
         ),
         Modelojugador(
@@ -84,7 +77,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 12000000,
           valor_venta: 4000000,
-          fotoRutaJugador: "images/amarMemic.png",
           posicion: "CEN",
         ),
         Modelojugador(
@@ -93,7 +85,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 12000000,
           valor_venta: 4000000,
-          fotoRutaJugador: "images/amirHadziahmetovic.png",
           posicion: "CEN",
         ),
         Modelojugador(
@@ -102,7 +93,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 42000000,
           valor_venta: 22000000,
-          fotoRutaJugador: "images/ermedinDemirovic.png",
           posicion: "DEL",
         ),
         Modelojugador(
@@ -111,7 +101,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 11000000,
           valor_venta: 3000000,
-          fotoRutaJugador: "images/harisTabakovic.png",
           posicion: "DEL",
         ),
         Modelojugador(
@@ -120,7 +109,6 @@ class Liga {
           pais: "images/logoBosnia.png",
           valor_clausula: 10000000,
           valor_venta: 2000000,
-          fotoRutaJugador: "images/edinDzeko.png",
           posicion: "DEL",
         ),
   ];
