@@ -5,6 +5,8 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/CardFutbolista4.dart';
 
@@ -66,6 +68,9 @@ class _PantallaOtorgacionDeEquipoState
 
     void _aceptarEquipo() {
       widget.usuario.equipo.equipo = equipoOtorgado;
+      for(var jugador in widget.usuario.equipo.equipo) {
+        jugador.idPropietario = widget.liga.participantes.indexOf(Logicausuario.usuarioActual);
+      }
 
       Navigator.push(
         context,
@@ -129,17 +134,17 @@ class _PantallaOtorgacionDeEquipoState
             Expanded(
               child: GridView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 12),
-                itemCount: 14, // tu lista real
+                itemCount: 14, // los jugadores otorgados
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, // 4 columnas como en la imagen
+                  crossAxisCount: 4, 
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  childAspectRatio: 0.75, // ajusta según tu card
+                  childAspectRatio: 0.75, // ajusta según la carta
                 ),
                 itemBuilder: (context, index) {
                   return CardFutbolista4(
                     jugador: equipoOtorgado[index],
-                  ); // tu widget existente
+                  ); 
                 },
               ),
             ),

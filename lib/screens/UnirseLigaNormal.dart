@@ -37,37 +37,44 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     if (ligaExistente == null) {
       _mostrarMensaje('No existe ninguna liga con ese nombre.');
       return;
+    } else if (ligaExistente.participantes.length ==
+        ligaExistente.capDeParticipantes) {
+       _mostrarMensaje('Esa liga ya está llena.');
+      return;  
     } else if (Logicaligas.getLigasNormales().contains(ligaExistente)) {
       final usuarioActual = Logicausuario.getUsuarioActual();
       if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
         Logicausuario.getUsuarioActual().unirLiga();
-        Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = ligaExistente;
+        Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente =
+            ligaExistente;
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PantallaLigaNormal(liga: Logicaligas.buscarLigaPorNombre(nombre)!, usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,),
+            builder: (context) => PantallaLigaNormal(
+              liga: Logicaligas.buscarLigaPorNombre(nombre)!,
+              usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
+            ),
           ),
         );
-      } else  {
-      _mostrarMensaje('Ya estas en esta liga.');
-      return;
+      } else {
+        _mostrarMensaje('Ya estas en esta liga.');
+        return;
       }
     } else {
       final usuarioActual = Logicausuario.getUsuarioActual();
 
-     if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
-         Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>
-              SeleccionPais(liga: ligaExistente as Modeloligaespecial),
-        ),
-      );
+      if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                SeleccionPais(liga: ligaExistente as Modeloligaespecial),
+          ),
+        );
       } else {
-      _mostrarMensaje('Ya estas en esta liga.');
-      return;
+        _mostrarMensaje('Ya estas en esta liga.');
+        return;
       }
-     
     }
   }
 

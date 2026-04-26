@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
-import 'package:proyecto_intermodular/widgets/CardJugador.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
+import 'package:proyecto_intermodular/widgets/CardFutbolista5.dart';
+import 'package:proyecto_intermodular/widgets/CardFutbolista6.dart';
+import 'package:proyecto_intermodular/widgets/drawer.dart';
 
-class Clasificacion extends StatefulWidget {
-  const Clasificacion({super.key, required this.liga, required this.usuario, required this.actualizar});
-  final Liga liga;
+class EquipoJugador extends StatefulWidget {
+  const EquipoJugador({
+    super.key,
+    required this.usuario,
+    required this.liga,
+    required this.actualizar,
+  });
   final Modelousuario usuario;
+  final Liga liga;
   final void Function() actualizar;
   @override
-  State<Clasificacion> createState() => _ClasificacionState();
+  State<EquipoJugador> createState() => _EquipoJugadorState();
 }
 
-class _ClasificacionState extends State<Clasificacion> {
+class _EquipoJugadorState extends State<EquipoJugador> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+      drawer: MyDrawer(),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+        child: Appbar(),
+      ),
+      body: Stack(
         children: [
           Positioned.fill(
             child: Image.asset(
@@ -81,16 +96,24 @@ class _ClasificacionState extends State<Clasificacion> {
                     padding: const EdgeInsets.symmetric(horizontal: 22),
                     child: widget.liga.participantes.isEmpty
                         ? const Center(
-                            child: Text('No hay jugadores en la liga'),
+                            child: Text('No hay futbolistas en el Merado'),
                           )
                         : ListView.builder(
-                            
-                            itemCount: widget.liga.participantes.length,
+                            itemCount: widget.usuario.equipo.equipo.length,
                             itemBuilder: (context, index) {
-                              widget.actualizar();
-                              return CardJugador(
-                                jugador: widget.liga.participantes[index],
-                                indexPlayer: index, usuario: widget.usuario, liga: widget.liga,
+                              return 
+                              widget.liga.runtimeType == Liga
+                              ? CardFutbolista5(
+                                usuario: widget.usuario,
+                                jugador: widget.usuario.equipo.equipo[index],
+                                actualizar: () {},
+                                liga: widget.liga,
+                              ):
+                              CardFutbolista6(
+                                usuario: widget.usuario,
+                                jugador: widget.usuario.equipo.equipo[index],
+                                actualizar: () {},
+                                liga: widget.liga,
                               );
                             },
                           ),
@@ -100,6 +123,7 @@ class _ClasificacionState extends State<Clasificacion> {
             ),
           ),
         ],
-      );
+      ),
+    );
   }
 }

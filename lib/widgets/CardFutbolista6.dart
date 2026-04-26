@@ -6,8 +6,8 @@ import 'package:proyecto_intermodular/models/liga.dart';
 
 //Carta de jugador que aparece en el mercado
 
-class CardFutbolista3 extends StatefulWidget {
-  const CardFutbolista3({
+class CardFutbolista6 extends StatefulWidget {
+  const CardFutbolista6({
     super.key,
     required this.usuario,
     required this.jugador,
@@ -19,60 +19,13 @@ class CardFutbolista3 extends StatefulWidget {
   final Liga liga;
   final void Function() actualizar;
   @override
-  State<CardFutbolista3> createState() => _CardFutbolista3State();
+  State<CardFutbolista6> createState() => _CardFutbolista6State();
 }
 
-class _CardFutbolista3State extends State<CardFutbolista3> {
+class _CardFutbolista6State extends State<CardFutbolista6> {
   Color colorPosicion = Colors.orange;
 
-  void _pujar() {
-    final snackBarValidadorValor = SnackBar(
-      content: Text("Esa puja supera tu saldo"),
-    );
-    final snackBarValidadorValor2 = SnackBar(
-      content: Text("Ese valor es menor que el definido del jugador"),
-    );
-    double puja = widget.jugador.valor_venta;
-
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text("¿Quieres pujar por este jugador?"),
-        content: TextField(
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          onChanged: (value) => puja = double.parse(value),
-          decoration: InputDecoration(
-            hintText: widget.jugador.valor_venta.toString(),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => {
-              if (widget.usuario.saldo < puja)
-                {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(snackBarValidadorValor),
-                }
-              else if (puja < widget.jugador.valor_venta)
-                {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(snackBarValidadorValor2),
-                }
-              else
-                {
-                  widget.jugador.pujas.add(Puja(widget.usuario, puja)),
-                  Navigator.pop(context),
-                },
-            },
-            child: Text("Aceptar"),
-          ),
-        ],
-      ),
-    );
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -188,15 +141,7 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
               ),
             ),
 
-            // Porcentaje
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pujar,
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-              ),
-              child: const Text("Pujar"),
-            ),
+            
           ],
         ),
       );

@@ -41,7 +41,8 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.crearLigaEspecial(nombre, usuarioActual);
+    Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes);
+
 
     Navigator.push(
       context,

@@ -40,7 +40,7 @@ class _LiganormalState extends State<Liganormal> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.crearLigaNormal(nombre, usuarioActual);
+    Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes);
     usuarioActual.unirLiga();
     Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = Logicaligas.buscarLigaPorNombre(nombre)!;
     Navigator.push(
