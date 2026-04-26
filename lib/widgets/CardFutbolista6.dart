@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
-import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 
-//Carta de jugador que aparece en el mercado
+//Carta de jugador que aparece al visualizar la plantilla de un usuario en una Liga Normal
 
 class CardFutbolista6 extends StatefulWidget {
   const CardFutbolista6({
@@ -23,20 +23,20 @@ class CardFutbolista6 extends StatefulWidget {
 }
 
 class _CardFutbolista6State extends State<CardFutbolista6> {
-  Color colorPosicion = Colors.orange;
+  Color colorPosicion = Colorcetes.porteroColor;
 
  
 
   @override
   Widget build(BuildContext context) {
     if (widget.jugador.posicion == "DEF") {
-      colorPosicion = Colors.deepPurple;
+      colorPosicion = Colorcetes.defenseColor;
     } else {
       if (widget.jugador.posicion == "CEN") {
-        colorPosicion = Colors.blue;
+        colorPosicion = Colorcetes.centroCampistaColor;
       } else {
         if (widget.jugador.posicion == "DEL") {
-          colorPosicion = Colors.green;
+          colorPosicion = Colorcetes.delanteroColor;
         }
       }
     }

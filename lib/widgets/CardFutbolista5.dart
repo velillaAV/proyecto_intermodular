@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloOferta.dart';
-import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/CardOfertas.dart';
 import 'package:proyecto_intermodular/widgets/EquipoJugador.dart';
 
-//Carta de jugador que aparece en el mercado
+//Carta de jugador que aparece al visualizar la plantilla de un usuario en una Liga Normal
 
 class CardFutbolista5 extends StatefulWidget {
   const CardFutbolista5({
@@ -27,7 +27,7 @@ class CardFutbolista5 extends StatefulWidget {
 }
 
 class _CardFutbolista5State extends State<CardFutbolista5> {
-  Color colorPosicion = Colors.orange;
+  Color colorPosicion = Colorcetes.porteroColor;
 
   void _ofertar() {
     Modelousuario usuarioActual = Logicausuario.usuarioActual.usuario_ligas
@@ -243,13 +243,13 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
   @override
   Widget build(BuildContext context) {
     if (widget.jugador.posicion == "DEF") {
-      colorPosicion = Colors.deepPurple;
+      colorPosicion = Colorcetes.defenseColor;
     } else {
       if (widget.jugador.posicion == "CEN") {
-        colorPosicion = Colors.blue;
+        colorPosicion = Colorcetes.centroCampistaColor;
       } else {
         if (widget.jugador.posicion == "DEL") {
-          colorPosicion = Colors.green;
+          colorPosicion = Colorcetes.delanteroColor;
         }
       }
     }

@@ -4,7 +4,6 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 
-//Carta de jugador que aparece en el mercado
 
 class CardOfertas extends StatefulWidget {
   const CardOfertas({
@@ -59,7 +58,7 @@ class _CardOfertasState extends State<CardOfertas> {
 
           const SizedBox(width: 10),
 
-          // Info central
+          // Nombre del ofertador
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +114,7 @@ class _CardOfertasState extends State<CardOfertas> {
             ),
           ),
 
-          // Porcentaje
+        
           SizedBox(height: 20),
           PopupMenuButton<String>(
             onSelected: (value) {

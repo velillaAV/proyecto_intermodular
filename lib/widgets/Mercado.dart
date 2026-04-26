@@ -82,7 +82,7 @@ class _MercadoState extends State<Mercado> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: widget.liga.participantes.isEmpty
-                      ? const Center(child: Text('No hay futbolistas en el Merado'))
+                      ? const Center(child: Text('No hay futbolistas en el Mercado'))
                       : ListView.builder(
                           itemCount: widget.liga.mercado.length,
                           itemBuilder: (context, index) {

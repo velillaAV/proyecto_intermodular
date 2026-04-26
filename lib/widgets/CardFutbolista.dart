@@ -389,7 +389,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                     ),
                   ),
 
-                  // IMAGEN JUGADOR
+                
                  
 
                   // NOMBRE Y EQUIPO

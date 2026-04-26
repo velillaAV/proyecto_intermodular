@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
@@ -23,7 +24,7 @@ class CardFutbolista3 extends StatefulWidget {
 }
 
 class _CardFutbolista3State extends State<CardFutbolista3> {
-  Color colorPosicion = Colors.orange;
+  Color colorPosicion = Colorcetes.porteroColor;
 
   void _pujar() {
     final snackBarValidadorValor = SnackBar(
@@ -77,13 +78,13 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
   @override
   Widget build(BuildContext context) {
     if (widget.jugador.posicion == "DEF") {
-      colorPosicion = Colors.deepPurple;
+      colorPosicion = Colorcetes.defenseColor;
     } else {
       if (widget.jugador.posicion == "CEN") {
-        colorPosicion = Colors.blue;
+        colorPosicion = Colorcetes.centroCampistaColor;
       } else {
         if (widget.jugador.posicion == "DEL") {
-          colorPosicion = Colors.green;
+          colorPosicion = Colorcetes.delanteroColor;
         }
       }
     }

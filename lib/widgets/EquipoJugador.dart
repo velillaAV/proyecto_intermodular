@@ -94,11 +94,7 @@ class _EquipoJugadorState extends State<EquipoJugador> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22),
-                    child: widget.liga.participantes.isEmpty
-                        ? const Center(
-                            child: Text('No hay futbolistas en el Merado'),
-                          )
-                        : ListView.builder(
+                    child: ListView.builder(
                             itemCount: widget.usuario.equipo.equipo.length,
                             itemBuilder: (context, index) {
                               return 
