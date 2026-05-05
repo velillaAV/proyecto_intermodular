@@ -81,6 +81,9 @@ class _MercadoState extends State<Mercado> {
 
   @override
   Widget build(BuildContext context) {
+    for(var jugador in widget.liga.mercado) {
+      jugador.setIcono();
+    }
     return Stack(
       children: [
         Positioned.fill(
@@ -293,8 +296,4 @@ class _MercadoState extends State<Mercado> {
           );
   }
 }
-        ),
-      ],
-    );
-  }
-}
+      

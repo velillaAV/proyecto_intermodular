@@ -41,6 +41,22 @@ class Logicajugadores {
       throw Exception('Failed to generate team');
     }
   }
+   Future<List<Modelojugador>> rellenarSelecciones() async {
+    final response = await http.get(Uri.parse('$baseUrl/jugadores/getJugadores'));
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+      return data.map((json) => Modelojugador(
+        id_jugador: json['id_jugador'],
+        nombre: json['nombre'],
+        pais: _convertirRutaImagen(json['pais']),
+        valor_clausula: json['valor_clausula'].toDouble(),
+        valor_venta: json['valor_venta'].toDouble(),
+        posicion: json['posicion'],
+      )).toList();
+    } else {
+      throw Exception('Failed to generate team');
+    }
+  }
 
   /// Convertir rutas de imágenes locales a URLs del servidor
   String _convertirRutaImagen(String ruta) {

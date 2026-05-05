@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
@@ -15,10 +17,47 @@ class SeleccionPais extends StatefulWidget {
 }
 
 class _SeleccionPaisState extends State<SeleccionPais> {
+  void initState() {
+    super.initState();
+    _loadSelecciones();
+  }
+  bool isLoading = true;
+
   bool isPicked = false;
   int indexGeneral = -1;
+  Future<void> _loadSelecciones() async {
+    try {
+      List<Modelojugador> equipo = await Logicajugadores().rellenarSelecciones();
+      setState(() {
+        for(var equipo2 in widget.liga.listaSelecciones) {
+          for(var jugadores in equipo) {
+            if(jugadores.posicion != "PORL" || jugadores.posicion != "DEFL" || jugadores.posicion != "CENL"|| jugadores.posicion != "DELL") {
+              if(jugadores.pais == equipo2.escudo) {
+                equipo2.equipo.add(jugadores);
+              }
+            } 
+          }
+        }
+        isLoading = false;
+      });
+    } catch (e) {
+      // Handle error
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+          child: Appbar(),
+        ),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
     return Scaffold(
       drawer: MyDrawer(),
       appBar: PreferredSize(

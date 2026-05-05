@@ -58,7 +58,9 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: const Color(0xFF1C1C1E),
+          color: widget.jugador.isIcono == true
+          ? Colors.amber:
+              const Color(0xFF1C1C1E),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(

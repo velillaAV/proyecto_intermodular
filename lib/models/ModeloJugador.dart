@@ -4,10 +4,11 @@ import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 class Modelojugador {
   final int id_jugador;
   final String nombre;
-  final String posicion;
+  String posicion;
   final String pais;
   int idPropietario = 0;
   int puntos = 0;
+  bool isIcono = false;
   double valor_venta;
   double valor_clausula;
   List<int> puntos_fase = [];
@@ -37,6 +38,22 @@ class Modelojugador {
 
   void definirValorVenta(double venta) {
     valor_venta += venta;
+  }
+
+  void setIcono() {
+    if(posicion == "PORL") {
+      isIcono = true;
+      posicion = "POR";
+    } else if(posicion == "DEFL")  {
+      isIcono = true;
+      posicion = "DEF";
+    } else if(posicion == "CENL") {
+      isIcono = true;
+      posicion = "CEN";
+    } else if(posicion == "DELL") {
+      isIcono = true;
+      posicion = "DEL";
+    }
   }
  
 }

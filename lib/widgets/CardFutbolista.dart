@@ -348,7 +348,11 @@ class _CardFutbolistaState extends State<CardFutbolista> {
               height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Colors.black,
+                color:  widget.usuario.alineacion
+                          .elementAt(widget.posicion)?.isIcono == true
+
+                ? Colors.amber:
+                    Colors.black,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black26,

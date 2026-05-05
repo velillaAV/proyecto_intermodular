@@ -273,7 +273,10 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: widget.jugador.isIcono == true
+          ?Colors.amber: 
+          Colors.black
+            ,
           border: Border.all(color: Colors.white),
         ),
 
