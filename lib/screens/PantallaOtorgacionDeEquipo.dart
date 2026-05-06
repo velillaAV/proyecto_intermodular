@@ -42,6 +42,7 @@ class _PantallaOtorgacionDeEquipoState
         isLoading = false;
       });
     } catch (e) {
+      print(e.toString());
       // Handle error
       setState(() {
         isLoading = false;
