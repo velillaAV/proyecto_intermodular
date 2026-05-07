@@ -47,6 +47,7 @@ schedule.scheduleJob('0 0 * * *', async () => {
 // Ruta de prueba
 app.get('/', (req, res) => {
   res.json({ message: 'API funcionando correctamente' });
+  console.log('API funcionando correctamente')
 });
 
 // Manejo de errores básico

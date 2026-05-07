@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+console.log("Gestionando Usuarios????")
 
 // Obtener todos los usuarios
 const getUsuarios = async (req, res) => {

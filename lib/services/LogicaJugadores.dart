@@ -27,9 +27,13 @@ class Logicajugadores {
 
   Future<List<Modelojugador>> otorgarEquipo() async {
     final response = await http.get(Uri.parse('$baseUrl/jugadores/generar-equipo'));
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Modelojugador(
+    if(response.statusCode == 500) {
+       print("No se que está happening ERRROOOOOOOR: ");
+      throw Exception('Failed to generate team');
+    }
+      print("No se que está happening");
+      final data = json.decode(response.body);
+      return (data as List).map((json) => Modelojugador(
         id_jugador: json['id_jugador'],
         nombre: json['nombre'],
         pais: _convertirRutaImagen(json['pais']),
@@ -37,9 +41,7 @@ class Logicajugadores {
         valor_venta: json['valor_venta'].toDouble(),
         posicion: json['posicion'],
       )).toList();
-    } else {
-      throw Exception('Failed to generate team');
-    }
+    
   }
    Future<List<Modelojugador>> rellenarSelecciones() async {
     final response = await http.get(Uri.parse('$baseUrl/jugadores/getJugadores'));

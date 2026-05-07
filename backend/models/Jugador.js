@@ -1,7 +1,7 @@
 const { getConnection } = require('../config/database');
 
 class Jugador {
-  constructor(id_jugador, nombre, pais, valor_clausula, valor_venta, fotoRutaJugador, posicion) {
+  constructor(id_jugador, nombre, pais, valor_clausula, valor_venta, posicion) {
     this.id_jugador = id_jugador;
     this.nombre = nombre;
     this.pais = pais;

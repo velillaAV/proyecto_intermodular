@@ -20,6 +20,7 @@ const getConnection = async () => {
   try {
     const connection = await pool.getConnection();
     return connection;
+    console.log("Conexión correcta a la base de datos")
   } catch (error) {
     console.error('Error al conectar a la base de datos:', error);
     throw error;

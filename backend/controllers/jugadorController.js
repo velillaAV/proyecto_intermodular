@@ -1,5 +1,5 @@
 const Jugador = require('../models/Jugador');
-
+console.log("Gestionando Jugadores????")
 // Obtener todos los jugadores
 const getJugadores = async (req, res) => {
   try {
@@ -40,6 +40,7 @@ const createJugador = async (req, res) => {
 
 // Generar equipo aleatorio
 const generarEquipo = async (req, res) => {
+  console.log("Intentando generar equipo")
   try {
     const porteros = await Jugador.getByPosicion('POR');
     const defensas = await Jugador.getByPosicion('DEF');
@@ -84,9 +85,12 @@ const generarEquipo = async (req, res) => {
         atacantesSeleccionados.push(atacante);
       }
     }
+    console.log("Equipo creado")
     equipo.push(...atacantesSeleccionados);
+    console.log(equipo);
 
-    res.json(equipo);
+    res.status(200).json(equipo);
+    
   } catch (error) {
     console.error('Error al generar equipo:', error);
     res.status(500).json({ error: 'Error interno del servidor' });

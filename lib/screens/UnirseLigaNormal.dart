@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
 import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
@@ -50,7 +51,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PantallaLigaNormal(
+            builder: (context) => PantallaOtorgacionDeEquipo(
               liga: Logicaligas.buscarLigaPorNombre(nombre)!,
               usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
             ),
