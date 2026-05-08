@@ -36,14 +36,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "POR")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "POR")
                                       .elementAt(index),
                                   actualizar: () {
@@ -74,14 +74,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "DEF")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "DEF")
                                       .elementAt(index),
                                   actualizar: () {
@@ -112,14 +112,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "CEN")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "CEN")
                                       .elementAt(index),
                                   actualizar: () {
@@ -150,14 +150,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "DEL")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "DEL")
                                       .elementAt(index),
                                   actualizar: () {
@@ -203,14 +203,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "POR")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "POR")
                                       .elementAt(index),
                                   actualizar: () {
@@ -241,14 +241,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "DEF")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "DEF")
                                       .elementAt(index),
                                   actualizar: () {
@@ -279,14 +279,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "CEN")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "CEN")
                                       .elementAt(index),
                                   actualizar: () {
@@ -317,14 +317,14 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                         children: [
                           Expanded(
                             child: ListView.builder(
-                              itemCount: widget.usuario.equipo.equipo
+                              itemCount: widget.usuario.equipo.suplentes
                                   .where((x) => x.posicion == "DEL")
                                   .length,
                               itemBuilder: (context, index) {
                                 return CardFutbolista2(
                                   posicion: widget.posicion,
                                   usuario: widget.usuario,
-                                  jugador: widget.usuario.equipo.equipo
+                                  jugador: widget.usuario.equipo.suplentes
                                       .where((x) => x.posicion == "DEL")
                                       .elementAt(index),
                                   actualizar: () {

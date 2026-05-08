@@ -4,8 +4,7 @@ import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 
-//Carta de jugador que aparece al visualizar la plantilla de un usuario en una Liga Normal
-
+//Carta de jugador que aparece al visualizar la plantilla de un usuario en una Liga Especial
 class CardFutbolista6 extends StatefulWidget {
   const CardFutbolista6({
     super.key,

@@ -41,7 +41,7 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
       onTap: () {
         if (widget.usuario.alineacion.elementAt(widget.posicion) == null) {
           widget.usuario.alineacion[widget.posicion] = widget.jugador;
-          widget.usuario.equipo.equipo.remove(widget.jugador);
+          widget.usuario.equipo.suplentes.remove(widget.jugador);
           widget.actualizar();
         } else {
           Modelojugador cambiado = widget.usuario.alineacion.elementAt(
@@ -49,8 +49,8 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
           )!;
 
           widget.usuario.alineacion[widget.posicion] = widget.jugador;
-          widget.usuario.equipo.equipo.remove(widget.jugador);
-          widget.usuario.equipo.equipo.add(cambiado);
+          widget.usuario.equipo.suplentes.remove(widget.jugador);
+          widget.usuario.equipo.suplentes.add(cambiado);
           widget.actualizar();
         }
       },

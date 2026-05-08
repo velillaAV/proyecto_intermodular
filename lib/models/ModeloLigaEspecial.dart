@@ -1,5 +1,4 @@
 import 'package:proyecto_intermodular/models/ModeloEquipo.dart';
-import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 
 class Modeloligaespecial extends Liga {

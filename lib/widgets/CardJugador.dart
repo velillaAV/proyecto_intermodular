@@ -6,11 +6,12 @@ import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/EquipoJugador.dart';
 
 class CardJugador extends StatefulWidget {
-  const CardJugador({super.key, required this.jugador, required this.indexPlayer, required this.usuario, required this.liga, });
+  const CardJugador({super.key, required this.jugador, required this.indexPlayer, required this.usuario, required this.liga, required this.actualizar, });
   final User jugador;
   final Modelousuario usuario;
   final int indexPlayer;
   final Liga liga;
+  final void Function() actualizar;
   @override
   State<CardJugador> createState() => _CardJugadorState();
 }
@@ -26,9 +27,7 @@ class _CardJugadorState extends State<CardJugador> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EquipoJugador(usuario: widget.usuario, liga: widget.liga, actualizar: () { setState(() {
-              
-            }); },),
+            builder: (context) => EquipoJugador(usuario: widget.jugador.usuario_ligas.firstWhere((liga) => liga.ligaPerteneciente == widget.liga), liga: widget.liga, actualizar:widget.actualizar),
           ),
         );
       },

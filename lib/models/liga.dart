@@ -209,7 +209,7 @@ class Liga {
             if (participante.usuario_ligas.contains(puja.usuario)) {
               if (participantes.indexOf(participante) ==
                   jugador.idPropietario) {
-                puja.usuario.equipo.equipo.add(jugador);
+                puja.usuario.equipo.suplentes.add(jugador);
               }
             }
           }
@@ -221,7 +221,7 @@ class Liga {
       );
 
       // Dar jugador al ganador
-      mejorPuja.usuario.equipo.equipo.add(jugador);
+      mejorPuja.usuario.equipo.suplentes.add(jugador);
 
       // devolver dinero a los perdedores
       for (var puja in jugador.pujas) {

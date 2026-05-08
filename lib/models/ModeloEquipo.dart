@@ -5,9 +5,10 @@ class Modeloequipo {
 
   final String? nombre;
   List<Modelojugador> equipo;
+  List<Modelojugador> suplentes = [];
   Modelousuario? usuario;
   final String? escudo;
-  Modeloequipo({this.nombre, this.usuario, required this.equipo, this.escudo});
+  Modeloequipo({this.nombre, this.usuario, this.escudo, required this.equipo});
 
   
 }

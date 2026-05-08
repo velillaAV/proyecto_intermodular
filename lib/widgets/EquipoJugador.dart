@@ -22,8 +22,14 @@ class EquipoJugador extends StatefulWidget {
 }
 
 class _EquipoJugadorState extends State<EquipoJugador> {
+
   @override
   Widget build(BuildContext context) {
+    void estf() {
+      setState(() {
+        
+      });
+    }
     return Scaffold(
       drawer: MyDrawer(),
       appBar: PreferredSize(
@@ -95,24 +101,29 @@ class _EquipoJugadorState extends State<EquipoJugador> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22),
                     child: ListView.builder(
-                            itemCount: widget.usuario.equipo.equipo.length,
-                            itemBuilder: (context, index) {
-                              return 
-                              widget.liga.runtimeType == Liga
-                              ? CardFutbolista5(
+                      itemCount: widget.usuario.equipo.equipo.length,
+                      
+                      itemBuilder: (context, index) {
+                       
+                        widget.actualizar();
+
+                        return widget.liga.runtimeType == Liga
+                            ? CardFutbolista5(
                                 usuario: widget.usuario,
                                 jugador: widget.usuario.equipo.equipo[index],
-                                actualizar: () {},
+                                actualizar: widget.actualizar,
                                 liga: widget.liga,
-                              ):
-                              CardFutbolista6(
+                              )
+                            : CardFutbolista6(
                                 usuario: widget.usuario,
                                 jugador: widget.usuario.equipo.equipo[index],
-                                actualizar: () {},
+                                actualizar: widget.actualizar,
                                 liga: widget.liga,
+                                
                               );
-                            },
-                          ),
+                              
+                      },
+                    ),
                   ),
                 ),
               ],

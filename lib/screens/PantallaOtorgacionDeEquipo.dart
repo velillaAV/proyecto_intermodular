@@ -68,9 +68,10 @@ class _PantallaOtorgacionDeEquipoState
     }
 
     void _aceptarEquipo() {
-      widget.usuario.equipo.equipo = equipoOtorgado;
+       widget.usuario.equipo.equipo = equipoOtorgado;
       for(var jugador in widget.usuario.equipo.equipo) {
         jugador.idPropietario = widget.liga.participantes.indexOf(Logicausuario.usuarioActual);
+        widget.usuario.equipo.suplentes.add(jugador);
       }
 
       Navigator.push(

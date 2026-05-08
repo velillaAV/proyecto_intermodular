@@ -90,7 +90,7 @@ class _ClasificacionState extends State<Clasificacion> {
                               widget.actualizar();
                               return CardJugador(
                                 jugador: widget.liga.participantes[index],
-                                indexPlayer: index, usuario: widget.usuario, liga: widget.liga,
+                                indexPlayer: index, usuario: widget.usuario, liga: widget.liga, actualizar: widget.actualizar,
                               );
                             },
                           ),

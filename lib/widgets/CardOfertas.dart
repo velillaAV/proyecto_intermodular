@@ -4,7 +4,6 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 
-
 class CardOfertas extends StatefulWidget {
   const CardOfertas({
     super.key,
@@ -12,9 +11,10 @@ class CardOfertas extends StatefulWidget {
     required this.jugador,
     required this.actualizar,
     required this.liga,
-    required this.posicion,
+    required this.posicion, required this.ofertador,
   });
   final Modelousuario usuario;
+  final Modelousuario ofertador;
   final Modelojugador jugador;
   final Liga liga;
   final int posicion;
@@ -27,7 +27,7 @@ class _CardOfertasState extends State<CardOfertas> {
   @override
   Widget build(BuildContext context) {
     User usuarioOfertador = widget.liga.participantes.singleWhere(
-      (user) => user.usuario_ligas.contains(widget.usuario),
+      (user) => user.usuario_ligas.contains(widget.ofertador),
     );
 
     return Container(
@@ -86,7 +86,7 @@ class _CardOfertasState extends State<CardOfertas> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Text(
+                        Text(
                           "Valor venta",
                           style: TextStyle(fontSize: 10, color: Colors.white54),
                         ),
@@ -98,7 +98,8 @@ class _CardOfertasState extends State<CardOfertas> {
                           ),
                         ),
                         Text(
-                          widget.jugador.oferta[widget.posicion].cantidad.toString(),
+                          widget.jugador.oferta[widget.posicion].cantidad
+                              .toString(),
                           style: const TextStyle(
                             fontSize: 12,
                             color: Colors.white,
@@ -114,32 +115,51 @@ class _CardOfertasState extends State<CardOfertas> {
             ),
           ),
 
-        
           SizedBox(height: 20),
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'aceptar') {
-                widget.usuario.sumarSaldo(
+                setState(() {
+                   widget.usuario.sumarSaldo(
                   widget.jugador.oferta[widget.posicion].cantidad,
                 );
-                widget.jugador.oferta[widget.posicion].usuario.equipo.equipo
+                widget.ofertador.equipo.equipo
                     .add(widget.jugador);
+                widget.ofertador.equipo.suplentes
+                    .add(widget.jugador);   
+                     
                 widget.usuario.equipo.equipo.remove(widget.jugador);
+                if (widget.usuario.alineacion.contains(widget.jugador)) {
+                  int pos = widget.usuario.alineacion.indexOf(widget.jugador);
+                  widget.usuario.alineacion.remove(widget.jugador);
+                  widget.usuario.alineacion.insert(pos, null);
+                }
+                if (widget.usuario.equipo.suplentes.contains(widget.jugador)) {
+                  widget.usuario.equipo.suplentes.remove(widget.jugador);
+                }
+                widget.actualizar();
+                });
+               
               } else if (value == 'denegar') {
                 widget.jugador.oferta[widget.posicion].usuario.sumarSaldo(
-                  widget.jugador.oferta[widget.posicion].cantidad,
+                widget.jugador.oferta[widget.posicion].cantidad,
+                  
                 );
+                widget.actualizar();
               }
             },
             itemBuilder: (context) => [
               PopupMenuItem(value: 'aceptar', child: Text('Aceptar')),
               PopupMenuItem(value: 'denegar', child: Text('Denegar')),
             ],
-            child: ElevatedButton(
-              onPressed:
-                  null, // Se deja en null porque lo maneja el PopMenuButton
-              child: Text("Acciones"),
-            ),
+            child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("Acciones", style: TextStyle(color: Colors.black)),
+              ),
           ),
         ],
       ),

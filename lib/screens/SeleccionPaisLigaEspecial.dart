@@ -21,21 +21,26 @@ class _SeleccionPaisState extends State<SeleccionPais> {
     super.initState();
     _loadSelecciones();
   }
+
   bool isLoading = true;
 
   bool isPicked = false;
   int indexGeneral = -1;
   Future<void> _loadSelecciones() async {
     try {
-      List<Modelojugador> equipo = await Logicajugadores().rellenarSelecciones();
+      List<Modelojugador> equipo = await Logicajugadores()
+          .rellenarSelecciones();
       setState(() {
-        for(var equipo2 in widget.liga.listaSelecciones) {
-          for(var jugadores in equipo) {
-            if(jugadores.posicion != "PORL" || jugadores.posicion != "DEFL" || jugadores.posicion != "CENL"|| jugadores.posicion != "DELL") {
-              if(jugadores.pais == equipo2.escudo) {
-                equipo2.equipo.add(jugadores);
+        for (var equipo2 in widget.liga.listaSelecciones) {
+          for (var jugadores in equipo) {
+            if (jugadores.posicion != "PORL" ||
+                jugadores.posicion != "DEFL" ||
+                jugadores.posicion != "CENL" ||
+                jugadores.posicion != "DELL") {
+              if (jugadores.pais == equipo2.escudo) {
+                equipo2.suplentes.add(jugadores);
               }
-            } 
+            }
           }
         }
         isLoading = false;
@@ -47,6 +52,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -199,7 +205,14 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                   .last
                                   .equipo =
                               seleccion;
-                          Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = widget.liga;
+                          for (var jugador in Logicausuario.getUsuarioActual().usuario_ligas.last.equipo.equipo) {
+                            Logicausuario.getUsuarioActual().usuario_ligas.last.equipo.suplentes.add(jugador);
+                          }
+                          Logicausuario.getUsuarioActual()
+                                  .usuario_ligas
+                                  .last
+                                  .ligaPerteneciente =
+                              widget.liga;
                           showDialog(
                             context: context,
                             builder: (_) => AlertDialog(

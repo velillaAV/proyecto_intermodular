@@ -6,7 +6,6 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/CardOfertas.dart';
-import 'package:proyecto_intermodular/widgets/EquipoJugador.dart';
 
 //Carta de jugador que aparece al visualizar la plantilla de un usuario en una Liga Normal
 
@@ -69,9 +68,12 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                 }
               else
                 {
-                  widget.jugador.oferta.add(Oferta(widget.usuario, oferta)),
-                  usuarioActual.restarSaldo(oferta),
-                  Navigator.pop(context),
+                  setState(() {
+                    widget.jugador.oferta.add(Oferta(usuarioActual, oferta));
+                    usuarioActual.restarSaldo(oferta);
+                    widget.actualizar();
+                    Navigator.pop(context);
+                  }),
                 },
             },
             child: Text("Aceptar"),
@@ -82,6 +84,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
   }
 
   void _clausulazo() {
+    int pos = widget.usuario.alineacion.indexOf(widget.jugador);
     Modelousuario usuarioActual = Logicausuario.usuarioActual.usuario_ligas
         .singleWhere((user) => user.ligaPerteneciente == widget.liga);
     double clausula = widget.jugador.valor_clausula;
@@ -102,10 +105,23 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
               }
             else
               {
-                widget.usuario.equipo.equipo.remove(widget.jugador),
-                usuarioActual.equipo.equipo.add(widget.jugador),
-                usuarioActual.restarSaldo(widget.jugador.valor_clausula),
-                Navigator.pop(context),
+                setState(() {
+                  widget.usuario.equipo.equipo.remove(widget.jugador);
+                  if (widget.usuario.alineacion.contains(widget.jugador)) {
+                    widget.usuario.alineacion.remove(widget.jugador);
+                    widget.usuario.alineacion.insert(pos, null);
+                  }
+                  if (widget.usuario.equipo.suplentes.contains(
+                    widget.jugador,
+                  )) {
+                    widget.usuario.equipo.suplentes.remove(widget.jugador);
+                    usuarioActual.equipo.equipo.add(widget.jugador);
+                    usuarioActual.equipo.suplentes.add(widget.jugador);
+                    usuarioActual.restarSaldo(widget.jugador.valor_clausula);
+                    widget.actualizar();
+                    Navigator.pop(context);
+                  }
+                }),
               },
           },
           child: Text("Aceptar"),
@@ -130,13 +146,14 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                 child: ListView.builder(
                   itemCount: widget.jugador.oferta.length,
                   itemBuilder: (context, index) {
+                    widget.actualizar();
                     return CardOfertas(
                       usuario: widget.usuario,
                       jugador: widget.jugador,
-                      actualizar: () {
-                        setState(() {});
-                      },
-                      liga: widget.liga, posicion: index,
+                      actualizar: widget.actualizar,
+                      liga: widget.liga,
+                      posicion: index,
+                      ofertador: widget.jugador.oferta[index].usuario,
                     );
                   },
                 ),
@@ -177,8 +194,11 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                 }
               else
                 {
-                  widget.jugador.aumentarClausula(sumaClausula),
-                  Navigator.pop(context),
+                  setState(() {
+                     widget.jugador.aumentarClausula(sumaClausula);
+                  Navigator.pop(context);
+                  }),
+                 
                 },
             },
             child: Text("Aceptar"),
@@ -189,7 +209,8 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
   }
 
   void _ponerAlMercado() {
-        final snackBarValidadorValor5 = SnackBar(
+    int pos = widget.usuario.alineacion.indexOf(widget.jugador);
+    final snackBarValidadorValor5 = SnackBar(
       content: Text("Ese valor de venta supera tu saldo"),
     );
     final snackBarValidadorValor6 = SnackBar(
@@ -226,10 +247,23 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                 }
               else
                 {
-                  widget.jugador.definirValorVenta(valorVenta),
-                  widget.liga.mercado.add(widget.jugador),
-                  widget.usuario.equipo.equipo.remove(widget.jugador),
-                  Navigator.pop(context),
+                  setState(() {
+                    widget.jugador.definirValorVenta(valorVenta);
+                  widget.liga.mercado.add(widget.jugador);
+                  widget.usuario.equipo.equipo.remove(widget.jugador);
+
+                  if (widget.usuario.alineacion.contains(widget.jugador))
+                    {
+                      widget.usuario.alineacion.remove(widget.jugador);
+                      widget.usuario.alineacion.insert(pos, null);
+                    }
+
+                  if (widget.usuario.equipo.suplentes.contains(widget.jugador))
+                    {widget.usuario.equipo.suplentes.remove(widget.jugador);}
+                  widget.actualizar();
+                  Navigator.pop(context);
+                  }),
+                  
                 },
             },
             child: Text("Aceptar"),
@@ -237,7 +271,6 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
         ],
       ),
     );
-
   }
 
   @override
@@ -255,183 +288,167 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
     }
 
     widget.liga.comprobarSubastas();
-    widget.actualizar();
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EquipoJugador(
-              usuario: widget.usuario,
-              liga: widget.liga,
-              actualizar: () {
-                setState(() {});
-              },
-            ),
-          ),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: widget.jugador.isIcono == true
-          ?Colors.amber: 
-          Colors.black
-            ,
-          border: Border.all(color: Colors.white),
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        color: widget.jugador.isIcono == true ? Colors.amber : Colors.black,
+        border: Border.all(color: Colors.white),
+      ),
 
-        child: Row(
-          children: [
-            Stack(
-              children: [
-                Container(width: 0, height: 0),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              Container(width: 0, height: 0),
+              Positioned(
+                top: 0,
+                left: 0,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
                   ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(width: 10),
+
+          // Info central
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorPosicion,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        widget.jugador.posicion,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        widget.jugador.nombre,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 6),
+
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Valor venta",
+                          style: TextStyle(fontSize: 10, color: Colors.white54),
+                        ),
+                        Text(
+                          widget.jugador.valor_venta.toString(),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(width: 15),
+                  ],
                 ),
               ],
             ),
+          ),
 
-            const SizedBox(width: 10),
-
-            // Info central
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 6,
-                          vertical: 2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: colorPosicion,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          widget.jugador.posicion,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Text(
-                          widget.jugador.nombre,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 6),
-
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Valor venta",
-                            style: TextStyle(
-                              fontSize: 10,
-                              color: Colors.white54,
-                            ),
-                          ),
-                          Text(
-                            widget.jugador.valor_venta.toString(),
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(width: 15),
-                    ],
-                  ),
-                ],
+          // Porcentaje
+          SizedBox(height: 20),
+          if (widget.usuario !=
+              Logicausuario.usuarioActual.usuario_ligas.singleWhere(
+                (user) => user.ligaPerteneciente == widget.liga,
+              ))
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'ofertar') {
+                  _ofertar();
+                } else if (value == 'clausulazo') {
+                  _clausulazo();
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(value: 'ofertar', child: Text('Ofertar')),
+                PopupMenuItem(value: 'clausulazo', child: Text('Clausular')),
+              ],
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("Acciones", style: TextStyle(color: Colors.black)),
               ),
             ),
 
-            // Porcentaje
-            SizedBox(height: 20),
-            if (widget.usuario !=
-                Logicausuario.usuarioActual.usuario_ligas.singleWhere(
-                  (user) => user.ligaPerteneciente == widget.liga,
-                ))
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  if (value == 'ofertar') {
-                    _ofertar();
-                  } else if (value == 'clausulazo') {
-                    _clausulazo();
-                  }
-                },
-                itemBuilder: (context) => [
-                  PopupMenuItem(value: 'ofertar', child: Text('Ofertar')),
-                  PopupMenuItem(value: 'clausulazo', child: Text('Clausular')),
-                ],
-                child: ElevatedButton(
-                  onPressed:
-                      null, // Se deja en null porque lo maneja el PopMenuButton
-                  child: Text("Acciones"),
+          if (widget.usuario ==
+              Logicausuario.usuarioActual.usuario_ligas.singleWhere(
+                (user) => user.ligaPerteneciente == widget.liga,
+              ))
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'revisarOfertas') {
+                  _revisarOfertas();
+                } else if (value == 'aumentarClausula') {
+                  _aumentarClausula();
+                } else {
+                  _ponerAlMercado();
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 'revisarOfertas',
+                  child: Text('Revisar Ofertas'),
                 ),
-              ),
-            if (widget.usuario ==
-                Logicausuario.usuarioActual.usuario_ligas.singleWhere(
-                  (user) => user.ligaPerteneciente == widget.liga,
-                ))
-              PopupMenuButton<String>(
-                onSelected: (value) {
-                  if (value == 'revisarOfertas') {
-                    _revisarOfertas();
-                  } else if (value == 'aumentarClausula') {
-                    _aumentarClausula();
-                  } else {
-                    _ponerAlMercado();
-                  }
-                },
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 'revisarOfertas',
-                    child: Text('Revisar Ofertas'),
-                  ),
-                  PopupMenuItem(
-                    value: 'aumentarClausula',
-                    child: Text('Aumentar Clausula'),
-                  ),
-                  PopupMenuItem(
-                    value: 'venderAlMercado',
-                    child: Text('Poner en el mercado'),
-                  ),
-                ],
-                child: ElevatedButton(
-                  onPressed:
-                      null, // Se deja en null porque lo maneja el PopMenuButton
-                  child: Text("Acciones"),
+                PopupMenuItem(
+                  value: 'aumentarClausula',
+                  child: Text('Aumentar Clausula'),
                 ),
+                PopupMenuItem(
+                  value: 'venderAlMercado',
+                  child: Text('Poner en el mercado'),
+                ),
+              ],
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text("Acciones", style: TextStyle(color: Colors.black)),
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }
