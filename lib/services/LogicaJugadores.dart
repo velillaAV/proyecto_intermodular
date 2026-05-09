@@ -9,55 +9,75 @@ class Logicajugadores {
   final String baseUrl = 'http://localhost:3000'; // Cambia según tu IP en móvil
 
   Future<List<Modelojugador>> getJugadoresByPosicion(String posicion) async {
-    final response = await http.get(Uri.parse('$baseUrl/jugadores/posicion/$posicion'));
+    final response = await http.get(
+      Uri.parse('$baseUrl/jugadores/posicion/$posicion'),
+    );
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Modelojugador(
-        id_jugador: json['id_jugador'],
-        nombre: json['nombre'],
-        pais: _convertirRutaImagen(json['pais']),
-        valor_clausula: json['valor_clausula'].toDouble(),
-        valor_venta: json['valor_venta'].toDouble(),
-        posicion: json['posicion'],
-      )).toList();
+      return data
+          .map(
+            (json) => Modelojugador(
+              id_jugador: json['id_jugador'],
+              nombre: json['nombre'],
+              pais: _convertirRutaImagen(json['pais']),
+              valor_clausula: json['valor_clausula'].toDouble(),
+              valor_venta: json['valor_venta'].toDouble(),
+              posicion: json['posicion'],
+            ),
+          )
+          .toList();
     } else {
       throw Exception('Failed to load players');
     }
   }
 
   Future<List<Modelojugador>> otorgarEquipo() async {
-    final response = await http.get(Uri.parse('$baseUrl/jugadores/generar-equipo'));
-    if(response.statusCode == 500) {
-       print("No se que está happening ERRROOOOOOOR: ");
+    final response = await http.get(
+      Uri.parse('$baseUrl/jugadores/generar-equipo'),
+    );
+    if (response.statusCode == 500) {
       throw Exception('Failed to generate team');
     }
-      print("No se que está happening");
-      final data = json.decode(response.body);
-      return (data as List).map((json) => Modelojugador(
-        id_jugador: json['id_jugador'],
-        nombre: json['nombre'],
-        pais: _convertirRutaImagen(json['pais']),
-        valor_clausula: json['valor_clausula'].toDouble(),
-        valor_venta: json['valor_venta'].toDouble(),
-        posicion: json['posicion'],
-      )).toList();
-    
+
+    final data = json.decode(response.body);
+    return (data as List)
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: _convertirRutaImagen(json['pais']),
+            valor_clausula: json['valor_clausula'].toDouble(),
+            valor_venta: json['valor_venta'].toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
   }
-   Future<List<Modelojugador>> rellenarSelecciones() async {
-    final response = await http.get(Uri.parse('$baseUrl/jugadores/getJugadores'));
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return data.map((json) => Modelojugador(
-        id_jugador: json['id_jugador'],
-        nombre: json['nombre'],
-        pais: _convertirRutaImagen(json['pais']),
-        valor_clausula: json['valor_clausula'].toDouble(),
-        valor_venta: json['valor_venta'].toDouble(),
-        posicion: json['posicion'],
-      )).toList();
-    } else {
-      throw Exception('Failed to generate team');
+
+  Future<List<Modelojugador>> rellenarSelecciones(String pais) async {
+    final response = await http.get(Uri.parse('$baseUrl/jugadores/pais/${Uri.encodeComponent(pais)}'));
+
+    if (response.statusCode != 200) {
+      print("error");
+      print(response.statusCode);
+      throw Exception('Error: ${response.statusCode}');
     }
+    print(response.body);
+    print(response.statusCode);
+    final data = json.decode(response.body);
+
+    return (data as List)
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: _convertirRutaImagen(json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
   }
 
   /// Convertir rutas de imágenes locales a URLs del servidor

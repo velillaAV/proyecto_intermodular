@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
+import 'package:proyecto_intermodular/models/ModeloEquipo.dart';
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
@@ -20,7 +23,26 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
   String nombreLiga = "";
   int numParticipantes = 0;
   
+  Future<void> _loadSelecciones(Modeloligaespecial liga) async {
+    try {
 
+      for (var equipo2 in liga.listaSelecciones) {
+        List<Modelojugador> lista = await Logicajugadores()
+            .rellenarSelecciones(equipo2.escudo!);
+       for(var jugador in lista) {
+        if(jugador.posicion != "PORL" && jugador.posicion != "DEFL" && jugador.posicion != "CENL" && jugador.posicion != "DELL") {
+          equipo2.equipo.add(jugador);
+        
+        }
+       }
+           
+      }
+      
+    } catch (e) {
+      // Handle error
+      
+    }
+  }
   void _mostrarMensaje(String mensaje) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(mensaje)),
@@ -41,8 +63,7 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes);
-
+    _loadSelecciones(Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes));
 
     Navigator.push(
       context,

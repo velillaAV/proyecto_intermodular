@@ -17,53 +17,15 @@ class SeleccionPais extends StatefulWidget {
 }
 
 class _SeleccionPaisState extends State<SeleccionPais> {
-  void initState() {
-    super.initState();
-    _loadSelecciones();
-  }
-
-  bool isLoading = true;
+  
 
   bool isPicked = false;
   int indexGeneral = -1;
-  Future<void> _loadSelecciones() async {
-    try {
-      List<Modelojugador> equipo = await Logicajugadores()
-          .rellenarSelecciones();
-      setState(() {
-        for (var equipo2 in widget.liga.listaSelecciones) {
-          for (var jugadores in equipo) {
-            if (jugadores.posicion != "PORL" ||
-                jugadores.posicion != "DEFL" ||
-                jugadores.posicion != "CENL" ||
-                jugadores.posicion != "DELL") {
-              if (jugadores.pais == equipo2.escudo) {
-                equipo2.suplentes.add(jugadores);
-              }
-            }
-          }
-        }
-        isLoading = false;
-      });
-    } catch (e) {
-      // Handle error
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
-          child: Appbar(),
-        ),
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
+   
     return Scaffold(
       drawer: MyDrawer(),
       appBar: PreferredSize(
@@ -73,7 +35,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/FondoMundial2026.png"),
+            image: AssetImage("images/FondoMundial2026.jpg"),
             opacity: 0.2,
             fit: BoxFit.fill,
           ),
@@ -88,65 +50,34 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                   final seleccion = widget.liga.listaSelecciones[index];
                   final isSelected = indexGeneral == index;
 
-                  return GestureDetector(
-                    onTap: seleccion.usuario != null
-                        ? null
-                        : () {
-                            setState(() {
-                              indexGeneral = index;
-                            });
-                          },
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.22,
+                    child: GestureDetector(
+                      onTap: seleccion.usuario != null
+                          ? null
+                          : () {
+                              setState(() {
+                                indexGeneral = index;
+                              });
+                            },
 
-                    child: seleccion.usuario == null
-                        ? AnimatedContainer(
-                            duration: const Duration(milliseconds: 250),
-                            margin: const EdgeInsets.symmetric(vertical: 8),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: isSelected
-                                  ? Colorcetes.selectionColor
-                                  : Colorcetes.cardColors,
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(
-                                color: isSelected ? Colors.white : Colors.black,
-                                width: 2,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  seleccion.escudo!,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        seleccion.nombre!,
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Opacity(
-                            opacity: 0.5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colorcetes.cardColors,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
+                      child: seleccion.usuario == null
+                          ? AnimatedContainer(
+                              duration: const Duration(milliseconds: 250),
                               margin: const EdgeInsets.symmetric(vertical: 8),
                               padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: isSelected
+                                    ? Colorcetes.selectionColor
+                                    : Colorcetes.cardColors,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.black,
+                                  width: 2,
+                                ),
+                              ),
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -154,34 +85,72 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                     width: 50,
                                     height: 50,
                                   ),
-                                  SizedBox(width: 12),
+                                  const SizedBox(width: 12),
                                   Expanded(
-                                    child: Row(
+                                    child: Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           seleccion.nombre!,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
-                                        ),
-                                        SizedBox(height: 1),
-                                        SizedBox(width: 600),
-                                        Icon(
-                                          Icons.lock,
-                                          size: 40,
-                                          color: Colors.white70,
                                         ),
                                       ],
                                     ),
                                   ),
                                 ],
                               ),
+                            )
+                          : Opacity(
+                              opacity: 0.5,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colorcetes.cardColors,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                padding: const EdgeInsets.all(12),
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      seleccion.escudo!,
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    SizedBox(width: 12),
+                                    Expanded(
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+
+                                        children: [
+                                          Text(
+                                            seleccion.nombre!,
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 1),
+                                          SizedBox(width: 600),
+                                          Flexible(
+                                            child: Icon(
+                                              Icons.lock,
+                                              size: 40,
+                                              color: Colors.white70,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                    ),
                   );
                 },
               ),
@@ -205,8 +174,18 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                   .last
                                   .equipo =
                               seleccion;
-                          for (var jugador in Logicausuario.getUsuarioActual().usuario_ligas.last.equipo.equipo) {
-                            Logicausuario.getUsuarioActual().usuario_ligas.last.equipo.suplentes.add(jugador);
+                          for (var jugador
+                              in Logicausuario.getUsuarioActual()
+                                  .usuario_ligas
+                                  .last
+                                  .equipo
+                                  .equipo) {
+                            Logicausuario.getUsuarioActual()
+                                .usuario_ligas
+                                .last
+                                .equipo
+                                .suplentes
+                                .add(jugador);
                           }
                           Logicausuario.getUsuarioActual()
                                   .usuario_ligas

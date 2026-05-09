@@ -4,7 +4,8 @@ console.log("Gestionando Jugadores????")
 const getJugadores = async (req, res) => {
   try {
     const jugadores = await Jugador.getAll();
-    res.json(jugadores);
+    console.log("jugadores obtenidos")
+    res.status(200).json(jugadores);
   } catch (error) {
     console.error('Error al obtener jugadores:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -17,6 +18,19 @@ const getJugadoresByPosicion = async (req, res) => {
     const { posicion } = req.params;
     const jugadores = await Jugador.getByPosicion(posicion);
     res.json(jugadores);
+  } catch (error) {
+    console.error('Error al obtener jugadores:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+const getJugadoresByPais = async (req, res) => {
+  try {
+    
+    const { pais } = req.params;
+    console.log(pais);
+    const jugadores = await Jugador.getByPais(pais);
+    res.status(200).json(jugadores);
   } catch (error) {
     console.error('Error al obtener jugadores:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -100,6 +114,7 @@ const generarEquipo = async (req, res) => {
 module.exports = {
   getJugadores,
   getJugadoresByPosicion,
+  getJugadoresByPais,
   createJugador,
   generarEquipo
 };

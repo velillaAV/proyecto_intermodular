@@ -64,23 +64,21 @@ class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
         liga: widget.liga,
         usuario: widget.usuario,
         actualizar: () {
-          setState(() {
-            
-          });
+          
         },
       ),
       Alineacion(
         usuario: widget.usuario,
         liga: widget.liga,
         actualizar: () {
-          setState(() {});
+          
         },
       ),
       Predicciones(
         liga: widget.liga,
         usuario: widget.usuario,
         actualizar: () {
-          setState(() {});
+         
         },
       ),
     ];

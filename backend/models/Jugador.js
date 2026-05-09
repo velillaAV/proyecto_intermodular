@@ -47,6 +47,27 @@ class Jugador {
     }
   }
 
+  static async getByPais(pais) {
+    console.log("el pais ha llegado ", pais)
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM jugadores WHERE pais = ?',
+        [pais]
+      );
+      return rows.map(row => new Jugador(
+        row.id_jugador,
+        row.nombre,
+        row.pais,
+        row.valor_clausula,
+        row.valor_venta,
+        row.posicion
+      ));
+    } finally {
+      connection.release();
+    }
+  }
+
   static async create(jugador) {
     const connection = await getConnection();
     try {

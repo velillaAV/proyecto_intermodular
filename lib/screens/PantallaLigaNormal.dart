@@ -85,9 +85,7 @@ class _PantallaLigaNormalState extends State<PantallaLigaNormal> {
       Clasificacion(liga: widget.liga, usuario: widget.usuario, actualizar: () {  },),
       Mercado(usuario: widget.usuario, liga: widget.liga, actualizar: () {  },),
       Alineacion(usuario: widget.usuario, liga: widget.liga, actualizar: () {  },),
-      Predicciones(liga: widget.liga, usuario: widget.usuario, actualizar: () { setState(() {
-        
-      }); },)
+      Predicciones(liga: widget.liga, usuario: widget.usuario, actualizar: () {  },)
       
   ];
     Widget pantalla = _pantallas[_selectedIndex];

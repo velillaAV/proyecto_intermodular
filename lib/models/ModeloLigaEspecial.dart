@@ -25,7 +25,7 @@ class Modeloligaespecial extends Liga {
       nombre: 'Republica Checa',
       usuario: null,
       equipo: [],
-      escudo: 'images/logoRepublicaCheca.png',
+      escudo: 'images/logoChequia.png',
     ),
     Modeloequipo(
       nombre: 'Canadá',
@@ -115,7 +115,7 @@ class Modeloligaespecial extends Liga {
       nombre: 'Costa de Marfil',
       usuario: null,
       equipo: [],
-      escudo: 'images/logoMarfil.png',
+      escudo: 'images/logoCostaMarfil.png',
     ),
     Modeloequipo(
       nombre: 'Ecuador',
@@ -169,7 +169,7 @@ class Modeloligaespecial extends Liga {
       nombre: 'Nueva Zelanda',
       usuario: null,
       equipo: [],
-      escudo: 'images/logoNuevaZel.png',
+      escudo: 'images/logoNuevaZelanda.png',
     ),
     Modeloequipo(
       nombre: 'España',
@@ -181,7 +181,7 @@ class Modeloligaespecial extends Liga {
       nombre: 'Cabo Verde',
       usuario: null,
       equipo: [],
-      escudo: 'images/logoCabo.png',
+      escudo: 'images/logoCaboVerde.png',
     ),
     Modeloequipo(
       nombre: 'Arabia Saudita',
