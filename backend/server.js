@@ -18,6 +18,7 @@ app.use('/assets', express.static(path.join(__dirname, '../assets')));
 const usuarioRoutes = require('./routes/usuarios');
 const jugadorRoutes = require('./routes/jugadores');
 const mercadoRoutes = require('./routes/mercado');
+const ligaRoutes = require('./routes/ligas');
 const { actualizarMercado } = require('./controllers/mercadoController');
 const { getConnection } = require('./config/database');
 
@@ -25,6 +26,7 @@ const { getConnection } = require('./config/database');
 app.use('/usuarios', usuarioRoutes);
 app.use('/jugadores', jugadorRoutes);
 app.use('/mercado', mercadoRoutes);
+app.use('/ligas', ligaRoutes);
 
 // ===== SCHEDULER PARA ACTUALIZAR MERCADO A LAS 00:00 =====
 // Se ejecuta todos los días a las 00:00
