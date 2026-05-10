@@ -336,7 +336,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Oh Hyeon-gyu', 'images/logoCorea.png', 10000000, 4000000, 'DEL'),
 --arabia saudi
 ('Mohammed Al-Owais', 'images/logoArabia.png', 3000000, 500000, 'POR'),
-('Yassine Bono', 'images/logoArabia.png', 10000000, 4000000, 'POR'),
+('Nawaf Al-Aqeedi', 'images/logoArabia.png', 9000000, 4000000, 'POR'),
 ('Ali Al-Bulayhi', 'images/logoArabia.png', 4000000, 1000000, 'DEF'),
 ('Saud Abdulhamid', 'images/logoArabia.png', 15000000, 8000000, 'DEF'),
 ('Hassan Tambakti', 'images/logoArabia.png', 10000000, 4000000, 'DEF'),

@@ -8,3 +8,15 @@ CREATE TABLE IF NOT EXISTS mercado_diario (
   FOREIGN KEY (id_liga) REFERENCES ligas(id_liga) ON DELETE CASCADE,
   INDEX idx_liga (id_liga)
 );
+
+CREATE TABLE IF NOT EXISTS ligas (
+id_liga INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(200) NOT NULL,
+cod_invitacion INT NOT NULL,
+propietario_id INT NOT NULL,
+tipo VARCHAR(200),
+cap_participantes INT NOT NULL,
+fase VARCHAR(200)
+
+
+);

@@ -385,7 +385,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                   Positioned(
                     top: 0,
                     right: 0,
-                    child: Image.asset(
+                    child: Image.network(
                       widget.usuario.alineacion
                           .elementAt(widget.posicion)!
                           .pais,
