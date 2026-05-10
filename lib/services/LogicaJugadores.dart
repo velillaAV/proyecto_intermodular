@@ -5,7 +5,7 @@ import 'package:proyecto_intermodular/models/ModeloEstadisticas.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 
 class Logicajugadores {
-  final String baseUrl = 'http://localhost:3000'; // Cambia según tu IP en móvil
+  final String baseUrl = 'http://192.168.56.1:3000'; // Cambia según tu IP en móvil
 
   Future<List<Modelojugador>> getJugadoresByPosicion(String posicion) async {
     final response = await http.get(
