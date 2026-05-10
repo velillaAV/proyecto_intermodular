@@ -8,6 +8,7 @@ class Liga {
   User propietario;
   String nombreLiga;
   String fase = "Fase de Grupos: Jornada 1";
+  bool hayClausulazos = false;
   List<User> participantes = [];
   final int capDeParticipantes;
   List<Modelojugador> mercado = [
@@ -115,6 +116,7 @@ class Liga {
     required this.propietario,
     required this.nombreLiga,
     required this.capDeParticipantes,
+    required this.hayClausulazos
   });
 
   void insertarPropietario() {

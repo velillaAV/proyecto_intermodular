@@ -172,7 +172,6 @@ Respuesta:
       "pais": "España",
       "valor_clausula": 10000000,
       "valor_venta": 5000000,
-      "foto": "/assets/images/jugadores/1.png"
     }
   ]
 }

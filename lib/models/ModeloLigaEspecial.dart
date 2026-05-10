@@ -297,6 +297,6 @@ class Modeloligaespecial extends Liga {
     required super.id_liga,
     required super.cod_invitacion,
     required super.propietario,
-    required super.nombreLiga, required super.capDeParticipantes,
+    required super.nombreLiga, required super.capDeParticipantes, required super.hayClausulazos,
   });
 }

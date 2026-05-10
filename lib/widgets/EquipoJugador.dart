@@ -25,11 +25,7 @@ class _EquipoJugadorState extends State<EquipoJugador> {
 
   @override
   Widget build(BuildContext context) {
-    void estf() {
-      setState(() {
-        
-      });
-    }
+    widget.usuario.ordenarEquipo();
     return Scaffold(
       drawer: MyDrawer(),
       appBar: PreferredSize(

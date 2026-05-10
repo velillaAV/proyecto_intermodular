@@ -42,12 +42,12 @@ class Logicaligas {
     return buscarLigaPorNombre(nombre) != null;
   }
 
-  static Liga crearLigaNormal(String nombre, User propietario, int numParticipantes) {
+  static Liga crearLigaNormal(String nombre, User propietario, int numParticipantes, bool clausulas) {
     final nuevaLiga = Liga(
       id_liga: _listaLigas.length + 1,
       cod_invitacion: _listaLigas.length + 100,
       propietario: propietario,
-      nombreLiga: nombre.trim(), capDeParticipantes: numParticipantes,
+      nombreLiga: nombre.trim(), capDeParticipantes: numParticipantes, hayClausulazos: clausulas,
     );
     nuevaLiga.insertarPropietario();
     _listaLigas.add(nuevaLiga);
@@ -60,7 +60,7 @@ class Logicaligas {
       id_liga: _listaLigas.length + 1,
       cod_invitacion: _listaLigas.length + 100,
       propietario: propietario,
-      nombreLiga: nombre.trim(), capDeParticipantes: numParticipantes,
+      nombreLiga: nombre.trim(), capDeParticipantes: numParticipantes, hayClausulazos: false,
     );
     nuevaLiga.insertarPropietario();
     _listaLigas.add(nuevaLiga);

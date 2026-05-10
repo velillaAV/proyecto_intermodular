@@ -399,6 +399,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
               },
               itemBuilder: (context) => [
                 PopupMenuItem(value: 'ofertar', child: Text('Ofertar')),
+                if(widget.liga.hayClausulazos == true) 
                 PopupMenuItem(value: 'clausulazo', child: Text('Clausular')),
               ],
               child: Container(
@@ -430,6 +431,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                   value: 'revisarOfertas',
                   child: Text('Revisar Ofertas'),
                 ),
+                if(widget.liga.hayClausulazos == true) 
                 PopupMenuItem(
                   value: 'aumentarClausula',
                   child: Text('Aumentar Clausula'),
