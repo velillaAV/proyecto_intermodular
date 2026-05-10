@@ -12,7 +12,7 @@ class Logicapredicciones {
     Modelopredicciones(
       id_prediccion: 2,
       equipoLocal: "images/logoCorea.png",
-      equipoVisitante: "images/Chequia.png",
+      equipoVisitante: "images/logoChequia.png",
       fase: "Fase de Grupos: Jornada 1",
     ),
     Modelopredicciones(
@@ -24,7 +24,7 @@ class Logicapredicciones {
     Modelopredicciones(
       id_prediccion: 4,
       equipoLocal: "images/logoSudafrica.png",
-      equipoVisitante: "images/Chequia.png",
+      equipoVisitante: "images/logoChequia.png",
       fase: "Fase de Grupos: Jornada 2",
     ),
   ];

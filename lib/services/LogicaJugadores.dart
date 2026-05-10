@@ -62,8 +62,7 @@ class Logicajugadores {
       print(response.statusCode);
       throw Exception('Error: ${response.statusCode}');
     }
-    print(response.body);
-    print(response.statusCode);
+    
     final data = json.decode(response.body);
 
     return (data as List)

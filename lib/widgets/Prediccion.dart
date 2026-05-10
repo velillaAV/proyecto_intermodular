@@ -37,28 +37,28 @@ class _PrediccionState extends State<Prediccion> {
   void _enviarPrediccion() {
     
     widget.prediccion.comprobacion(marcadorA, marcadorB);
-    if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarLocal == true) {
-      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == true) {
+    if(widget.prediccion.verificarLocal == true) {
+      if(widget.prediccion.verificarVisitante == true) {
         colorLocal = Colors.green;
         colorVisitante = Colors.green;
         widget.usuario.puntuar(3);
         
       }
-      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == false) {
+      if(widget.prediccion.verificarVisitante == false) {
         colorLocal = Colors.green;
         colorVisitante = Colors.red;
         widget.usuario.puntuar(1);
         
       }
     }    
-    if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarLocal == false) {
-      if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == false) {
+    if(widget.prediccion.verificarLocal == false) {
+      if(widget.prediccion.verificarVisitante == false) {
         colorLocal = Colors.red;
         colorVisitante = Colors.red;
        
         
       } 
-       if(Logicapredicciones.listaPredicciones.elementAt(widget.posicion).verificarVisitante == true) {
+       if(widget.prediccion.verificarVisitante == true) {
         colorLocal = Colors.red;
         colorVisitante = Colors.green;
         widget.usuario.puntuar(1);
@@ -66,7 +66,7 @@ class _PrediccionState extends State<Prediccion> {
       }
     } 
    
-    widget.usuario.predicciones.insert(widget.posicion, widget.prediccion);
+    widget.usuario.predicciones.add(widget.prediccion);
     widget.actualizar();
   }
    
