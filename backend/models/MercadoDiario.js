@@ -74,11 +74,13 @@ class MercadoDiario {
     const connection = await getConnection();
     try {
       const market = await this.getByLiga(id_liga);
-      if (!market || !market.jugadores_json) return [];
+      if (!market || !market.jugadores_json || market.jugadores_json.length === 0) return [];
 
-      const ids = market.jugadores_json.join(',');
+      const ids = market.jugadores_json;
+      const placeholders = ids.map(() => '?').join(',');
       const [rows] = await connection.execute(
-        `SELECT * FROM jugadores WHERE id_jugador IN (${ids})`
+        `SELECT * FROM jugadores WHERE id_jugador IN (${placeholders})`,
+        ids,
       );
       return rows;
     } finally {

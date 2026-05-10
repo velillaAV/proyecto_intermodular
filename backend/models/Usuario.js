@@ -106,6 +106,38 @@ class Usuario {
       connection.release();
     }
   }
+
+  static async create(usuario) {
+    const connection = await getConnection();
+    try {
+      const [result] = await connection.execute(
+        'INSERT INTO usuarios (nombre, contrasena, genero, edad, lugarNacimiento, fotoRuta, isAdmin, isBlocked) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          usuario.nombre,
+          usuario.contrasena,
+          usuario.genero || null,
+          usuario.edad || null,
+          usuario.lugarNacimiento || null,
+          usuario.fotoRuta || null,
+          usuario.isAdmin || false,
+          usuario.isBlocked || false,
+        ]
+      );
+      return new Usuario(
+        result.insertId,
+        usuario.nombre,
+        usuario.contrasena,
+        usuario.genero || null,
+        usuario.edad || null,
+        usuario.lugarNacimiento || null,
+        usuario.fotoRuta || null,
+        usuario.isAdmin || false,
+        usuario.isBlocked || false
+      );
+    } finally {
+      connection.release();
+    }
+  }
 }
 
 module.exports = Usuario;

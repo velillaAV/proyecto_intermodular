@@ -9,8 +9,6 @@ class User {
   String lugarNacimiento;
   String? fotoRuta;
   List<Modelousuario> usuario_ligas = [];
-  
-
 
   bool isAdmin;
   bool isBlocked = false;
@@ -22,8 +20,33 @@ class User {
     required this.edad,
     required this.lugarNacimiento,
     required this.fotoRuta,
-    required this.isAdmin
+    required this.isAdmin,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nombre': nombre,
+      'contrasena': contrasena,
+      'genero': genero,
+      'edad': edad,
+      'lugarNacimiento': lugarNacimiento,
+      'fotoRuta': fotoRuta,
+      'isAdmin': isAdmin,
+      'isBlocked': isBlocked,
+    };
+  }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      nombre: json['nombre'] ?? '',
+      contrasena: json['contrasena'] ?? '',
+      genero: json['genero'] ?? '',
+      edad: json['edad'] ?? 0,
+      lugarNacimiento: json['lugarNacimiento'] ?? '',
+      fotoRuta: json['fotoRuta'],
+      isAdmin: json['isAdmin'] ?? false,
+    )..isBlocked = json['isBlocked'] ?? false;
+  }
 
   String getNombre() {
     return nombre;

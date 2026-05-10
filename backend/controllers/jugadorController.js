@@ -161,6 +161,60 @@ const generarEquipo = async (req, res) => {
   }
 };
 
+const generarPartidosAleatorios = async (req, res) => {
+  try {
+    const jugadores = await Jugador.getAll();
+    const paisesUnicos = [];
+    for (const j of jugadores) {
+      if (!paisesUnicos.includes(j.pais)) {
+        paisesUnicos.push(j.pais);
+      }
+    }
+
+    const nombresPaises = paisesUnicos.map(pais => {
+      const clean = pais
+        .replace(/images\//i, '')
+        .replace(/logo/i, '')
+        .replace(/\.png$/i, '')
+        .replace(/([A-Z])/g, ' $1')
+        .trim();
+      return clean.length === 0 ? pais : clean;
+    });
+
+    if (nombresPaises.length < 2) {
+      return res.status(200).json({ partidos: [] });
+    }
+
+    const indexes = nombresPaises.map((_, index) => index);
+    for (let i = indexes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+    }
+
+    const maxPartidos = Math.min(4, Math.floor(nombresPaises.length / 2));
+    const partidos = [];
+
+    for (let i = 0; i < maxPartidos; i++) {
+      const localIndex = indexes[i * 2];
+      const visitanteIndex = indexes[i * 2 + 1];
+      const golesLocal = Math.floor(Math.random() * 5);
+      const golesVisitante = Math.floor(Math.random() * 5);
+      partidos.push({
+        equipoLocal: nombresPaises[localIndex],
+        equipoVisitante: nombresPaises[visitanteIndex],
+        golesLocal,
+        golesVisitante,
+        fase: 'Partido amistoso',
+      });
+    }
+
+    res.status(200).json({ partidos });
+  } catch (error) {
+    console.error('Error al generar partidos aleatorios:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 module.exports = {
   getJugadores,
   getJugadoresByPosicion,
@@ -168,5 +222,6 @@ module.exports = {
   sumarPuntos,
   obtenerPuntosJugador,
   createJugador,
-  generarEquipo
+  generarEquipo,
+  generarPartidosAleatorios
 };
