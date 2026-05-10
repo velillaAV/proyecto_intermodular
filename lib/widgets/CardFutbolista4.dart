@@ -33,7 +33,7 @@ class _CardFutbolista4State extends State<CardFutbolista4> {
           Positioned(
             top: 0,
             right: 0,
-            child: Image.asset(widget.jugador.pais, width: 30),
+            child: Image.network(widget.jugador.pais, width: 30),
           ),
 
   

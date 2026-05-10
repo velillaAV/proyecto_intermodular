@@ -18,18 +18,6 @@ INSERT INTO usuarios (nombre, contrasena, genero, edad, lugarNacimiento, fotoRut
 ('Edgar', 'Edgar', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
 ('admin', 'admin', 'Masculino', 30, 'Desconocido', '', TRUE, FALSE);
 
--- Crear tabla de ligas
-CREATE TABLE IF NOT EXISTS ligas (
-  id_liga INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(255) NOT NULL UNIQUE,
-  cod_invitacion INT NOT NULL UNIQUE,
-  propietario_id INT,
-  tipo VARCHAR(50) NOT NULL DEFAULT 'normal',
-  cap_de_participantes INT NOT NULL,
-  fase VARCHAR(255) DEFAULT 'Fase de Grupos: Jornada 1',
-  FOREIGN KEY (propietario_id) REFERENCES usuarios(id) ON DELETE SET NULL
-);
-
 -- Crear tabla de jugadores
 CREATE TABLE IF NOT EXISTS jugadores (
   id_jugador INT AUTO_INCREMENT PRIMARY KEY,
@@ -348,7 +336,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Oh Hyeon-gyu', 'images/logoCorea.png', 10000000, 4000000, 'DEL'),
 --arabia saudi
 ('Mohammed Al-Owais', 'images/logoArabia.png', 3000000, 500000, 'POR'),
-('Nawaf Al-Aqeedi', 'images/logoArabia.png', 9000000, 4000000, 'POR'),
+('Yassine Bono', 'images/logoArabia.png', 10000000, 4000000, 'POR'),
 ('Ali Al-Bulayhi', 'images/logoArabia.png', 4000000, 1000000, 'DEF'),
 ('Saud Abdulhamid', 'images/logoArabia.png', 15000000, 8000000, 'DEF'),
 ('Hassan Tambakti', 'images/logoArabia.png', 10000000, 4000000, 'DEF'),

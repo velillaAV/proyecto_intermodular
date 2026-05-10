@@ -29,5 +29,25 @@ class Modelousuario {
     saldo + suma;
   }
 
+  int orden(String posicion) {
+  switch (posicion) {
+    case 'POR':
+      return 0;
+    case 'DEF':
+      return 1;
+    case 'CEN':
+      return 2;
+    case 'DEL':
+      return 3;
+    default:
+      return 99;
+  }
+}
+
+
+  void ordenarEquipo() {
+    equipo.equipo.sort((a, b) => orden(a.posicion).compareTo(orden(b.posicion)));
+  }
+
 }
 

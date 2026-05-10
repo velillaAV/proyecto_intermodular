@@ -5,6 +5,7 @@ const schedule = require('node-schedule');
 require('dotenv').config();
 
 const app = express();
+app.use('/assets', express.static('assets'));
 const PORT = process.env.PORT || 3000;
 
 // Middleware

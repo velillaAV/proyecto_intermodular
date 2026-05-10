@@ -122,12 +122,7 @@ class _CardOfertasState extends State<CardOfertas> {
                 setState(() {
                    widget.usuario.sumarSaldo(
                   widget.jugador.oferta[widget.posicion].cantidad,
-                );
-                widget.ofertador.equipo.equipo
-                    .add(widget.jugador);
-                widget.ofertador.equipo.suplentes
-                    .add(widget.jugador);   
-                     
+                ); 
                 widget.usuario.equipo.equipo.remove(widget.jugador);
                 if (widget.usuario.alineacion.contains(widget.jugador)) {
                   int pos = widget.usuario.alineacion.indexOf(widget.jugador);
@@ -137,14 +132,21 @@ class _CardOfertasState extends State<CardOfertas> {
                 if (widget.usuario.equipo.suplentes.contains(widget.jugador)) {
                   widget.usuario.equipo.suplentes.remove(widget.jugador);
                 }
+                widget.ofertador.equipo.equipo
+                    .add(widget.jugador);
+                widget.ofertador.equipo.suplentes
+                    .add(widget.jugador);   
+                     
+               
                 widget.actualizar();
+                Navigator.of(context).pop();
                 });
+                
                
               } else if (value == 'denegar') {
                 widget.jugador.oferta[widget.posicion].usuario.sumarSaldo(
-                widget.jugador.oferta[widget.posicion].cantidad,
-                  
-                );
+                widget.jugador.oferta[widget.posicion].cantidad);
+                Navigator.of(context).pop();
                 widget.actualizar();
               }
             },

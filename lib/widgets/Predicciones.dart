@@ -5,7 +5,12 @@ import 'package:proyecto_intermodular/services/LogicaPredicciones.dart';
 import 'package:proyecto_intermodular/widgets/Prediccion.dart';
 
 class Predicciones extends StatefulWidget {
-  const Predicciones({super.key, required this.liga, required this.usuario, required this.actualizar});
+  const Predicciones({
+    super.key,
+    required this.liga,
+    required this.usuario,
+    required this.actualizar,
+  });
   final Liga liga;
   final Modelousuario usuario;
   final void Function() actualizar;
@@ -16,6 +21,10 @@ class Predicciones extends StatefulWidget {
 class _PrediccionesState extends State<Predicciones> {
   @override
   Widget build(BuildContext context) {
+    final predicciones = Logicapredicciones().prediccionesSegunRondaYUsuario(
+      widget.liga.fase,
+      widget.usuario,
+    );
     return Stack(
       children: [
         Positioned.fill(
@@ -72,22 +81,15 @@ class _PrediccionesState extends State<Predicciones> {
 
             Expanded(
               child: ListView.builder(
-                itemCount: Logicapredicciones()
-                    .prediccionesSegunRondaYUsuario(widget.liga.fase, widget.usuario)
-                    .length,
+                itemCount: predicciones.length,
                 itemBuilder: (context, index) {
-                  int i = index;
                   return Prediccion(
-                    prediccion: Logicapredicciones()
-                        .prediccionesSegunRondaYUsuario(widget.liga.fase, widget.usuario)
-                        .elementAt(index),
+                    prediccion: predicciones.elementAt(index),
                     usuario: widget.usuario,
                     actualizar: () {
-                      setState(() {
-                      
-                      });
+                      setState(() {});
                     },
-                    posicion: i,
+                    posicion: index,
                   );
                 },
               ),

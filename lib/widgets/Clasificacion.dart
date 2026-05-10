@@ -14,7 +14,9 @@ class Clasificacion extends StatefulWidget {
 
 class _ClasificacionState extends State<Clasificacion> {
   @override
+  
   Widget build(BuildContext context) {
+    widget.liga.actualizarClasificacion();
     return Stack(
         children: [
           Positioned.fill(
