@@ -43,37 +43,4 @@ class ApiService {
       return [];
     }
   }
-
-  // LIGAS
-  static Future<Map<String, dynamic>?> createLiga(Map<String, dynamic> ligaData) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/ligas'),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(ligaData),
-    );
-
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
-    } else {
-      return null;
-    }
-  }
-
-  static Future<List<dynamic>> getLigas() async {
-    final response = await http.get(Uri.parse('$baseUrl/ligas'));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return [];
-    }
-  }
-
-  static Future<Map<String, dynamic>?> generarPartidosAleatorios() async {
-    final response = await http.get(Uri.parse('$baseUrl/jugadores/partidos-aleatorios'));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return null;
-    }
-  }
 }

@@ -9,7 +9,6 @@ import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/UserControllers.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
-import 'package:proyecto_intermodular/services/api_service.dart';
 
 class PantallaRegistrar extends StatefulWidget {
   const PantallaRegistrar({super.key});
@@ -106,7 +105,7 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
 
   // ── Lógica ────────────────────────────────────────────────────────────────
 
-  Future<void> _aceptar() async {
+  void _aceptar() {
     if (_nombre.isEmpty) {
       return _snack("El campo (nombre) está vacio");
     }
@@ -127,20 +126,6 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
     }
     if (Logicausuario.mismoNombre(_nombre)) {
       return _snack("El usuario ya existe");
-    }
-
-    final created = await ApiService.registerUser({
-      'nombre': _nombre,
-      'contrasena': _contrasena,
-      'genero': _tratamiento,
-      'edad': _edad,
-      'lugarNacimiento': _lugarNacimiento,
-      'fotoRuta': _fotoRuta,
-      'isAdmin': false,
-    });
-
-    if (!created) {
-      return _snack("No se pudo registrar el usuario. Intenta de nuevo.");
     }
 
     UserControllers.creacionYInsercionDeUsuario(

@@ -6,9 +6,6 @@ import 'package:proyecto_intermodular/screens/PantallaGestion.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
 import 'package:proyecto_intermodular/screens/PantallaRegistrar.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
-import 'package:proyecto_intermodular/services/api_service.dart';
-import 'package:proyecto_intermodular/services/SessionService.dart';
-import 'package:proyecto_intermodular/models/user.dart';
 
 class Pantallainiciosesion extends StatefulWidget {
   const Pantallainiciosesion({super.key});
@@ -18,21 +15,19 @@ class Pantallainiciosesion extends StatefulWidget {
 }
 
 class _PantallainiciosesionState extends State<Pantallainiciosesion> {
-  Future<void> _inicioSesion() async {
+  void _inicioSesion() {
     if (_nombre.isEmpty) {
+      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreVacio));
       final snackBarNombre = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreVacio)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarNombre);
-      return;
-    }
-
-    if (_contrasena.isEmpty) {
+    } else if (_contrasena.isEmpty) {
+      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasenaVacio));
       final snackBarContrasena = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasenaVacio)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarContrasena);
-<<<<<<< Updated upstream
     } else if (Logicausuario.getListaUsuarios().isEmpty) {
       print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noExistenUsuarios));
       final snackBarNoHayUsuarios = SnackBar(
@@ -73,37 +68,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
          (route) => false,
       );
       
-=======
-      return;
->>>>>>> Stashed changes
     }
-
-    final result = await ApiService.login(_nombre, _contrasena);
-    if (result == null) {
-      final snackBarError = SnackBar(
-        content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarError);
-      return;
-    }
-
-    final user = User(
-      nombre: result['nombre'] ?? _nombre,
-      contrasena: _contrasena,
-      genero: result['genero'] ?? '',
-      edad: result['edad'] ?? 0,
-      lugarNacimiento: result['lugarNacimiento'] ?? '',
-      fotoRuta: result['fotoRuta'],
-      isAdmin: result['isAdmin'] ?? false,
-    );
-
-    await SessionService.saveUser(user);
-
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
-      (route) => false,
-    );
   }
 
   void _registrar() {
