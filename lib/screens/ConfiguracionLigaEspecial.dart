@@ -16,37 +16,42 @@ class ConfiguracionLigaEspecial extends StatefulWidget {
   const ConfiguracionLigaEspecial({super.key});
 
   @override
-  State<ConfiguracionLigaEspecial> createState() => _ConfiguracionLigaEspecialState();
+  State<ConfiguracionLigaEspecial> createState() =>
+      _ConfiguracionLigaEspecialState();
 }
 
 class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
   String nombreLiga = "";
   int numParticipantes = 0;
-  
+
   Future<void> _loadSelecciones(Modeloligaespecial liga) async {
     try {
-
       for (var equipo2 in liga.listaSelecciones) {
-        List<Modelojugador> lista = await Logicajugadores()
-            .rellenarSelecciones(equipo2.escudo!);
-       for(var jugador in lista) {
-        if(jugador.posicion != "PORL" && jugador.posicion != "DEFL" && jugador.posicion != "CENL" && jugador.posicion != "DELL") {
-          equipo2.equipo.add(jugador);
-        
+        List<Modelojugador> lista = await Logicajugadores().rellenarSelecciones(
+          equipo2.escudo!,
+        );
+        for (var jugador in lista) {
+          if (jugador.posicion != "PORL" &&
+              jugador.posicion != "DEFL" &&
+              jugador.posicion != "CENL" &&
+              jugador.posicion != "DELL") {
+            final puntos = await Logicajugadores().obtenerPuntosJugador(
+              jugador.id_jugador,
+            );
+            jugador.puntuar(puntos);
+            equipo2.equipo.add(jugador);
+          }
         }
-       }
-           
       }
-      
     } catch (e) {
       // Handle error
-      
     }
   }
+
   void _mostrarMensaje(String mensaje) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensaje)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensaje)));
   }
 
   void _enviarLiga() {
@@ -58,17 +63,22 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
 
     if (Logicaligas.existeLigaNombre(nombre)) {
       _mostrarMensaje(
-          'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.');
+        'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.',
+      );
       return;
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    _loadSelecciones(Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes));
+    _loadSelecciones(
+      Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes),
+    );
 
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SeleccionPais(liga: Logicaligas.buscarLigaPorNombre(nombre) as Modeloligaespecial),
+        builder: (context) => SeleccionPais(
+          liga: Logicaligas.buscarLigaPorNombre(nombre) as Modeloligaespecial,
+        ),
       ),
     );
   }
@@ -83,7 +93,6 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
       ),
       body: Stack(
         children: [
-          
           Positioned.fill(
             child: Image.asset(
               'images/FondoMundial2026.jpg',
@@ -91,12 +100,9 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
             ),
           ),
           Positioned.fill(
-            child: Container(
-              color: Colors.white.withOpacity(0.85),
-            ),
+            child: Container(color: Colors.white.withOpacity(0.85)),
           ),
 
-       
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -146,9 +152,7 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
                     // 🔹 Participantes
                     TextField(
                       keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                         labelText: 'Número de participantes',
                         filled: true,
@@ -164,10 +168,6 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
 
                     const SizedBox(height: 15),
 
-                    
-                  
-
-                   
                     ElevatedButton(
                       style: CustomStyles.estiloBotonInicioSesion,
                       onPressed: _enviarLiga,

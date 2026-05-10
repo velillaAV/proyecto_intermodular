@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS jugadores (
   pais VARCHAR(255),
   valor_clausula BIGINT,
   valor_venta BIGINT,
-  posicion VARCHAR(10) NOT NULL
+  posicion VARCHAR(10) NOT NULL,
+  puntos INT DEFAULT 0
 );
 
 -- Insertar datos de jugadores
@@ -816,3 +817,6 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Pele', 'images/logoBrasil.png', 120000000, 92000000, 'DELL'),
 ('Jairzinho', 'images/logoBrasil.png', 143000000, 95000000, 'DELL'),
 ('Hristo Stoichkov', 'images/logoBulgaria.png', 83000000, 55000000, 'DELL');
+
+
+

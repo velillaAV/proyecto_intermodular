@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/translations/languagesInicioSesion.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/GoogleControllers.dart';
+import 'package:proyecto_intermodular/screens/PantallaGestion.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
 import 'package:proyecto_intermodular/screens/PantallaRegistrar.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
@@ -55,7 +56,11 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
       ScaffoldMessenger.of(context).showSnackBar(snackBarValidador3);
     } else if (Logicausuario.confirmarAdmins(_nombre, _contrasena) == true ||
         Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
-      // Lógica para admins (actualmente vacía en tu código original)
+       Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => PantallaGestion()),
+         (route) => false,
+      );
     } else {
       Navigator.pushAndRemoveUntil(
         context,

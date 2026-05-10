@@ -48,7 +48,7 @@ class Jugador {
   }
 
   static async getByPais(pais) {
-    console.log("el pais ha llegado ", pais)
+    console.log("Ha llegado el pais ", pais)
     const connection = await getConnection();
     try {
       const [rows] = await connection.execute(
@@ -68,6 +68,19 @@ class Jugador {
     }
   }
 
+   static async getPuntos(id_jugador) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT puntos FROM jugadores WHERE id_jugador = ?',
+        [id_jugador]
+      );
+      return parseInt(rows[0].puntos);
+    } finally {
+      connection.release();
+    }
+  }
+
   static async create(jugador) {
     const connection = await getConnection();
     try {
@@ -76,6 +89,20 @@ class Jugador {
         [jugador.nombre, jugador.pais, jugador.valor_clausula, jugador.valor_venta, jugador.posicion]
       );
       return new Jugador(result.insertId, ...Object.values(jugador));
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async actualizarPuntos(puntos, id_jugador) {
+    const connection = await getConnection();
+    try {
+
+
+      const [result] = await connection.execute(
+        'UPDATE jugadores SET puntos = ? WHERE id_jugador = ?',
+        [puntos, id_jugador]
+      );
     } finally {
       connection.release();
     }

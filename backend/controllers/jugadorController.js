@@ -52,6 +52,56 @@ const createJugador = async (req, res) => {
   }
 };
 
+const sumarPuntos = async (req, res) => {
+  try {
+    const {
+    id_jugador,
+    goles,
+    asistencias,
+    minutos,
+    tarjetas_amarillas,
+    tarjetas_rojas
+  } = req.body;
+   let puntos =
+      goles * 5 +
+      asistencias * 3 -
+      tarjetas_amarillas -
+      (tarjetas_rojas * 3);
+      if (minutos >= 60) {
+        puntos += 2;
+      } else {
+        puntos += 1;
+      }
+    await Jugador.actualizarPuntos(puntos, id_jugador);
+    res.status(200).json({message: "Se ha actualizado perfectamente"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const obtenerPuntosJugador = async (req, res) => {
+  try {
+   
+
+   const { id_jugador } = req.params;
+    const puntos = await Jugador.getPuntos(id_jugador);
+     res.json({
+      "puntos": puntos
+    });
+
+  } catch (error) {
+    console.error('Error al obtener jugadores:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+
+    
+
+   
+  
+
+};
+
 // Generar equipo aleatorio
 const generarEquipo = async (req, res) => {
   console.log("Intentando generar equipo")
@@ -115,6 +165,8 @@ module.exports = {
   getJugadores,
   getJugadoresByPosicion,
   getJugadoresByPais,
+  sumarPuntos,
+  obtenerPuntosJugador,
   createJugador,
   generarEquipo
 };
