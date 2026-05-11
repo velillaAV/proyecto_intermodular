@@ -1,0 +1,16 @@
+# Archivo de configuración para Railway
+# Este archivo indica a Railway que use Node.js
+# y especifica el comando de inicio
+
+# Railway detectará automáticamente que es un proyecto Node.js
+# por el presence del package.json
+
+# Comando de inicio: npm start (definido en package.json)
+# Puerto: process.env.PORT (proporcionado por Railway)
+
+# Variables de entorno a configurar en Railway:
+# - DB_HOST
+# - DB_USER
+# - DB_PASSWORD
+# - DB_NAME
+# - DB_PORT

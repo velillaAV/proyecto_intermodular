@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:proyecto_intermodular/models/ModeloEstadisticas.dart';
-
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/config/api_config.dart';
 
 class Logicajugadores {
-  final String baseUrl = 'http://localhost:3000'; // Cambia según tu IP en móvil
+  // Ahora usa la configuración centralizada
+  final String baseUrl = Config.baseUrl;
 
   Future<List<Modelojugador>> getJugadoresByPosicion(String posicion) async {
     final response = await http.get(

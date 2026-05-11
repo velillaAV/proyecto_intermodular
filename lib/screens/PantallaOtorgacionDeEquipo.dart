@@ -62,6 +62,18 @@ class _PantallaOtorgacionDeEquipoState
       );
     }
 
+    if (equipoOtorgado.isEmpty) {
+      return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(Dimensiones.paddingAppbar),
+          child: Appbar(),
+        ),
+        body: Center(
+          child: Text('Error: No se pudo generar el equipo. Intenta de nuevo.'),
+        ),
+      );
+    }
+
     double valorEquipo = 0;
     for (int i = 0; i < equipoOtorgado.length; i++) {
       valorEquipo += equipoOtorgado[i].valor_venta;
@@ -136,7 +148,7 @@ class _PantallaOtorgacionDeEquipoState
             Expanded(
               child: GridView.builder(
                 padding: EdgeInsets.symmetric(horizontal: 12),
-                itemCount: 14, // los jugadores otorgados
+                itemCount: equipoOtorgado.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4, 
                   crossAxisSpacing: 10,

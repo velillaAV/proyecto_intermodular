@@ -106,10 +106,34 @@ const obtenerPuntosJugador = async (req, res) => {
 const generarEquipo = async (req, res) => {
   console.log("Intentando generar equipo")
   try {
+    console.log("Obteniendo porteros...")
     const porteros = await Jugador.getByPosicion('POR');
+    console.log("Porteros encontrados:", porteros.length)
+    
+    console.log("Obteniendo defensas...")
     const defensas = await Jugador.getByPosicion('DEF');
+    console.log("Defensas encontrados:", defensas.length)
+    
+    console.log("Obteniendo centrocampistas...")
     const centrocampistas = await Jugador.getByPosicion('CEN');
+    console.log("Centrocampistas encontrados:", centrocampistas.length)
+    
+    console.log("Obteniendo atacantes...")
     const atacantes = await Jugador.getByPosicion('DEL');
+    console.log("Atacantes encontrados:", atacantes.length)
+
+    if (porteros.length === 0 || defensas.length === 0 || centrocampistas.length === 0 || atacantes.length === 0) {
+      console.log("Error: No hay suficientes jugadores en la base de datos");
+      return res.status(400).json({ 
+        error: 'No hay suficientes jugadores en la base de datos. Verifica que se ejecutó init_db.js correctamente.',
+        debug: {
+          porteros: porteros.length,
+          defensas: defensas.length,
+          centrocampistas: centrocampistas.length,
+          atacantes: atacantes.length
+        }
+      });
+    }
 
     const equipo = [];
 
@@ -149,7 +173,7 @@ const generarEquipo = async (req, res) => {
         atacantesSeleccionados.push(atacante);
       }
     }
-    console.log("Equipo creado")
+    console.log("Equipo creado con " + equipo.length + " jugadores")
     equipo.push(...atacantesSeleccionados);
     console.log(equipo);
 
@@ -157,7 +181,7 @@ const generarEquipo = async (req, res) => {
     
   } catch (error) {
     console.error('Error al generar equipo:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ error: 'Error al generar equipo: ' + error.message });
   }
 };
 

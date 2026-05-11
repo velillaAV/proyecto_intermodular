@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS jugadores (
 
 -- Insertar datos de jugadores
 INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALUES
---españa
+-- españa
 ('Unai Simón', 'images/logoEspana.png', 35000000, 15000000, 'POR'),
 ('David Raya', 'images/logoEspana.png', 25000000, 8000000, 'POR'),
 ('Pau Cubarsí', 'images/logoEspana.png', 55000000, 35000000, 'DEF'),
@@ -47,7 +47,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Dani Olmo', 'images/logoEspana.png', 55000000, 32000000, 'DEL'),
 ('Samu Omorodion', 'images/logoEspana.png', 48000000, 24000000, 'DEL'),
 ('Yeremy Pino', 'images/logoEspana.png', 35000000, 16000000, 'DEL'),
---argentina
+-- argentina
 ('Emiliano Martínez', 'images/logoArgentina.png', 30000000, 12000000, 'POR'),
 ('Geronimo Rulli', 'images/logoArgentina.png', 12000000, 4000000, 'POR'),
 ('Cristian Romero', 'images/logoArgentina.png', 55000000, 30000000, 'DEF'),
@@ -63,7 +63,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Lautaro Martínez', 'images/logoArgentina.png', 70000000, 50000000, 'DEL'),
 ('Alejandro Garnacho', 'images/logoArgentina.png', 60000000, 40000000, 'DEL'),
 ('Matías Soulé', 'images/logoArgentina.png', 42000000, 22000000, 'DEL'),
---francia
+-- francia
 ('Mike Maignan', 'images/logoFrancia.png', 40000000, 20000000, 'POR'),
 ('Lucas Chevalier', 'images/logoFrancia.png', 28000000, 12000000, 'POR'),
 ('William Saliba', 'images/logoFrancia.png', 65000000, 45000000, 'DEF'),
@@ -79,7 +79,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Michael Olise', 'images/logoFrancia.png', 55000000, 35000000, 'DEL'),
 ('Bradley Barcola', 'images/logoFrancia.png', 50000000, 30000000, 'DEL'),
 ('Marcus Thuram', 'images/logoFrancia.png', 45000000, 25000000, 'DEL'),
---USA
+-- USA
 ('Matt Turner', 'images/logoUSA.png', 8000000, 2000000, 'POR'),
 ('Chris Brady', 'images/logoUSA.png', 12000000, 4000000, 'POR'),
 ('Chris Richards', 'images/logoUSA.png', 22000000, 10000000, 'DEF'),
@@ -95,7 +95,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Folarin Balogun', 'images/logoUSA.png', 35000000, 18000000, 'DEL'),
 ('Ricardo Pepi', 'images/logoUSA.png', 22000000, 10000000, 'DEL'),
 ('Timothy Weah', 'images/logoUSA.png', 24000000, 11000000, 'DEL'),
---belgica
+-- belgica
 ('Thibaut Courtois', 'images/logoBelgica.png', 25000000, 8000000, 'POR'),
 ('Maarten Vandevoordt', 'images/logoBelgica.png', 20000000, 8000000, 'POR'),
 ('Arthur Theate', 'images/logoBelgica.png', 28000000, 14000000, 'DEF'),
@@ -111,7 +111,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Charles De Ketelaere', 'images/logoBelgica.png', 42000000, 22000000, 'DEL'),
 ('Leandro Trossard', 'images/logoBelgica.png', 28000000, 12000000, 'DEL'),
 ('Mika Godts', 'images/logoBelgica.png', 60000000, 22000000, 'DEL'),
---portugal
+-- portugal
 ('Diogo Costa', 'images/logoPortugal.png', 45000000, 25000000, 'POR'),
 ('José Sá', 'images/logoPortugal.png', 12000000, 4000000, 'POR'),
 ('Rúben Dias', 'images/logoPortugal.png', 60000000, 40000000, 'DEF'),
@@ -127,7 +127,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Gonçalo Ramos', 'images/logoPortugal.png', 45000000, 25000000, 'DEL'),
 ('João Félix', 'images/logoPortugal.png', 38000000, 18000000, 'DEL'),
 ('Francisco Conceição', 'images/logoPortugal.png', 35000000, 16000000, 'DEL'),
---canada
+-- canada
 ('Dayne St. Clair', 'images/logoCanada.png', 8000000, 2000000, 'POR'),
 ('Maxime Crépeau', 'images/logoCanada.png', 5000000, 1000000, 'POR'),
 ('Alphonso Davies', 'images/logoCanada.png', 65000000, 45000000, 'DEF'),
@@ -143,7 +143,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Cyle Larin', 'images/logoCanada.png', 18000000, 8000000, 'DEL'),
 ('Jacob Shaffelburg', 'images/logoCanada.png', 12000000, 5000000, 'DEL'),
 ('Tajon Buchanan', 'images/logoCanada.png', 20000000, 10000000, 'DEL'),
---mexico
+-- mexico
 ('Luis Malagón', 'images/logoMexico.png', 10000000, 4000000, 'POR'),
 ('Alex Padilla', 'images/logoMexico.png', 8000000, 3000000, 'POR'),
 ('Johan Vásquez', 'images/logoMexico.png', 18000000, 9000000, 'DEF'),
@@ -159,7 +159,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Julián Quiñones', 'images/logoMexico.png', 18000000, 9000000, 'DEL'),
 ('César Huerta', 'images/logoMexico.png', 12000000, 6000000, 'DEL'),
 ('Hirving Lozano', 'images/logoMexico.png', 20000000, 10000000, 'DEL'),
---brasil
+-- brasil
 ('Alisson Becker', 'images/logoBrasil.png', 35000000, 15000000, 'POR'),
 ('Ederson Moraes', 'images/logoBrasil.png', 35000000, 15000000, 'POR'),
 ('Éder Militão', 'images/logoBrasil.png', 60000000, 40000000, 'DEF'),
@@ -175,7 +175,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Endrick', 'images/logoBrasil.png', 70000000, 50000000, 'DEL'),
 ('Savinho', 'images/logoBrasil.png', 50000000, 30000000, 'DEL'),
 ('Estêvão Willian', 'images/logoBrasil.png', 45000000, 25000000, 'DEL'),
---colombia
+-- colombia
 ('Camilo Vargas', 'images/logoColombia.png', 5000000, 1000000, 'POR'),
 ('Kevin Mier', 'images/logoColombia.png', 8000000, 3000000, 'POR'),
 ('Daniel Muñoz', 'images/logoColombia.png', 22000000, 10000000, 'DEF'),
@@ -191,7 +191,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Jhon Durán', 'images/logoColombia.png', 35000000, 20000000, 'DEL'),
 ('Jhon Córdoba', 'images/logoColombia.png', 15000000, 6000000, 'DEL'),
 ('Yáser Asprilla', 'images/logoColombia.png', 22000000, 12000000, 'DEL'),
---uruguay
+-- uruguay
 ('Sergio Rochet', 'images/logoUruguay.png', 7000000, 2000000, 'POR'),
 ('Santiago Mele', 'images/logoUruguay.png', 5000000, 1000000, 'POR'),
 ('Ronald Araújo', 'images/logoUruguay.png', 65000000, 40000000, 'DEF'),
@@ -207,7 +207,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Facundo Pellistri', 'images/logoUruguay.png', 20000000, 10000000, 'DEL'),
 ('Luciano Rodríguez', 'images/logoUruguay.png', 18000000, 9000000, 'DEL'),
 ('Federico Viñas', 'images/logoUruguay.png', 12000000, 5000000, 'DEL'),
---Inglaterra
+-- Inglaterra
 ('Jordan Pickford', 'images/logoInglaterra.png', 25000000, 10000000, 'POR'),
 ('Aaron Ramsdale', 'images/logoInglaterra.png', 22000000, 8000000, 'POR'),
 ('John Stones', 'images/logoInglaterra.png', 35000000, 18000000, 'DEF'),
@@ -223,7 +223,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Phil Foden', 'images/logoInglaterra.png', 110000000, 90000000, 'DEL'),
 ('Ollie Watkins', 'images/logoInglaterra.png', 55000000, 35000000, 'DEL'),
 ('Anthony Gordon', 'images/logoInglaterra.png', 50000000, 30000000, 'DEL'),
---alemania
+-- alemania
 ('Marc-André ter Stegen', 'images/logoAlemania.png', 20000000, 8000000, 'POR'),
 ('Alexander Nübel', 'images/logoAlemania.png', 15000000, 6000000, 'POR'),
 ('Antonio Rüdiger', 'images/logoAlemania.png', 35000000, 18000000, 'DEF'),
@@ -239,7 +239,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Deniz Undav', 'images/logoAlemania.png', 28000000, 14000000, 'DEL'),
 ('Leroy Sané', 'images/logoAlemania.png', 55000000, 35000000, 'DEL'),
 ('Maximilian Beier', 'images/logoAlemania.png', 35000000, 20000000, 'DEL'),
---holanda
+-- holanda
 ('Bart Verbruggen', 'images/logoHolanda.png', 25000000, 12000000, 'POR'),
 ('Mark Flekken', 'images/logoHolanda.png', 12000000, 5000000, 'POR'),
 ('Virgil van Dijk', 'images/logoHolanda.png', 30000000, 12000000, 'DEF'),
@@ -255,7 +255,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Brian Brobbey', 'images/logoHolanda.png', 35000000, 18000000, 'DEL'),
 ('Donyell Malen', 'images/logoHolanda.png', 32000000, 16000000, 'DEL'),
 ('Justin Kluivert', 'images/logoHolanda.png', 20000000, 8000000, 'DEL'),
---marruecos
+-- marruecos
 ('Yassine Bounou', 'images/logoMarruecos.png', 12000000, 4000000, 'POR'),
 ('Munir Mohamedi', 'images/logoMarruecos.png', 3000000, 500000, 'POR'),
 ('Achraf Hakimi', 'images/logoMarruecos.png', 60000000, 40000000, 'DEF'),
@@ -271,7 +271,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Abde Ezzalzouli', 'images/logoMarruecos.png', 15000000, 7000000, 'DEL'),
 ('Ilias Akhomach', 'images/logoMarruecos.png', 14000000, 6000000, 'DEL'),
 ('Amine Adli', 'images/logoMarruecos.png', 28000000, 14000000, 'DEL'),
---japon
+-- japon
 ('Zion Suzuki', 'images/logoJapon.png', 10000000, 4000000, 'POR'),
 ('Keisuke Osako', 'images/logoJapon.png', 4000000, 1000000, 'POR'),
 ('Takehiro Tomiyasu', 'images/logoJapon.png', 30000000, 15000000, 'DEF'),
@@ -287,7 +287,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Kyogo Furuhashi', 'images/logoJapon.png', 15000000, 6000000, 'DEL'),
 ('Ayase Ueda', 'images/logoJapon.png', 12000000, 5000000, 'DEL'),
 ('Ritsu Doan', 'images/logoJapon.png', 20000000, 10000000, 'DEL'),
---australia
+-- australia
 ('Mathew Ryan', 'images/logoAustralia.png', 5000000, 1000000, 'POR'),
 ('Joe Gauci', 'images/logoAustralia.png', 3000000, 500000, 'POR'),
 ('Harry Souttar', 'images/logoAustralia.png', 15000000, 7000000, 'DEF'),
@@ -303,7 +303,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Kusini Yengi', 'images/logoAustralia.png', 8000000, 3000000, 'DEL'),
 ('Craig Goodwin', 'images/logoAustralia.png', 4000000, 1000000, 'DEL'),
 ('Samuel Silvera', 'images/logoAustralia.png', 5000000, 2000000, 'DEL'),
---catar 
+-- catar 
 ('Meshaal Barsham', 'images/logoCatar.png', 1200000, 500000, 'POR'),
 ('Saad Al Sheeb', 'images/logoCatar.png', 900000, 400000, 'POR'),
 ('Pedro Miguel', 'images/logoCatar.png', 1200000, 600000, 'DEF'),
@@ -319,7 +319,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Almoez Ali', 'images/logoCatar.png', 5500000, 2300000, 'DEL'),
 ('Yusuf Abdurisag', 'images/logoCatar.png', 2000000, 900000, 'DEL'),
 ('Mohammed Muntari', 'images/logoCatar.png', 1800000, 800000, 'DEL'),
---corea
+-- corea
 ('Jo Hyeon-woo', 'images/logoCorea.png', 4000000, 1000000, 'POR'),
 ('Kim Seung-gyu', 'images/logoCorea.png', 3000000, 500000, 'POR'),
 ('Kim Min-jae', 'images/logoCorea.png', 50000000, 35000000, 'DEF'),
@@ -335,7 +335,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Hwang Hee-chan', 'images/logoCorea.png', 30000000, 18000000, 'DEL'),
 ('Cho Gue-sung', 'images/logoCorea.png', 12000000, 5000000, 'DEL'),
 ('Oh Hyeon-gyu', 'images/logoCorea.png', 10000000, 4000000, 'DEL'),
---arabia saudi
+-- arabia saudi
 ('Mohammed Al-Owais', 'images/logoArabia.png', 3000000, 500000, 'POR'),
 ('Yassine Bono', 'images/logoArabia.png', 10000000, 4000000, 'POR'),
 ('Ali Al-Bulayhi', 'images/logoArabia.png', 4000000, 1000000, 'DEF'),
@@ -351,7 +351,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Firas Al-Buraikan', 'images/logoArabia.png', 15000000, 7000000, 'DEL'),
 ('Abdulrahman Ghareeb', 'images/logoArabia.png', 10000000, 4000000, 'DEL'),
 ('Saleh Al-Shehri', 'images/logoArabia.png', 5000000, 1000000, 'DEL'),
---costa de marfil
+-- costa de marfil
 ('Yahia Fofana', 'images/logoCostaMarfil.png', 12000000, 5000000, 'POR'),
 ('Charles Folly', 'images/logoCostaMarfil.png', 2000000, 500000, 'POR'),
 ('Ousmane Diomandé', 'images/logoCostaMarfil.png', 45000000, 25000000, 'DEF'),
@@ -367,7 +367,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Karim Konaté', 'images/logoCostaMarfil.png', 30000000, 18000000, 'DEL'),
 ('Oumar Diakité', 'images/logoCostaMarfil.png', 18000000, 9000000, 'DEL'),
 ('Nicolas Pépé', 'images/logoCostaMarfil.png', 12000000, 4000000, 'DEL'),
---argelia
+-- argelia
 ('Anthony Mandrea', 'images/logoArgelia.png', 5000000, 1500000, 'POR'),
 ('Alexandre Oukidja', 'images/logoArgelia.png', 2000000, 500000, 'POR'),
 ('Rayan Aït-Nouri', 'images/logoArgelia.png', 38000000, 20000000, 'DEF'),
@@ -383,7 +383,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Amine Gouiri', 'images/logoArgelia.png', 30000000, 18000000, 'DEL'),
 ('Said Benrahma', 'images/logoArgelia.png', 18000000, 8000000, 'DEL'),
 ('Mohamed Amoura', 'images/logoArgelia.png', 20000000, 10000000, 'DEL'),
---egipto
+-- egipto
 ('Mohamed El Shenawy', 'images/logoEgipto.png', 4000000, 1000000, 'POR'),
 ('Mostafa Shobeir', 'images/logoEgipto.png', 3000000, 1000000, 'POR'),
 ('Mohamed Abdelmonem', 'images/logoEgipto.png', 12000000, 5000000, 'DEF'),
@@ -399,7 +399,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Omar Marmoush', 'images/logoEgipto.png', 45000000, 28000000, 'DEL'),
 ('Mostafa Mohamed', 'images/logoEgipto.png', 20000000, 10000000, 'DEL'),
 ('Trezeguet', 'images/logoEgipto.png', 12000000, 5000000, 'DEL'),
---ecuador
+-- ecuador
 ('Hernán Galíndez', 'images/logoEcuador.png', 2000000, 500000, 'POR'),
 ('Moisés Ramírez', 'images/logoEcuador.png', 5000000, 1500000, 'POR'),
 ('Piero Hincapié', 'images/logoEcuador.png', 50000000, 35000000, 'DEF'),
@@ -415,7 +415,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Kevin Rodríguez', 'images/logoEcuador.png', 8000000, 3000000, 'DEL'),
 ('John Yeboah', 'images/logoEcuador.png', 9000000, 4000000, 'DEL'),
 ('Leonardo Campana', 'images/logoEcuador.png', 10000000, 4000000, 'DEL'),
---croacia
+-- croacia
 ('Dominik Livakovic', 'images/logoCroacia.png', 15000000, 7000000, 'POR'),
 ('Nediljko Labrovic', 'images/logoCroacia.png', 6000000, 2000000, 'POR'),
 ('Josko Gvardiol', 'images/logoCroacia.png', 85000000, 65000000, 'DEF'),
@@ -431,7 +431,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Andrej Kramaric', 'images/logoCroacia.png', 8000000, 2000000, 'DEL'),
 ('Igor Matanovic', 'images/logoCroacia.png', 12000000, 5000000, 'DEL'),
 ('Ivan Perisic', 'images/logoCroacia.png', 4000000, 1000000, 'DEL'),
---turquia
+-- turquia
 ('Mert Günok', 'images/logoTurquia.png', 4000000, 1000000, 'POR'),
 ('Altay Bayindir', 'images/logoTurquia.png', 12000000, 5000000, 'POR'),
 ('Ferdi Kadioglu', 'images/logoTurquia.png', 35000000, 20000000, 'DEF'),
@@ -447,7 +447,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Semih Kılıçsoy', 'images/logoTurquia.png', 25000000, 15000000, 'DEL'),
 ('Kerem Aktürkoğlu', 'images/logoTurquia.png', 20000000, 10000000, 'DEL'),
 ('Bertuğ Yıldırım', 'images/logoTurquia.png', 10000000, 4000000, 'DEL'),
---noruega
+-- noruega
 ('Ørjan Nyland', 'images/logoNoruega.png', 3000000, 500000, 'POR'),
 ('Egil Selvik', 'images/logoNoruega.png', 2000000, 500000, 'POR'),
 ('Julian Ryerson', 'images/logoNoruega.png', 22000000, 10000000, 'DEF'),
@@ -463,7 +463,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Alexander Sørloth', 'images/logoNoruega.png', 28000000, 14000000, 'DEL'),
 ('Jørgen Strand Larsen', 'images/logoNoruega.png', 25000000, 12000000, 'DEL'),
 ('Aron Dønnum', 'images/logoNoruega.png', 8000000, 3000000, 'DEL'),
---senegal 
+-- senegal 
 ('Edouard Mendy', 'images/logoSenegal.png', 8000000, 3000000, 'POR'),
 ('Seny Dieng', 'images/logoSenegal.png', 3000000, 1200000, 'POR'),
 ('Kalidou Koulibaly', 'images/logoSenegal.png', 9000000, 4000000, 'DEF'),
@@ -479,7 +479,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Ismaila Sarr', 'images/logoSenegal.png', 19000000, 7000000, 'DEL'),
 ('Boulaye Dia', 'images/logoSenegal.png', 7000000, 3000000, 'DEL'),
 ('Nicolas Jackson', 'images/logoSenegal.png', 8500000, 3500000, 'DEL'),
---jordania
+-- jordania
 ('Yazeed Abulaila', 'images/logoJordania.png', 4000000, 1000000, 'POR'),
 ('Abdallah Al-Fakhouri', 'images/logoJordania.png', 2000000, 500000, 'POR'),
 ('Yazan Al-Arab', 'images/logoJordania.png', 6000000, 2000000, 'DEF'),
@@ -495,7 +495,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Yazan Al-Naimat', 'images/logoJordania.png', 15000000, 7000000, 'DEL'),
 ('Ali Olwan', 'images/logoJordania.png', 8000000, 3000000, 'DEL'),
 ('Anas Al-Awadat', 'images/logoJordania.png', 5000000, 1500000, 'DEL'),
---uzbekistan
+-- uzbekistan
 ('Utkir Yusupov', 'images/logoUzbekistan.png', 3000000, 500000, 'POR'),
 ('Abduvakhid Nematov', 'images/logoUzbekistan.png', 5000000, 1500000, 'POR'),
 ('Abdukodir Khusanov', 'images/logoUzbekistan.png', 20000000, 10000000, 'DEF'),
@@ -511,7 +511,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Oston Urunov', 'images/logoUzbekistan.png', 12000000, 5000000, 'DEL'),
 ('Igor Sergeev', 'images/logoUzbekistan.png', 4000000, 1000000, 'DEL'),
 ('Bobir Abdixolikov', 'images/logoUzbekistan.png', 5000000, 1500000, 'DEL'),
---bosnia
+-- bosnia
 ('Nikola Vasijl', 'images/logoBosnia.png', 8000000, 4000000, 'POR'),
 ('Martin Zlomislic', 'images/logoBosnia.png', 8000000, 1000000, 'POR'),
 ('Sead Kolasinac', 'images/logoBosnia.png', 11000000, 6000000, 'DEF'),
@@ -527,7 +527,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Haris Tabakovic', 'images/logoBosnia.png', 8000000, 3000000, 'DEL'),
 ('Kerim Alajbegovic', 'images/logoBosnia.png', 10000000, 5000000, 'DEL'),
 ('Edin Dzeko', 'images/logoBosnia.png', 10000000, 5000000, 'DEL'),
---irak
+-- irak
 ('Jalal Hassan', 'images/logoIrak.png', 2000000, 500000, 'POR'),
 ('Fahad Talib', 'images/logoIrak.png', 1500000, 300000, 'POR'),
 ('Rebin Sulaka', 'images/logoIrak.png', 4000000, 1000000, 'DEF'),
@@ -543,7 +543,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Ali Al-Hamadi', 'images/logoIrak.png', 12000000, 5000000, 'DEL'),
 ('Youssef Amyn', 'images/logoIrak.png', 8000000, 3000000, 'DEL'),
 ('Mohanad Ali', 'images/logoIrak.png', 5000000, 1500000, 'DEL'),
---cabo verde
+-- cabo verde
 ('Vozinha', 'images/logoCaboVerde.png', 2000000, 500000, 'POR'),
 ('Bruno Varela', 'images/logoCaboVerde.png', 6000000, 2000000, 'POR'),
 ('Logan Costa', 'images/logoCaboVerde.png', 18000000, 9000000, 'DEF'),
@@ -559,7 +559,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Bebé', 'images/logoCaboVerde.png', 2000000, 500000, 'DEL'),
 ('Garry Rodrigues', 'images/logoCaboVerde.png', 6000000, 2000000, 'DEL'),
 ('Jovane Cabral', 'images/logoCaboVerde.png', 8000000, 3000000, 'DEL'),
---ghana
+-- ghana
 ('Lawrence Ati-Zigi', 'images/logoGhana.png', 6000000, 2000000, 'POR'),
 ('Jojo Wollacott', 'images/logoGhana.png', 3000000, 500000, 'POR'),
 ('Mohammed Salisu', 'images/logoGhana.png', 25000000, 12000000, 'DEF'),
@@ -575,7 +575,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Antoine Semenyo', 'images/logoGhana.png', 22000000, 10000000, 'DEL'),
 ('Jordan Ayew', 'images/logoGhana.png', 6000000, 2000000, 'DEL'),
 ('Ernest Nuamah', 'images/logoGhana.png', 25000000, 12000000, 'DEL'),
---sudafrica
+-- sudafrica
 ('Ronwen Williams', 'images/logoSudafrica.png', 5000000, 1500000, 'POR'),
 ('Ricardo Goss', 'images/logoSudafrica.png', 1500000, 300000, 'POR'),
 ('Teboho Mokoena', 'images/logoSudafrica.png', 8000000, 3000000, 'DEF'),
@@ -591,7 +591,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Lyle Foster', 'images/logoSudafrica.png', 18000000, 9000000, 'DEL'),
 ('Evidence Makgopa', 'images/logoSudafrica.png', 5000000, 2000000, 'DEL'),
 ('Oswin Appollis', 'images/logoSudafrica.png', 3000000, 1000000, 'DEL'),
---tunez
+-- tunez
 ('Aymen Dahmen', 'images/logoTunez.png', 4500000, 1200000, 'POR'),
 ('Bechir Ben Said', 'images/logoTunez.png', 1800000, 400000, 'POR'),
 ('Montassar Talbi', 'images/logoTunez.png', 9000000, 3500000, 'DEF'),
@@ -607,7 +607,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Seifeddine Jaziri', 'images/logoTunez.png', 3500000, 1200000, 'DEL'),
 ('Haythem Jouini', 'images/logoTunez.png', 2000000, 500000, 'DEL'),
 ('Elias Achouri', 'images/logoTunez.png', 6500000, 2500000, 'DEL'),
---congo
+-- congo
 ('Lionel Mpasi', 'images/logoRDCongo.png', 3000000, 500000, 'POR'),
 ('Dimitry Bertaud', 'images/logoRDCongo.png', 4000000, 1000000, 'POR'),
 ('Chancel Mbemba', 'images/logoRDCongo.png', 12000000, 5000000, 'DEF'),
@@ -623,7 +623,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Cédric Bakambu', 'images/logoRDCongo.png', 5000000, 1000000, 'DEL'),
 ('Meschack Elia', 'images/logoRDCongo.png', 10000000, 4000000, 'DEL'),
 ('Simon Banza', 'images/logoRDCongo.png', 20000000, 10000000, 'DEL'),
---curazao
+-- curazao
 ('Eloy Room', 'images/logoCurazao.png', 2000000, 500000, 'POR'),
 ('Trevor Doornbusch', 'images/logoCurazao.png', 1000000, 200000, 'POR'),
 ('Vurnon Anita', 'images/logoCurazao.png', 1500000, 300000, 'DEF'),
@@ -639,7 +639,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Kenji Gorré', 'images/logoCurazao.png', 3000000, 1000000, 'DEL'),
 ('Xander Severina', 'images/logoCurazao.png', 4000000, 1500000, 'DEL'),
 ('Jearl Margaritha', 'images/logoCurazao.png', 2000000, 500000, 'DEL'),
---haiti
+-- haiti
 ('Johny Placide', 'images/logoHaiti.png', 1000000, 200000, 'POR'),
 ('Alexandre Pierre', 'images/logoHaiti.png', 1500000, 300000, 'POR'),
 ('Ricardo Adé', 'images/logoHaiti.png', 2500000, 500000, 'DEF'),
@@ -655,7 +655,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Duckens Nazon', 'images/logoHaiti.png', 5000000, 2000000, 'DEL'),
 ('Mondy Prunier', 'images/logoHaiti.png', 2000000, 500000, 'DEL'),
 ('Louicius Don Deedson', 'images/logoHaiti.png', 3000000, 1000000, 'DEL'),
---panama
+-- panama
 ('Orlando Mosquera', 'images/logoPanama.png', 3000000, 1000000, 'POR'),
 ('César Samudio', 'images/logoPanama.png', 2000000, 500000, 'POR'),
 ('José Córdoba', 'images/logoPanama.png', 10000000, 4000000, 'DEF'),
@@ -671,7 +671,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('José Fajardo', 'images/logoPanama.png', 4000000, 1000000, 'DEL'),
 ('Eduardo Guerrero', 'images/logoPanama.png', 6000000, 2500000, 'DEL'),
 ('Kahiser Lenis', 'images/logoPanama.png', 3000000, 1000000, 'DEL'),
---nueva zalanda
+-- nueva zalanda
 ('Alex Paulsen', 'images/logoNuevaZelanda.png', 5000000, 1500000, 'POR'),
 ('Oliver Sail', 'images/logoNuevaZelanda.png', 2000000, 500000, 'POR'),
 ('Liborato Cacace', 'images/logoNuevaZelanda.png', 10000000, 4000000, 'DEF'),
@@ -687,7 +687,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Ben Waine', 'images/logoNuevaZelanda.png', 5000000, 1500000, 'DEL'),
 ('Kosta Barbarouses', 'images/logoNuevaZelanda.png', 2000000, 500000, 'DEL'),
 ('Alex Greive', 'images/logoNuevaZelanda.png', 3000000, 1000000, 'DEL'),
---republica checa
+-- republica checa
 ('Matej Kovar', 'images/logoChequia.png', 15000000, 7000000, 'POR'),
 ('Jindrich Stanek', 'images/logoChequia.png', 8000000, 3000000, 'POR'),
 ('Ladislav Krejci', 'images/logoChequia.png', 22000000, 11000000, 'DEF'),
@@ -703,7 +703,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Adam Hlozek', 'images/logoChequia.png', 25000000, 12000000, 'DEL'),
 ('Tomas Chory', 'images/logoChequia.png', 10000000, 4000000, 'DEL'),
 ('Mojmir Chytil', 'images/logoChequia.png', 12000000, 5000000, 'DEL'),
---suiza
+-- suiza
 ('Gregor Kobel', 'images/logoSuiza.png', 45000000, 25000000, 'POR'),
 ('Yvon Mvogo', 'images/logoSuiza.png', 8000000, 3000000, 'POR'),
 ('Manuel Akanji', 'images/logoSuiza.png', 50000000, 30000000, 'DEF'),
@@ -719,7 +719,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Dan Ndoye', 'images/logoSuiza.png', 30000000, 18000000, 'DEL'),
 ('Zeki Amdouni', 'images/logoSuiza.png', 22000000, 11000000, 'DEL'),
 ('Ruben Vargas', 'images/logoSuiza.png', 15000000, 7000000, 'DEL'),
---suecia
+-- suecia
 ('Robin Olsen', 'images/logoSuecia.png', 4000000, 1000000, 'POR'),
 ('Viktor Johansson', 'images/logoSuecia.png', 8000000, 3000000, 'POR'),
 ('Isak Hien', 'images/logoSuecia.png', 25000000, 12000000, 'DEF'),
@@ -735,7 +735,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Viktor Gyökeres', 'images/logoSuecia.png', 90000000, 75000000, 'DEL'),
 ('Anthony Elanga', 'images/logoSuecia.png', 35000000, 20000000, 'DEL'),
 ('Gustaf Nilsson', 'images/logoSuecia.png', 12000000, 5000000, 'DEL'),
---paraguay
+-- paraguay
 ('Carlos Coronel', 'images/logoParaguay.png', 5000000, 1500000, 'POR'),
 ('Roberto Fernández', 'images/logoParaguay.png', 3000000, 500000, 'POR'),
 ('Gustavo Gómez', 'images/logoParaguay.png', 8000000, 3000000, 'DEF'),
@@ -751,7 +751,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Miguel Almirón', 'images/logoParaguay.png', 22000000, 10000000, 'DEL'),
 ('Antonio Sanabria', 'images/logoParaguay.png', 12000000, 5000000, 'DEL'),
 ('Adam Bareiro', 'images/logoParaguay.png', 8000000, 3000000, 'DEL'),
---escocia
+-- escocia
 ('Angus Gunn', 'images/logoEscocia.png', 8000000, 3000000, 'POR'),
 ('Robby McCrorie', 'images/logoEscocia.png', 3000000, 500000, 'POR'),
 ('Andrew Robertson', 'images/logoEscocia.png', 30000000, 12000000, 'DEF'),
@@ -767,7 +767,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Che Adams', 'images/logoEscocia.png', 18000000, 8000000, 'DEL'),
 ('Lyndon Dykes', 'images/logoEscocia.png', 6000000, 2000000, 'DEL'),
 ('Ben Doak', 'images/logoEscocia.png', 20000000, 12000000, 'DEL'),
---austria
+-- austria
 ('Alexander Schlager', 'images/logoAustria.png', 7000000, 2500000, 'POR'),
 ('Patrick Pentz', 'images/logoAustria.png', 5000000, 1500000, 'POR'),
 ('David Alaba', 'images/logoAustria.png', 25000000, 10000000, 'DEF'),
@@ -783,7 +783,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Michael Gregoritsch', 'images/logoAustria.png', 10000000, 4000000, 'DEL'),
 ('Marko Arnautovic', 'images/logoAustria.png', 4000000, 1000000, 'DEL'),
 ('Junior Adamu', 'images/logoAustria.png', 12000000, 5000000, 'DEL'),
---iran
+-- iran
 ('Alireza Beiranvand', 'images/logoIran.png', 3000000, 500000, 'POR'),
 ('Payam Niazmand', 'images/logoIran.png', 2000000, 500000, 'POR'),
 ('Milad Mohammadi', 'images/logoIran.png', 4000000, 1000000, 'DEF'),
@@ -799,7 +799,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Sardar Azmoun', 'images/logoIran.png', 12000000, 5000000, 'DEL'),
 ('Mehdi Ghayedi', 'images/logoIran.png', 6000000, 2000000, 'DEL'),
 ('Shahriyar Moghanlou', 'images/logoIran.png', 3000000, 1000000, 'DEL'),
---iconos
+-- iconos
 ('Ladislao Mazurkiewicz', 'images/logoUruguay.png', 45000000, 3500000, 'PORL'),
 ('Claudio Taffarel', 'images/logoBrasil.png', 52000000, 4500000, 'PORL'),
 ('Carlos Alberto', 'images/logoBrasil.png', 57000000, 50000000, 'DEFL'),
@@ -817,6 +817,7 @@ INSERT INTO jugadores (nombre, pais, valor_clausula, valor_venta, posicion) VALU
 ('Pele', 'images/logoBrasil.png', 120000000, 92000000, 'DELL'),
 ('Jairzinho', 'images/logoBrasil.png', 143000000, 95000000, 'DELL'),
 ('Hristo Stoichkov', 'images/logoBulgaria.png', 83000000, 55000000, 'DELL');
+
 
 
 
