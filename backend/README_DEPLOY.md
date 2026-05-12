@@ -56,9 +56,9 @@ railway login
 Cuando ejecutas `railway up` desde la carpeta `backend`, **solo se sube el código del backend**, no toda tu aplicación Flutter.
 
 ```bash
-cd backend  # ← Estás aquí cuando ejecutas railway up
+cd backend  # ← Ejecuta desde aquí
 railway init --name "proyecto-intermodular-backend"
-railway up  # ← Solo sube: server.js, controllers/, models/, routes/, package.json, etc.
+railway up
 ```
 
 #### Opción A: Desde cero (sin GitHub)
@@ -86,17 +86,65 @@ En el dashboard de Railway:
 3. Selecciona tu repo `proyecto_intermodular`
 4. Railway se actualizará automáticamente cuando hagas push a GitHub
 
-### Paso 4: Configurar Base de Datos
+### Paso 5: Configurar Base de Datos
 En el dashboard de Railway:
 1. Agrega un plugin de MySQL
 2. Copia las credenciales generadas
 3. Configura las variables de entorno en Railway
 
-### Paso 5: Actualizar tu app Flutter
-Cambia en `lib/services/LogicaJugadores.dart`:
-```dart
-final String baseUrl = 'https://tu-proyecto-railway.up.railway.app';
+### Paso 6: Inicializar la base de datos
+En la carpeta `backend`, ejecuta:
+
+```bash
+cd backend
+railway run node init_db.js
 ```
+
+Esto poblará las tablas `usuarios` y `jugadores` en la base de datos.
+
+### Paso 7: Probar la API
+Primero prueba el root endpoint:
+
+```bash
+curl https://proyectointermodular-production-9806.up.railway.app/
+```
+
+Deberías ver:
+
+```json
+{"message":"API funcionando correctamente"}
+```
+
+Después prueba el endpoint de generar equipo:
+
+```bash
+curl https://proyectointermodular-production-9806.up.railway.app/jugadores/generar-equipo
+```
+
+Si aparece un error como:
+
+```json
+{"error":"Error al generar equipo: connect ECONNREFUSED 127.0.0.1:3306"}
+```
+
+significa que el backend está intentando conectar a una base de datos local. Para arreglarlo, revisa estas variables de entorno en Railway:
+
+- `DB_HOST`
+- `DB_USER`
+- `DB_PASSWORD`
+- `DB_NAME`
+- `DB_PORT`
+
+Asegúrate de que estén apuntando al servicio MySQL de Railway.
+
+### Paso 8: Actualizar tu app Flutter
+En `lib/config/api_config.dart`, cambia:
+
+```dart
+static const String baseUrl = 'https://proyectointermodular-production-9806.up.railway.app';
+```
+
+Y reinicia la app Flutter.
 
 ## Opción 2: Heroku
 

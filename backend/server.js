@@ -2,7 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const schedule = require('node-schedule');
-require('dotenv').config();
+
+// Cargar variables de entorno solo si no vienen del entorno de Railway.
+if (!process.env.RAILWAY_ENVIRONMENT) {
+  require('dotenv').config();
+}
 
 const app = express();
 
