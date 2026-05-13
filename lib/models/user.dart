@@ -1,6 +1,7 @@
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
 class User {
+  int? id_usuario;
   String nombre;
   String contrasena;
   String genero;
@@ -14,6 +15,7 @@ class User {
   bool isAdmin;
   bool isBlocked = false;
   User({
+    this.id_usuario,
     required this.nombre,
     required this.contrasena,
     required this.genero,

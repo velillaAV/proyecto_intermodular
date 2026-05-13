@@ -21,8 +21,8 @@ class Logicajugadores {
               id_jugador: json['id_jugador'],
               nombre: json['nombre'],
               pais: _convertirRutaImagen(json['pais']),
-              valor_clausula: json['valor_clausula'].toDouble(),
-              valor_venta: json['valor_venta'].toDouble(),
+              valor_clausula: (json['valor_clausula'] as num).toDouble(),
+              valor_venta: (json['valor_venta'] as num).toDouble(),
               posicion: json['posicion'],
             ),
           )
@@ -36,8 +36,8 @@ class Logicajugadores {
     final response = await http.get(
       Uri.parse('$baseUrl/jugadores/generar-equipo'),
     );
-    if (response.statusCode == 500) {
-      throw Exception('Failed to generate team');
+    if (response.statusCode != 200) {
+      throw Exception('Failed to generate team: ${response.statusCode}');
     }
 
     final data = json.decode(response.body);
@@ -47,8 +47,8 @@ class Logicajugadores {
             id_jugador: json['id_jugador'],
             nombre: json['nombre'],
             pais: _convertirRutaImagen(json['pais']),
-            valor_clausula: json['valor_clausula'].toDouble(),
-            valor_venta: json['valor_venta'].toDouble(),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
           ),
         )

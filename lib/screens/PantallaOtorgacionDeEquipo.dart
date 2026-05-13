@@ -134,21 +134,29 @@ class _PantallaOtorgacionDeEquipoState
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                itemCount: 14, // los jugadores otorgados
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, 
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 0.75, // ajusta según la carta
-                ),
-                itemBuilder: (context, index) {
-                  return CardFutbolista4(
-                    jugador: equipoOtorgado[index],
-                  ); 
-                },
-              ),
+              child: equipoOtorgado.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'No se pudo cargar el equipo. Intenta de nuevo.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 16, color: Colors.black54),
+                      ),
+                    )
+                  : GridView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      itemCount: equipoOtorgado.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.75,
+                      ),
+                      itemBuilder: (context, index) {
+                        return CardFutbolista4(
+                          jugador: equipoOtorgado[index],
+                        );
+                      },
+                    ),
             ),
             SizedBox(height: 20),
             ElevatedButton(

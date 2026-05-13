@@ -54,6 +54,16 @@ class _CardFutbolista4State extends State<CardFutbolista4> {
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 4),
+                Text(
+                  'Valor: ${widget.jugador.valor_venta.toStringAsFixed(0)}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
