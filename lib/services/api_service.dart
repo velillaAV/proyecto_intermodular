@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:proyecto_intermodular/config/api_config.dart';
 
 class ApiService {
-  static const String baseUrl = Config.baseUrl;
+  static const String baseUrl = 'http://192.168.56.1:3000';
 
   // REGISTRO
   static Future<bool> registerUser(Map<String, dynamic> userData) async {

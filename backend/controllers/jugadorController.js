@@ -52,88 +52,14 @@ const createJugador = async (req, res) => {
   }
 };
 
-const sumarPuntos = async (req, res) => {
-  try {
-    const {
-    id_jugador,
-    goles,
-    asistencias,
-    minutos,
-    tarjetas_amarillas,
-    tarjetas_rojas
-  } = req.body;
-   let puntos =
-      goles * 5 +
-      asistencias * 3 -
-      tarjetas_amarillas -
-      (tarjetas_rojas * 3);
-      if (minutos >= 60) {
-        puntos += 2;
-      } else {
-        puntos += 1;
-      }
-    await Jugador.actualizarPuntos(puntos, id_jugador);
-    res.status(200).json({message: "Se ha actualizado perfectamente"});
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
-};
-
-const obtenerPuntosJugador = async (req, res) => {
-  try {
-   
-
-   const { id_jugador } = req.params;
-    const puntos = await Jugador.getPuntos(id_jugador);
-     res.json({
-      "puntos": puntos
-    });
-
-  } catch (error) {
-    console.error('Error al obtener jugadores:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-
-    
-
-   
-  
-
-};
-
 // Generar equipo aleatorio
 const generarEquipo = async (req, res) => {
   console.log("Intentando generar equipo")
   try {
-    console.log("Obteniendo porteros...")
     const porteros = await Jugador.getByPosicion('POR');
-    console.log("Porteros encontrados:", porteros.length)
-    
-    console.log("Obteniendo defensas...")
     const defensas = await Jugador.getByPosicion('DEF');
-    console.log("Defensas encontrados:", defensas.length)
-    
-    console.log("Obteniendo centrocampistas...")
     const centrocampistas = await Jugador.getByPosicion('CEN');
-    console.log("Centrocampistas encontrados:", centrocampistas.length)
-    
-    console.log("Obteniendo atacantes...")
     const atacantes = await Jugador.getByPosicion('DEL');
-    console.log("Atacantes encontrados:", atacantes.length)
-
-    if (porteros.length === 0 || defensas.length === 0 || centrocampistas.length === 0 || atacantes.length === 0) {
-      console.log("Error: No hay suficientes jugadores en la base de datos");
-      return res.status(400).json({ 
-        error: 'No hay suficientes jugadores en la base de datos. Verifica que se ejecutó init_db.js correctamente.',
-        debug: {
-          porteros: porteros.length,
-          defensas: defensas.length,
-          centrocampistas: centrocampistas.length,
-          atacantes: atacantes.length
-        }
-      });
-    }
 
     const equipo = [];
 
@@ -173,7 +99,7 @@ const generarEquipo = async (req, res) => {
         atacantesSeleccionados.push(atacante);
       }
     }
-    console.log("Equipo creado con " + equipo.length + " jugadores")
+    console.log("Equipo creado")
     equipo.push(...atacantesSeleccionados);
     console.log(equipo);
 
@@ -181,7 +107,7 @@ const generarEquipo = async (req, res) => {
     
   } catch (error) {
     console.error('Error al generar equipo:', error);
-    res.status(500).json({ error: 'Error al generar equipo: ' + error.message });
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 
@@ -189,8 +115,6 @@ module.exports = {
   getJugadores,
   getJugadoresByPosicion,
   getJugadoresByPais,
-  sumarPuntos,
-  obtenerPuntosJugador,
   createJugador,
   generarEquipo
 };

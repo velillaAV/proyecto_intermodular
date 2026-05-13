@@ -59,7 +59,6 @@ class _PantallaLigaEspecialState extends State<PantallaLigaEspecial> {
 
   @override
   Widget build(BuildContext context) {
-
     final List<Widget> _pantallas = [
       Clasificacion(
         liga: widget.liga,

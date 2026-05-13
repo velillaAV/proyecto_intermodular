@@ -1,4 +1,3 @@
-require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { getConnection } = require('./config/database');
@@ -17,16 +16,8 @@ async function initDatabase() {
     // Ejecutar cada declaración
     for (const statement of statements) {
       if (statement.trim()) {
-        try {
-          await connection.execute(statement.trim());
-          console.log('Ejecutado:', statement.trim().substring(0, 50) + '...');
-        } catch (stmtError) {
-          if (stmtError.code === 'ER_DUP_ENTRY') {
-            console.warn('Ignorando entrada duplicada en statement:', statement.trim().substring(0, 50) + '...');
-            continue;
-          }
-          throw stmtError;
-        }
+        await connection.execute(statement.trim());
+        console.log('Ejecutado:', statement.trim().substring(0, 50) + '...');
       }
     }
 

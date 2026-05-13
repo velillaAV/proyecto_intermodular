@@ -2,14 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const schedule = require('node-schedule');
-
-// Cargar variables de entorno solo si no vienen del entorno de Railway.
-if (!process.env.RAILWAY_ENVIRONMENT) {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 const app = express();
-
+app.use('/assets', express.static('assets'));
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -23,6 +19,7 @@ app.use('/assets', express.static(path.join(__dirname, '../assets')));
 const usuarioRoutes = require('./routes/usuarios');
 const jugadorRoutes = require('./routes/jugadores');
 const mercadoRoutes = require('./routes/mercado');
+const ligaRoutes = require('./routes/ligas');
 const { actualizarMercado } = require('./controllers/mercadoController');
 const { getConnection } = require('./config/database');
 
@@ -30,6 +27,7 @@ const { getConnection } = require('./config/database');
 app.use('/usuarios', usuarioRoutes);
 app.use('/jugadores', jugadorRoutes);
 app.use('/mercado', mercadoRoutes);
+app.use('/ligas', ligaRoutes);
 
 // ===== SCHEDULER PARA ACTUALIZAR MERCADO A LAS 00:00 =====
 // Se ejecuta todos los días a las 00:00
@@ -48,8 +46,6 @@ schedule.scheduleJob('0 0 * * *', async () => {
     console.error('Error en actualización automática de mercados:', error);
   }
 });
-
-
 
 // Ruta de prueba
 app.get('/', (req, res) => {

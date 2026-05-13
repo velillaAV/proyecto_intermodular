@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "init-db": "node init_db.js",
-    "deploy": "bash deploy.sh"
+    "init-db": "node init_db.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:proyecto_intermodular/config/api_config.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 
 class ServicioMercadoDiario {
-  final String baseUrl = Config.baseUrl;
+  final String baseUrl = 'http://localhost:3000'; // Ajusta según tu IP en móvil
 
   /// Obtener mercado diario de una liga
   Future<ModeloMercadoDiario> obtenerMercadoHoy(int idLiga) async {

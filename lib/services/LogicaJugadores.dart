@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:proyecto_intermodular/models/ModeloEstadisticas.dart';
+import 'dart:math';
+
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
-import 'package:proyecto_intermodular/config/api_config.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
 class Logicajugadores {
-  // Ahora usa la configuración centralizada
-  final String baseUrl = Config.baseUrl;
+  // Cambia 'localhost' por tu IP para móvil, ej: '192.168.1.100'
+  final String baseUrl = 'http://localhost:3000'; // Para móvil: 'http://TU_IP:3000'
 
   Future<List<Modelojugador>> getJugadoresByPosicion(String posicion) async {
     final response = await http.get(
@@ -23,8 +24,6 @@ class Logicajugadores {
               valor_clausula: json['valor_clausula'].toDouble(),
               valor_venta: json['valor_venta'].toDouble(),
               posicion: json['posicion'],
-              
-              
             ),
           )
           .toList();
@@ -64,7 +63,6 @@ class Logicajugadores {
       print(response.statusCode);
       throw Exception('Error: ${response.statusCode}');
     }
-    print("me voy a volar los sesos");
     
     final data = json.decode(response.body);
 
@@ -92,44 +90,4 @@ class Logicajugadores {
     }
     return '$baseUrl/assets/images/$ruta'; // Por si no tiene el prefijo
   }
-
- Future<void> sumarPuntos(ModeloEstadisticas stats) async {
-
-  final response = await http.post(
-    Uri.parse('$baseUrl/jugadores/puntuar'),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: jsonEncode(stats.toJson()),
-  );
-
-  if (response.statusCode != 200) {
-    print("error");
-    print(response.body);
-    throw Exception('Error: ${response.statusCode}');
-  } else {
-    print("actualización correcta");
-  }
-}
-Future<int> obtenerPuntosJugador(int idJugador) async {
-  final response = await http.get(
-    Uri.parse('$baseUrl/jugadores/puntos/$idJugador'),
-  );
-
-  if (response.statusCode != 200) {
-    print("Error obteniendo puntos");
-    print(response.body);
-
-    throw Exception(
-      'Error: ${response.statusCode}',
-    );
-
-  }
-
-
-  final data = jsonDecode(response.body);
-
-  return data['puntos'];
-}
-
 }
