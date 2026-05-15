@@ -1,3 +1,4 @@
+-- Tabla para almacenar el mercado diario de cada liga
 CREATE TABLE IF NOT EXISTS mercado_diario (
   id_mercado INT AUTO_INCREMENT PRIMARY KEY,
   id_liga INT NOT NULL UNIQUE,
