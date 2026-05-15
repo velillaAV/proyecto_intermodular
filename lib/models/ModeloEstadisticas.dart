@@ -27,9 +27,4 @@ class ModeloEstadisticas {
       "tarjetas_rojas": tarjetas_rojas,
     };
   }
-
-
-
-
-
 }
