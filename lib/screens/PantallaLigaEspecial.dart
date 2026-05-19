@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
 import 'package:proyecto_intermodular/widgets/Alineacion.dart';
-import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/Clasificacion.dart';
 import 'package:proyecto_intermodular/widgets/Predicciones.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';

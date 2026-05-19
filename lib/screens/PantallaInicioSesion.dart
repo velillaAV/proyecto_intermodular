@@ -115,7 +115,6 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   
   String _nombre = "";
   String _contrasena = "";
-  String? _contrasenaRecu;
 
   @override
   Widget build(BuildContext context) {

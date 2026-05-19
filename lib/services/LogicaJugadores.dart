@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'dart:math';
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
-import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
 class Logicajugadores {
   // Cambia 'localhost' por tu IP para móvil, ej: '192.168.1.100'

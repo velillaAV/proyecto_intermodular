@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
-import 'package:proyecto_intermodular/services/LogicaPredicciones.dart';
 
 class Prediccion extends StatefulWidget {
   const Prediccion({

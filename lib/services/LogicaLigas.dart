@@ -7,20 +7,14 @@ import 'package:http/http.dart' as http;
 
 class Logicaligas {
   // Cambia 'localhost' por tu IP para móvil, ej: '192.168.1.100'
-  final String baseUrl = 'http://localhost:3000'; // Para móvil: 'http://TU_IP:3000'
+  static const String baseUrl = 'http://localhost:3000'; // Para móvil: 'http://TU_IP:3000'
 
   static final List<Liga> _listaLigas = [];
   static final List<Liga> _listaLigasNormales = [];
   static final List<Liga> _listaLigasEspeciales = [];
 
-  void _anadirLigaNormal(Liga liga) {
-    _listaLigas.add(liga);
-    _listaLigasNormales.add(liga);
-  }
-
-  void _anadirLigaEspecial(Liga liga) {
-    _listaLigas.add(liga);
-    _listaLigasEspeciales.add(liga);
+  static bool existeLigaNombre(String nombre) {
+    return buscarLigaPorNombre(nombre) != null;
   }
 
   static List<Liga> getLigas() {
@@ -58,13 +52,23 @@ class Logicaligas {
         if (jsonLiga['tipo'] == 'especial') {
           // Crear Modeloligaespecial
         } else {
+          User propietario = User(
+            id_usuario: jsonLiga['propietario_id'],
+            nombre: 'Desconocido',
+            contrasena: '',
+            genero: '',
+            edad: 0,
+            lugarNacimiento: '',
+            fotoRuta: null,
+            isAdmin: false,
+          );
           Liga liga = Liga(
             id_liga: jsonLiga['id_liga'],
             cod_invitacion: jsonLiga['cod_invitacion'],
-            propietario: null, // Necesitaría buscar usuario por id
+            propietario: propietario,
             nombreLiga: jsonLiga['nombre'],
             capDeParticipantes: jsonLiga['cap_de_participantes'],
-            hayClausulazos: false, // Asumir
+            hayClausulazos: false,
           );
           _listaLigas.add(liga);
           _listaLigasNormales.add(liga);
