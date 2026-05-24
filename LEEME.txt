@@ -1,0 +1,84 @@
+ROAD TO THE WORLD CUP 26 APP
+Instrucciones para montar el proyecto en local.
+
+DESCRIPCIÓN
+
+Road to the World Cup 26 APP es una aplicación Fantasy centrada en el Mundial 2026.
+La aplicación permite:
+
+REQUISITOS PREVIOS
+
+Antes de ejecutar el proyecto es necesario tener instalado:
+
+-Node.js
+Recomendado: versión 18 o superior
+-npm
+Normalmente se instala junto a Node.js
+-Android Studio
+Necesario para ejecutar la aplicación Android
+-JDK (Java Development Kit)
+Recomendado: JDK 17
+-Git
+Para clonar el repositorio
+-Base de datos y Backend
+El proyecto utiliza conexión con backend y base de datos para:
+usuarios
+ligas
+mercado
+estadísticas
+alineaciones
+INSTALACIÓN DEL PROYECTO
+Clonar el repositorio
+git clone URL_DEL_REPOSITORIO
+
+2. Entrar en la carpeta del proyecto
+cd nombre-del-proyecto
+
+3. Instalar dependencias
+npm install
+
+4. Configurar variables de entorno
+Crear un archivo .env en la raíz del proyecto y añadir:
+
+5. Iniciar el backend
+npm run backend
+
+6. Ejecutar la aplicación
+npm start
+
+EJECUCIÓN EN ANDROID
+Abrir Android Studio
+2.Iniciar un emulador Android
+o conectar un dispositivo físico
+3. Ejecutar:
+npm run android
+
+COMPILACIÓN APK
+Para generar el APK:
+2. cd android
+3. ./gradlew assembleRelease
+4. El archivo APK generado aparecerá en:
+android/app/build/outputs/apk/release/
+
+FUNCIONALIDADES PRINCIPALES
+-Inicio de sesión y registro
+-Creación de ligas normales y especiales
+-Sistema de mercado y pujas
+-Gestión de alineaciones
+-Sistema de cláusulas
+-Predicciones de resultados
+-Información mundialista
+-Gestión de estadísticas de jugadores
+
+ESTRUCTURA GENERAL
+frontend/
+Contiene las pantallas y componentes visuales
+
+backend/
+Contiene lógica del servidor y API
+
+database/
+Scripts y configuración de base de datos
+
+assets/
+Imágenes y recursos gráficos
