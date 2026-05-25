@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/backend_config.dart';
 
 import '../models/liga.dart';
 import '../models/user.dart';
@@ -7,9 +7,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Logicaligas {
-  static String get baseUrl {
-    return kIsWeb ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
-  }
+  static const String baseUrl = backendBaseUrl;
 
   static final List<Liga> _listaLigas = [];
   static final List<Liga> _listaLigasNormales = [];

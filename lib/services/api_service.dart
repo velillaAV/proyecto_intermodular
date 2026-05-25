@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
+import 'package:proyecto_intermodular/services/backend_config.dart';
 
 class ApiService {
-  static String get baseUrl {
-    return kIsWeb ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
-  }
+  static const String baseUrl = backendBaseUrl;
 
   // REGISTRO
   static Future<Map<String, dynamic>?> registerUser(Map<String, dynamic> userData) async {
