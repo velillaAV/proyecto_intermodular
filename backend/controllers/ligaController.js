@@ -38,6 +38,48 @@ const getLigaByNombre = async (req, res) => {
   }
 };
 
+const getLigasByUsuario = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ligas = await Liga.getLigasByUsuario(id);
+    res.json(ligas);
+  } catch (error) {
+    console.error('Error al obtener ligas del usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
+const joinLiga = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { id_usuario } = req.body;
+
+    if (!id_usuario) {
+      return res.status(400).json({ error: 'id_usuario es requerido para unirse a la liga' });
+    }
+
+    const liga = await Liga.getById(id);
+    if (!liga) {
+      return res.status(404).json({ error: 'Liga no encontrada' });
+    }
+
+    const participaciones = await Liga.getParticipantCount(id);
+    if (participaciones >= liga.cap_de_participantes) {
+      return res.status(400).json({ error: 'La liga ya está llena' });
+    }
+
+    const joined = await Liga.joinLiga(id, id_usuario);
+    if (!joined) {
+      return res.status(400).json({ error: 'El usuario ya está en esta liga' });
+    }
+
+    res.json({ message: 'Usuario unido a la liga' });
+  } catch (error) {
+    console.error('Error al unir usuario a la liga:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 const createLiga = async (req, res) => {
   try {
     const liga = req.body;
@@ -98,6 +140,8 @@ module.exports = {
   getLigas,
   getLigaById,
   getLigaByNombre,
+  getLigasByUsuario,
+  joinLiga,
   createLiga,
   updateLiga,
   deleteLiga

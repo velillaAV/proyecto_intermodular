@@ -1,18 +1,24 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.56.1:3000';
+  static String get baseUrl {
+    return kIsWeb ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
+  }
 
   // REGISTRO
-  static Future<bool> registerUser(Map<String, dynamic> userData) async {
+  static Future<Map<String, dynamic>?> registerUser(Map<String, dynamic> userData) async {
     final response = await http.post(
       Uri.parse('$baseUrl/usuarios'),
       headers: {"Content-Type": "application/json"},
       body: jsonEncode(userData),
     );
 
-    return response.statusCode == 201;
+    if (response.statusCode == 201) {
+      return jsonDecode(response.body);
+    }
+    return null;
   }
 
   // LOGIN

@@ -16,7 +16,15 @@ INSERT INTO usuarios (nombre, contrasena, genero, edad, lugarNacimiento, fotoRut
 ('Alvaro', 'Alvaro', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
 ('Dario', 'Dario', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
 ('Edgar', 'Edgar', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
-('admin', 'admin', 'Masculino', 30, 'Desconocido', '', TRUE, FALSE);
+('admin', 'admin', 'Masculino', 30, 'Desconocido', '', TRUE, FALSE)
+ON DUPLICATE KEY UPDATE
+  contrasena = VALUES(contrasena),
+  genero = VALUES(genero),
+  edad = VALUES(edad),
+  lugarNacimiento = VALUES(lugarNacimiento),
+  fotoRuta = VALUES(fotoRuta),
+  isAdmin = VALUES(isAdmin),
+  isBlocked = VALUES(isBlocked);
 
 -- Crear tabla de jugadores
 CREATE TABLE IF NOT EXISTS jugadores (

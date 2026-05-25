@@ -16,7 +16,36 @@ INSERT INTO usuarios (nombre, contrasena, genero, edad, lugarNacimiento, fotoRut
 ('Alvaro', 'Alvaro', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
 ('Dario', 'Dario', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
 ('Edgar', 'Edgar', 'Masculino', 25, 'Desconocido', '', FALSE, FALSE),
-('admin', 'admin', 'Masculino', 30, 'Desconocido', '', TRUE, FALSE);
+('admin', 'admin', 'Masculino', 30, 'Desconocido', '', TRUE, FALSE)
+ON DUPLICATE KEY UPDATE
+  contrasena = VALUES(contrasena),
+  genero = VALUES(genero),
+  edad = VALUES(edad),
+  lugarNacimiento = VALUES(lugarNacimiento),
+  fotoRuta = VALUES(fotoRuta),
+  isAdmin = VALUES(isAdmin),
+  isBlocked = VALUES(isBlocked);
+
+-- Crear tabla de ligas
+CREATE TABLE IF NOT EXISTS ligas (
+  id_liga INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(255) NOT NULL UNIQUE,
+  cod_invitacion INT NOT NULL UNIQUE,
+  propietario_id INT,
+  tipo VARCHAR(50) DEFAULT 'normal',
+  cap_de_participantes INT NOT NULL,
+  fase VARCHAR(255) DEFAULT 'Fase de Grupos: Jornada 1',
+  FOREIGN KEY (propietario_id) REFERENCES usuarios(id)
+);
+
+-- Crear tabla intermedia para participantes de ligas
+CREATE TABLE IF NOT EXISTS liga_participantes (
+  id_liga INT NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY (id_liga, id_usuario),
+  FOREIGN KEY (id_liga) REFERENCES ligas(id_liga) ON DELETE CASCADE,
+  FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE
+);
 
 -- Crear tabla de jugadores
 CREATE TABLE IF NOT EXISTS jugadores (

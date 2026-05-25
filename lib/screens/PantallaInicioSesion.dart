@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/translations/languagesInicioSesion.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/controllers/GoogleControllers.dart';
+import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
 import 'package:proyecto_intermodular/screens/PantallaRegistrar.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
+import 'package:proyecto_intermodular/services/api_service.dart';
 
 class Pantallainiciosesion extends StatefulWidget {
   const Pantallainiciosesion({super.key});
@@ -14,56 +17,48 @@ class Pantallainiciosesion extends StatefulWidget {
 }
 
 class _PantallainiciosesionState extends State<Pantallainiciosesion> {
-  void _inicioSesion() {
+  Future<void> _inicioSesion() async {
     if (_nombre.isEmpty) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreVacio));
       final snackBarNombre = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.nombreVacio)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarNombre);
-    } else if (_contrasena.isEmpty) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasenaVacio));
+      return;
+    }
+    if (_contrasena.isEmpty) {
       final snackBarContrasena = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.contrasenaVacio)),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBarContrasena);
-    } else if (Logicausuario.getListaUsuarios().isEmpty) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noExistenUsuarios));
-      final snackBarNoHayUsuarios = SnackBar(
-        content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noExistenUsuarios)),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarNoHayUsuarios);
-    } else if (Logicausuario.confirmarUsuarios(_nombre, _contrasena) == false &&
-        Logicausuario.confirmarAdmins(_nombre, _contrasena) == false &&
-        Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales));
-      final snackBarValidador1 = SnackBar(
+      return;
+    }
+
+    final usuarioJson = await ApiService.login(_nombre, _contrasena);
+    if (usuarioJson == null) {
+      final snackBarValidador = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador1);
-    } else if (Logicausuario.confirmarBloqueo(_nombre, _contrasena) == true) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado));
-      final snackBarValidador2 = SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador);
+      return;
+    }
+
+    if (usuarioJson['isBlocked'] == true) {
+      final snackBarBloqueado = SnackBar(
         content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.usuarioBloqueado)),
       );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador2);
-     } else if (Logicausuario.confirmarUsuarios(_nombre, _contrasena) == false && Logicausuario.confirmarAdmins(_nombre, _contrasena) == false && Logicausuario.confirmarAdmin(_nombre, _contrasena) == false) {
-      print(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales));
-      final snackBarValidador3 = SnackBar(
-        content: Text(Languagesiniciosesion.getTexto(Languagesiniciosesion.noUsuarioCredenciales)),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBarValidador3);
-    } else if (Logicausuario.confirmarAdmins(_nombre, _contrasena) == true ||
-        Logicausuario.confirmarAdmin(_nombre, _contrasena) == true) {
-      // Lógica para admins (actualmente vacía en tu código original)
-    } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
-         (route) => false,
-      );
-      
+      ScaffoldMessenger.of(context).showSnackBar(snackBarBloqueado);
+      return;
     }
+
+    final usuarioActual = User.fromJson(usuarioJson);
+    Logicausuario.setUsuarioActual(usuarioActual);
+    await Logicaligas.cargarLigasDesdeBackend(usuarioActual.id_usuario);
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
+      (route) => false,
+    );
   }
 
   void _registrar() {

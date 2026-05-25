@@ -36,15 +36,19 @@ const createUsuario = async (req, res) => {
       return res.status(400).json({ error: 'Nombre y contraseña son requeridos' });
     }
 
+    const existente = await Usuario.getByNombre(usuario.nombre);
+    if (existente) {
+      return res.status(400).json({ error: 'El nombre de usuario ya existe' });
+    }
+
     const nuevoUsuario = await Usuario.create(usuario);
     res.status(201).json(nuevoUsuario);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+    console.error('Error al crear usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 
-// Actualizar usuario
 const updateUsuario = async (req, res) => {
   try {
     const { id } = req.params;

@@ -111,6 +111,10 @@ class Logicausuario {
     return usuarioActual;
   }
 
+  static void setUsuarioActual(User usuario) {
+    usuarioActual = usuario;
+  }
+
   static bool confirmarBloqueo(String nombre, String contrasena) {
     //Se confirma si el usuario esta bloqueado
     bool validador = false;

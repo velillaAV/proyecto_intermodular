@@ -24,7 +24,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     ).showSnackBar(SnackBar(content: Text(mensaje)));
   }
 
-  void _enviarLiga() {
+  Future<void> _enviarLiga() async {
     final nombre = nombreLiga.trim();
 
     if (nombre.isEmpty) {
@@ -43,7 +43,9 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
       return;  
     } else if (Logicaligas.getLigasNormales().contains(ligaExistente)) {
       final usuarioActual = Logicausuario.getUsuarioActual();
-      if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+      final joined = await Logicaligas.unirUsuarioALigaBackend(ligaExistente, usuarioActual);
+      if (joined) {
+        ligaExistente.participantes.add(usuarioActual);
         Logicausuario.getUsuarioActual().unirLiga();
         Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente =
             ligaExistente;
@@ -51,7 +53,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
           context,
           MaterialPageRoute(
             builder: (context) => PantallaOtorgacionDeEquipo(
-              liga: Logicaligas.buscarLigaPorNombre(nombre)!,
+              liga: ligaExistente,
               usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
             ),
           ),

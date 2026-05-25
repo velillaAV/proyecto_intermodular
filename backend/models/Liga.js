@@ -52,6 +52,60 @@ class Liga {
     }
   }
 
+  static async getLigasByUsuario(usuarioId) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT l.*, u.nombre AS propietario_nombre FROM ligas l JOIN liga_participantes lp ON l.id_liga = lp.id_liga LEFT JOIN usuarios u ON l.propietario_id = u.id WHERE lp.id_usuario = ?',
+        [usuarioId]
+      );
+      return rows;
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async getParticipantCount(id_liga) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT COUNT(*) as count FROM liga_participantes WHERE id_liga = ?',
+        [id_liga]
+      );
+      return rows[0].count || 0;
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async isUserInLiga(id_liga, id_usuario) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT * FROM liga_participantes WHERE id_liga = ? AND id_usuario = ?',
+        [id_liga, id_usuario]
+      );
+      return rows.length > 0;
+    } finally {
+      connection.release();
+    }
+  }
+
+  static async joinLiga(id_liga, id_usuario) {
+    const connection = await getConnection();
+    try {
+      const alreadyJoined = await Liga.isUserInLiga(id_liga, id_usuario);
+      if (alreadyJoined) return false;
+      await connection.execute(
+        'INSERT INTO liga_participantes (id_liga, id_usuario) VALUES (?, ?)',
+        [id_liga, id_usuario]
+      );
+      return true;
+    } finally {
+      connection.release();
+    }
+  }
+
   static async getByNombre(nombre) {
     const connection = await getConnection();
     try {
@@ -82,8 +136,15 @@ class Liga {
         'INSERT INTO ligas (nombre, cod_invitacion, propietario_id, tipo, cap_de_participantes, fase) VALUES (?, ?, ?, ?, ?, ?)',
         [liga.nombre, liga.cod_invitacion, liga.propietario_id, liga.tipo, liga.cap_de_participantes, liga.fase || 'Fase de Grupos: Jornada 1']
       );
+      const insertId = result.insertId;
+      if (liga.propietario_id) {
+        await connection.execute(
+          'INSERT INTO liga_participantes (id_liga, id_usuario) VALUES (?, ?)',
+          [insertId, liga.propietario_id]
+        );
+      }
       return new Liga(
-        result.insertId,
+        insertId,
         liga.nombre,
         liga.cod_invitacion,
         liga.propietario_id,

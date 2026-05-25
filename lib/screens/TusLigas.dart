@@ -17,6 +17,20 @@ class TusLigas extends StatefulWidget {
 }
 
 class _TusLigasState extends State<TusLigas> {
+  @override
+  void initState() {
+    super.initState();
+    _cargarLigasUsuario();
+  }
+
+  Future<void> _cargarLigasUsuario() async {
+    final usuarioActual = Logicausuario.getUsuarioActual();
+    if (usuarioActual.id_usuario != null) {
+      await Logicaligas.cargarLigasDesdeBackend(usuarioActual.id_usuario);
+      setState(() {});
+    }
+  }
+
   List<Liga> _obtenerLigasDelUsuario() {
     final usuarioActual = Logicausuario.getUsuarioActual();
     final todasLasLigas = Logicaligas.getLigas();

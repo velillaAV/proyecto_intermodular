@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 
 import '../models/liga.dart';
@@ -6,8 +7,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Logicaligas {
-  // Cambia 'localhost' por tu IP para móvil, ej: '192.168.1.100'
-  static const String baseUrl = 'http://localhost:3000'; // Para móvil: 'http://TU_IP:3000'
+  static String get baseUrl {
+    return kIsWeb ? 'http://localhost:3000' : 'http://10.0.2.2:3000';
+  }
 
   static final List<Liga> _listaLigas = [];
   static final List<Liga> _listaLigasNormales = [];
@@ -37,20 +39,20 @@ class Logicaligas {
     return coincidencias.isEmpty ? null : coincidencias.first;
   }
 
-  static Future<void> cargarLigasDesdeBackend() async {
-    final response = await http.get(Uri.parse('$baseUrl/ligas'));
+  static Future<void> cargarLigasDesdeBackend([int? usuarioId]) async {
+    final uri = usuarioId != null
+        ? Uri.parse('$baseUrl/ligas/usuario/$usuarioId')
+        : Uri.parse('$baseUrl/ligas');
+
+    final response = await http.get(uri);
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
       _listaLigas.clear();
       _listaLigasNormales.clear();
       _listaLigasEspeciales.clear();
       for (var jsonLiga in data) {
-        // Crear liga desde JSON
-        // Asumir que hay un fromJson o crear manualmente
-        // Por simplicidad, crear Liga básica
-        // Pero para especial, verificar tipo
         if (jsonLiga['tipo'] == 'especial') {
-          // Crear Modeloligaespecial
+          // Crear Modeloligaespecial si lo necesitas
         } else {
           User propietario = User(
             id_usuario: jsonLiga['propietario_id'],
@@ -75,6 +77,18 @@ class Logicaligas {
         }
       }
     }
+  }
+
+  static Future<bool> unirUsuarioALigaBackend(Liga liga, User usuario) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/ligas/${liga.id_liga}/unirse'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'id_usuario': usuario.id_usuario,
+      }),
+    );
+
+    return response.statusCode == 200;
   }
 
   static Future<Liga> crearLigaNormal(String nombre, User propietario, int numParticipantes, bool clausulas) async {
