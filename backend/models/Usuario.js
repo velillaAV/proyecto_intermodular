@@ -106,6 +106,29 @@ class Usuario {
       connection.release();
     }
   }
+
+  static async create(usuario) {
+    const connection = await getConnection();
+    try {
+      const [result] = await connection.execute(
+        'INSERT INTO usuarios (nombre, contrasena, genero, edad, lugarNacimiento, fotoRuta, isAdmin, isBlocked) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [
+          usuario.nombre,
+          usuario.contrasena,
+          usuario.genero || null,
+          usuario.edad || null,
+          usuario.lugarNacimiento || null,
+          usuario.fotoRuta || null,
+          usuario.isAdmin ? 1 : 0,
+          usuario.isBlocked ? 1 : 0
+        ]
+      );
+      const insertId = result.insertId;
+      return await Usuario.getById(insertId);
+    } finally {
+      connection.release();
+    }
+  }
 }
 
 module.exports = Usuario;
