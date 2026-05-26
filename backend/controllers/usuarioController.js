@@ -1,6 +1,7 @@
 const Usuario = require('../models/Usuario');
 const fs = require('fs');
 console.log("Gestionando Usuarios????")
+console.log('Usuario export check:', typeof Usuario, Object.getOwnPropertyNames(Usuario).filter(n=>typeof Usuario[n] === 'function'))
 
 // Obtener todos los usuarios
 const getUsuarios = async (req, res) => {
