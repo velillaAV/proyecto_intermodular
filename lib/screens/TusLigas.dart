@@ -4,6 +4,7 @@ import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
@@ -32,42 +33,33 @@ class _TusLigasState extends State<TusLigas> {
   }
 
   List<Liga> _obtenerLigasDelUsuario() {
-    final usuarioActual = Logicausuario.getUsuarioActual();
-    final todasLasLigas = Logicaligas.getLigas();
-    
-    // Filtrar ligas donde el usuario actual es participante
-    final ligasDelUsuario = todasLasLigas.where((liga) {
-      return liga.getParticipantes().any(
-        (participante) => participante.getNombre() == usuarioActual.getNombre(),
-      );
-    }).toList();
-    
-    return ligasDelUsuario;
+    return Logicaligas.getLigas();
   }
 
   void _navegarALiga(Liga liga) {
-      final usuarioActual = Logicausuario.getUsuarioActual();
-       int pos = usuarioActual.usuario_ligas.indexWhere((us) => us.ligaPerteneciente == liga);
-    // Verificar si es una liga normal o especial
+    final usuarioActual = Logicausuario.getUsuarioActual();
+    final pos = usuarioActual.usuario_ligas.indexWhere((us) => us.ligaPerteneciente == liga);
+    var usuarioLiga = pos >= 0
+        ? usuarioActual.usuario_ligas[pos]
+        : Modelousuario()..ligaPerteneciente = liga;
+
     if (Logicaligas.getLigasNormales().contains(liga)) {
-       
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PantallaLigaNormal(
             liga: liga,
-            usuario: Logicausuario.getUsuarioActual().usuario_ligas[pos]
+            usuario: usuarioLiga,
           ),
         ),
       );
     } else {
-      // Es una liga especial
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PantallaLigaEspecial(
             liga: liga,
-            usuario: Logicausuario.getUsuarioActual().usuario_ligas[pos],
+            usuario: usuarioLiga,
           ),
         ),
       );

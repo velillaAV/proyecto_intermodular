@@ -5,6 +5,7 @@ import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
+import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
@@ -26,7 +27,7 @@ class _LiganormalState extends State<Liganormal> {
     );
   }
 
-  void _enviarLiga() {
+  void _enviarLiga() async {
     final nombre = nombreLiga.trim();
     if (nombre.isEmpty) {
       _mostrarMensaje('Por favor ingresa un nombre de liga.');
@@ -40,13 +41,24 @@ class _LiganormalState extends State<Liganormal> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes, clausulas);
-    usuarioActual.unirLiga();
-    Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente = Logicaligas.buscarLigaPorNombre(nombre)!;
+    final result = await Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes, clausulas);
+    if (result == null || result['success'] != true) {
+      final err = result != null && result['error'] != null ? result['error'].toString() : 'No se pudo guardar la liga en el servidor. Intenta otra vez.';
+      _mostrarMensaje('Error servidor: $err');
+      return;
+    }
+
+    final nuevaLiga = result['liga'] as Liga;
+    final nuevoUsuarioLiga = usuarioActual.unirLiga();
+    nuevoUsuarioLiga.ligaPerteneciente = nuevaLiga;
+
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PantallaOtorgacionDeEquipo(liga: Logicaligas.buscarLigaPorNombre(nombre)!, usuario: usuarioActual.usuario_ligas.last,)
+        builder: (context) => PantallaOtorgacionDeEquipo(
+          liga: nuevaLiga,
+          usuario: nuevoUsuarioLiga,
+        ),
       ),
     );
   }

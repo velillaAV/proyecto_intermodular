@@ -8,6 +8,7 @@ class Liga {
     this.propietario_id = propietario_id;
     this.tipo = tipo;
     this.cap_de_participantes = cap_de_participantes;
+    this.cap_participantes = cap_de_participantes;
     this.fase = fase;
   }
 
@@ -21,7 +22,7 @@ class Liga {
         row.cod_invitacion,
         row.propietario_id,
         row.tipo,
-        row.cap_de_participantes,
+        row.cap_participantes ?? row.cap_de_participantes,
         row.fase
       ));
     } finally {
@@ -44,7 +45,7 @@ class Liga {
         row.cod_invitacion,
         row.propietario_id,
         row.tipo,
-        row.cap_de_participantes,
+        row.cap_participantes ?? row.cap_de_participantes,
         row.fase
       );
     } finally {
@@ -121,7 +122,7 @@ class Liga {
         row.cod_invitacion,
         row.propietario_id,
         row.tipo,
-        row.cap_de_participantes,
+        row.cap_participantes ?? row.cap_de_participantes,
         row.fase
       );
     } finally {
@@ -132,9 +133,10 @@ class Liga {
   static async create(liga) {
     const connection = await getConnection();
     try {
+      const cap = liga.cap_de_participantes ?? liga.cap_participantes;
       const [result] = await connection.execute(
-        'INSERT INTO ligas (nombre, cod_invitacion, propietario_id, tipo, cap_de_participantes, fase) VALUES (?, ?, ?, ?, ?, ?)',
-        [liga.nombre, liga.cod_invitacion, liga.propietario_id, liga.tipo, liga.cap_de_participantes, liga.fase || 'Fase de Grupos: Jornada 1']
+        'INSERT INTO ligas (nombre, cod_invitacion, propietario_id, tipo, cap_participantes, fase) VALUES (?, ?, ?, ?, ?, ?)',
+        [liga.nombre, liga.cod_invitacion, liga.propietario_id, liga.tipo, cap, liga.fase || 'Fase de Grupos: Jornada 1']
       );
       const insertId = result.insertId;
       if (liga.propietario_id) {
@@ -149,7 +151,7 @@ class Liga {
         liga.cod_invitacion,
         liga.propietario_id,
         liga.tipo,
-        liga.cap_de_participantes,
+        cap,
         liga.fase || 'Fase de Grupos: Jornada 1'
       );
     } finally {
@@ -160,9 +162,10 @@ class Liga {
   static async update(id_liga, liga) {
     const connection = await getConnection();
     try {
+      const cap = liga.cap_de_participantes ?? liga.cap_participantes;
       await connection.execute(
-        'UPDATE ligas SET nombre = ?, cod_invitacion = ?, propietario_id = ?, tipo = ?, cap_de_participantes = ?, fase = ? WHERE id_liga = ?',
-        [liga.nombre, liga.cod_invitacion, liga.propietario_id, liga.tipo, liga.cap_de_participantes, liga.fase || 'Fase de Grupos: Jornada 1', id_liga]
+        'UPDATE ligas SET nombre = ?, cod_invitacion = ?, propietario_id = ?, tipo = ?, cap_participantes = ?, fase = ? WHERE id_liga = ?',
+        [liga.nombre, liga.cod_invitacion, liga.propietario_id, liga.tipo, cap, liga.fase || 'Fase de Grupos: Jornada 1', id_liga]
       );
       return await Liga.getById(id_liga);
     } finally {

@@ -21,30 +21,39 @@ class ApiService {
 
   // LOGIN
   static Future<Map<String, dynamic>?> login(String nombre, String contrasena) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/usuarios/login'),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "nombre": nombre,
-        "contrasena": contrasena,
-      }),
-    );
+    try {
+      final response = await http
+          .post(
+            Uri.parse('$baseUrl/usuarios/login'),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({
+              "nombre": nombre,
+              "contrasena": contrasena,
+            }),
+          )
+          .timeout(const Duration(seconds: 10));
 
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return null;
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+    } catch (e) {
+      print('Error en login: $e');
     }
+    return null;
   }
 
   // OBTENER USUARIOS
   static Future<List<dynamic>> getUsuarios() async {
-    final response = await http.get(Uri.parse('$baseUrl/usuarios'));
-
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return [];
+    try {
+      final response = await http
+          .get(Uri.parse('$baseUrl/usuarios'))
+          .timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      }
+    } catch (e) {
+      print('Error al obtener usuarios: $e');
     }
+    return [];
   }
 }

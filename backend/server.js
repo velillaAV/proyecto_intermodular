@@ -10,7 +10,29 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+
+// Capturar raw body para debugging y permitir que express.json lo verifique
+app.use(express.json({
+  verify: (req, res, buf) => {
+    try {
+      req.rawBody = buf.toString();
+    } catch (e) {
+      req.rawBody = null;
+    }
+  }
+}));
+
+// Manejo de errores de JSON malformado para devolver 400 en vez de provocar un crash
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    console.error('Bad JSON received:', err.message);
+    if (req && req.rawBody) {
+      console.error('Raw body:', req.rawBody);
+    }
+    return res.status(400).json({ error: 'Malformed JSON' });
+  }
+  next();
+});
 
 // Servir archivos estáticos (imágenes, etc)
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
@@ -59,6 +81,14 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Algo salió mal!' });
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+server.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') {
+    console.error(`Error: el puerto ${PORT} ya está en uso. Detén el proceso existente o cambia el puerto.`);
+    process.exit(1);
+  }
+  console.error('Error en el servidor:', error);
 });

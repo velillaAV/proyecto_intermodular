@@ -11,6 +11,11 @@ const {
   deleteLiga
 } = require('../controllers/ligaController');
 
+// Endpoint de depuración para inspeccionar rawBody y headers
+router.post('/debug', (req, res) => {
+  res.json({ rawBody: req.rawBody || null, headers: req.headers });
+});
+
 // GET /ligas - Obtener todas las ligas
 router.get('/', getLigas);
 

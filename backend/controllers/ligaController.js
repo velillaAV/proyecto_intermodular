@@ -1,4 +1,5 @@
 const Liga = require('../models/Liga');
+const fs = require('fs');
 
 const getLigas = async (req, res) => {
   try {
@@ -83,7 +84,15 @@ const joinLiga = async (req, res) => {
 const createLiga = async (req, res) => {
   try {
     const liga = req.body;
-    if (!liga.nombre || !liga.cod_invitacion || !liga.cap_de_participantes) {
+    const cap = liga.cap_de_participantes ?? liga.cap_participantes;
+    console.log('POST /ligas body:', JSON.stringify(liga));
+    try {
+      const raw = req.rawBody || JSON.stringify(liga);
+      fs.appendFileSync('ligas_debug.log', `--- ${new Date().toISOString()} REQUEST RAW: ${raw}\n`);
+    } catch (e) {
+      // ignore logging errors
+    }
+    if (!liga.nombre || !liga.cod_invitacion || cap == null) {
       return res.status(400).json({ error: 'Nombre, código de invitación y capacidad de participantes son requeridos' });
     }
 
@@ -92,12 +101,16 @@ const createLiga = async (req, res) => {
       cod_invitacion: liga.cod_invitacion,
       propietario_id: liga.propietario_id || null,
       tipo: liga.tipo || 'normal',
-      cap_de_participantes: liga.cap_de_participantes,
+      cap_participantes: cap,
+      cap_de_participantes: cap,
       fase: liga.fase || 'Fase de Grupos: Jornada 1'
     });
 
     res.status(201).json(nuevoLiga);
   } catch (error) {
+    try {
+      fs.appendFileSync('ligas_debug.log', `ERROR ${new Date().toISOString()}: ${error.stack || error.toString()}\n\n`);
+    } catch (e) {}
     console.error('Error al crear liga:', error);
     res.status(500).json({ error: error.message });
   }
@@ -107,12 +120,14 @@ const updateLiga = async (req, res) => {
   try {
     const { id } = req.params;
     const liga = req.body;
+    const cap = liga.cap_de_participantes ?? liga.cap_participantes;
     const ligaActualizada = await Liga.update(id, {
       nombre: liga.nombre,
       cod_invitacion: liga.cod_invitacion,
       propietario_id: liga.propietario_id || null,
       tipo: liga.tipo || 'normal',
-      cap_de_participantes: liga.cap_de_participantes,
+      cap_participantes: cap,
+      cap_de_participantes: cap,
       fase: liga.fase || 'Fase de Grupos: Jornada 1'
     });
     if (!ligaActualizada) {
