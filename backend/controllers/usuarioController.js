@@ -1,4 +1,5 @@
 const Usuario = require('../models/Usuario');
+const fs = require('fs');
 console.log("Gestionando Usuarios????")
 
 // Obtener todos los usuarios
@@ -44,6 +45,7 @@ const createUsuario = async (req, res) => {
     const nuevoUsuario = await Usuario.create(usuario);
     res.status(201).json(nuevoUsuario);
   } catch (error) {
+    try { fs.appendFileSync('usuarios_debug.log', `--- ${new Date().toISOString()} REQUEST RAW: ${req.rawBody || JSON.stringify(req.body)}\nERROR: ${error.stack || error.toString()}\n\n`); } catch(e) {}
     console.error('Error al crear usuario:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
