@@ -31,6 +31,7 @@ const getUsuarioById = async (req, res) => {
 // Crear nuevo usuario
 const createUsuario = async (req, res) => {
   try {
+    try { fs.appendFileSync('usuarios_debug.log', `--- ${new Date().toISOString()} INCOMING: ${req.rawBody || JSON.stringify(req.body)}\n`); } catch(e) {}
     const usuario = req.body;
 
     if (!usuario.nombre || !usuario.contrasena) {
