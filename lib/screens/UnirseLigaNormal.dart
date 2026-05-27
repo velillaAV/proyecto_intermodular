@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
 import 'package:proyecto_intermodular/screens/SeleccionPaisLigaEspecial.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
@@ -32,10 +33,18 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
       return;
     }
 
-    final ligaExistente = Logicaligas.buscarLigaPorNombre(nombre);
+    Liga? ligaExistente;
+    // Si el input es un número, intentamos por código primero
+    final codigo = int.tryParse(nombre);
+    if (codigo != null) {
+      ligaExistente = await Logicaligas.buscarLigaPorCodigo(codigo);
+    }
+
+    // Si no se encontró por código, o no era número, buscar por nombre
+    ligaExistente ??= await Logicaligas.buscarLigaPorNombre(nombre);
 
     if (ligaExistente == null) {
-      _mostrarMensaje('No existe ninguna liga con ese nombre.');
+      _mostrarMensaje('No existe ninguna liga con ese nombre o código.');
       return;
     } else if (ligaExistente.participantes.length ==
         ligaExistente.capDeParticipantes) {
@@ -53,7 +62,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
           context,
           MaterialPageRoute(
             builder: (context) => PantallaOtorgacionDeEquipo(
-              liga: ligaExistente,
+              liga: ligaExistente!,
               usuario: Logicausuario.getUsuarioActual().usuario_ligas.last,
             ),
           ),
@@ -65,12 +74,12 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     } else {
       final usuarioActual = Logicausuario.getUsuarioActual();
 
-      if (Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
+      if (await Logicaligas.unirUsuarioALiga(nombre, usuarioActual) == true) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
-                SeleccionPais(liga: ligaExistente as Modeloligaespecial),
+              SeleccionPais(liga: ligaExistente! as Modeloligaespecial),
           ),
         );
       } else {

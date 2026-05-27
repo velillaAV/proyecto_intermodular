@@ -15,8 +15,9 @@ class Logicaligas {
   static final List<Liga> _listaLigasNormales = [];
   static final List<Liga> _listaLigasEspeciales = [];
 
-  static bool existeLigaNombre(String nombre) {
-    return buscarLigaPorNombre(nombre) != null;
+  static Future<bool> existeLigaNombre(String nombre) async {
+    final liga = await buscarLigaPorNombre(nombre);
+    return liga != null;
   }
 
   static List<Liga> getLigas() {
@@ -31,12 +32,91 @@ class Logicaligas {
     return _listaLigasEspeciales;
   }
 
-  static Liga? buscarLigaPorNombre(String nombre) {
+  static Future<Liga?> buscarLigaPorNombre(String nombre) async {
     final nombreTrim = nombre.trim().toLowerCase();
     final coincidencias = _listaLigas.where(
       (liga) => liga.nombreLiga.trim().toLowerCase() == nombreTrim,
     );
-    return coincidencias.isEmpty ? null : coincidencias.first;
+    if (coincidencias.isNotEmpty) return coincidencias.first;
+
+    // No está en caché; preguntar al backend
+    try {
+      final uri = Uri.parse('$baseUrl/ligas/nombre/${Uri.encodeComponent(nombre.trim())}');
+      final response = await http.get(uri).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        final jsonLiga = json.decode(response.body);
+        User propietario = User(
+          id_usuario: jsonLiga['propietario_id'],
+          nombre: jsonLiga['propietario_nombre'] ?? 'Desconocido',
+          contrasena: '',
+          genero: '',
+          edad: 0,
+          lugarNacimiento: '',
+          fotoRuta: null,
+          isAdmin: false,
+        );
+        Liga liga = Liga(
+          id_liga: jsonLiga['id_liga'],
+          cod_invitacion: jsonLiga['cod_invitacion'],
+          propietario: propietario,
+          nombreLiga: jsonLiga['nombre'],
+          capDeParticipantes: jsonLiga['cap_participantes'] ?? jsonLiga['cap_de_participantes'] ?? 0,
+          hayClausulazos: false,
+        );
+
+        // Añadir a listas locales para cache
+        _listaLigas.add(liga);
+        _listaLigasNormales.add(liga);
+        return liga;
+      }
+    } catch (e) {
+      print('Error buscando liga por nombre en backend: $e');
+    }
+    return null;
+  }
+
+  /// Buscar liga por código de invitación (pregunta al backend si es necesario)
+  static Future<Liga?> buscarLigaPorCodigo(int codigo) async {
+    // Primero buscar en caché
+    final coincidencias = _listaLigas.where((l) => l.cod_invitacion == codigo);
+    if (coincidencias.isNotEmpty) return coincidencias.first;
+
+    // Obtener todas las ligas y buscar código
+    try {
+      final uri = Uri.parse('$baseUrl/ligas');
+      final response = await http.get(uri).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body);
+        for (var jsonLiga in data) {
+          if ((jsonLiga['cod_invitacion'] ?? jsonLiga['cod']) == codigo) {
+            User propietario = User(
+              id_usuario: jsonLiga['propietario_id'],
+              nombre: jsonLiga['propietario_nombre'] ?? 'Desconocido',
+              contrasena: '',
+              genero: '',
+              edad: 0,
+              lugarNacimiento: '',
+              fotoRuta: null,
+              isAdmin: false,
+            );
+            Liga liga = Liga(
+              id_liga: jsonLiga['id_liga'],
+              cod_invitacion: jsonLiga['cod_invitacion'],
+              propietario: propietario,
+              nombreLiga: jsonLiga['nombre'],
+              capDeParticipantes: jsonLiga['cap_participantes'] ?? jsonLiga['cap_de_participantes'] ?? 0,
+              hayClausulazos: false,
+            );
+            _listaLigas.add(liga);
+            _listaLigasNormales.add(liga);
+            return liga;
+          }
+        }
+      }
+    } catch (e) {
+      print('Error buscando liga por codigo en backend: $e');
+    }
+    return null;
   }
 
   static Future<void> cargarLigasDesdeBackend([int? usuarioId]) async {
@@ -173,8 +253,8 @@ class Logicaligas {
     return nuevaLiga;
   }
 
-  static bool unirUsuarioALiga(String nombre, User usuario) {
-    final liga = buscarLigaPorNombre(nombre);
+  static Future<bool> unirUsuarioALiga(String nombre, User usuario) async {
+    final liga = await buscarLigaPorNombre(nombre);
     if (liga == null) {
       return false;
     }

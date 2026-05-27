@@ -48,26 +48,28 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
     );
   }
 
-  void _enviarLiga() {
+  void _enviarLiga() async {
     final nombre = nombreLiga.trim();
     if (nombre.isEmpty) {
       _mostrarMensaje('Por favor ingresa un nombre de liga.');
       return;
     }
 
-    if (Logicaligas.existeLigaNombre(nombre)) {
+    if (await Logicaligas.existeLigaNombre(nombre)) {
       _mostrarMensaje(
           'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.');
       return;
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    _loadSelecciones(Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes));
+    final nueva = Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes);
+    _loadSelecciones(nueva);
 
+    final cargada = await Logicaligas.buscarLigaPorNombre(nombre) as Modeloligaespecial?;
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SeleccionPais(liga: Logicaligas.buscarLigaPorNombre(nombre) as Modeloligaespecial),
+        builder: (context) => SeleccionPais(liga: cargada ?? nueva),
       ),
     );
   }
