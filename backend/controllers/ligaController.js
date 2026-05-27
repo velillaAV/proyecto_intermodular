@@ -25,6 +25,17 @@ const getLigaById = async (req, res) => {
   }
 };
 
+const getParticipantesLiga = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const participantes = await Liga.getParticipants(id);
+    res.json(participantes);
+  } catch (error) {
+    console.error('Error al obtener participantes de la liga:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
+
 const getLigaByNombre = async (req, res) => {
   try {
     const { nombre } = req.params;
@@ -43,7 +54,15 @@ const getLigasByUsuario = async (req, res) => {
   try {
     const { id } = req.params;
     const ligas = await Liga.getLigasByUsuario(id);
-    res.json(ligas);
+    // Para cada liga, obtener participantes y adjuntarlos como arreglo 'participantes'
+    const resultado = [];
+    for (const row of ligas) {
+      const participantes = await Liga.getParticipants(row.id_liga);
+      // anexar participantes raw (objeto usuario) y devolver la fila original
+      const fila = Object.assign({}, row, { participantes });
+      resultado.push(fila);
+    }
+    res.json(resultado);
   } catch (error) {
     console.error('Error al obtener ligas del usuario:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -159,5 +178,6 @@ module.exports = {
   joinLiga,
   createLiga,
   updateLiga,
-  deleteLiga
+  deleteLiga,
+  getParticipantesLiga
 };

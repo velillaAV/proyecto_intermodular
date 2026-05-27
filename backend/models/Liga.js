@@ -79,6 +79,19 @@ class Liga {
     }
   }
 
+  static async getParticipants(id_liga) {
+    const connection = await getConnection();
+    try {
+      const [rows] = await connection.execute(
+        'SELECT u.* FROM usuarios u JOIN liga_participantes lp ON u.id = lp.id_usuario WHERE lp.id_liga = ?',
+        [id_liga]
+      );
+      return rows;
+    } finally {
+      connection.release();
+    }
+  }
+
   static async isUserInLiga(id_liga, id_usuario) {
     const connection = await getConnection();
     try {

@@ -5,6 +5,7 @@ const {
   getLigaById,
   getLigaByNombre,
   getLigasByUsuario,
+  getParticipantesLiga,
   joinLiga,
   createLiga,
   updateLiga,
@@ -21,6 +22,9 @@ router.get('/', getLigas);
 
 // GET /ligas/usuario/:id - Obtener ligas de un usuario
 router.get('/usuario/:id', getLigasByUsuario);
+
+// GET /ligas/:id/participantes - Obtener participantes de una liga
+router.get('/:id/participantes', getParticipantesLiga);
 
 // GET /ligas/nombre/:nombre - Obtener liga por nombre
 router.get('/nombre/:nombre', getLigaByNombre);

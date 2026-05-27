@@ -153,9 +153,41 @@ class Logicaligas {
               hayClausulazos: false,
             );
 
+            // Usar participantes incluidos en la respuesta de ligas si existen
+            if (jsonLiga['participantes'] != null && jsonLiga['participantes'] is List) {
+              try {
+                for (var userJson in (jsonLiga['participantes'] as List<dynamic>)) {
+                  final participante = User.fromJson(userJson as Map<String, dynamic>);
+                  liga.participantes.add(participante);
+                }
+              } catch (e) {
+                // ignorar errores de parseo
+              }
+            } else {
+              // Fallback: pedir participantes por separado
+              try {
+                final partesUri = Uri.parse('$baseUrl/ligas/${liga.id_liga}/participantes');
+                final partResp = await http.get(partesUri).timeout(const Duration(seconds: 10));
+                if (partResp.statusCode == 200) {
+                  final lista = json.decode(partResp.body) as List<dynamic>;
+                  for (var userJson in lista) {
+                    try {
+                      final participante = User.fromJson(userJson);
+                      liga.participantes.add(participante);
+                    } catch (_) {}
+                  }
+                }
+              } catch (e) {
+                // ignorar errores de participantes
+              }
+            }
+
             if (usuarioId != null && Logicausuario.getUsuarioActual().id_usuario == usuarioId) {
               final usuarioActual = Logicausuario.getUsuarioActual();
-              liga.participantes.add(usuarioActual);
+              // Asegurar que el usuario actual esté en la lista de participantes
+              if (!liga.participantes.any((p) => p.id_usuario == usuarioActual.id_usuario)) {
+                liga.participantes.add(usuarioActual);
+              }
 
               Modelousuario? usuarioLigaExistente;
               for (final usuarioLiga in usuarioActual.usuario_ligas) {
