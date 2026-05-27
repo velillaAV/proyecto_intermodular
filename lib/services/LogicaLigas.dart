@@ -3,6 +3,8 @@ import 'package:proyecto_intermodular/services/backend_config.dart';
 
 import '../models/liga.dart';
 import '../models/user.dart';
+import '../models/ModeloUsuario.dart';
+import '../services/LogicaUsuarios.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -70,6 +72,27 @@ class Logicaligas {
               capDeParticipantes: jsonLiga['cap_participantes'] ?? jsonLiga['cap_de_participantes'] ?? 0,
               hayClausulazos: false,
             );
+
+            if (usuarioId != null && Logicausuario.getUsuarioActual().id_usuario == usuarioId) {
+              final usuarioActual = Logicausuario.getUsuarioActual();
+              liga.participantes.add(usuarioActual);
+
+              Modelousuario? usuarioLigaExistente;
+              for (final usuarioLiga in usuarioActual.usuario_ligas) {
+                if (usuarioLiga.ligaPerteneciente.id_liga == liga.id_liga) {
+                  usuarioLigaExistente = usuarioLiga;
+                  break;
+                }
+              }
+
+              if (usuarioLigaExistente != null) {
+                usuarioLigaExistente.ligaPerteneciente = liga;
+              } else {
+                final usuarioLiga = Modelousuario()..ligaPerteneciente = liga;
+                usuarioActual.usuario_ligas.add(usuarioLiga);
+              }
+            }
+
             _listaLigas.add(liga);
             _listaLigasNormales.add(liga);
           }

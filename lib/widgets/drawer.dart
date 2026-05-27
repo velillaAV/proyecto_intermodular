@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
-import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({super.key});
@@ -42,7 +41,6 @@ class _MyDrawerState extends State<MyDrawer> {
          ListTile(
             title: Text("Cerrar Sesión"),
             onTap: () {
-              Logicausuario.eliminarUsuarios(Logicausuario.getUsuarioActual());
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -62,7 +60,6 @@ class _MyDrawerState extends State<MyDrawer> {
                   settings: RouteSettings()
                 ),
               );
-              ;
             },
           ),
         ]

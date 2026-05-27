@@ -115,6 +115,15 @@ class Logicausuario {
     usuarioActual = usuario;
   }
 
+  static User? buscarUsuarioPorNombre(String nombre) {
+    for (final usuario in _listaUsuarios) {
+      if (usuario.getNombre() == nombre) {
+        return usuario;
+      }
+    }
+    return null;
+  }
+
   static bool confirmarBloqueo(String nombre, String contrasena) {
     //Se confirma si el usuario esta bloqueado
     bool validador = false;

@@ -51,6 +51,12 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
     }
 
     final usuarioActual = User.fromJson(usuarioJson);
+    final usuarioLocal = Logicausuario.buscarUsuarioPorNombre(usuarioActual.nombre);
+    if (usuarioLocal != null) {
+      usuarioActual.usuario_ligas = usuarioLocal.usuario_ligas;
+    } else {
+      Logicausuario.anadirUsuarios(usuarioActual);
+    }
     Logicausuario.setUsuarioActual(usuarioActual);
     await Logicaligas.cargarLigasDesdeBackend(usuarioActual.id_usuario);
 
