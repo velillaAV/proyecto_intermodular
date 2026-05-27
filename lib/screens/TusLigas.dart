@@ -4,6 +4,7 @@ import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
@@ -44,15 +45,27 @@ class _TusLigasState extends State<TusLigas> {
         : Modelousuario()..ligaPerteneciente = liga;
 
     if (Logicaligas.getLigasNormales().contains(liga)) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PantallaLigaNormal(
-            liga: liga,
-            usuario: usuarioLiga,
+      if (usuarioLiga.equipo.equipo.isEmpty) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PantallaOtorgacionDeEquipo(
+              liga: liga,
+              usuario: usuarioLiga,
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PantallaLigaNormal(
+              liga: liga,
+              usuario: usuarioLiga,
+            ),
+          ),
+        );
+      }
     } else {
       Navigator.push(
         context,

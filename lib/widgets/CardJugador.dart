@@ -24,10 +24,14 @@ class _CardJugadorState extends State<CardJugador> {
         widget.jugador.getNombre() == Logicausuario.getUsuarioActual().getNombre();
     return GestureDetector(
       onTap: () {
+        final usuarioLiga = widget.jugador.usuario_ligas.firstWhere(
+          (ligaUsuario) => ligaUsuario.ligaPerteneciente == widget.liga,
+          orElse: () => Modelousuario()..ligaPerteneciente = widget.liga,
+        );
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EquipoJugador(usuario: widget.jugador.usuario_ligas.firstWhere((liga) => liga.ligaPerteneciente == widget.liga), liga: widget.liga, actualizar:widget.actualizar),
+            builder: (context) => EquipoJugador(usuario: usuarioLiga, liga: widget.liga, actualizar:widget.actualizar),
           ),
         );
       },
@@ -80,7 +84,7 @@ class _CardJugadorState extends State<CardJugador> {
               ),
               const SizedBox(width: 12),
                Text(
-                widget.jugador.usuario_ligas.last.puntos.toString(),
+                widget.jugador.usuario_ligas.isNotEmpty ? widget.jugador.usuario_ligas.last.puntos.toString() : '0',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

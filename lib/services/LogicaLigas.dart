@@ -157,8 +157,18 @@ class Logicaligas {
             if (jsonLiga['participantes'] != null && jsonLiga['participantes'] is List) {
               try {
                 for (var userJson in (jsonLiga['participantes'] as List<dynamic>)) {
-                  final participante = User.fromJson(userJson as Map<String, dynamic>);
-                  liga.participantes.add(participante);
+                  final mapUser = userJson as Map<String, dynamic>;
+                  if (mapUser['id_usuario'] == Logicausuario.getUsuarioActual().id_usuario || mapUser['id'] == Logicausuario.getUsuarioActual().id_usuario) {
+                    final participante = Logicausuario.getUsuarioActual();
+                    if (participante.usuario_ligas.where((u) => u.ligaPerteneciente == liga).isEmpty) {
+                      participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
+                    }
+                    liga.participantes.add(participante);
+                  } else {
+                    final participante = User.fromJson(mapUser);
+                    participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
+                    liga.participantes.add(participante);
+                  }
                 }
               } catch (e) {
                 // ignorar errores de parseo
@@ -172,8 +182,18 @@ class Logicaligas {
                   final lista = json.decode(partResp.body) as List<dynamic>;
                   for (var userJson in lista) {
                     try {
-                      final participante = User.fromJson(userJson);
-                      liga.participantes.add(participante);
+                      final mapUser = userJson as Map<String, dynamic>;
+                      if (mapUser['id_usuario'] == Logicausuario.getUsuarioActual().id_usuario || mapUser['id'] == Logicausuario.getUsuarioActual().id_usuario) {
+                        final participante = Logicausuario.getUsuarioActual();
+                        if (participante.usuario_ligas.where((u) => u.ligaPerteneciente == liga).isEmpty) {
+                          participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
+                        }
+                        liga.participantes.add(participante);
+                      } else {
+                        final participante = User.fromJson(mapUser);
+                        participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
+                        liga.participantes.add(participante);
+                      }
                     } catch (_) {}
                   }
                 }

@@ -29,8 +29,11 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
   Color colorPosicion = Colorcetes.porteroColor;
 
   void _ofertar() {
-    Modelousuario usuarioActual = Logicausuario.usuarioActual.usuario_ligas
-        .singleWhere((user) => user.ligaPerteneciente == widget.liga);
+    final usuarioActualList = Logicausuario.usuarioActual.usuario_ligas
+        .where((user) => user.ligaPerteneciente == widget.liga)
+        .toList();
+    if (usuarioActualList.isEmpty) return;
+    Modelousuario usuarioActual = usuarioActualList.first;
     final snackBarValidadorValor = SnackBar(
       content: Text("Esa oferta supera tu saldo"),
     );
@@ -85,8 +88,11 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
 
   void _clausulazo() {
     int pos = widget.usuario.alineacion.indexOf(widget.jugador);
-    Modelousuario usuarioActual = Logicausuario.usuarioActual.usuario_ligas
-        .singleWhere((user) => user.ligaPerteneciente == widget.liga);
+    final usuarioActualList = Logicausuario.usuarioActual.usuario_ligas
+        .where((user) => user.ligaPerteneciente == widget.liga)
+        .toList();
+    if (usuarioActualList.isEmpty) return;
+    Modelousuario usuarioActual = usuarioActualList.first;
     double clausula = widget.jugador.valor_clausula;
     final snackBarValidadorValor3 = SnackBar(
       content: Text("Esa oferta supera tu saldo"),
@@ -288,6 +294,10 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
     }
 
     widget.liga.comprobarSubastas();
+    final usuarioActualList = Logicausuario.usuarioActual.usuario_ligas
+        .where((user) => user.ligaPerteneciente == widget.liga)
+        .toList();
+    final usuarioActualLiga = usuarioActualList.isNotEmpty ? usuarioActualList.first : null;
     return Container(
       decoration: BoxDecoration(
         color: widget.jugador.isIcono == true ? Colors.amber : Colors.black,
@@ -385,10 +395,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
 
           // Porcentaje
           SizedBox(height: 20),
-          if (widget.usuario !=
-              Logicausuario.usuarioActual.usuario_ligas.singleWhere(
-                (user) => user.ligaPerteneciente == widget.liga,
-              ))
+          if (usuarioActualLiga != null && widget.usuario != usuarioActualLiga)
             PopupMenuButton<String>(
               onSelected: (value) {
                 if (value == 'ofertar') {
@@ -412,10 +419,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
               ),
             ),
 
-          if (widget.usuario ==
-              Logicausuario.usuarioActual.usuario_ligas.singleWhere(
-                (user) => user.ligaPerteneciente == widget.liga,
-              ))
+          if (usuarioActualLiga != null && widget.usuario == usuarioActualLiga)
             PopupMenuButton<String>(
               onSelected: (value) {
                 if (value == 'revisarOfertas') {

@@ -238,6 +238,12 @@ class Liga {
   }
 
   void actualizarClasificacion() {
-    participantes.sort((a, b) => b.usuario_ligas.firstWhere((liga) => liga.ligaPerteneciente.nombreLiga == nombreLiga).puntos.compareTo(a.usuario_ligas.firstWhere((liga) => liga.ligaPerteneciente.nombreLiga == nombreLiga).puntos));
+    participantes.sort((a, b) {
+      final datosA = a.usuario_ligas.where((ligaUsuario) => ligaUsuario.ligaPerteneciente.nombreLiga == nombreLiga).toList();
+      final datosB = b.usuario_ligas.where((ligaUsuario) => ligaUsuario.ligaPerteneciente.nombreLiga == nombreLiga).toList();
+      final puntosA = datosA.isNotEmpty ? datosA.first.puntos : 0;
+      final puntosB = datosB.isNotEmpty ? datosB.first.puntos : 0;
+      return puntosB.compareTo(puntosA);
+    });
   }
 }
