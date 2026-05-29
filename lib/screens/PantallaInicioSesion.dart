@@ -199,7 +199,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 value: 1,
                 child: Text("English", style: TextStyle(color: Colors.black)),
               ),
-            ],
+            ], 
             onChanged: (value) {
               _cambiarIdioma(value!);
             },
@@ -227,7 +227,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
-                        child: Image.asset(
+                        child: Image.network(
                           "assets/images/logoMundial2026.png",
                           width: 180,
                           height: 180,
@@ -378,6 +378,8 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                 ),
               ),
             ),
-    );
+        
+      );
+    
   }
 }

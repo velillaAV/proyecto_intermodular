@@ -26,7 +26,9 @@ class _PantallainformacionmundialistaState
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/FondoMundial2026.jpg"),
+
+              image: NetworkImage("images/FondoMundial2026.jpg"),
+
               opacity: 0.2,
               fit: BoxFit.fill,
             ),

@@ -29,7 +29,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/FondoMundial2026.jpg"),
+            image: NetworkImage("images/FondoMundial2026.jpg"),
             opacity: 0.2,
             fit: BoxFit.fill,
           ),
@@ -74,7 +74,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                               ),
                               child: Row(
                                 children: [
-                                  Image.asset(
+                                  Image.network(
                                     seleccion.escudo!,
                                     width: 50,
                                     height: 50,
@@ -109,7 +109,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                 padding: const EdgeInsets.all(12),
                                 child: Row(
                                   children: [
-                                    Image.asset(
+                                    Image.network(
                                       seleccion.escudo!,
                                       width: 50,
                                       height: 50,
