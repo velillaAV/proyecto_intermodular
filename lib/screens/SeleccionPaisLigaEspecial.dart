@@ -29,7 +29,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage("images/FondoMundial2026.jpg"),
+            image: AssetImage("images/FondoMundial2026.jpg"),
             opacity: 0.2,
             fit: BoxFit.fill,
           ),

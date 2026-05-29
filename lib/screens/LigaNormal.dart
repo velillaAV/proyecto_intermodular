@@ -75,7 +75,7 @@ class _LiganormalState extends State<Liganormal> {
         children: [
           // 🔹 Fondo
           Positioned.fill(
-            child: Image.network(
+            child: Image.asset(
               'images/FondoMundial2026.jpg',
               fit: BoxFit.cover,
             ),

@@ -88,7 +88,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
+            child: Image.asset(
               "images/FondoMundial2026.jpg",
 
           ),

@@ -70,7 +70,7 @@ class _EleccionligaState extends State<Eleccionliga> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.network(
+            child: Image.asset(
               "images/FondoMundial2026.jpg",
               fit: BoxFit.cover,
             ),
