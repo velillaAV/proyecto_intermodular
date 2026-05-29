@@ -15,15 +15,11 @@ class SeleccionPais extends StatefulWidget {
 }
 
 class _SeleccionPaisState extends State<SeleccionPais> {
-  
-
   bool isPicked = false;
   int indexGeneral = -1;
- 
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       drawer: MyDrawer(),
       appBar: PreferredSize(
@@ -33,7 +29,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/FondoMundial2026.jpg"),
+            image: AssetImage("assets/images/FondoMundial2026.jpg"),
             opacity: 0.2,
             fit: BoxFit.fill,
           ),

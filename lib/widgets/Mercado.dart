@@ -34,7 +34,7 @@ class _MercadoState extends State<Mercado> {
     super.initState();
     servicio = ServicioMercadoDiario();
     cargarMercadoDiario();
-    
+
     // Iniciar timer para actualizar cuenta atrás cada segundo
     timerCuentaAtras = Timer.periodic(Duration(seconds: 1), (_) {
       if (mercadoDiario != null && mounted) {
@@ -57,9 +57,11 @@ class _MercadoState extends State<Mercado> {
         cargando = true;
         error = null;
       });
-      
-      final nuevoMercado = await servicio.obtenerMercadoHoy(widget.liga.id_liga);
-      
+
+      final nuevoMercado = await servicio.obtenerMercadoHoy(
+        widget.liga.id_liga,
+      );
+
       if (mounted) {
         setState(() {
           mercadoDiario = nuevoMercado;
@@ -81,16 +83,19 @@ class _MercadoState extends State<Mercado> {
 
   @override
   Widget build(BuildContext context) {
-    for(var jugador in widget.liga.mercado) {
+    for (var jugador in widget.liga.mercado) {
       jugador.setIcono();
     }
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('images/FondoMundial2026.jpg', fit: BoxFit.cover),
+          child: Image.asset(
+            'assets/images/FondoMundial2026.jpg',
+            fit: BoxFit.cover,
+          ),
         ),
         Positioned.fill(
-          child: Container(color: Colors.white.withOpacity(0.75)),
+          child: Container(color: Colors.white.withValues(alpha: 0.75)),
         ),
         SafeArea(
           child: Column(
@@ -143,7 +148,10 @@ class _MercadoState extends State<Mercado> {
               // Cuenta atrás del mercado diario
               if (usarMercadoDiario && !cargando && mercadoDiario != null)
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 8),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 22,
+                    vertical: 8,
+                  ),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Colors.deepPurple,
@@ -200,32 +208,39 @@ class _MercadoState extends State<Mercado> {
                   child: cargando && usarMercadoDiario
                       ? Center(child: CircularProgressIndicator())
                       : error != null && usarMercadoDiario
-                          ? Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(Icons.error_outline, color: Colors.red, size: 60),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Error cargando mercado diario',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Usando mercado local',
-                                    style: TextStyle(color: Colors.orange, fontSize: 12),
-                                  ),
-                                  SizedBox(height: 16),
-                                  ElevatedButton(
-                                    onPressed: cargarMercadoDiario,
-                                    child: Text('Reintentar'),
-                                  ),
-                                ],
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.error_outline,
+                                color: Colors.red,
+                                size: 60,
                               ),
-                            )
-                          : usarMercadoDiario && mercadoDiario != null
-                              ? _construirMercadoDiario()
-                              : _construirMercadoLocal(),
+                              SizedBox(height: 16),
+                              Text(
+                                'Error cargando mercado diario',
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Usando mercado local',
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              SizedBox(height: 16),
+                              ElevatedButton(
+                                onPressed: cargarMercadoDiario,
+                                child: Text('Reintentar'),
+                              ),
+                            ],
+                          ),
+                        )
+                      : usarMercadoDiario && mercadoDiario != null
+                      ? _construirMercadoDiario()
+                      : _construirMercadoLocal(),
                 ),
               ),
             ],
@@ -267,10 +282,14 @@ class _MercadoState extends State<Mercado> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('\$${(jugador.valorClausula / 1000000).toStringAsFixed(1)}M',
-                    style: TextStyle(fontSize: 12)),
-                Text('\$${(jugador.valorVenta / 1000000).toStringAsFixed(1)}M',
-                    style: TextStyle(fontSize: 10, color: Colors.grey)),
+                Text(
+                  '\$${(jugador.valorClausula / 1000000).toStringAsFixed(1)}M',
+                  style: TextStyle(fontSize: 12),
+                ),
+                Text(
+                  '\$${(jugador.valorVenta / 1000000).toStringAsFixed(1)}M',
+                  style: TextStyle(fontSize: 10, color: Colors.grey),
+                ),
               ],
             ),
           ),
@@ -296,4 +315,3 @@ class _MercadoState extends State<Mercado> {
           );
   }
 }
-      

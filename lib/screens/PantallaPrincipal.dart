@@ -15,6 +15,15 @@ class PantallaPrincipal extends StatefulWidget {
 }
 
 class _PantallaPrincipalState extends State<PantallaPrincipal> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(
+      const AssetImage('assets/images/FondoMundial2026.jpg'),
+      context,
+    );
+  }
+
   void _elegirLiga() {
     Navigator.push(
       context,
@@ -80,13 +89,13 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
         children: [
           Positioned.fill(
             child: Image.asset(
-              "images/FondoMundial2026.jpg",
+              "assets/images/FondoMundial2026.jpg",
               fit: BoxFit.cover,
             ),
           ),
 
           Positioned.fill(
-            child: Container(color: Colors.white.withOpacity(0.75)),
+            child: Container(color: Colors.white.withValues(alpha: 0.75)),
           ),
 
           Center(
@@ -98,11 +107,11 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
                   vertical: 30,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
+                  color: Colors.white.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
+                      color: Colors.black.withValues(alpha: 0.4),
                       blurRadius: 25,
                       spreadRadius: 2,
                       offset: const Offset(0, 10),

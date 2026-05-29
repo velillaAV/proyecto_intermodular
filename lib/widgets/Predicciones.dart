@@ -28,10 +28,13 @@ class _PrediccionesState extends State<Predicciones> {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('images/FondoMundial2026.jpg', fit: BoxFit.cover),
+          child: Image.asset(
+            'assets/images/FondoMundial2026.jpg',
+            fit: BoxFit.cover,
+          ),
         ),
         Positioned.fill(
-          child: Container(color: Colors.white.withOpacity(0.75)),
+          child: Container(color: Colors.white.withValues(alpha: 0.75)),
         ),
         Column(
           children: [

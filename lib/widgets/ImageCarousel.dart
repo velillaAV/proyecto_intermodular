@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-
 class ImageCarousel extends StatefulWidget {
   /// Lista de rutas de imágenes locales (assets)
   final List<String> imagePaths;
   final List<List<String>> descriptions;
-  const ImageCarousel({Key? key, required this.imagePaths, required this.descriptions}) : super(key: key);
+  const ImageCarousel({
+    super.key,
+    required this.imagePaths,
+    required this.descriptions,
+  });
 
   @override
   State<ImageCarousel> createState() => _ImageCarouselState();
@@ -48,10 +51,6 @@ class _ImageCarouselState extends State<ImageCarousel> {
     }
   }
 
- 
-
-   
-
   // Función para ir a la imagen anterior
   void _previousPage() {
     // Solo retrocede si NO estamos en la primera imagen
@@ -64,22 +63,15 @@ class _ImageCarouselState extends State<ImageCarousel> {
   }
 
   void _showImageDialog(BuildContext context, int index) {
-     
-
-     
     showDialog(
       context: context,
       builder: (context) {
-       
         return SingleChildScrollView(
           child: AlertDialog(
-          title: const Text("Información"),
-          
-            content: 
-            
-            Text(widget.descriptions[index].join("\n")),
+            title: const Text("Información"),
+
+            content: Text(widget.descriptions[index].join("\n")),
             actions: [
-              
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -91,7 +83,6 @@ class _ImageCarouselState extends State<ImageCarousel> {
         );
       },
     );
-     
   }
 
   @override
@@ -104,7 +95,6 @@ class _ImageCarouselState extends State<ImageCarousel> {
           // Stack permite superponer:
           // El PageView
           // Las flechas encima
-        
           children: [
             SizedBox(
               height: 250,
@@ -127,6 +117,13 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 },
 
                 itemBuilder: (context, index) {
+                  final imagePath = widget.imagePaths[index];
+                  final resolvedPath = imagePath.startsWith('assets/images/')
+                      ? imagePath
+                      : imagePath.startsWith('images/')
+                      ? 'assets/$imagePath'
+                      : imagePath;
+
                   return GestureDetector(
                     onTap: () {
                       _showImageDialog(context, index);
@@ -134,7 +131,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.asset(
-                        widget.imagePaths[index],
+                        resolvedPath,
                         fit: BoxFit.fill,
                         width: double.infinity,
                       ),
@@ -144,9 +141,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               ),
             ),
 
-           
             // Flecha izquierda
-           
             Positioned(
               left: 10,
               child: IconButton(
@@ -157,9 +152,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               ),
             ),
 
-           
             // Flecha derecha
-           
             Positioned(
               right: 10,
               child: IconButton(
@@ -172,9 +165,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
         const SizedBox(height: 10),
 
-        
         // Indicadores (los puntitos)
-        
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
 

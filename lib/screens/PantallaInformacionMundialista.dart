@@ -26,7 +26,7 @@ class _PantallainformacionmundialistaState
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("images/FondoMundial2026.jpg"),
+              image: AssetImage("assets/images/FondoMundial2026.jpg"),
               opacity: 0.2,
               fit: BoxFit.fill,
             ),
@@ -122,7 +122,7 @@ class _PantallainformacionmundialistaState
                     ],
                   ),
                 ),
-        
+
                 SizedBox(height: 20),
                 Text(
                   "Actuaciones memorables en mundiales",
@@ -143,27 +143,28 @@ class _PantallainformacionmundialistaState
                     ],
                     descriptions: [
                       [
-                        "La actuación de Diego Maradona en la Copa Mundial de la FIFA 1986 es considerada una de las mejores actuaciones individuales de la historia del fútbol. Fue el líder absoluto de la albiceleste y participó directamente en 10 de los 14 goles del equipo (5 goles y 5 asistencias)." ,
+                        "La actuación de Diego Maradona en la Copa Mundial de la FIFA 1986 es considerada una de las mejores actuaciones individuales de la historia del fútbol. Fue el líder absoluto de la albiceleste y participó directamente en 10 de los 14 goles del equipo (5 goles y 5 asistencias).",
                         "En el debút ante corea dió 3 asistencias, 2 a Valdano y otra a Ruggeri, además de soportar las entradas de los coreanos. Contra Italia la vigente campeona,  marcó de vaselina ante Giovanni Galli para empatar el partido, y selló la fase de grupos con una asistencia al Burru ante Bulgaria",
                         "Contra Uruguay su conducción y regates rompieron la defensa uruguaya aunque no marcó ni asistió, contra Inglaterra el Diego se desatió marcando la mano de dios y el gol del siglo ante Peter Shilton. En las semis, un doblete ante Bélgica certificó el pase de Argentina a la final",
-                        "En la gran final, después de que Alemania remontara un fuerte 2-0, Maradona dió una asistencia clave para Burruchaga que marcó el 3-2 que le daba el mundial a la albiceleste y aumentaba el hito del mismo Diego Armando"                    
+                        "En la gran final, después de que Alemania remontara un fuerte 2-0, Maradona dió una asistencia clave para Burruchaga que marcó el 3-2 que le daba el mundial a la albiceleste y aumentaba el hito del mismo Diego Armando",
                       ],
-                      [ 
+                      [
                         "La actuación de Jairzinho en el Mundial de 1970 es una de las más impresionantes en la historia del fútbol. Conocido como “el Huracán de la Derecha”, fue una pieza clave del legendario equipo de Selección de fútbol de Brasil que conquistó el torneo.",
                         "Lo que hace su desempeño especialmente memorable es que logró marcar al menos un gol en cada uno de los partidos que disputó, un récord que muy pocos jugadores han conseguido en una sola Copa del Mundo. Desde el primer encuentro, Jairzinho mostró su potencia, velocidad y capacidad goleadora",
                         "En la fase de grupos, anotó contra Checoslovaquia, Inglaterra y Rumanía, siendo decisivo en todos ellos. Especialmente recordado es su gol frente a Inglaterra, vigente campeona en ese momento, donde su fuerza física y determinación rompieron la defensa rival.",
                         "En la fase eliminatoria, Jairzinho continuó su racha goleadora. Marcó en los cuartos de final contra Perú, en semifinales frente a Uruguay, y no podía faltar su gol en la final ante la selección italiana.",
-                        "En ese último encuentro, contribuyó a la victoria por 4-1, que consolidó a Brasil como tricampeón del mundo y le permitió quedarse definitivamente con el trofeo Jules Rimet (COPA DEL MUNDO). Con todo eso la actuación de Jairzinho se convirtió en una de las más infravaloradas y poco recordadas"
+                        "En ese último encuentro, contribuyó a la victoria por 4-1, que consolidó a Brasil como tricampeón del mundo y le permitió quedarse definitivamente con el trofeo Jules Rimet (COPA DEL MUNDO). Con todo eso la actuación de Jairzinho se convirtió en una de las más infravaloradas y poco recordadas",
                       ],
-                      [ "La actuación de Roberto Baggio en la Copa Mundial de la FIFA 1994 es una de las más recordadas y contradictorias en la historia del fútbol, marcada por un inicio discreto, una fase final brillante y un desenlace dramático.",
+                      [
+                        "La actuación de Roberto Baggio en la Copa Mundial de la FIFA 1994 es una de las más recordadas y contradictorias en la historia del fútbol, marcada por un inicio discreto, una fase final brillante y un desenlace dramático.",
                         "En la fase de grupos, su rendimiento fue irregular y generó críticas. Italia tuvo dificultades para avanzar y Baggio no logró destacar en los primeros partidos, lo que llevó a cuestionamientos sobre su estado físico y su influencia en el juego.",
                         "A partir de los octavos de final, Baggio se transformó en el jugador decisivo del torneo. Marcó dos goles clave contra Nigeria incluido el empate agónico que llevó el partido a la prórroga, y continuó con goles determinantes frente a España en cuartos de final y contra Bulgaria en semifinales.",
-                        "En la final contra Brasil, disputada tras un torneo agotador y con Baggio físicamente mermado, el partido terminó sin goles y se decidió en la tanda de penaltis. Ahí llegó lo más trágico de su carrera: Baggio falló el último penalti, enviando el balón a las nubes, lo que dio el título a Brasil."
-                                            ],
+                        "En la final contra Brasil, disputada tras un torneo agotador y con Baggio físicamente mermado, el partido terminó sin goles y se decidió en la tanda de penaltis. Ahí llegó lo más trágico de su carrera: Baggio falló el último penalti, enviando el balón a las nubes, lo que dio el título a Brasil.",
+                      ],
                     ],
                   ),
                 ),
-                 SizedBox(height: 20),
+                SizedBox(height: 20),
                 Text(
                   "PLAYOFFS EUROPEOS",
                   style: TextStyle(
@@ -172,7 +173,7 @@ class _PantallainformacionmundialistaState
                     color: Colors.black,
                   ),
                 ),
-                  SizedBox(
+                SizedBox(
                   height: 400,
                   width: 600,
                   child: ImageCarousel(
@@ -180,17 +181,17 @@ class _PantallainformacionmundialistaState
                       "images/rutaA.png",
                       "images/rutaB.png",
                       "images/rutaC.png",
-                      "images/rutaD.png"
+                      "images/rutaD.png",
                     ],
                     descriptions: [
                       [
-                        "Esta semana en la ruta A de los play offs europeos, Italia, Gales, Irlanda de Norte y Bosnia buscaran su pase al mundial, y aquí te hablo de las 4 selecciones y sus oportunidades." ,
+                        "Esta semana en la ruta A de los play offs europeos, Italia, Gales, Irlanda de Norte y Bosnia buscaran su pase al mundial, y aquí te hablo de las 4 selecciones y sus oportunidades.",
                         "Gennaro Gattuso que ya dió su convocatoria para la Azurra quiere enmendar el paso mundialista de los ultimos años de Italia, fase de grupos en 2010 y 2014, eliminada en clasificatorios por Suecia en 2018 y Macedonia del Norte en 2022",
                         "Repasando la convocatoria, el extremo ex de la Juve ahora jugador del Liverpool Federico Chiesa vuelve tras una ausencia de 2 años en la selección, y con ganas de volver al nivel de esa Eurocopa 2021, en donde vacunaba a cualquiera.",
                         "Parte por parte, en porteria Donnarumma no tiene cambio, aunque Valverde lo haya vacilado en Champions, en una defensa revejuvenecida, volverá del lesión Giorgio Scalvini, que se juntaran al grupo de los defensas promesa junto a Diego Coppola y Marco Palestra del Cagliari",
                         "aún así, Alessandro Bastoni y el firme Gianluca Mancini lideraran la zaga. El polivalente Dimarco que se está marcando un temporadón y Di Lorenzo ocuparan sus respectivos laterales. En el centro del campo Nicolo Barella, Sandro Tonali y Manuel Locatelli serían la apuesta de Gattuso para manejar el partido",
                         "Chiesa y Politano se disputaran la banda derecha, mientras que el prometedor Pio (el pollito Pio) Esposito se ha hecho un hueco en la punta de ataque, probablemente acompañado de Mateo Retegui, todo es problable para que Italia clasifique, pero recuerden, nunca apuesten por Italia."
-                        "    ",
+                            "    ",
                         "Por parte de Irlanda del Norte es mal augurio que principalmente sus jugadores más resltables son sus dos laterales, Connor Bradley (actualmente lesionado) y Trai Hume, pero para añadirle más picante, dire algunos jugadores que podrían sorpender.",
                         "Para empezar el delantero del West Bromwich Albion, Isaac Price lleva 7 goles y 1 asistencia e intenta evitar el descenso de los suyos. En la defensa también hay otros nombres propios, como el defensa del Sunderland Daniel Ballard, o el lateral ex Watford Jamal Lewis.",
                         "Con todo esto Irlanda del Norte intentaran vestirse de Macedonios y eliminar a Italia, aunque al final acabaremos viendo Catenaccio vs Brexit, lo cual será un entretenido duelo de todas maneras",
@@ -201,10 +202,9 @@ class _PantallainformacionmundialistaState
                         "       ",
                         "Para acabar estaría la Bosnia de Edin Dzeko, la mistica de esta selección nunca se la quitaran, pero los Miralem Pjanec, Hasan Salihadmidzic, Zvejdan Misimovic o Vedad Ibisevic ya no están.",
                         "Las bazas más claras de los bosnios, son su delantera la cual tiene bastantes opciones, el mismo Edin Dzeko que está destinado ha jugar su segundo mundial después de 2014, a su lado Tabakovic y Erdem Demirovic, ambos delanteros de la Bundes con mucho talento.",
-                        "Y en defensa otro veterano como Sead Kolasinac portará su granito de arena. Bosnia puede darle pelea a Gales, pero si llegarán a vencerles como siempre, lo llegarían a tener bastante jodido en una posible final ante Italia."
-        
+                        "Y en defensa otro veterano como Sead Kolasinac portará su granito de arena. Bosnia puede darle pelea a Gales, pero si llegarán a vencerles como siempre, lo llegarían a tener bastante jodido en una posible final ante Italia.",
                       ],
-                      [ 
+                      [
                         "Desde una Suecia desinflada, una Ucrania con jovenes promesas y con una Polonia que busca el last dance de Robert Lewandowski hasta una Albania que quiere sorprender, y de esa forma se dictara el clasificado de la ruta B, pero de momento, analicémoslos.",
                         " ",
                         "Como se ha mencionado antes, Suecia va caída en picada, y es que a pesar de los nombres con los que forma su equipo no opinan igual, la verdad es que Gyokeres y Isak no han sido capaces de contribuir en la fase clasificatoria.",
@@ -212,14 +212,14 @@ class _PantallainformacionmundialistaState
                         "Y por otra parte, aunque no es atacante, Mattias Svanberg ha tenido que ocupar posiciones ofensivas debido a la ausencia de dos grandes nombres pero de pequeño rendimiento actual. Las lesiones no permitiran que Dejan Kulusevski pueda participar en los play offs pero tienen cierto recambio",
                         "Y estoy hablando de Roony Bardghji la joya del FC Barcelona y que junto a Benjamin Nygren serán bastante importantes en el intento de pasar los play offs, pero no nos dejemos la defensa, en la que predominan el Isak bueno, Isak Hien, y el que ha visto mejores dias, Victor Lindelof",
                         "En el centro del campo jugadores prometedores como Hugo Larsson, la perla de un Tottenham en declive Lucas Bergvall o un jugador que siempre da la cara como Yasin Ayari."
-                        "En general Suecia si no juega como en los clasificatorios lo tiene ciertamente a la altura, pero Ucrania, tampoco es moco de pavo",
+                            "En general Suecia si no juega como en los clasificatorios lo tiene ciertamente a la altura, pero Ucrania, tampoco es moco de pavo",
                         " ",
                         "Y hablando de Ucrania, continuemos con ellos, sumando datos curiosos a la olla, su ultimo mundial fue hace 20 años, liderados por Andriy Shevchencko nada más nada menos, y aunque después de su retiro Ucrania ha estado desorientada, hay que decir que han logrado cosechar buenos jugadores",
                         "En el ataque parece que tienen una obsesion con el Girona, o el Girona con ellos, porque Vladislav Vanat le ha quitado el puesto a Artem Dobvyk, aunque hay que admitir que se lo ha merecido, y acompañandole estaran el siempre fiable Oleksandr Zubkov, y el jedi Viktor Tsygankov",
                         "La defensa tampoco se queda atras, la apuesta de Luis Enrique Illia Zabarniy será quien se encargará de parar a Gyokeres, a sus lados Konoplya y el euforico Mykolenko. Mientras que como último recurso el portero Anatoliy Trubin siempre estará por la favor de volver a volar los cierlos",
                         "No miento al decir que Ucrania puede darle pelea e incluso ganarle a Suecia y intentar ganar la final ante Polonia o Albania, tiene un equipo bastante completo",
                         ""
-                        "Por su parte una Polonia que viene en mejora, hará todo lo que esté en su mano para que Robert Lewandowski juegue su ultimo mundial, y lo mejor de todo, es que tienen bastantes oportunidades",
+                            "Por su parte una Polonia que viene en mejora, hará todo lo que esté en su mano para que Robert Lewandowski juegue su ultimo mundial, y lo mejor de todo, es que tienen bastantes oportunidades",
                         "Hay que recordar que la única razón de estar en play off es haber estado en el mismo grupo que un gran equipo como lo es Holanda, pero Jakub Kaminski nos recordó que Polonia no es poca cosa marcando el empate ante Holanda en los clasificatorios",
                         "Jakub Kaminski, Robert Lewandoski, y Oskar Pietuszewski buscaran marcar la diferencia en el ataque, mientras que el que generará las jugadas será el veterano Piotr Zielinski. Aún así su defensa de 5 no se lo quita ni el paso de los tiempos",
                         "Polonia no debería tener problemas en ganar a Albania, luego ya tendría que sufrir para poder vencer a Ucrania o a Suecia en una posible final, pero lo que es seguro es que Lewandowski si que lo dará todo para su last dance",
@@ -228,9 +228,9 @@ class _PantallainformacionmundialistaState
                         "En defensa el mitico lateral Elseid Hysaj dará lo último que le queda para que Albania clasifique, mientras que en el resto de la defensa Berat Djismiti y Ivan Balliu serán quien saquen la cara por sus compañeros",
                         "La Eurocopa 2024 de los albaneses influira mucho en a convocatoria, ya que a Laçi y a Assllani no los quitan del centro del campo ni pagando, mientras que en el ataque hay un poco más de consistencia",
                         "El autor del gol más rapido de las Eurocopas Nedim Bajrami querrá seguir volando en busca de romper las defensas rivales y que Uzuni y Armando Broja marquen los goles. Albania lo tiene dificil, es cierto, pero las probabilidades nunca son 0",
-
                       ],
-                      [ "La Ruta C facilmente es la más desigualada, dos equipos que hicieron una muy buena Eurocopa 2024, Rumania y Turquía por un lado y Kosovo y Eslovaquia por otro, es verdad que no se puede esperar mucho de ese lado de la ruta, pero vamos a ver más a fondo",
+                      [
+                        "La Ruta C facilmente es la más desigualada, dos equipos que hicieron una muy buena Eurocopa 2024, Rumania y Turquía por un lado y Kosovo y Eslovaquia por otro, es verdad que no se puede esperar mucho de ese lado de la ruta, pero vamos a ver más a fondo",
                         "  ",
                         "Hay que empezar admitiendo que la Eurocopa de Eslovaquia tampoco fue mala ya que casí eliminan a Inglaterra, y ahora tienen la posibilidad de jugar el mundial, y tienen ciertos jugadores para conseguirlo",
                         "La defensa es la cara de esta Eslovaquia, aunque Milan Skriniar no está para nada en su nivel en el Inter, siempre es un seguro para la zaga eslovaca, y si a eso le subas al infravalorado David Hancko y a Daniel Valjent más o menos tienen la defensa bastante completa",
@@ -254,10 +254,7 @@ class _PantallainformacionmundialistaState
                         "En el centro del campo de por si no hay mucho que destacar, pero ahí va nuestra primera joyita encubierta, Florin Tanase, un jugón que está devolviendo al Steaua de Bucarest donde se merece, primeros en el grupo B de la fase eliminatoria de la liga rumana",
                         "Ya en el ataque, el veloz extremo Dennis Man, será quien lidere el ataque, mientras que Ianis Hagi quiere replicar la leyenda de su padre en el 1994 llevando a Rumania de nuevo a un mundia en Estados Unidos",
                         "Rumania lleva una selección bastante centrada en su liga, y todos tienen una gran conexión, lo cual les podría servir para pelear contra la rocosa y letal Turquía e intentar llegar a la final",
-
-
-                       
-                                            ],
+                      ],
                       [
                         "La última ruta para llegar al mundial, la ruta D, una Republica de Irlanda que le dió la vuelta a Hungría, Republica Checa que no pudo clasificar tras perder contra las Islas Feroes, La Macedonia del Norte mata italianos y la siempre prometedora Dinamarca",
                         " ",
@@ -281,10 +278,8 @@ class _PantallainformacionmundialistaState
                         "Poco se puede resaltar de los macedonios, pero siempre a los dos mismos cracks, fieras y gigantes, Enis Bardhi y Stole Dimitrievski, dos clasicazos de LaLiga, quien no vio a Enis Bardhi en el Levante que se vaya a ver un video suyo en Youtube ya mismo",
                         "Y por parte de Stole es la representación de lo que ha sido Jan Oblak para Eslovenia, un muro que intenta proteger las esperanzas mundialistas de los macedonios día sí y día no",
                         "Para que no se quede corto soltemos algunas joyas encubiertas, Elif Elmas que a pesar de ser ciertamente conocido, empezó siendo una promesa y hoy ha bajado su nivel bastante, otro parecido es el ex del Girona Bojan Miovski",
-                        "Hay muchas ganas de volver a ver jugar a Macedonia del Norte unos play offs después de los del mundial 2022, y se que darán espectaculo pase lo que pase"
-
-        
-                                            ]                      
+                        "Hay muchas ganas de volver a ver jugar a Macedonia del Norte unos play offs después de los del mundial 2022, y se que darán espectaculo pase lo que pase",
+                      ],
                     ],
                   ),
                 ),
@@ -297,7 +292,7 @@ class _PantallainformacionmundialistaState
                     color: Colors.black,
                   ),
                 ),
-                  SizedBox(
+                SizedBox(
                   height: 400,
                   width: 600,
                   child: ImageCarousel(
@@ -306,7 +301,7 @@ class _PantallainformacionmundialistaState
                       "images/finalrutaB.png",
                       "images/finalrutaC.png",
                       "images/finalrutaD.png",
-                      "images/finalesrutaRD.png"
+                      "images/finalesrutaRD.png",
                     ],
                     descriptions: [
                       [
@@ -321,11 +316,9 @@ class _PantallainformacionmundialistaState
                         "Bosnia y Italia, ambas que no pisaban un mundial desde 2014 tenían la oportunidad de hacerlo. Y en los primeros minutos, tras un error en el saque de Vasijl, Moise Kean la mandó a la escuadra abriendo el marcador, pero en el minuto 40, tras una entrada brusca a Memic, Bastoni se hacía expulsar tontamente",
                         "En la segunda parte, Moise Kean pudo doblar la ventaja pero a pesar de haber hecho un buen sprint, su remate se fue por encima del larguero, y Bosnia lo aprovechó minutos después, ya que Haris Tabakovic mandaba el partido a una prórroga que Italia buscaba evitar.",
                         "En la prórroga una gran parada de Vasijl evita que Italia marcara, Benjamin Tahirovic fue el que pudo materializar la ocasión más clara de la prórroga, pero su remate se fue rozando el palo. A Italia le serbian los penaltis recordandonos a esa Eurocopa de 2021, pero esta vez seria distinto",
-                        "Pio Esposito mandó el balón a la grada, Bosnia no falló, pero Bryan Cristante y su remate al larguero, dictaron una pena repentina para Italia, que se encargó de certificarla Esmir Bajraktarevic. Italia seguía sin ir al mundial después de 12 años, y Bosnia volvía trás 12 años."
-
-        
+                        "Pio Esposito mandó el balón a la grada, Bosnia no falló, pero Bryan Cristante y su remate al larguero, dictaron una pena repentina para Italia, que se encargó de certificarla Esmir Bajraktarevic. Italia seguía sin ir al mundial después de 12 años, y Bosnia volvía trás 12 años.",
                       ],
-                      [ 
+                      [
                         "Los suecos empezarón fuerte ante Ucrania, a los 5 minutos y gran pase de Benjamin Nygren dejó a Victor Gyokeres rematando solo frente a porteria, poniendo el 0-1, Gabriel Gudmunsson se subió a la moto y con un gran sprint estuvó a punto de poner tierra de por medio, pero el palo dijo que no",
                         "En la segunda parte, con un saque milagroso del portero sueco Kristoffer Nordfeldt asistió a Gyokeres que después de escuchar las críticas, marcaba su doblete poniendo el segundo en el marcador, Gyokeres que aún seguía con hambre, se construyó el mismo una jugada que acabó en un pénalti que el mismo marcaría",
                         "Tras el hat trick de Gyokeres, el partido ya estaba sentenciado aún así Matviy Ponomarenko marcaba el gol de la honra para Ucrania, y dejaba con un 1-3 el resultado final, pasando Suecia a la final sin ninguna molestia",
@@ -334,10 +327,9 @@ class _PantallainformacionmundialistaState
                         "y en el 72, con otro zapatazo Piotr Zielinski esta vez no falló culminando una gran remontada polaca que se quedaba con su pase a la final de los play offs",
                         "En la gran final, Suecia empezó de forma energica, Ayari con un gran taconazo, asistió a Elanga que la clavaba en la escuadra marcando el primero, Polonia no tardó en espabilarse, y Nicola Zalewski marcaba el empate 14 minutos después.",
                         "Antes del descanso Gustaf Lagerbielke con un gran testarazo volvía a poner por delante a Suecia, el partido que ya era un tira y afloja siguió con la misma dinamica y en la segunda parte Swiderski volvía a empatar el partido, y no fue hasta el final del partido cuando se definiria",
-                        "En el minuto 87, después de una parada de Grabara, Zeneli le pegó al palo, el balón salió rebotado, y un Gyokeres que se estaba redimiendo de la fase clasificatoria, marcaba un gol agonico, que mandaba a Suecia al mundial 8 años después"
-
+                        "En el minuto 87, después de una parada de Grabara, Zeneli le pegó al palo, el balón salió rebotado, y un Gyokeres que se estaba redimiendo de la fase clasificatoria, marcaba un gol agonico, que mandaba a Suecia al mundial 8 años después",
                       ],
-                      [ 
+                      [
                         "En un partido bastante reñido, Martin Valjent abrió el marcador a favor de Eslovaquia con un gran cabezazo a los 6 minutos, pero Kosovo reaccionó y Veldin Hodza empataba en el 21 el partido",
                         "A minutos del final de la primera parte, una falta de entendimiento provocó que un tiro libre de Lukas Haraslin que no llevaba mucho peligro acabara en gol, aún así en el inicio de la segunda mitad Fisnik Asllani con un cabezazo hermoso empataba de nuevo",
                         "Y para aumentar la locura, Florent Muslija marcaba de tiro libre para finalmente remontar el partido a favor de Kosovo, en el 73, Dubravka detuvo bien el remate de Hajdari, pero el rebote le cayó a Kreshnik Hajziri que marcaba un 2-4 sensacional",
@@ -347,9 +339,7 @@ class _PantallainformacionmundialistaState
                         "Por parte de los rumanos, se encontraron con el palos tras el remates de Ratiu y con eso, Turquía se acercaba más de clasificar al mundial",
                         "En la gran final para el repechaje Kosovo tuvo la primera con un gran remate de Fisnik Asllani que primero detuvo Cakir y que luego pegó en el larguero, poco después con una gran jugada de Yildiz, Akturkoglu se quedaba solo frente a la porteria, pero un mal control de su parte hizo que no pudiera tirar",
                         "Ya en la segunda parte, Kokcu estaba a nada de marcar el primero, pero el mismo Akturkoglu le quitó el gol para marcar el suyo propio, adelantando de todas formas a Turquía en el marcador, Kenan Yildiz siguió con su masterclass, y a pesar de que pudo haber marcado, Turquía ganó y clasificaba al mundial",
-
-                       
-                                            ],
+                      ],
                       [
                         "En el partido entre republicas, se vió una primera parte de locura, en donde todo empezó trás un penalti sobre Nathan Collins provocado por Vladimir Darida, que evidentemente Troy Parrot se encargó de marcar para adelantar a los irlandeses y trás una jugada con muchas carambolas, Matej Kovar marcó en propia",
                         "Republica Checa que a los 23 minutos ya perdía 0-2, volvía a ver la esperanza tras que el arbitro pitara penalti debido a un claro agarrón sobre Ladislav Krejci que Patrick Schick marcaría con una clase inigualable para recortar distancias",
@@ -361,9 +351,8 @@ class _PantallainformacionmundialistaState
                         "En la final, Republica Checa se adelantó a los 3 minutos con una volea impresionante de Pavel Sulc que dejaba a Dinamarca sin palabras, Pavel Sulc y Matej Kover se convirtieron en los protagonistas de la primera parte, Kovar parando un gran tiro libre y Pavel Sulc deslumbrando con su visión de juego.",
                         "Cosa que pudo haber hecho que Republica Checa pusiera tierra de por medio, pero Lukas Provod no pudo materializar la ocasión. En el 71, Joachim Anderser ponía las tablas en el marcador con un gran cabezazo, llevando el partido a la prórroga",
                         "En la prórroga, Ladislav Krejci que fue clave contra Republica de Irlanda marcaba el 2-1 en el 100 de partido, pero el delantero el Bodo/Glimt Kasper Hogh empató en el 110 haciendo su tan conocida celebración cosa que llevó el partido a la tanda de penaltis",
-                        "Dinamarca falló 3 penaltis en la tanda, Republica Checa solo 1, y con el lanzamiento acertado de Michel Sadilek, Republica Checa volvía al mundial 20 años después."
-        
-                                            ],
+                        "Dinamarca falló 3 penaltis en la tanda, Republica Checa solo 1, y con el lanzamiento acertado de Michel Sadilek, Republica Checa volvía al mundial 20 años después.",
+                      ],
                       [
                         "En los play offs del resto del mundo, Bolivia se enfrentaba a Surinam en un partido en donde Bolivia empezó fuerte con un gran disparo de Roberto Fernadéz que repeló el guardameta de Surinam",
                         "Trás otra jugada de calidad de Bolivia, Monteiro acabó rematando hacía atrás, fallando estrepitosamente, el partido continuó su rumbo, y Guillermo Viscarra salvaba a Bolivia con una gran parada que evitaba el 0-1",
@@ -375,11 +364,8 @@ class _PantallainformacionmundialistaState
                         "Era de esperar que Republica del Congo dominara el encuentro, pero Jamaica pudo haberse adelantado con un remate de Kasey Palmer que acabó en córner. O el disparo lejano de Leon Bailey que se fue rozando el palo",
                         "Bakambu, tuvo la oportunidad de finalmente a marcar, pero su remate lo acabó parando el guardameta Jamaicano. El partido se fue a la prórroga, y Tuanzebe marcaba el gol que mandaba a Republica del Congo al mundial",
                         "En la segunda final del play off, Bolivia quería rozar el milagro ante una Irak que quería volver a pisar el mundial desde el 86, Irak empezó dominando y con un gran tiro libre de Al-Hamadi que sacaba con una gran parada de Viscarra, Irak hacia una demostración de intenciones",
-                        "Y pocos minutos después el mismo Al-Hamadi marcaba de cabeza para adelantar a Irak, Bolivia recuperó la fé después de que Paniagua volviera a iluminar el camino con un gran gol por la escuadra, camino que se encargó de oscurecer el capitán de Irak Aymen Hussein, que con su gol, mandaba a Irak al mundial"
-
-                       
-        
-                                            ],                                             
+                        "Y pocos minutos después el mismo Al-Hamadi marcaba de cabeza para adelantar a Irak, Bolivia recuperó la fé después de que Paniagua volviera a iluminar el camino con un gran gol por la escuadra, camino que se encargó de oscurecer el capitán de Irak Aymen Hussein, que con su gol, mandaba a Irak al mundial",
+                      ],
                     ],
                   ),
                 ),
