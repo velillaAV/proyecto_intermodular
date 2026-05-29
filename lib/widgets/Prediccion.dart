@@ -86,7 +86,7 @@ class _PrediccionState extends State<Prediccion> {
             color: Colors.grey,
             child: Row(
               children: [
-                Image.asset(
+                Image.network(
                   widget.prediccion.equipoLocal,
                   width: 140,
                   height: 140,
@@ -108,7 +108,7 @@ class _PrediccionState extends State<Prediccion> {
                   ?Colors.green: Colors.red,
                   child: Text(marcadorB.toString()),
                 ),
-                Image.asset(
+                Image.network(
                   widget.prediccion.equipoVisitante,
                   width: 140,
                   height: 140,
@@ -131,7 +131,7 @@ class _PrediccionState extends State<Prediccion> {
             color: Colors.grey,
             child: Row(
               children: [
-                Image.asset(
+                Image.network(
                   widget.prediccion.equipoLocal,
                   width: 140,
                   height: 140,
@@ -163,7 +163,7 @@ class _PrediccionState extends State<Prediccion> {
                     onChanged: (_) => _updateScore(),
                   ),
                 ),
-                Image.asset(
+                Image.network(
                   widget.prediccion.equipoVisitante,
                   width: 140,
                   height: 140,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/translations/languagesInicioSesion.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
-import 'package:proyecto_intermodular/controllers/GoogleControllers.dart';
 import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/screens/PantallaPrincipal.dart';
 import 'package:proyecto_intermodular/screens/PantallaRegistrar.dart';
@@ -140,15 +139,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
     }
   }
 
-  void _inicioSesionGoogle(userCredential) async {
-    if (userCredential != null) {
-      if (!mounted) return;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const PantallaPrincipal()),
-      );
-    }
-  }
+ 
 
   void _cambiarIdioma(int nuevoIdioma) {
     setState(() {
@@ -299,28 +290,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                     ),
                     const SizedBox(height: 15),
 
-                    ElevatedButton(
-                      onPressed: _isLoading
-                          ? null
-                          : () async {
-                              final userCredential =
-                                  await GoogleControllers.loginGoogle();
-                              _inicioSesionGoogle(userCredential);
-                            },
-                      style: CustomStyles.estiloBotonGoogle,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            Languagesiniciosesion.getTexto(
-                              Languagesiniciosesion.accederGoogle,
-                            ),
-                            style: const TextStyle(fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ),
+                    
                     const SizedBox(height: 15),
 
                     ElevatedButton(

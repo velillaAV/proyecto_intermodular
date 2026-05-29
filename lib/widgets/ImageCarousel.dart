@@ -130,7 +130,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
+                      child: Image.network(
                         resolvedPath,
                         fit: BoxFit.fill,
                         width: double.infinity,
