@@ -19,7 +19,7 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     precacheImage(
-      const AssetImage('assets/images/FondoMundial2026.jpg'),
+      const NetworkImage('assets/images/FondoMundial2026.jpg'),
       context,
     );
   }
@@ -88,12 +88,11 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              "assets/images/FondoMundial2026.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
+            child: Image.network(
+              "images/FondoMundial2026.jpg",
 
+          ),
+          ),
           Positioned.fill(
             child: Container(color: Colors.white.withValues(alpha: 0.75)),
           ),
