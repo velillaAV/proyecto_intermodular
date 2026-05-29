@@ -86,7 +86,7 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
         children: [
           
           Positioned.fill(
-            child: Image.asset(
+            child: Image.network(
               'images/FondoMundial2026.jpg',
               fit: BoxFit.cover,
             ),

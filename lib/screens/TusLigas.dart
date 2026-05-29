@@ -106,7 +106,7 @@ class _TusLigasState extends State<TusLigas> {
               children: [
                 // Fondo con imagen
                 Positioned.fill(
-                  child: Image.asset(
+                  child: Image.network(
                     'assets/images/FondoMundial2026.jpg',
                     fit: BoxFit.cover,
                   ),

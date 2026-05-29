@@ -90,7 +90,7 @@ class _PantallaOtorgacionDeEquipoState
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
+            child: Image.network(
               'images/FondoMundial2026.jpg',
               fit: BoxFit.cover,
             ),
