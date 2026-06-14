@@ -26,13 +26,13 @@ class CardOfertas extends StatefulWidget {
 class _CardOfertasState extends State<CardOfertas> {
   @override
   Widget build(BuildContext context) {
-    User usuarioOfertador;
+    Usuario usuarioOfertador;
     try {
       usuarioOfertador = widget.liga.participantes.singleWhere(
         (user) => user.usuario_ligas.contains(widget.ofertador),
       );
     } catch (_) {
-      usuarioOfertador = User(
+      usuarioOfertador = Usuario(
         id_usuario: null,
         nombre: 'Desconocido',
         contrasena: '',

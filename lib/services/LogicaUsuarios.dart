@@ -1,8 +1,8 @@
 import 'package:proyecto_intermodular/models/user.dart';
 
 class Logicausuario {
-  static final List<User> _listaUsuarios = [
-    User(
+  static final List<Usuario> _listaUsuarios = [
+    Usuario(
       nombre: "Edgar",
       contrasena: "Edgar",
       genero: 'Sr',
@@ -11,7 +11,7 @@ class Logicausuario {
       fotoRuta: null,
       isAdmin: false,
     ),
-    User(
+    Usuario(
       nombre: "Alvaro",
       contrasena: "Alvaro",
       genero: 'Sr',
@@ -20,7 +20,7 @@ class Logicausuario {
       fotoRuta: null,
       isAdmin: false,
     ),
-    User(
+    Usuario(
       nombre: "Dario",
       contrasena: "Dario",
       genero: 'Sr',
@@ -31,10 +31,10 @@ class Logicausuario {
     ),
   ];
 
-  static final List<User> _listaAdmins = [];
+  static final List<Usuario> _listaAdmins = [];
 
-  static final List<User> _listaUsuariosAdmins = [
-    User(
+  static final List<Usuario> _listaUsuariosAdmins = [
+    Usuario(
       nombre: "Edgar",
       contrasena: "Edgar",
       genero: 'Sr',
@@ -43,7 +43,7 @@ class Logicausuario {
       fotoRuta: null,
       isAdmin: false,
     ),
-    User(
+    Usuario(
       nombre: "Alvaro",
       contrasena: "Alvaro",
       genero: 'Sr',
@@ -52,7 +52,7 @@ class Logicausuario {
       fotoRuta: null,
       isAdmin: false,
     ),
-    User(
+    Usuario(
       nombre: "Dario",
       contrasena: "Dario",
       genero: 'Sr',
@@ -63,8 +63,8 @@ class Logicausuario {
     ),
   ];
 
-  static final List<User> _admin = [
-    User(
+  static final List<Usuario> _admin = [
+    Usuario(
       nombre: "admin",
       contrasena: "admin",
       genero: 'Sr',
@@ -75,7 +75,7 @@ class Logicausuario {
     ),
   ];
 
-  static User usuarioActual = User(
+  static Usuario usuarioActual = Usuario(
     nombre: "null",
     contrasena: "contrasena",
     genero: "genero",
@@ -85,37 +85,37 @@ class Logicausuario {
     isAdmin: false,
   );
 
-  static void anadirUsuarios(User usuarios) {
+  static void anadirUsuarios(Usuario usuarios) {
     _listaUsuarios.add(usuarios);
     _listaUsuariosAdmins.add(usuarios);
   }
 
-  static void anadirAdmins(User admin) {
+  static void anadirAdmins(Usuario admin) {
     _listaAdmins.add(admin);
     _listaUsuariosAdmins.add(admin);
   }
 
-  static List<User> getListaUsuarios() {
+  static List<Usuario> getListaUsuarios() {
     return _listaUsuarios;
   }
 
-  static List<User> getListaAdmins() {
+  static List<Usuario> getListaAdmins() {
     return _listaAdmins;
   }
 
-  static List<User> getListaUsuariosAdmins() {
+  static List<Usuario> getListaUsuariosAdmins() {
     return _listaUsuariosAdmins;
   }
 
-  static User getUsuarioActual() {
+  static Usuario getUsuarioActual() {
     return usuarioActual;
   }
 
-  static void setUsuarioActual(User usuario) {
+  static void setUsuarioActual(Usuario usuario) {
     usuarioActual = usuario;
   }
 
-  static User? buscarUsuarioPorNombre(String nombre) {
+  static Usuario? buscarUsuarioPorNombre(String nombre) {
     for (final usuario in _listaUsuarios) {
       if (usuario.getNombre() == nombre) {
         return usuario;
@@ -129,7 +129,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _listaUsuariosAdmins.length; i++) {
-      User u = _listaUsuariosAdmins[i];
+      Usuario u = _listaUsuariosAdmins[i];
       if (u.getNombre() == nombre && u.getContrasena() == contrasena) {
         if (u.isBlocked == true) {
           validador = true;
@@ -145,7 +145,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _listaUsuarios.length; i++) {
-      User u = _listaUsuarios[i];
+      Usuario u = _listaUsuarios[i];
       if (u.getNombre() == nombre && u.getContrasena() == contrasena) {
         validador = true;
         usuarioActual = u;
@@ -159,7 +159,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _listaAdmins.length; i++) {
-      User u = _listaAdmins[i];
+      Usuario u = _listaAdmins[i];
       if (u.getNombre() == nombre && u.getContrasena() == contrasena) {
         validador = true;
         usuarioActual = u;
@@ -173,7 +173,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _admin.length; i++) {
-      User u = _admin[i];
+      Usuario u = _admin[i];
       if (u.getNombre() == nombre && u.getContrasena() == contrasena) {
         validador = true;
         usuarioActual = u;
@@ -188,7 +188,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _listaUsuarios.length; i++) {
-      User u = _listaUsuarios[i];
+      Usuario u = _listaUsuarios[i];
       if (u.getNombre() == nombre) {
         validador = true;
         usuarioActual = u;
@@ -202,7 +202,7 @@ class Logicausuario {
     bool validador = false;
 
     for (int i = 0; i < _listaUsuariosAdmins.length; i++) {
-      User u = _listaUsuariosAdmins[i];
+      Usuario u = _listaUsuariosAdmins[i];
       if (u.getNombre() == nombre) {
         validador = true;
         usuarioActual = u;
@@ -217,7 +217,7 @@ class Logicausuario {
     String contrasena = " ";
     int contadorDiscordancia = 0;
     for (int i = 0; i < _listaUsuarios.length; i++) {
-      User u = _listaUsuarios[i];
+      Usuario u = _listaUsuarios[i];
       if (u.getNombre().compareTo(nombre) == 0) {
         contrasena = u.getContrasena();
       } else {
@@ -232,7 +232,7 @@ class Logicausuario {
     return contrasena;
   }
 
-  static void eliminarUsuarios(User usuario) {
+  static void eliminarUsuarios(Usuario usuario) {
     if (usuario.getNombre().compareTo("admin") == 0 ||
         usuario.getNombre().compareTo("Edgar") == 0 ||
         usuario.getNombre().compareTo("Alvaro") == 0) {
@@ -244,7 +244,7 @@ class Logicausuario {
     }
   }
 
-  static User seleccionarUsuario(int ID_User) {
+  static Usuario seleccionarUsuario(int ID_User) {
     return _listaUsuarios.elementAt(ID_User);
   }
 }

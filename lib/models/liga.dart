@@ -5,11 +5,11 @@ import 'package:proyecto_intermodular/models/user.dart';
 class Liga {
   int id_liga;
   int cod_invitacion;
-  User propietario;
+  Usuario propietario;
   String nombreLiga;
   String fase = "Fase de Grupos: Jornada 1";
   bool hayClausulazos = false;
-  List<User> participantes = [];
+  List<Usuario> participantes = [];
   final int capDeParticipantes;
   List<Modelojugador> mercado = [
     Modelojugador(
@@ -131,7 +131,7 @@ class Liga {
     return cod_invitacion;
   }
 
-  User getPropietario() {
+  Usuario getPropietario() {
     return propietario;
   }
 
@@ -139,7 +139,7 @@ class Liga {
     return nombreLiga;
   }
 
-  List<User> getParticipantes() {
+  List<Usuario> getParticipantes() {
     return participantes;
   }
 
@@ -155,7 +155,7 @@ class Liga {
     this.cod_invitacion = cod_invitacion;
   }
 
-  void setPropietario(User propietario) {
+  void setPropietario(Usuario propietario) {
     this.propietario = propietario;
   }
 
@@ -163,7 +163,7 @@ class Liga {
     this.nombreLiga = nombreLiga;
   }
 
-  void setParticipantes(List<User> participantes) {
+  void setParticipantes(List<Usuario> participantes) {
     this.participantes = participantes;
   }
 

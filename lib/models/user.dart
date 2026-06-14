@@ -1,6 +1,6 @@
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 
-class User {
+class Usuario {
   int? id_usuario;
   String nombre;
   String contrasena;
@@ -14,7 +14,7 @@ class User {
 
   bool isAdmin;
   bool isBlocked = false;
-  User({
+  Usuario({
     this.id_usuario,
     required this.nombre,
     required this.contrasena,
@@ -88,8 +88,8 @@ class User {
   }
 
   
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Usuario.fromJson(Map<String, dynamic> json) {
+    return Usuario(
       id_usuario: json['id_usuario'] ?? json['id'] ?? null,
       nombre: json['nombre'] ?? '',
       contrasena: json['contrasena'] ?? json['password'] ?? '',

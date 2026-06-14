@@ -7,7 +7,7 @@ import 'package:proyecto_intermodular/widgets/EquipoJugador.dart';
 
 class CardJugador extends StatefulWidget {
   const CardJugador({super.key, required this.jugador, required this.indexPlayer, required this.usuario, required this.liga, required this.actualizar, });
-  final User jugador;
+  final Usuario jugador;
   final Modelousuario usuario;
   final int indexPlayer;
   final Liga liga;

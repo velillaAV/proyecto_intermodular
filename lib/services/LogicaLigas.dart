@@ -45,7 +45,7 @@ class Logicaligas {
       final response = await http.get(uri).timeout(const Duration(seconds: 10));
       if (response.statusCode == 200) {
         final jsonLiga = json.decode(response.body);
-        User propietario = User(
+        Usuario propietario = Usuario(
           id_usuario: jsonLiga['propietario_id'],
           nombre: jsonLiga['propietario_nombre'] ?? 'Desconocido',
           contrasena: '',
@@ -89,7 +89,7 @@ class Logicaligas {
         List<dynamic> data = json.decode(response.body);
         for (var jsonLiga in data) {
           if ((jsonLiga['cod_invitacion'] ?? jsonLiga['cod']) == codigo) {
-            User propietario = User(
+            Usuario propietario = Usuario(
               id_usuario: jsonLiga['propietario_id'],
               nombre: jsonLiga['propietario_nombre'] ?? 'Desconocido',
               contrasena: '',
@@ -134,7 +134,7 @@ class Logicaligas {
           if (jsonLiga['tipo'] == 'especial') {
             // Crear Modeloligaespecial si lo necesitas
           } else {
-            User propietario = User(
+            Usuario propietario = Usuario(
               id_usuario: jsonLiga['propietario_id'],
               nombre: 'Desconocido',
               contrasena: '',
@@ -165,7 +165,7 @@ class Logicaligas {
                     }
                     liga.participantes.add(participante);
                   } else {
-                    final participante = User.fromJson(mapUser);
+                    final participante = Usuario.fromJson(mapUser);
                     participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
                     liga.participantes.add(participante);
                   }
@@ -190,7 +190,7 @@ class Logicaligas {
                         }
                         liga.participantes.add(participante);
                       } else {
-                        final participante = User.fromJson(mapUser);
+                        final participante = Usuario.fromJson(mapUser);
                         participante.usuario_ligas.add(Modelousuario()..ligaPerteneciente = liga);
                         liga.participantes.add(participante);
                       }
@@ -237,7 +237,7 @@ class Logicaligas {
     }
   }
 
-  static Future<bool> unirUsuarioALigaBackend(Liga liga, User usuario) async {
+  static Future<bool> unirUsuarioALigaBackend(Liga liga, Usuario usuario) async {
     final response = await http.post(
       Uri.parse('$baseUrl/ligas/${liga.id_liga}/unirse'),
       headers: {'Content-Type': 'application/json'},
@@ -249,7 +249,7 @@ class Logicaligas {
     return response.statusCode == 200;
   }
 
-  static Future<Map<String, dynamic>> crearLigaNormal(String nombre, User propietario, int numParticipantes, bool clausulas) async {
+  static Future<Map<String, dynamic>> crearLigaNormal(String nombre, Usuario propietario, int numParticipantes, bool clausulas) async {
     final cod = _listaLigas.length + 100;
     try {
       final response = await http
@@ -292,7 +292,7 @@ class Logicaligas {
     }
   }
 
-   static Modeloligaespecial crearLigaEspecial(String nombre, User propietario, int numParticipantes) {
+   static Modeloligaespecial crearLigaEspecial(String nombre, Usuario propietario, int numParticipantes) {
     final nuevaLiga = Modeloligaespecial(
       id_liga: _listaLigas.length + 1,
       cod_invitacion: _listaLigas.length + 100,
@@ -305,7 +305,7 @@ class Logicaligas {
     return nuevaLiga;
   }
 
-  static Future<bool> unirUsuarioALiga(String nombre, User usuario) async {
+  static Future<bool> unirUsuarioALiga(String nombre, Usuario usuario) async {
     final liga = await buscarLigaPorNombre(nombre);
     if (liga == null) {
       return false;

@@ -4,7 +4,7 @@ import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 class UserControllers {
 
   static void creacionYInsercionDeUsuario(String _nombre, String _contrasena, int _edad, String _tratamiento, String _lugarNacimiento, String? _fotoRuta, bool _adminONo) { //Con los parametros recibidos, se crea un usuario y se introduce en la lista especifica
-    User usuarioNuevo = new User(
+    Usuario usuarioNuevo = new Usuario(
         nombre: _nombre,
         contrasena: _contrasena,
         edad: _edad,
