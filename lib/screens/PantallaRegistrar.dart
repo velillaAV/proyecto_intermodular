@@ -47,16 +47,13 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   void _snack(String mensaje) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(mensaje)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(mensaje)));
   }
 
   void _irA(Widget pantalla) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => pantalla),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (context) => pantalla));
   }
 
   SizedBox _gap() => SizedBox(height: Dimensiones.paddingMediano);
@@ -83,8 +80,9 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
     return TextFormField(
       obscureText: obscureText,
       keyboardType: soloNumeros ? TextInputType.number : null,
-      inputFormatters:
-          soloNumeros ? [FilteringTextInputFormatter.digitsOnly] : null,
+      inputFormatters: soloNumeros
+          ? [FilteringTextInputFormatter.digitsOnly]
+          : null,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: label,
@@ -126,16 +124,15 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
       return _snack("No están aceptados los terminos");
     }
 
-    final nuevoUsuario = await ApiService.registerUser({
-      'nombre': _nombre,
-      'contrasena': _contrasena,
-      'genero': _tratamiento,
-      'edad': _edad,
-      'lugarNacimiento': _lugarNacimiento,
-      'fotoRuta': _fotoRuta,
-      'isAdmin': false,
-      'isBlocked': false,
-    });
+    final nuevoUsuario = await ApiService.registerUser(
+      _nombre,
+      _contrasena,
+      _tratamiento,
+      _edad,
+      _lugarNacimiento,
+      _fotoRuta
+    
+    );
 
     if (nuevoUsuario == null) {
       return _snack("No se pudo registrar el usuario. Intenta de nuevo.");
@@ -209,7 +206,8 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   Languagespantallaregistrar.tratamiento,
                                 ),
                                 style: TextStyle(
-                                    fontSize: Dimensiones.paddingMediano),
+                                  fontSize: Dimensiones.paddingMediano,
+                                ),
                               ),
                               SizedBox(width: Dimensiones.paddingMediano),
                               _radioBtn('Sr'),
@@ -294,13 +292,13 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                 DropdownMenu(
                                   label: Text(
                                     Languagespantallaregistrar.getTexto(
-                                      Languagespantallaregistrar.lugarNacimiento,
+                                      Languagespantallaregistrar
+                                          .lugarNacimiento,
                                     ),
                                   ),
                                   initialSelection: listaLugares.first,
                                   onSelected: (String? value) {
-                                    setState(
-                                        () => _lugarNacimiento = value!);
+                                    setState(() => _lugarNacimiento = value!);
                                   },
                                   dropdownMenuEntries: menuEntries,
                                 ),
@@ -312,16 +310,19 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                   children: [
                                     Text(
                                       Languagespantallaregistrar.getTexto(
-                                        Languagespantallaregistrar.aceptarTerminos,
+                                        Languagespantallaregistrar
+                                            .aceptarTerminos,
                                       ),
                                       style: TextStyle(
-                                          fontSize: Dimensiones.paddingMediano),
+                                        fontSize: Dimensiones.paddingMediano,
+                                      ),
                                     ),
                                     Checkbox(
                                       checkColor: Colors.white,
                                       fillColor:
                                           WidgetStateProperty.resolveWith(
-                                              _colorBotonTick),
+                                            _colorBotonTick,
+                                          ),
                                       value: _tickONo,
                                       onChanged: (value) {
                                         setState(() => _tickONo = value!);
@@ -340,7 +341,8 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                       Languagespantallaregistrar.aceptar,
                                     ),
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
 
@@ -354,7 +356,8 @@ class _PantallaRegistrarState extends State<PantallaRegistrar> {
                                       Languagespantallaregistrar.cancelar,
                                     ),
                                     style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ],

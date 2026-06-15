@@ -3,8 +3,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:proyecto_intermodular/screens/PantallaInicioSesion.dart';
 
 Future<void> main() async {
+
+
+
   await Supabase.initialize(
-    url: 'https://ymdpeykhonejkkxncdig.supabase.co',
+    url: "https://ymdpeykhonejkkxncdig.supabase.co",
+    publishableKey: "sb_publishable_b-jNRsn5OVkashwG1_-p8Q_V4ew6pOQ"
   );
   runApp(const MyApp());
 }

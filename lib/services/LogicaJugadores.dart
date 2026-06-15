@@ -3,48 +3,22 @@ import 'package:http/http.dart' as http;
 import 'package:proyecto_intermodular/services/backend_config.dart';
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Logicajugadores {
-  static const String baseUrl = backendBaseUrl;
+  final mSupaBase = Supabase.instance.client;
 
   Future<List<Modelojugador>> getJugadoresByPosicion(String posicion) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/jugadores/posicion/$posicion'),
-    );
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return data
-          .map(
-            (json) => Modelojugador(
-              id_jugador: json['id_jugador'],
-              nombre: json['nombre'],
-              pais: _convertirRutaImagen(json['pais']),
-              valor_clausula: (json['valor_clausula'] as num).toDouble(),
-              valor_venta: (json['valor_venta'] as num).toDouble(),
-              posicion: json['posicion'],
-            ),
-          )
-          .toList();
-    } else {
-      throw Exception('Failed to load players');
-    }
-  }
-
-  Future<List<Modelojugador>> otorgarEquipo() async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/jugadores/generar-equipo'),
-    );
-    if (response.statusCode != 200) {
-      throw Exception('Failed to generate team: ${response.statusCode}');
-    }
-
-    final data = json.decode(response.body);
-    return (data as List)
+    final response = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('posicion', posicion);
+    return response
         .map(
           (json) => Modelojugador(
             id_jugador: json['id_jugador'],
             nombre: json['nombre'],
-            pais: _convertirRutaImagen(json['pais']),
+            pais: (json['pais']),
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
@@ -53,23 +27,96 @@ class Logicajugadores {
         .toList();
   }
 
-  Future<List<Modelojugador>> rellenarSelecciones(String pais) async {
-    final response = await http.get(Uri.parse('$baseUrl/jugadores/pais/${Uri.encodeComponent(pais)}'));
-
-    if (response.statusCode != 200) {
-      print("error");
-      print(response.statusCode);
-      throw Exception('Error: ${response.statusCode}');
-    }
-    
-    final data = json.decode(response.body);
-
-    return (data as List)
+  Future<List<Modelojugador>> otorgarEquipo() async {
+    final porteros = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('posicion', 'POR')
+        .limit(1);
+    final defensas = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('posicion', 'DEF')
+        .limit(5);
+    final centrocampistas = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('posicion', 'CEN')
+        .limit(4);
+    final delanteros = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('posicion', 'DEL')
+        .limit(4);
+    List<Modelojugador> porterosList;
+    List<Modelojugador> defensaList;
+    List<Modelojugador> centrocampistasList;
+    List<Modelojugador> delanterosList;
+    List<Modelojugador> equipo;
+    porterosList = porteros
         .map(
           (json) => Modelojugador(
             id_jugador: json['id_jugador'],
             nombre: json['nombre'],
-            pais: _convertirRutaImagen(json['pais']),
+            pais: (json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
+        defensaList = defensas
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: (json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
+        centrocampistasList = centrocampistas
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: (json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
+        delanterosList = delanteros
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: (json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
+        equipo = porterosList + defensaList + centrocampistasList + delanterosList;
+        return equipo;
+        
+  }
+
+  Future<List<Modelojugador>> rellenarSelecciones(String pais) async {
+    final response = await mSupaBase
+        .from('jugadores')
+        .select()
+        .eq('pais', pais);
+    return response
+        .map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: (json['pais']),
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
@@ -79,13 +126,4 @@ class Logicajugadores {
   }
 
   /// Convertir rutas de imágenes locales a URLs del servidor
-  String _convertirRutaImagen(String ruta) {
-    if (ruta.startsWith('http')) {
-      return ruta; // Ya es una URL completa
-    }
-    if (ruta.startsWith('images/')) {
-      return '$baseUrl/assets/$ruta'; // Convertir a URL del servidor
-    }
-    return '$baseUrl/assets/images/$ruta'; // Por si no tiene el prefijo
-  }
 }

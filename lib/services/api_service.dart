@@ -1,59 +1,83 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/services/backend_config.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ApiService {
-  static const String baseUrl = backendBaseUrl;
-
   // REGISTRO
-  static Future<Map<String, dynamic>?> registerUser(Map<String, dynamic> userData) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/usuarios'),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(userData),
-    );
+  static Future<Map<String, dynamic>?> registerUser(
+    String nombre,
+    String contrasena,
+    String genero,
+    int edad,
+    String lugarNacimiento,
+    String? fotoRuta,
+  ) async {
+    final mSupaBase = Supabase.instance.client;
 
-    if (response.statusCode == 201) {
-      return jsonDecode(response.body);
+    try {
+      await mSupaBase.from('usuarios').insert({
+        'nombre': nombre,
+        'contrasena': contrasena,
+        'genero': genero,
+        'edad': edad,
+        'lugarNacimiento': lugarNacimiento,
+        'fotoRuta': fotoRuta!,
+        'isadmin': false,
+        'isblocked': false,
+      });
+      print('¡Registro insertado con éxito!');
+    } catch (e) {
+      print('Error al insertar el registro: $e');
     }
-    return null;
   }
 
   // LOGIN
-  static Future<Map<String, dynamic>?> login(String nombre, String contrasena) async {
+  static Future<Map<String, dynamic>?> login(
+    String nombre,
+    String contrasena,
+  ) async {
     try {
-      final response = await http
-          .post(
-            Uri.parse('$baseUrl/usuarios/login'),
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode({
-              "nombre": nombre,
-              "contrasena": contrasena,
-            }),
-          )
-          .timeout(const Duration(seconds: 10));
+      final mSupaBase = Supabase.instance.client;
 
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
+      // Ejecuta la consulta en Supabase
+      final response = await mSupaBase
+          .from('usuarios')
+          .select()
+          .eq('nombre', nombre)
+          .eq('contrasena', contrasena);
+
+          print(response);
+
+      // Si la lista no está vacía, devuelve el primer registro como Map
+      if (response.isNotEmpty) {
+        return response.first;
       }
     } catch (e) {
       print('Error en login: $e');
     }
+
+    // Devuelve null si no se encontró el usuario o hubo un error
     return null;
   }
 
   // OBTENER USUARIOS
   static Future<List<dynamic>> getUsuarios() async {
-    try {
-      final response = await http
-          .get(Uri.parse('$baseUrl/usuarios'))
-          .timeout(const Duration(seconds: 10));
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body);
-      }
-    } catch (e) {
-      print('Error al obtener usuarios: $e');
-    }
-    return [];
+    final mSupaBase = Supabase.instance.client;
+    final response = await mSupaBase.from('usuarios').select();
+    return response
+        .map(
+          (json) => Usuario(
+            nombre: json['nombre'],
+            contrasena: json['contrasena'],
+            genero: json['genero'],
+            edad: (json['edad'] as num).toInt(),
+            lugarNacimiento: json['lugarNacimiento'],
+            fotoRuta: json['nonbre'],
+            isAdmin: json['isadmin'] as bool,
+          ),
+        )
+        .toList();
   }
 }
