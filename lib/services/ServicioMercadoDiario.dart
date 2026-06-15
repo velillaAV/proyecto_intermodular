@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
-import 'package:proyecto_intermodular/services/backend_config.dart';
 
 class ServicioMercadoDiario {
-  static const String baseUrl = backendBaseUrl;
 
   /// Obtener mercado diario de una liga
   Future<ModeloMercadoDiario> obtenerMercadoHoy(int idLiga) async {

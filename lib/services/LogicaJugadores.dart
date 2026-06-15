@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:proyecto_intermodular/services/backend_config.dart';
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
