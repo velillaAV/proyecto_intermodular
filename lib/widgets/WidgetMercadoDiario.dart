@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'dart:async';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
@@ -181,7 +182,7 @@ class _WidgetMercadoDiarioState extends State<WidgetMercadoDiario> {
     );
   }
 
-  Widget _construirTarjetaJugador(JugadorMercado jugador) {
+  Widget _construirTarjetaJugador(Modelojugador jugador) {
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -197,18 +198,8 @@ class _WidgetMercadoDiarioState extends State<WidgetMercadoDiario> {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
               child: Image.network(
-                servicio.getUrlImagenJugador(jugador.foto),
+                jugador.pais,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: Icon(Icons.image_not_supported, color: Colors.grey[600]),
-                  );
-                },
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(child: CircularProgressIndicator());
-                },
               ),
             ),
           ),
@@ -247,11 +238,11 @@ class _WidgetMercadoDiarioState extends State<WidgetMercadoDiario> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Cl: \$${(jugador.valorClausula / 1000000).toStringAsFixed(1)}M',
+                        'Cl: \$${(jugador.valor_clausula / 1000000).toStringAsFixed(1)}M',
                         style: TextStyle(fontSize: 9, color: Colors.grey[700]),
                       ),
                       Text(
-                        'Ve: \$${(jugador.valorVenta / 1000000).toStringAsFixed(1)}M',
+                        'Ve: \$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
                         style: TextStyle(fontSize: 9, color: Colors.grey[700]),
                       ),
                     ],

@@ -62,14 +62,15 @@ class _ConfiguracionLigaEspecialState extends State<ConfiguracionLigaEspecial> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    final nueva = Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes);
-    _loadSelecciones(nueva);
+    final result = await Logicaligas.crearLigaEspecial(nombre, usuarioActual, numParticipantes);
+    final nuevaLiga = result['liga'] as Modeloligaespecial;
+    _loadSelecciones(nuevaLiga);
 
     final cargada = await Logicaligas.buscarLigaPorNombre(nombre) as Modeloligaespecial?;
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SeleccionPais(liga: cargada ?? nueva),
+        builder: (context) => SeleccionPais(liga: cargada ?? nuevaLiga),
       ),
     );
   }

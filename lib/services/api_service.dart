@@ -21,8 +21,8 @@ class ApiService {
         'contrasena': contrasena,
         'genero': genero,
         'edad': edad,
-        'lugarNacimiento': lugarNacimiento,
-        'fotoRuta': fotoRuta!,
+        'lugarnacimiento': lugarNacimiento,
+        'fotoruta': '',
         'isadmin': false,
         'isblocked': false,
       });

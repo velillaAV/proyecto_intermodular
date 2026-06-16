@@ -41,12 +41,9 @@ class _LiganormalState extends State<Liganormal> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
+    print('llega?');
     final result = await Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes, clausulas);
-    if (result == null || result['success'] != true) {
-      final err = result != null && result['error'] != null ? result['error'].toString() : 'No se pudo guardar la liga en el servidor. Intenta otra vez.';
-      _mostrarMensaje('Error servidor: $err');
-      return;
-    }
+    
 
     final nuevaLiga = result['liga'] as Liga;
     final nuevoUsuarioLiga = usuarioActual.unirLiga();

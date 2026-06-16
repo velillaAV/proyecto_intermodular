@@ -263,7 +263,7 @@ class _MercadoState extends State<Mercado> {
           margin: EdgeInsets.symmetric(vertical: 8),
           child: ListTile(
             leading: Image.network(
-              servicio.getUrlImagenJugador(jugador.foto),
+              jugador.pais,
               width: 50,
               height: 50,
               fit: BoxFit.cover,
@@ -283,11 +283,11 @@ class _MercadoState extends State<Mercado> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '\$${(jugador.valorClausula / 1000000).toStringAsFixed(1)}M',
+                  '\$${(jugador.valor_clausula / 1000000).toStringAsFixed(1)}M',
                   style: TextStyle(fontSize: 12),
                 ),
                 Text(
-                  '\$${(jugador.valorVenta / 1000000).toStringAsFixed(1)}M',
+                  '\$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
                   style: TextStyle(fontSize: 10, color: Colors.grey),
                 ),
               ],

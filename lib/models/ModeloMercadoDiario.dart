@@ -1,8 +1,10 @@
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+
 class ModeloMercadoDiario {
   final int idLiga;
   final DateTime fechaActualizacion;
   final DateTime fechaProximoCambio;
-  final List<JugadorMercado> jugadores;
+  final List<Modelojugador> jugadores;
 
   ModeloMercadoDiario({
     required this.idLiga,
@@ -27,46 +29,7 @@ class ModeloMercadoDiario {
     return '${horas.toString().padLeft(2, '0')}:${minutos.toString().padLeft(2, '0')}:${segundos.toString().padLeft(2, '0')}';
   }
 
-  factory ModeloMercadoDiario.fromJson(Map<String, dynamic> json) {
-    return ModeloMercadoDiario(
-      idLiga: json['mercado']['id_liga'],
-      fechaActualizacion: DateTime.parse(json['mercado']['fecha_actualizacion']),
-      fechaProximoCambio: DateTime.parse(json['mercado']['fecha_proximo_cambio']),
-      jugadores: (json['jugadores'] as List)
-          .map((j) => JugadorMercado.fromJson(j))
-          .toList(),
-    );
-  }
+ 
 }
 
-class JugadorMercado {
-  final int idJugador;
-  final String nombre;
-  final String posicion;
-  final String pais;
-  final double valorClausula;
-  final double valorVenta;
-  final String foto;
 
-  JugadorMercado({
-    required this.idJugador,
-    required this.nombre,
-    required this.posicion,
-    required this.pais,
-    required this.valorClausula,
-    required this.valorVenta,
-    required this.foto,
-  });
-
-  factory JugadorMercado.fromJson(Map<String, dynamic> json) {
-    return JugadorMercado(
-      idJugador: json['id_jugador'],
-      nombre: json['nombre'],
-      posicion: json['posicion'],
-      pais: json['pais'],
-      valorClausula: (json['valor_clausula'] as num).toDouble(),
-      valorVenta: (json['valor_venta'] as num).toDouble(),
-      foto: json['foto'],
-    );
-  }
-}

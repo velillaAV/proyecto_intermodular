@@ -1,37 +1,43 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ServicioMercadoDiario {
-
   /// Obtener mercado diario de una liga
   Future<ModeloMercadoDiario> obtenerMercadoHoy(int idLiga) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/mercado/$idLiga'),
-        headers: {'Content-Type': 'application/json'},
-      ).timeout(const Duration(seconds: 10));
+    final mSupaBase = Supabase.instance.client;
 
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        return ModeloMercadoDiario.fromJson(data);
-      } else if (response.statusCode == 404) {
-        throw Exception('Mercado no encontrado para esta liga');
-      } else {
-        throw Exception('Error al cargar mercado: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Error conectando con servidor: $e');
-    }
+    final jugadoresJson = await mSupaBase.from('mercado_diario').select('jugadores');
+    List<Modelojugador> jugadores = jugadoresJson.map(
+          (json) => Modelojugador(
+            id_jugador: json['id_jugador'],
+            nombre: json['nombre'],
+            pais: (json['pais']),
+            valor_clausula: (json['valor_clausula'] as num).toDouble(),
+            valor_venta: (json['valor_venta'] as num).toDouble(),
+            posicion: json['posicion'],
+          ),
+        )
+        .toList();
+
+
+
+    final mercado = await mSupaBase
+        .from('mercado_diario')
+        .select()
+        .eq('id_liga', idLiga).single();
+
+    ModeloMercadoDiario mercadoDiario = ModeloMercadoDiario(
+      idLiga: idLiga,
+      fechaActualizacion: mercado['fecha_actualizacion'],
+      fechaProximoCambio: mercado['fecha_proximo_cambio'],
+      jugadores: jugadores,
+    );
+
+    return mercadoDiario;
   }
 
   /// Obtener URL completa de imagen de jugador
-  String getUrlImagenJugador(String rutaRelativa) {
-    // Si ya es una URL completa, retornarla
-    if (rutaRelativa.startsWith('http')) {
-      return rutaRelativa;
-    }
-    // Si es una ruta relativa, agregar el baseUrl
-    return '$baseUrl$rutaRelativa';
-  }
 }
