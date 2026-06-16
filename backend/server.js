@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use('/assets/images');
 app.use(cors());
 
 // Capturar raw body para debugging y permitir que express.json lo verifique
@@ -52,21 +53,7 @@ app.use('/ligas', ligaRoutes);
 
 // ===== SCHEDULER PARA ACTUALIZAR MERCADO A LAS 00:00 =====
 // Se ejecuta todos los días a las 00:00
-schedule.scheduleJob('0 0 * * *', async () => {
-  console.log('Iniciando actualización automática de mercados a las 00:00');
-  try {
-    const connection = await getConnection();
-    const [ligas] = await connection.execute('SELECT id_liga FROM ligas');
-    connection.release();
 
-    for (const liga of ligas) {
-      await actualizarMercado(liga.id_liga);
-    }
-    console.log('Mercados actualizados exitosamente');
-  } catch (error) {
-    console.error('Error en actualización automática de mercados:', error);
-  }
-});
 
 // Ruta de prueba
 app.get('/', (req, res) => {

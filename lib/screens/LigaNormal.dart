@@ -41,7 +41,6 @@ class _LiganormalState extends State<Liganormal> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
-    print('llega?');
     final result = await Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes, clausulas);
     
 
@@ -72,8 +71,8 @@ class _LiganormalState extends State<Liganormal> {
         children: [
           // 🔹 Fondo
           Positioned.fill(
-            child: Image.asset(
-              'images/FondoMundial2026.jpg',
+            child: Image.network(
+              'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoMundial2026.jpg',
               fit: BoxFit.cover,
             ),
           ),

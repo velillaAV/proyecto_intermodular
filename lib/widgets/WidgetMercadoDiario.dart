@@ -73,6 +73,10 @@ class _WidgetMercadoDiarioState extends State<WidgetMercadoDiario> {
       }
     }
   }
+  String cambiarRutaImagen(String rutaImagen) {
+    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
+    return rutaNueva;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +202,7 @@ class _WidgetMercadoDiarioState extends State<WidgetMercadoDiario> {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
               ),
               child: Image.network(
-                jugador.pais,
+               cambiarRutaImagen(jugador.pais),
                 fit: BoxFit.cover,
               ),
             ),

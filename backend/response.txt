@@ -1,1 +1,0 @@
-{"error":"Algo salió mal!"}

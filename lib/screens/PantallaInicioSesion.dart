@@ -21,7 +21,6 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    precacheImage(AssetImage('assets/images/logoMundial2026.png'), context);
   }
 
   Future<void> _inicioSesion() async {
@@ -84,7 +83,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
         Logicausuario.anadirUsuarios(usuarioActual);
       }
       Logicausuario.setUsuarioActual(usuarioActual);
-      await Logicaligas.cargarLigasDesdeBackend(usuarioActual.id_usuario);
+      await Logicaligas.cargarLigasDesdeBackend();
       if (!mounted) return;
 
       Navigator.pushAndRemoveUntil(
@@ -106,38 +105,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
     );
   }
 
-  void _contrasenaRecuperada(String valor) {
-    String? contrasenaRecuperada = Logicausuario.recuperarContrasena(valor);
-
-    if (contrasenaRecuperada == null) {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: Text(
-            Languagesiniciosesion.getTexto(
-              Languagesiniciosesion.noExisteElUsuario,
-            ),
-          ),
-        ),
-      );
-    } else {
-      showDialog<String>(
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-          title: Row(
-            children: [
-              Text(
-                Languagesiniciosesion.getTexto(
-                  Languagesiniciosesion.tuContrasenaEs,
-                ),
-              ),
-              Text(contrasenaRecuperada),
-            ],
-          ),
-        ),
-      );
-    }
-  }
+  
 
  
 
@@ -219,7 +187,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
                         child: Image.network(
-                          "assets/images/logoMundial2026.png",
+                          "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/logoMundial2026.png",
                           width: 180,
                           height: 180,
                         ),
@@ -312,38 +280,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
 
                     const SizedBox(height: 25),
 
-                    TextButton(
-                      onPressed: () => showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: Text(
-                            Languagesiniciosesion.getTexto(
-                              Languagesiniciosesion.recuperarContrasena,
-                            ),
-                          ),
-                          content: TextFormField(
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: Languagesiniciosesion.getTexto(
-                                Languagesiniciosesion.nombreUsuario,
-                              ),
-                            ),
-                            onFieldSubmitted: (value) {
-                              _contrasenaRecuperada(value);
-                            },
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        Languagesiniciosesion.getTexto(
-                          Languagesiniciosesion.olvidasteContrasena,
-                        ),
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 6, 58, 231),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    
                   ],
                 ),
               ),

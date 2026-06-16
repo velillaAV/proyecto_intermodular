@@ -26,7 +26,11 @@ class _PrediccionState extends State<Prediccion> {
    int marcadorB = 0;
       Color colorLocal = Colors.grey;
       Color colorVisitante = Colors.grey;
-  
+  String cambiarRutaImagen(String rutaImagen) {
+    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
+    return rutaNueva;
+  }
+
   void _updateScore() {
     marcadorA = int.tryParse(_equipoLocalController.text) ?? 0;
     marcadorB = int.tryParse(_equipoVisitanteController.text) ?? 0;
@@ -86,8 +90,8 @@ class _PrediccionState extends State<Prediccion> {
             color: Colors.grey,
             child: Row(
               children: [
-                Image.asset(
-                  widget.prediccion.equipoLocal,
+                Image.network(
+                 cambiarRutaImagen(widget.prediccion.equipoLocal) ,
                   width: 140,
                   height: 140,
                 ),
@@ -108,8 +112,8 @@ class _PrediccionState extends State<Prediccion> {
                   ?Colors.green: Colors.red,
                   child: Text(marcadorB.toString()),
                 ),
-                Image.asset(
-                  widget.prediccion.equipoVisitante,
+                Image.network(
+                 cambiarRutaImagen(widget.prediccion.equipoVisitante),
                   width: 140,
                   height: 140,
                 ),
@@ -131,8 +135,8 @@ class _PrediccionState extends State<Prediccion> {
             color: Colors.grey,
             child: Row(
               children: [
-                Image.asset(
-                  widget.prediccion.equipoLocal,
+                 Image.network(
+                 cambiarRutaImagen(widget.prediccion.equipoLocal) ,
                   width: 140,
                   height: 140,
                 ),
@@ -163,8 +167,8 @@ class _PrediccionState extends State<Prediccion> {
                     onChanged: (_) => _updateScore(),
                   ),
                 ),
-                Image.asset(
-                  widget.prediccion.equipoVisitante,
+                Image.network(
+                 cambiarRutaImagen(widget.prediccion.equipoVisitante) ,
                   width: 140,
                   height: 140,
                 ),

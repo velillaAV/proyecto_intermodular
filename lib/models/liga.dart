@@ -121,6 +121,7 @@ class Liga {
 
   void insertarPropietario() {
     participantes.add(propietario);
+    
   }
 
   int getId_liga() {

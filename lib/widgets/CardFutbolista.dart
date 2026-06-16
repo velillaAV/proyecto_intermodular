@@ -17,6 +17,10 @@ class CardFutbolista extends StatefulWidget {
 }
 
 class _CardFutbolistaState extends State<CardFutbolista> {
+  String cambiarRutaImagen(String rutaImagen) {
+    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
+    return rutaNueva;
+  }
   @override
   Widget build(BuildContext context) {
     return widget.usuario.alineacion.elementAt(widget.posicion) == null
@@ -386,9 +390,9 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                     top: 0,
                     right: 0,
                     child: Image.network(
-                      widget.usuario.alineacion
+                     cambiarRutaImagen(widget.usuario.alineacion
                           .elementAt(widget.posicion)!
-                          .pais,
+                          .pais,) ,
                       width: 30,
                     ),
                   ),

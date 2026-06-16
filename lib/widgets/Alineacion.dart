@@ -25,7 +25,7 @@ class _AlineacionState extends State<Alineacion> {
         children: [
           Positioned.fill(
             child: Image.network(
-              'assets/images/FondoAlineacion.jpg',
+              'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoAlineacion.jpg',
               fit: BoxFit.cover,
             ),
           ),

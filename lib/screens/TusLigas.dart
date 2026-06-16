@@ -39,17 +39,15 @@ class _TusLigasState extends State<TusLigas> {
   Future<void> _cargarLigasUsuario() async {
     setState(() => _isLoading = true);
 
-    final usuarioActual = Logicausuario.getUsuarioActual();
-    if (usuarioActual.id_usuario != null) {
-      await Logicaligas.cargarLigasDesdeBackend(usuarioActual.id_usuario);
-    }
+    
 
     if (!mounted) return;
     setState(() => _isLoading = false);
   }
 
   List<Liga> _obtenerLigasDelUsuario() {
-    return Logicaligas.getLigas();
+    final usuarioActual = Logicausuario.getUsuarioActual();
+    return Logicaligas.getLigasByPropietario(usuarioActual.id_usuario! );
   }
 
   void _navegarALiga(Liga liga) {
@@ -96,8 +94,8 @@ class _TusLigasState extends State<TusLigas> {
               children: [
                 // Fondo con imagen
                 Positioned.fill(
-                  child: Image.asset(
-                    'assets/images/FondoMundial2026.jpg',
+                  child: Image.network(
+                    'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoMundial2026.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),

@@ -118,11 +118,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
                 itemBuilder: (context, index) {
                   final imagePath = widget.imagePaths[index];
-                  final resolvedPath = imagePath.startsWith('assets/images/')
-                      ? imagePath
-                      : imagePath.startsWith('images/')
-                      ? 'assets/$imagePath'
-                      : imagePath;
+                 
 
                   return GestureDetector(
                     onTap: () {
@@ -130,8 +126,8 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        resolvedPath,
+                      child: Image.network(
+                        imagePath,
                         fit: BoxFit.fill,
                         width: double.infinity,
                       ),

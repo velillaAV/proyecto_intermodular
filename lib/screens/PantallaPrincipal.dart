@@ -88,8 +88,8 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              "images/FondoMundial2026.jpg",
+            child: Image.network(
+              "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoMundial2026.jpg",
 
           ),
           ),

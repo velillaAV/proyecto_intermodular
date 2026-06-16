@@ -212,39 +212,8 @@ class Logicausuario {
     return validador;
   }
 
-  static String? recuperarContrasena(String nombre) {
-    //Sirve para devolver la contraseña al usuario
-    String contrasena = " ";
-    int contadorDiscordancia = 0;
-    for (int i = 0; i < _listaUsuarios.length; i++) {
-      Usuario u = _listaUsuarios[i];
-      if (u.getNombre().compareTo(nombre) == 0) {
-        contrasena = u.getContrasena();
-      } else {
-        contadorDiscordancia++;
-      }
-    }
+  
+  
 
-    if (contadorDiscordancia == _listaUsuarios.length) {
-      //Si las discordancias son las mismas que la cantidad de usuario, significa que el nombre que ha puesto no existe
-      return null;
-    }
-    return contrasena;
-  }
-
-  static void eliminarUsuarios(Usuario usuario) {
-    if (usuario.getNombre().compareTo("admin") == 0 ||
-        usuario.getNombre().compareTo("Edgar") == 0 ||
-        usuario.getNombre().compareTo("Alvaro") == 0) {
-      //Si es el admin, no se borra
-    } else {
-      _listaUsuarios.remove(
-        _listaUsuarios.elementAt(_listaUsuarios.indexOf(usuario)),
-      );
-    }
-  }
-
-  static Usuario seleccionarUsuario(int ID_User) {
-    return _listaUsuarios.elementAt(ID_User);
-  }
+  
 }

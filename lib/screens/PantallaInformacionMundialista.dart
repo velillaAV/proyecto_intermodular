@@ -27,7 +27,7 @@ class _PantallainformacionmundialistaState
           decoration: BoxDecoration(
             image: DecorationImage(
 
-              image: AssetImage("images/FondoMundial2026.jpg"),
+              image: NetworkImage("https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoMundial2026.jpg"),
 
               opacity: 0.2,
               fit: BoxFit.fill,
@@ -50,9 +50,9 @@ class _PantallainformacionmundialistaState
                   width: 600,
                   child: ImageCarousel(
                     imagePaths: [
-                      "images/mexicoMundial70.jpg",
-                      "images/mexicoMundial86.jpg",
-                      "images/estadosUnidosMundial94.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/mexicoMundial70.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/mexicoMundial86.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/estadosUnidosMundial94.jpg",
                     ],
                     descriptions: [
                       [
@@ -139,9 +139,9 @@ class _PantallainformacionmundialistaState
                   width: 600,
                   child: ImageCarousel(
                     imagePaths: [
-                      "images/maradonaCup.jpg",
-                      "images/jairzinho.jpg",
-                      "images/baggio.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/maradonaCup.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/jairzinho.jpg",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/baggio.jpg",
                     ],
                     descriptions: [
                       [
@@ -180,10 +180,10 @@ class _PantallainformacionmundialistaState
                   width: 600,
                   child: ImageCarousel(
                     imagePaths: [
-                      "images/rutaA.png",
-                      "images/rutaB.png",
-                      "images/rutaC.png",
-                      "images/rutaD.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/rutaA.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/rutaB.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/rutaC.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/rutaD.png",
                     ],
                     descriptions: [
                       [
@@ -299,11 +299,11 @@ class _PantallainformacionmundialistaState
                   width: 600,
                   child: ImageCarousel(
                     imagePaths: [
-                      "images/finalrutaA.png",
-                      "images/finalrutaB.png",
-                      "images/finalrutaC.png",
-                      "images/finalrutaD.png",
-                      "images/finalesrutaRD.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/finalrutaA.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/finalrutaB.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/finalrutaC.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/finalrutaD.png",
+                      "https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/finalesrutaRD.png",
                     ],
                     descriptions: [
                       [

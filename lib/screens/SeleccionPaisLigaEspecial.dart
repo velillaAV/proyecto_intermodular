@@ -18,6 +18,11 @@ class _SeleccionPaisState extends State<SeleccionPais> {
   bool isPicked = false;
   int indexGeneral = -1;
 
+  String cambiarRutaImagen(String rutaImagen) {
+    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
+    return rutaNueva;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +80,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                               child: Row(
                                 children: [
                                   Image.network(
-                                    seleccion.escudo!,
+                                    cambiarRutaImagen(seleccion.escudo!),
                                     width: 50,
                                     height: 50,
                                   ),

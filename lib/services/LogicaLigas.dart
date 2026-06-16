@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -61,9 +63,9 @@ class Logicaligas {
       nombre: response.first['nombre'],
       contrasena: response.first['contrasena'],
       genero: response.first['genero'],
-      edad: (response.first['edad'] as num).toInt(),
+      edad: response.first['edad'] as int,
       lugarNacimiento: response.first['lugarNacimiento'],
-      fotoRuta: response.first['nonbre'],
+      fotoRuta: response.first['fotoruta'],
       isAdmin: response.first['isadmin'] as bool,
     );
 
@@ -108,9 +110,9 @@ class Logicaligas {
       nombre: response.first['nombre'],
       contrasena: response.first['contrasena'],
       genero: response.first['genero'],
-      edad: (response.first['edad'] as num).toInt(),
+      edad: response.first['edad'] as int,
       lugarNacimiento: response.first['lugarNacimiento'],
-      fotoRuta: response.first['nonbre'],
+      fotoRuta: response.first['fotoruta'],
       isAdmin: response.first['isadmin'] as bool,
     );
 
@@ -121,10 +123,10 @@ class Logicaligas {
 
     Liga ligali = Liga(
       id_liga: liga.first['id_liga'],
-      cod_invitacion: liga.first['cod_invitacion'],
+      cod_invitacion: liga.first['cod_invitacion'] as int,
       propietario: propietarioUs,
       nombreLiga: liga.first['nombre'],
-      capDeParticipantes: liga.first['cap_participantes'] ?? 1,
+      capDeParticipantes: liga.first['cap_participantes'] as int,
       hayClausulazos: false,
     );
 
@@ -134,43 +136,41 @@ class Logicaligas {
     return ligali;
   }
 
-  static Future<void> cargarLigasDesdeBackend([int? usuarioId]) async {
+  static Future<void> cargarLigasDesdeBackend() async {
     final mSupaBase = Supabase.instance.client;
 
     try {
-      var query = mSupaBase.from('ligas').select('*, liga_participantes(*)');
-
-      if (usuarioId != null) {
-        query = query.eq('liga_participantes.id_usuario', usuarioId);
-      }
-
-      final data = await query.withConverter((data) => data);
+      var ligasJson =  await mSupaBase.from('ligas').select('*, liga_participantes(*)');
+      
+      
 
       _listaLigas.clear();
       _listaLigasNormales.clear();
       _listaLigasEspeciales.clear();
 
-      for (var jsonLiga in data) {
-        final response = await mSupaBase
-            .from('usuarios')
-            .select()
-            .eq('id', usuarioId!);
+      for (var jsonLiga in ligasJson) {
+      final idpropietarioJson = await mSupaBase.from('ligas').select('*, liga_participantes(id_usuario)').eq('id_liga', jsonLiga['id_liga']);
+      int idpropietario = idpropietarioJson as int;
+      final response = await mSupaBase
+        .from('usuarios')
+        .select()
+        .eq('id', idpropietario).single();
 
         Usuario propietarioUs = Usuario(
-          nombre: response.first['nombre'],
-          contrasena: response.first['contrasena'],
-          genero: response.first['genero'],
-          edad: (response.first['edad'] as num).toInt(),
-          lugarNacimiento: response.first['lugarNacimiento'],
-          fotoRuta: response.first['nonbre'],
-          isAdmin: response.first['isadmin'] as bool,
+          nombre: response['nombre'],
+          contrasena: response['contrasena'],
+          genero: response['genero'],
+          edad: response['edad'] as int,
+          lugarNacimiento: response['lugarNacimiento'],
+          fotoRuta: response['fotoruta'],
+          isAdmin: response['isadmin'] as bool,
         );
         // 5. Mapeo del objeto Liga
         Liga liga = Liga(
           id_liga: jsonLiga['id_liga'],
-          cod_invitacion: jsonLiga['cod_invitacion'],
+          cod_invitacion: jsonLiga['cod_invitacion'] as int,
           nombreLiga: jsonLiga['nombre'],
-          capDeParticipantes: jsonLiga['cap_participantes'] ?? 0,
+          capDeParticipantes: jsonLiga['cap_de_participantes'] as int,
           propietario: propietarioUs,
           hayClausulazos: false,
         );
@@ -203,7 +203,7 @@ class Logicaligas {
         }
       }
     } catch (e) {
-      print('Error cargando ligas con Supabase');
+      print('Error cargando ligas con Supabase: $e ');
     }
   }
 
@@ -260,7 +260,15 @@ class Logicaligas {
       hayClausulazos: clausulas,
     );
 
-    // Lógica de estado local
+    try {
+      await mSupaBase.from('liga_participantes').insert({
+        'id_liga': idLiga,
+        'id_usuario': propietario.id_usuario,
+      });
+    } catch (e) {
+      print('Error al insertar usuario en liga: $e');
+    }
+
     nuevaLiga.insertarPropietario();
     _listaLigas.add(nuevaLiga);
     _listaLigasNormales.add(nuevaLiga);
@@ -306,7 +314,14 @@ class Logicaligas {
       hayClausulazos: false,
     );
 
-    nuevaLiga.insertarPropietario();
+ try {
+      await mSupaBase.from('liga_participantes').insert({
+        'id_liga': idLiga,
+        'id_usuario': propietario.id_usuario,
+      });
+    } catch (e) {
+      print('Error al insertar usuario en liga: $e');
+    }    
     _listaLigas.add(nuevaLiga);
     _listaLigasEspeciales.add(nuevaLiga);
 
@@ -314,6 +329,7 @@ class Logicaligas {
   }
 
   static Future<bool> unirUsuarioALiga(String nombre, Usuario usuario) async {
+   final mSupaBase = Supabase.instance.client;
     final liga = await buscarLigaPorNombre(nombre);
     if (liga == null) {
       return false;
@@ -323,8 +339,29 @@ class Logicaligas {
     );
     if (!yaEsParticipante) {
       liga.participantes.add(usuario);
+       try {
+      await mSupaBase.from('liga_participantes').insert({
+        'id_liga': liga.id_liga,
+        'id_usuario': usuario.id_usuario,
+      });
+    } catch (e) {
+      print('Error al insertar usuario en liga: $e');
+    }
       return true;
     }
     return false;
+  }
+
+  static List<Liga> getLigasByPropietario(int id_usuario) {
+    List<Liga> ligas = [];
+    for(var liga in _listaLigas) {
+      if(liga.propietario.id_usuario == id_usuario) {
+          ligas.add(liga);
+      }
+    }
+
+
+    return ligas;
+
   }
 }

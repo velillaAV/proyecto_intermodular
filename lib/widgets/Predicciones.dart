@@ -28,8 +28,8 @@ class _PrediccionesState extends State<Predicciones> {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset(
-            'assets/images/FondoMundial2026.jpg',
+          child: Image.network(
+            'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/images/FondoMundial2026.jpg',
             fit: BoxFit.cover,
           ),
         ),
