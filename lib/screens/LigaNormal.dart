@@ -34,7 +34,7 @@ class _LiganormalState extends State<Liganormal> {
       return;
     }
 
-    if (await Logicaligas.existeLigaNombre(nombre)) {
+    if (await Logicaligas.existeLigaNombre(nombre) == true) {
       _mostrarMensaje(
           'Ya existe una liga con ese nombre. Usa la opción de unirse para entrar.');
       return;

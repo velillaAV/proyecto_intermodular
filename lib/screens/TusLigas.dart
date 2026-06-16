@@ -62,23 +62,13 @@ class _TusLigasState extends State<TusLigas> {
           ..ligaPerteneciente = liga;
 
     if (Logicaligas.getLigasNormales().contains(liga)) {
-      if (usuarioLiga.equipo.equipo.isEmpty) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                PantallaOtorgacionDeEquipo(liga: liga, usuario: usuarioLiga),
-          ),
-        );
-      } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                PantallaLigaNormal(liga: liga, usuario: usuarioLiga),
-          ),
-        );
-      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+              PantallaLigaNormal(liga: liga, usuario: usuarioLiga),
+        ),
+      );
     } else {
       Navigator.push(
         context,
