@@ -80,9 +80,7 @@ class Logicaligas {
       hayClausulazos: false,
     );
 
-    // Añadir a listas locales para cache
-    _listaLigas.add(ligali);
-    _listaLigasNormales.add(ligali);
+    
     return ligali;
   }
 
@@ -200,9 +198,9 @@ class Logicaligas {
            fotoRuta: '',
            isAdmin: usuarioJson['isadmin'] as bool,
         );
-        print(participante.nombre);
         liga.participantes.add(participante);
         participante.unirLiga();
+        participante.usuario_ligas.last.ligaPerteneciente = liga;
 
 
       }
@@ -233,7 +231,6 @@ class Logicaligas {
     int numParticipantes,
     bool clausulas,
   ) async {
-    print('no llega tru?');
     final mSupaBase = Supabase.instance.client;
     final codJson = await mSupaBase
         .from('ligas')
@@ -369,7 +366,6 @@ class Logicaligas {
           ligas.add(liga);
           
       }
-      print(liga.participantes.first.id_usuario);
     }
 
 

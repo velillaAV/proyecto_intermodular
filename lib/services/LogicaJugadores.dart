@@ -1,6 +1,4 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
+import 'dart:math';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -27,31 +25,33 @@ class Logicajugadores {
   }
 
   Future<List<Modelojugador>> otorgarEquipo() async {
+    int portero = Random().nextInt(96);
     final porteros = await mSupaBase
         .from('jugadores')
         .select()
         .eq('posicion', 'POR')
-        .limit(1);
+        .range(portero, portero,);
     final defensas = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'DEF')
-        .limit(5);
+        .eq('posicion', 'DEF');
     final centrocampistas = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'CEN')
-        .limit(4);
+        .eq('posicion', 'CEN');
     final delanteros = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'DEL')
-        .limit(4);
+        .eq('posicion', 'DEL');
     List<Modelojugador> porterosList;
     List<Modelojugador> defensaList;
     List<Modelojugador> centrocampistasList;
     List<Modelojugador> delanterosList;
     List<Modelojugador> equipo;
+    List<Modelojugador> defensaListFinal = [];
+    List<Modelojugador> centrocampistasListFinal = [];                                                           
+    List<Modelojugador> delanterosListFinal = [];
+
     porterosList = porteros
         .map(
           (json) => Modelojugador(
@@ -100,7 +100,18 @@ class Logicajugadores {
           ),
         )
         .toList();
-        equipo = porterosList + defensaList + centrocampistasList + delanterosList;
+
+        for(int i = 0; i < 5; i++) {
+         defensaListFinal.add(defensaList.elementAt(Random().nextInt(defensaList.length)));
+        }
+        for(int i = 0; i < 4; i++) {
+          centrocampistasListFinal.add(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)));
+          print(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)).toString());
+        } for(int i = 0; i < 4; i++) {
+          delanterosListFinal.add(delanterosList.elementAt(Random().nextInt(delanterosList.length)));
+          print(delanterosList.elementAt(Random().nextInt(delanterosList.length)).toString());
+        }
+        equipo = porterosList + defensaListFinal + centrocampistasListFinal + delanterosListFinal;
         return equipo;
         
   }

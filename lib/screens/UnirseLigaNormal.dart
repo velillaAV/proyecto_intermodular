@@ -41,7 +41,7 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
     }
 
     // Si no se encontró por código, o no era número, buscar por nombre
-    ligaExistente ??= await Logicaligas.buscarLigaPorNombre(nombre);
+    ligaExistente = await Logicaligas.buscarLigaPorNombre(nombre);
 
     if (ligaExistente == null) {
       _mostrarMensaje('No existe ninguna liga con ese nombre o código.');
