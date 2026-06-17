@@ -4,7 +4,6 @@ import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 
 class Modelousuario {
-
   Modeloequipo equipo = Modeloequipo(equipo: []);
   double saldo = 100000000;
   List<Modelojugador?> alineacion = [null, null, null, null, null, null, null, null, null, null, null];

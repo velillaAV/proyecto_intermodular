@@ -69,14 +69,14 @@ class Logicaligas {
       isAdmin: response.first['isadmin'] as bool,
     );
 
-    final liga = await mSupaBase.from('ligas').select().eq('nombre', nombre);
+    final liga = await mSupaBase.from('ligas').select().eq('nombre', nombre).single();
 
     Liga ligali = Liga(
-      id_liga: liga.first['id_liga'],
-      cod_invitacion: liga.first['cod_invitacion'],
+      id_liga: liga['id_liga'],
+      cod_invitacion: liga['cod_invitacion'],
       propietario: propietarioUs,
-      nombreLiga: liga.first['nombre'],
-      capDeParticipantes: liga.first['cap_participantes'],
+      nombreLiga: liga['nombre'],
+      capDeParticipantes: liga['cap_participantes'],
       hayClausulazos: false,
     );
 
@@ -136,89 +136,96 @@ class Logicaligas {
     return ligali;
   }
 
-  static Future<void> cargarLigasDesdeBackend() async {
-    final mSupaBase = Supabase.instance.client;
+ static Future<void> cargarLigasDesdeBackend() async {
+  final mSupaBase = Supabase.instance.client;
 
-    try {
-      var ligasJson =  await mSupaBase.from('ligas').select('*, liga_participantes(*)');
+  try {
+    var ligasJson = await mSupaBase.from('ligas').select();
+    
+    
+    _listaLigas.clear();
+    _listaLigasNormales.clear();
+    _listaLigasEspeciales.clear();
+
+    for (var jsonLiga in ligasJson) {
+      if(jsonLiga.isEmpty) {
+      print('No hay liga');
+      continue;
+    } else {
+      int idpropietario = jsonLiga['propietario_id'] as int; 
+      int idliga = jsonLiga['id_liga'] as int;
       
-      
-
-      _listaLigas.clear();
-      _listaLigasNormales.clear();
-      _listaLigasEspeciales.clear();
-
-      for (var jsonLiga in ligasJson) {
-      final idpropietarioJson = await mSupaBase.from('ligas').select('*, liga_participantes(id_usuario)').eq('id_liga', jsonLiga['id_liga']);
-      int idpropietario = idpropietarioJson as int;
       final response = await mSupaBase
-        .from('usuarios')
-        .select()
-        .eq('id', idpropietario).single();
+          .from('usuarios')
+          .select()
+          .eq('id', idpropietario)
+          .single();
+      Usuario propietarioUs = Usuario(
+        id_usuario: idpropietario,
+        nombre: response['nombre'],
+        contrasena: response['contrasena'],
+        genero: response['genero'],
+        edad: response['edad'] as int,
+        lugarNacimiento: response['lugarnacimiento'],
+        fotoRuta: ' ',
+        isAdmin: response['isadmin'] as bool,
+      );
 
-        Usuario propietarioUs = Usuario(
-          nombre: response['nombre'],
-          contrasena: response['contrasena'],
-          genero: response['genero'],
-          edad: response['edad'] as int,
-          lugarNacimiento: response['lugarNacimiento'],
-          fotoRuta: response['fotoruta'],
-          isAdmin: response['isadmin'] as bool,
+
+      // 3. Mapeo del objeto Liga
+      Liga liga = Liga(
+        id_liga: jsonLiga['id_liga'] as int,
+        cod_invitacion: jsonLiga['cod_invitacion'] as int,
+        nombreLiga: jsonLiga['nombre'],
+        capDeParticipantes: jsonLiga['cap_de_participantes'] as int,
+        propietario: propietarioUs,
+        hayClausulazos: false,
+      );
+
+      var participantesJson = await mSupaBase.from('liga_participantes').select().eq('id_liga', idliga);
+      for(var participanteJson in participantesJson) {
+          int idUsuario = participanteJson['id_usuario'] as int;
+           final usuarioJson = await mSupaBase
+          .from('usuarios')
+          .select()
+          .eq('id', idUsuario)
+          .single();
+        Usuario participante = Usuario(
+          id_usuario: idUsuario,
+           nombre: usuarioJson['nombre'],
+           contrasena: usuarioJson['contrasena'],
+           genero: usuarioJson['genero'],
+           edad: usuarioJson['edad'] as int,
+           lugarNacimiento: usuarioJson['lugarnacimiento'],
+           fotoRuta: '',
+           isAdmin: usuarioJson['isadmin'] as bool,
         );
-        // 5. Mapeo del objeto Liga
-        Liga liga = Liga(
-          id_liga: jsonLiga['id_liga'],
-          cod_invitacion: jsonLiga['cod_invitacion'] as int,
-          nombreLiga: jsonLiga['nombre'],
-          capDeParticipantes: jsonLiga['cap_de_participantes'] as int,
-          propietario: propietarioUs,
-          hayClausulazos: false,
-        );
+        print(participante.nombre);
+        liga.participantes.add(participante);
+        participante.unirLiga();
 
-        final List<dynamic> participantesJson =
-            jsonLiga['liga_participantes'] ?? [];
-        for (var userJson in participantesJson) {
-          final participante =
-              (userJson['id_usuario'] ==
-                  Logicausuario.getUsuarioActual().id_usuario)
-              ? Logicausuario.getUsuarioActual()
-              : Usuario.fromJson(userJson);
 
-          if (!participante.usuario_ligas.any(
-            (u) => u.ligaPerteneciente.id_liga == liga.id_liga,
-          )) {
-            participante.usuario_ligas.add(
-              Modelousuario()..ligaPerteneciente = liga,
-            );
-          }
-          liga.participantes.add(participante);
-        }
-
-        _listaLigas.add(liga);
-
-        if (jsonLiga['tipo'] == 'especial') {
-          _listaLigasEspeciales.add(liga);
-        } else {
-          _listaLigasNormales.add(liga);
-        }
       }
-    } catch (e) {
-      print('Error cargando ligas con Supabase: $e ');
+
+
+
+
+      _listaLigas.add(liga);
+
+      if (jsonLiga['tipo'] == 'especial') {
+        _listaLigasEspeciales.add(liga);
+      } else {
+        _listaLigasNormales.add(liga);
+      }
     }
+    }
+      
+  } catch (e) {
+    print('Error cargando ligas con Supabase: $e ');
   }
+}
 
-  static Future<bool> unirUsuarioALigaBackend(
-    Liga liga,
-    Usuario usuario,
-  ) async {
-    final mSupaBase = Supabase.instance.client;
-    await mSupaBase.from('liga_participantes').insert({
-      'id_liga': liga.id_liga,
-      'id_usuario': usuario.id_usuario,
-    });
-
-    return true;
-  }
+ 
 
   static Future<Map<String, dynamic>> crearLigaNormal(
     String nombre,
@@ -228,8 +235,11 @@ class Logicaligas {
   ) async {
     print('no llega tru?');
     final mSupaBase = Supabase.instance.client;
-
-    final cod = _listaLigas.length + 100;
+    final codJson = await mSupaBase
+        .from('ligas')
+        .select()
+        .count(CountOption.exact);  
+    final cod = codJson.count + 100;
 
     try {
       await mSupaBase.from('ligas').insert({
@@ -282,8 +292,11 @@ class Logicaligas {
     int numParticipantes,
   ) async {
     final mSupaBase = Supabase.instance.client;
-
-    final cod = _listaLigas.length + 100;
+    final codJson = await mSupaBase
+        .from('ligas')
+        .select()
+        .count(CountOption.exact);  
+    final cod = codJson.count + 100;
 
     try {
       await mSupaBase.from('ligas').insert({
@@ -315,10 +328,7 @@ class Logicaligas {
     );
 
  try {
-      await mSupaBase.from('liga_participantes').insert({
-        'id_liga': idLiga,
-        'id_usuario': propietario.id_usuario,
-      });
+      
     } catch (e) {
       print('Error al insertar usuario en liga: $e');
     }    
@@ -355,9 +365,11 @@ class Logicaligas {
   static List<Liga> getLigasByPropietario(int id_usuario) {
     List<Liga> ligas = [];
     for(var liga in _listaLigas) {
-      if(liga.propietario.id_usuario == id_usuario) {
+      if(liga.participantes.any((part) => part.id_usuario == id_usuario)) {
           ligas.add(liga);
+          
       }
+      print(liga.participantes.first.id_usuario);
     }
 
 

@@ -46,6 +46,7 @@ class _LiganormalState extends State<Liganormal> {
 
     final nuevaLiga = result['liga'] as Liga;
     final nuevoUsuarioLiga = usuarioActual.unirLiga();
+    Logicaligas.unirUsuarioALiga(nombre, Logicausuario.getUsuarioActual());
     nuevoUsuarioLiga.ligaPerteneciente = nuevaLiga;
 
     Navigator.push(

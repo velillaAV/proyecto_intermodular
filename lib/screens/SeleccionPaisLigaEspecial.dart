@@ -3,6 +3,7 @@ import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
@@ -165,6 +166,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                       : () {
                           widget.liga.listaSelecciones[indexGeneral].usuario =
                               Logicausuario.getUsuarioActual().unirLiga();
+                              Logicaligas.unirUsuarioALiga(widget.liga.nombreLiga, Logicausuario.getUsuarioActual());
 
                           final seleccion =
                               widget.liga.listaSelecciones[indexGeneral];
