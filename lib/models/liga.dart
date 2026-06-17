@@ -119,10 +119,7 @@ class Liga {
     required this.hayClausulazos
   });
 
-  void insertarPropietario() {
-    participantes.add(propietario);
-    
-  }
+  
 
   int getId_liga() {
     return id_liga;

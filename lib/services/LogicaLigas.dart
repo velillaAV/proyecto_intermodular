@@ -271,12 +271,13 @@ class Logicaligas {
       await mSupaBase.from('liga_participantes').insert({
         'id_liga': idLiga,
         'id_usuario': propietario.id_usuario,
+        'puntos': 0,
+        'saldo': 100000000
       });
     } catch (e) {
       print('Error al insertar usuario en liga: $e');
     }
 
-    nuevaLiga.insertarPropietario();
     _listaLigas.add(nuevaLiga);
     _listaLigasNormales.add(nuevaLiga);
 
@@ -350,6 +351,8 @@ class Logicaligas {
       await mSupaBase.from('liga_participantes').insert({
         'id_liga': liga.id_liga,
         'id_usuario': usuario.id_usuario,
+        'puntos': 0,
+        'saldo': 100000000
       });
     } catch (e) {
       print('Error al insertar usuario en liga: $e');
