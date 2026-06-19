@@ -10,54 +10,22 @@ REQUISITOS PREVIOS
 
 Antes de ejecutar el proyecto es necesario tener instalado:
 
--Node.js
-Recomendado: versión 18 o superior
--npm
-Normalmente se instala junto a Node.js
+
 -Android Studio
 Necesario para ejecutar la aplicación Android
 -JDK (Java Development Kit)
 Recomendado: JDK 17
 -Git
 Para clonar el repositorio
--Base de datos y Backend
-El proyecto utiliza conexión con backend y base de datos para:
-usuarios
-ligas
-mercado
-estadísticas
-alineaciones
+
 INSTALACIÓN DEL PROYECTO
 Clonar el repositorio
 git clone URL_DEL_REPOSITORIO
 
-2. Entrar en la carpeta del proyecto
-cd nombre-del-proyecto
-
-3. Instalar dependencias
-npm install
-
-4. Configurar variables de entorno
-Crear un archivo .env en la raíz del proyecto y añadir:
-
-5. Iniciar el backend
-npm run backend
-
-6. Ejecutar la aplicación
-npm start
-
-EJECUCIÓN EN ANDROID
-Abrir Android Studio
-2.Iniciar un emulador Android
-o conectar un dispositivo físico
-3. Ejecutar:
-npm run android
 
 COMPILACIÓN APK
 Para generar el APK:
-2. cd android
-3. ./gradlew assembleRelease
-4. El archivo APK generado aparecerá en:
+flutter build apk --release
 android/app/build/outputs/apk/release/
 
 FUNCIONALIDADES PRINCIPALES
@@ -77,8 +45,7 @@ Contiene las pantallas y componentes visuales
 backend/
 Contiene lógica del servidor y API
 
-database/
-Scripts y configuración de base de datos
+
 
 assets/
 Imágenes y recursos gráficos

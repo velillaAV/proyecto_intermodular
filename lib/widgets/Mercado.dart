@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'dart:async';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
@@ -50,6 +52,54 @@ class _MercadoState extends State<Mercado> {
     timerCuentaAtras.cancel();
     super.dispose();
   }
+  void _pujar(Modelojugador jugador) {
+    final snackBarValidadorValor = SnackBar(
+      content: Text("Esa puja supera tu saldo"),
+    );
+    final snackBarValidadorValor2 = SnackBar(
+      content: Text("Ese valor es menor que el definido del jugador"),
+    );
+    double puja = jugador.valor_venta;
+
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("¿Quieres pujar por este jugador?"),
+        content: TextField(
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          onChanged: (value) => puja = double.parse(value),
+          decoration: InputDecoration(
+            hintText: jugador.valor_venta.toString(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => {
+              if (widget.usuario.saldo < puja)
+                {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor),
+                }
+              else if (puja < jugador.valor_venta)
+                {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor2),
+                }
+              else
+                {
+                  jugador.pujas.add(Puja(widget.usuario, puja)),
+                  Navigator.pop(context),
+                },
+            },
+            child: Text("Aceptar"),
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<void> cargarMercadoDiario() async {
     try {
@@ -76,6 +126,7 @@ class _MercadoState extends State<Mercado> {
           error = e.toString();
           cargando = false;
           usarMercadoDiario = false; // Usar mercado local si falla
+          print('Error al cargar mercado diario: $error');
         });
       }
     }
@@ -281,21 +332,34 @@ class _MercadoState extends State<Mercado> {
               },
             ),
             title: Text(jugador.nombre),
-            subtitle: Text('${jugador.posicion} - ${jugador.pais}'),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
+            subtitle:  
+            Row(
               children: [
-                Text(
-                  '\$${(jugador.valor_clausula / 1000000).toStringAsFixed(1)}M',
-                  style: TextStyle(fontSize: 12),
-                ),
-                Text(
-                  '\$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
-                  style: TextStyle(fontSize: 10, color: Colors.grey),
+                Text(jugador.posicion),
+                SizedBox(width: 140,),
+                ElevatedButton(
+                  onPressed: () => _pujar(jugador),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  ),
+                  child: const Text("Pujar"),
                 ),
               ],
             ),
+            
+            trailing: 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '\$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+              
+            
           ),
         );
       },

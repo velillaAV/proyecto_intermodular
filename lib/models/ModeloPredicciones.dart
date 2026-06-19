@@ -4,13 +4,13 @@ class Modelopredicciones {
   final String equipoLocal;
   final String equipoVisitante;
   final String fase;
-  int golesLocal = 0;
-  int golesVisitante = 0;
+  final int golesLocal;
+  final int golesVisitante;
   bool verificarLocal = false;
   bool verificarVisitante = false;
   
 
-  Modelopredicciones({required this.id_prediccion, required this.equipoLocal, required this.equipoVisitante, required this.fase});
+  Modelopredicciones({required this.id_prediccion, required this.equipoLocal, required this.equipoVisitante, required this.fase, required this.golesLocal, required this.golesVisitante});
 
 
   void comprobacion(int golesLocal2, int golesVisitante2) {
