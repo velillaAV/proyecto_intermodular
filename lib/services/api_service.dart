@@ -27,6 +27,18 @@ class ApiService {
         'isblocked': false,
       });
       print('¡Registro insertado con éxito!');
+      final response = await mSupaBase
+          .from('usuarios')
+          .select()
+          .eq('nombre', nombre)
+          .eq('contrasena', contrasena);
+
+          print(response);
+
+      // Si la lista no está vacía, devuelve el primer registro como Map
+      if (response.isNotEmpty) {
+        return response.first;
+      }
     } catch (e) {
       print('Error al insertar el registro: $e');
     }

@@ -5,8 +5,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/liga.dart';
 import '../models/user.dart';
-import '../models/ModeloUsuario.dart';
-import '../services/LogicaUsuarios.dart';
 
 class Logicaligas {
   static final List<Liga> _listaLigas = [];

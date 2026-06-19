@@ -54,7 +54,6 @@ class _UnirseLigaNormalState extends State<UnirseLigaNormal> {
       final usuarioActual = Logicausuario.getUsuarioActual();
       final joined = await Logicaligas.unirUsuarioALiga(ligaExistente.nombreLiga, usuarioActual);
       if (joined) {
-        ligaExistente.participantes.add(usuarioActual);
         Logicausuario.getUsuarioActual().unirLiga();
         Logicausuario.getUsuarioActual().usuario_ligas.last.ligaPerteneciente =
             ligaExistente;
