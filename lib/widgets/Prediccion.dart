@@ -10,179 +10,151 @@ class Prediccion extends StatefulWidget {
     required this.actualizar,
     required this.posicion,
   });
+
   final Modelopredicciones prediccion;
   final Modelousuario usuario;
   final int posicion;
   final void Function() actualizar;
+
   @override
   State<Prediccion> createState() => _PrediccionState();
 }
 
 class _PrediccionState extends State<Prediccion> {
   final TextEditingController _equipoLocalController = TextEditingController();
-  final TextEditingController _equipoVisitanteController =
-      TextEditingController();
-   int  marcadorA = 0;
-   int marcadorB = 0;
-      Color colorLocal = Colors.grey;
-      Color colorVisitante = Colors.grey;
+  final TextEditingController _equipoVisitanteController = TextEditingController();
+
+  int marcadorA = 0;
+  int marcadorB = 0;
+
+  Color colorLocal = Colors.grey;
+  Color colorVisitante = Colors.grey;
+
   String cambiarRutaImagen(String rutaImagen) {
-    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
-    return rutaNueva;
+    return 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
   }
 
   void _updateScore() {
     marcadorA = int.tryParse(_equipoLocalController.text) ?? 0;
     marcadorB = int.tryParse(_equipoVisitanteController.text) ?? 0;
-   
   }
 
   void _enviarPrediccion() {
-    
     widget.prediccion.comprobacion(marcadorA, marcadorB);
-    if(widget.prediccion.verificarLocal == true) {
-      if(widget.prediccion.verificarVisitante == true) {
+
+    if (widget.prediccion.verificarLocal) {
+      if (widget.prediccion.verificarVisitante) {
         colorLocal = Colors.green;
         colorVisitante = Colors.green;
         widget.usuario.puntuar(3);
-        
-      }
-      if(widget.prediccion.verificarVisitante == false) {
+      } else {
         colorLocal = Colors.green;
         colorVisitante = Colors.red;
         widget.usuario.puntuar(1);
-        
       }
-    }    
-    if(widget.prediccion.verificarLocal == false) {
-      if(widget.prediccion.verificarVisitante == false) {
+    } else {
+      if (!widget.prediccion.verificarVisitante) {
         colorLocal = Colors.red;
         colorVisitante = Colors.red;
-       
-        
-      } 
-       if(widget.prediccion.verificarVisitante == true) {
+      } else {
         colorLocal = Colors.red;
         colorVisitante = Colors.green;
         widget.usuario.puntuar(1);
-        
       }
-    } 
-   
+    }
+
     widget.usuario.predicciones.add(widget.prediccion);
     widget.actualizar();
   }
-   
+
   @override
   Widget build(BuildContext context) {
-    return 
-    widget.usuario.predicciones.any((element) => element == widget.prediccion,)
-    
-   ?Padding(
-      padding: const EdgeInsets.all(20.0),
+    final double imageSize = MediaQuery.of(context).size.width * 0.22;
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Column(
-        
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Equipo A
           Container(
-            width: 450,
-            color: Colors.grey,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: Row(
               children: [
+                // Imagen local
                 Image.network(
-                 cambiarRutaImagen(widget.prediccion.equipoLocal) ,
-                  width: 140,
-                  height: 140,
+                  cambiarRutaImagen(widget.prediccion.equipoLocal),
+                  width: imageSize,
+                  height: imageSize,
+                  fit: BoxFit.contain,
                 ),
-                Container(
-                  width: 60,
-                  color: widget.prediccion.verificarLocal == true
-                  ?Colors.green: Colors.red,
-                  child: Text(marcadorA.toString()),
-                ),
-                const SizedBox(width: 20),
 
-                const Text("-", style: TextStyle(fontSize: 20)),
+                const SizedBox(width: 10),
 
-                const SizedBox(width: 20),
-                Container(
-                  width: 60,
-                  color: widget.prediccion.verificarVisitante == true
-                  ?Colors.green: Colors.red,
-                  child: Text(marcadorB.toString()),
+                // Marcador local
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    color: widget.usuario.predicciones.contains(widget.prediccion)
+                        ? (widget.prediccion.verificarLocal ? Colors.green : Colors.red)
+                        : colorLocal,
+                    child: widget.usuario.predicciones.contains(widget.prediccion)
+                        ? Center(child: Text(marcadorA.toString(), style: const TextStyle(fontSize: 20)))
+                        : TextField(
+                            controller: _equipoLocalController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            decoration: const InputDecoration(hintText: "0"),
+                            onChanged: (_) => _updateScore(),
+                          ),
+                  ),
                 ),
+
+                const SizedBox(width: 10),
+                const Text("-", style: TextStyle(fontSize: 22)),
+                const SizedBox(width: 10),
+
+                // Marcador visitante
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    color: widget.usuario.predicciones.contains(widget.prediccion)
+                        ? (widget.prediccion.verificarVisitante ? Colors.green : Colors.red)
+                        : colorVisitante,
+                    child: widget.usuario.predicciones.contains(widget.prediccion)
+                        ? Center(child: Text(marcadorB.toString(), style: const TextStyle(fontSize: 20)))
+                        : TextField(
+                            controller: _equipoVisitanteController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            decoration: const InputDecoration(hintText: "0"),
+                            onChanged: (_) => _updateScore(),
+                          ),
+                  ),
+                ),
+
+                const SizedBox(width: 10),
+
+                // Imagen visitante
                 Image.network(
-                 cambiarRutaImagen(widget.prediccion.equipoVisitante),
-                  width: 140,
-                  height: 140,
+                  cambiarRutaImagen(widget.prediccion.equipoVisitante),
+                  width: imageSize,
+                  height: imageSize,
+                  fit: BoxFit.contain,
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
-        ],
-      ),
-    ): Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Equipo A
-          Container(
-            width: 450,
-            color: Colors.grey,
-            child: Row(
-              children: [
-                 Image.network(
-                 cambiarRutaImagen(widget.prediccion.equipoLocal) ,
-                  width: 140,
-                  height: 140,
-                ),
-                Container(
-                  width: 60,
-                  color: colorLocal,
-                  child: TextField(
-                    controller: _equipoLocalController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    decoration: const InputDecoration(hintText: "0"),
-                    onChanged: (_) => _updateScore(),
-                  ),
-                ),
-                const SizedBox(width: 20),
 
-                const Text("-", style: TextStyle(fontSize: 20)),
+          const SizedBox(height: 20),
 
-                const SizedBox(width: 20),
-                Container(
-                  width: 60,
-                  color: colorVisitante,
-                  child: TextField(
-                    controller: _equipoVisitanteController,
-                    keyboardType: TextInputType.number,
-                    textAlign: TextAlign.center,
-                    decoration: const InputDecoration(hintText: "0"),
-                    onChanged: (_) => _updateScore(),
-                  ),
-                ),
-                Image.network(
-                 cambiarRutaImagen(widget.prediccion.equipoVisitante) ,
-                  width: 140,
-                  height: 140,
-                ),
-              ],
+          if (!widget.usuario.predicciones.contains(widget.prediccion))
+            ElevatedButton(
+              onPressed: _enviarPrediccion,
+              child: const Text("Enviar predicción"),
             ),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _enviarPrediccion,
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-            ),
-            child: const Text("Enviar predicción"),
-          ),
         ],
       ),
     );
