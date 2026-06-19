@@ -1,8 +1,6 @@
-import 'dart:convert';
 
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
-import 'package:proyecto_intermodular/widgets/Mercado.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ServicioMercadoDiario {

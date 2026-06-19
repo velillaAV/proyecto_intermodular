@@ -30,7 +30,7 @@ class _MercadoState extends State<Mercado> {
   late Timer timerCuentaAtras;
   String cuentaAtras = '00:00:00';
   bool usarMercadoDiario = true;
-
+  
   @override
   void initState() {
     super.initState();

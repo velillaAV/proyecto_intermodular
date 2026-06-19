@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
+import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/services/LogicaPredicciones.dart';
+import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/Prediccion.dart';
 
 class Predicciones extends StatefulWidget {
@@ -19,12 +22,29 @@ class Predicciones extends StatefulWidget {
 }
 
 class _PrediccionesState extends State<Predicciones> {
+  List<Modelopredicciones> predicciones = [];
+  bool isLoading = false;
+  void initState() {
+    super.initState();
+    _loadPredicciones(widget.liga.fase);
+  }
+
+
+ Future<void> _loadPredicciones(String fase) async {
+     final loadpredicciones =  await Logicapredicciones().prediccionesSegunRondaYUsuario(
+      widget.liga.fase,
+    );
+    setState(() {
+    predicciones = loadpredicciones;
+    isLoading = true;
+    });
+    
+ }
+
+  
   @override
   Widget build(BuildContext context) {
-    final predicciones = Logicapredicciones().prediccionesSegunRondaYUsuario(
-      widget.liga.fase,
-      widget.usuario,
-    );
+    
     return Stack(
       children: [
         Positioned.fill(
@@ -36,7 +56,9 @@ class _PrediccionesState extends State<Predicciones> {
         Positioned.fill(
           child: Container(color: Colors.white.withValues(alpha: 0.75)),
         ),
-        Column(
+        isLoading == false
+        ?  Center(child: CircularProgressIndicator())
+        : Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
@@ -98,7 +120,10 @@ class _PrediccionesState extends State<Predicciones> {
               ),
             ),
           ],
-        ),
+        )
+       
+       
+    
       ],
     );
   }
