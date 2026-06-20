@@ -95,7 +95,7 @@ class ServicioMercadoDiario {
     }
   }
 
-  Future<Modelojugador> resolverPuja(
+  Future<void> resolverPuja(
     int id_mercado,
     int id_jugador,
     int id_liga,
@@ -111,23 +111,24 @@ class ServicioMercadoDiario {
           .order('puja', ascending: false)
           .single();
       final int idUsuario = idUsuarioJSON as int;
-      final jugadorJSON = await mSupaBase
-          .from('jugadores')
-          .select()
-          .eq('id_jugador', id_jugador)
-          .single();
-      jugador = Modelojugador(
-        id_jugador: id_jugador,
-        nombre: jugadorJSON['nombre'],
-        pais: jugadorJSON['pais'],
-        valor_clausula: jugadorJSON['valor_clausula'],
-        valor_venta: jugadorJSON['valor_venta'],
-        posicion: jugadorJSON['posicion'],
-      );
+       await mSupaBase
+        .from('pujas_jugador')
+        .delete()
+        .eq('id_jugador', id_jugador).eq('id_mercado', id_mercado).eq('id_liga', id_liga);
+        final espacio = await mSupaBase
+        .from('liga_participantes').select().eq('id_usuario', idUsuario).eq('id_liga', id_liga).single();
+        final cont = await mSupaBase
+        .from('liga_participantes').select('equipo').eq('id_usuario', idUsuario).eq('id_liga', id_liga).count(CountOption.exact);
+        int contExact = cont.count;
+        Map<String, dynamic> jugador = espacio['equipo'] ?? {};
+        jugador['jugador $contExact'];
+        await mSupaBase.from('liga_participantes').update({
+        'equipo': jugador
+        }).eq('id_usuario', idUsuario).eq('id_liga', id_liga);
+
     } catch (e) {
       print('Error al resolver la puja: $e');
     }
-    return jugador;
   }
 
   Future<int> getCountMercado() async {

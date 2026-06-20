@@ -2,6 +2,7 @@ import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/user.dart';
+import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
 
 class Liga {
   int id_liga;
@@ -98,11 +99,13 @@ class Liga {
     }
   }
 
-  void comprobarSubastas() {
+  Future<void> comprobarSubastas() async {
     for (var jugador in mercado.jugadores) {
-      if (DateTime.now().isAfter(jugador.fechaFinSubasta)) {
+      
         resolverSubasta(jugador);
-      }
+        await ServicioMercadoDiario().resolverPuja(mercado.idMercado, jugador.id_jugador, id_liga);
+
+      
     }
   }
 
