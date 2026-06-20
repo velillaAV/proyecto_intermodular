@@ -48,7 +48,9 @@ class _LiganormalState extends State<Liganormal> {
 
     final nuevaLiga = result['liga'] as Liga;
     final nuevoUsuarioLiga = usuarioActual.unirLiga();
+    print('preparado para insertar mercado diario');
     ServicioMercadoDiario().insertarMercadoDiario(nuevaLiga.id_liga);
+    print('preparado para obtener mercado diario');
     nuevaLiga.mercado = await ServicioMercadoDiario().obtenerMercadoHoy(nuevaLiga.id_liga);
     nuevoUsuarioLiga.ligaPerteneciente = nuevaLiga;
 
