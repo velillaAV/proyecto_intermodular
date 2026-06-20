@@ -53,61 +53,68 @@ class _MercadoState extends State<Mercado> {
   }
 
   Future<void> _pujar(Modelojugador jugador) async {
-    final snackBarValidadorValor = SnackBar(
-      content: Text("Esa puja supera tu saldo"),
-    );
-    final snackBarValidadorValor2 = SnackBar(
-      content: Text("Ese valor es menor que el definido del jugador"),
-    );
-    double puja = jugador.valor_venta;
+    try {
+      final snackBarValidadorValor = SnackBar(
+        content: Text("Esa puja supera tu saldo"),
+      );
+      final snackBarValidadorValor2 = SnackBar(
+        content: Text("Ese valor es menor que el definido del jugador"),
+      );
+      double puja = jugador.valor_venta;
 
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text("¿Quieres pujar por este jugador?"),
-        content: TextField(
-          keyboardType: TextInputType.number,
-          textAlign: TextAlign.center,
-          onChanged: (value) => puja = double.parse(value),
-          decoration: InputDecoration(hintText: jugador.valor_venta.toString()),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => {
-              if (widget.usuario.saldo < puja)
-                {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(snackBarValidadorValor),
-                }
-              else if (puja < jugador.valor_venta)
-                {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(snackBarValidadorValor2),
-                }
-              else
-                {
-                  jugador.pujas.add(Puja(widget.usuario, puja)),
-                  servicio.insertarPuja(
-                    Logicausuario.getListaUsuarios()
-                        .singleWhere(
-                          (usuario) =>
-                              usuario.usuario_ligas.contains(widget.usuario),
-                        )
-                        .id_usuario!,
-                    widget.liga.mercado.idMercado,
-                    jugador.id_jugador,
-                    puja,
-                  ),
-                  Navigator.pop(context),
-                },
-            },
-            child: Text("Aceptar"),
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text("¿Quieres pujar por este jugador?"),
+          content: TextField(
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            onChanged: (value) => puja = double.parse(value),
+            decoration: InputDecoration(
+              hintText: jugador.valor_venta.toString(),
+            ),
           ),
-        ],
-      ),
-    );
+          actions: [
+            TextButton(
+              onPressed: () async => {
+                if (widget.usuario.saldo < puja)
+                  {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(snackBarValidadorValor),
+                  }
+                else if (puja < jugador.valor_venta)
+                  {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(snackBarValidadorValor2),
+                  }
+                else
+                  {
+                    jugador.pujas.add(Puja(widget.usuario, puja)),
+                    await servicio.insertarPuja(
+                      Logicausuario.getListaUsuarios()
+                          .singleWhere(
+                            (usuario) =>
+                                usuario.usuario_ligas.contains(widget.usuario),
+                          )
+                          .id_usuario!,
+                      widget.liga.mercado.idMercado,
+                      jugador.id_jugador,
+                      puja,
+                    ),
+                  },
+                Navigator.pop(context),
+              },
+
+              child: Text("Aceptar"),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      print('error a la hora de hacer la puja $e');
+    }
   }
 
   Future<void> comprobarDuracion() async {
@@ -123,15 +130,16 @@ class _MercadoState extends State<Mercado> {
         cargando = true;
         error = null;
       });
-
-      final nuevoMercado = await servicio.obtenerMercadoHoy(
-        widget.liga.id_liga,
-      );
+      if (widget.liga.mercado.tiempoRestante == Duration.zero) {
+        final nuevoMercado = await servicio.obtenerMercadoHoy(
+          widget.liga.id_liga,
+        );
+        widget.liga.mercado = nuevoMercado;
+        cuentaAtras = nuevoMercado.cuentaAtrasFormato;
+      }
 
       if (mounted) {
         setState(() {
-          widget.liga.mercado = nuevoMercado;
-          cuentaAtras = nuevoMercado.cuentaAtrasFormato;
           cargando = false;
           usarMercadoDiario = true;
         });

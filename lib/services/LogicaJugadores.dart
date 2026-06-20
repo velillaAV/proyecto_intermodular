@@ -30,7 +30,7 @@ class Logicajugadores {
         .from('jugadores')
         .select()
         .eq('posicion', 'POR')
-        .range(portero, portero,);
+        .range(portero, portero);
     final defensas = await mSupaBase
         .from('jugadores')
         .select()
@@ -49,7 +49,7 @@ class Logicajugadores {
     List<Modelojugador> delanterosList;
     List<Modelojugador> equipo;
     List<Modelojugador> defensaListFinal = [];
-    List<Modelojugador> centrocampistasListFinal = [];                                                           
+    List<Modelojugador> centrocampistasListFinal = [];
     List<Modelojugador> delanterosListFinal = [];
 
     porterosList = porteros
@@ -64,7 +64,7 @@ class Logicajugadores {
           ),
         )
         .toList();
-        defensaList = defensas
+    defensaList = defensas
         .map(
           (json) => Modelojugador(
             id_jugador: json['id_jugador'],
@@ -76,7 +76,7 @@ class Logicajugadores {
           ),
         )
         .toList();
-        centrocampistasList = centrocampistas
+    centrocampistasList = centrocampistas
         .map(
           (json) => Modelojugador(
             id_jugador: json['id_jugador'],
@@ -88,7 +88,7 @@ class Logicajugadores {
           ),
         )
         .toList();
-        delanterosList = delanteros
+    delanterosList = delanteros
         .map(
           (json) => Modelojugador(
             id_jugador: json['id_jugador'],
@@ -101,19 +101,56 @@ class Logicajugadores {
         )
         .toList();
 
-        for(int i = 0; i < 5; i++) {
-         defensaListFinal.add(defensaList.elementAt(Random().nextInt(defensaList.length)));
-        }
-        for(int i = 0; i < 4; i++) {
-          centrocampistasListFinal.add(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)));
-          print(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)).toString());
-        } for(int i = 0; i < 4; i++) {
-          delanterosListFinal.add(delanterosList.elementAt(Random().nextInt(delanterosList.length)));
-          print(delanterosList.elementAt(Random().nextInt(delanterosList.length)).toString());
-        }
-        equipo = porterosList + defensaListFinal + centrocampistasListFinal + delanterosListFinal;
-        return equipo;
-        
+    for (int i = 0; i < 5; i++) {
+      defensaListFinal.add(
+        defensaList.elementAt(Random().nextInt(defensaList.length)),
+      );
+      while (defensaListFinal.length != defensaListFinal.toSet().length) {
+        defensaListFinal.removeWhere(
+          (elemento) => elemento.nombre == defensaListFinal.last.nombre,
+        );
+        defensaListFinal.add(
+          defensaList.elementAt(Random().nextInt(defensaList.length)),
+        );
+      }
+    }
+    for (int i = 0; i < 4; i++) {
+      centrocampistasListFinal.add(
+        centrocampistasList.elementAt(
+          Random().nextInt(centrocampistasList.length),
+        ),
+      );
+      while (centrocampistasListFinal.length !=
+          centrocampistasListFinal.toSet().length) {
+        centrocampistasListFinal.removeWhere(
+          (elemento) => elemento.nombre == centrocampistasListFinal.last.nombre,
+        );
+        centrocampistasListFinal.add(
+          centrocampistasList.elementAt(
+            Random().nextInt(centrocampistasList.length),
+          ),
+        );
+      }
+    }
+    for (int i = 0; i < 4; i++) {
+      delanterosListFinal.add(
+        delanterosList.elementAt(Random().nextInt(delanterosList.length)),
+      );
+      while (delanterosListFinal.length != delanterosListFinal.toSet().length) {
+        delanterosListFinal.removeWhere(
+          (elemento) => elemento.nombre == delanterosListFinal.last.nombre,
+        );
+        delanterosListFinal.add(
+          delanterosList.elementAt(Random().nextInt(delanterosList.length)),
+        );
+      }
+    }
+    equipo =
+        porterosList +
+        defensaListFinal +
+        centrocampistasListFinal +
+        delanterosListFinal;
+    return equipo;
   }
 
   Future<List<Modelojugador>> rellenarSelecciones(String pais) async {

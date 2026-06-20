@@ -54,11 +54,9 @@ class ServicioMercadoDiario {
     try {
       final List<Modelojugador> jugadores = await Logicajugadores()
           .otorgarEquipo();
-      print('llega');
       final List<Map<String, dynamic>> jugadoresJSON = jugadores
           .map((jugador) => jugador.toJson())
           .toList();
-      print('mapeado');
 
       await mSupaBase.from('mercado_diario').insert({
         'id_liga': idLiga,
@@ -67,7 +65,6 @@ class ServicioMercadoDiario {
             .add(const Duration(hours: 4))
             .toIso8601String(),
       });
-      print('insertado');
     } catch (e) {
       if (e is PostgrestException) {
         print('Error al insertar mercado_diario: ${e.message}');
