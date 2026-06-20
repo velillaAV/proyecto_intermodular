@@ -207,7 +207,7 @@ class Logicaligas {
                 fotoRuta: '',
                 isAdmin: usuarioJson['isadmin'] as bool,
               );
-              
+
               liga.participantes.add(participante);
               participante.unirLiga();
               participante.usuario_ligas.last.ligaPerteneciente = liga;
@@ -290,6 +290,7 @@ class Logicaligas {
               }
 
               participante.usuario_ligas.last.equipo.equipo = equipo;
+              participante.usuario_ligas.last.equipo.suplentes = equipo;
               participante.usuario_ligas.last.alineacion = alineacion;
               participante.usuario_ligas.last.predicciones = predicciones;
             }
@@ -392,6 +393,7 @@ class Logicaligas {
                         .toDouble(),
                     posicion: jugadorJSON['posicion'],
                   );
+
                   equipo.add(jugador);
                 }
               }
@@ -413,7 +415,6 @@ class Logicaligas {
                         .toDouble(),
                     posicion: jugadorJSON['posicion'],
                   );
-                  print(jugador.nombre);
 
                   alineacion.add(jugador);
                 }
@@ -463,6 +464,7 @@ class Logicaligas {
               }
 
               participante.usuario_ligas.last.equipo.equipo = equipo;
+              participante.usuario_ligas.last.equipo.suplentes = equipo;
               participante.usuario_ligas.last.alineacion = alineacion;
               participante.usuario_ligas.last.predicciones = predicciones;
             }

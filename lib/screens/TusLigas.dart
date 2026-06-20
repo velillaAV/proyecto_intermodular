@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
+import 'package:proyecto_intermodular/models/user.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
@@ -51,7 +52,7 @@ class _TusLigasState extends State<TusLigas> {
   }
 
   void _navegarALiga(Liga liga) {
-    final usuarioActual = Logicausuario.getUsuarioActual();
+    final usuarioActual = liga.getParticipantes().singleWhere((par) => par.id_usuario == Logicausuario.getUsuarioActual().id_usuario);
     print(usuarioActual.usuario_ligas.length);
     Modelousuario usuarioLiga = usuarioActual.usuario_ligas.firstWhere((usuaioLiga) => usuaioLiga.ligaPerteneciente.id_liga == liga.id_liga);
 
