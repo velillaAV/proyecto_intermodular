@@ -101,43 +101,40 @@ class Liga {
 
   Future<void> comprobarSubastas() async {
     for (var jugador in mercado.jugadores) {
-      
-        resolverSubasta(jugador);
-        await ServicioMercadoDiario().resolverPuja(mercado.idMercado, jugador.id_jugador, id_liga);
+        int id_pujador = await ServicioMercadoDiario().resolverPuja(mercado.idMercado, jugador.id_jugador, id_liga, jugador.id_jugador);
+        double cantidad_pujada = await ServicioMercadoDiario().getValorPuja(mercado.idMercado, jugador.id_jugador, id_liga);
+        resolverSubasta(jugador, id_pujador, cantidad_pujada);
 
       
     }
   }
 
-  void resolverSubasta(Modelojugador jugador) {
-    if (jugador.pujas.isEmpty) {
-      if (jugador.idPropietario != 0) {
-        for (var puja in jugador.pujas) {
+  void resolverSubasta(Modelojugador jugador, int id_usuario, double cantidad_pujada) {
+    
           for (var participante in participantes) {
-            if (participante.usuario_ligas.contains(puja.usuario)) {
-              if (participantes.indexOf(participante) ==
-                  jugador.idPropietario) {
-                puja.usuario.equipo.suplentes.add(jugador);
-              }
+            if (participante.id_usuario == id_usuario) {
+                for(final usuarioLiga in participante.usuario_ligas) {
+                  if(usuarioLiga.ligaPerteneciente.id_liga == id_liga) {
+                     usuarioLiga.equipo.suplentes.add(jugador);
+                     
+                  }
+                }
+               
+
+            } else  {
+              for(final usuarioLiga in participante.usuario_ligas) {
+                  if(usuarioLiga.ligaPerteneciente.id_liga == id_liga) {
+                     usuarioLiga.equipo.suplentes.add(jugador);
+                     usuarioLiga.sumarSaldo(cantidad_pujada);
+                  }
+                }
             }
           }
-        }
-      }
-    } else {
-      Puja mejorPuja = jugador.pujas.reduce(
-        (a, b) => a.cantidad > b.cantidad ? a : b,
-      );
+       
 
-      // Dar jugador al ganador
-      mejorPuja.usuario.equipo.suplentes.add(jugador);
+      
 
-      // devolver dinero a los perdedores
-      for (var puja in jugador.pujas) {
-        if (puja.usuario != mejorPuja.usuario) {
-          puja.usuario.sumarSaldo(puja.cantidad);
-        }
-      }
-    }
+    
 
     // Limpiar pujas
     jugador.pujas.clear();

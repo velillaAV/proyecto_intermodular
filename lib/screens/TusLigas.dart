@@ -47,17 +47,13 @@ class _TusLigasState extends State<TusLigas> {
 
   List<Liga> _obtenerLigasDelUsuario() {
     final usuarioActual = Logicausuario.getUsuarioActual();
-    return Logicaligas.getLigasByPropietario(usuarioActual.id_usuario! );
+    return Logicaligas.getLigasByParticipante(usuarioActual.id_usuario! );
   }
 
   void _navegarALiga(Liga liga) {
     final usuarioActual = Logicausuario.getUsuarioActual();
-    final pos = usuarioActual.usuario_ligas.indexWhere(
-      (us) => us.ligaPerteneciente == liga,
-    );
-    var usuarioLiga =
-        pos >= 0 ? usuarioActual.usuario_ligas[pos] : Modelousuario()
-          ..ligaPerteneciente = liga;
+    print(usuarioActual.usuario_ligas.length);
+    Modelousuario usuarioLiga = usuarioActual.usuario_ligas.firstWhere((usuaioLiga) => usuaioLiga.ligaPerteneciente.id_liga == liga.id_liga);
 
     if (Logicaligas.getLigasNormales().contains(liga)) {
       Navigator.push(

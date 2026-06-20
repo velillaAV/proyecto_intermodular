@@ -1,5 +1,7 @@
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
+import 'package:proyecto_intermodular/models/ModeloPuja.dart';
+import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -95,13 +97,14 @@ class ServicioMercadoDiario {
     }
   }
 
-  Future<void> resolverPuja(
+  Future<int> resolverPuja(
     int id_mercado,
     int id_jugador,
     int id_liga,
+    int jugador_id,
   ) async {
     final mSupaBase = Supabase.instance.client;
-    late Modelojugador jugador;
+    int idUsuario = 0;
     try {
       final idUsuarioJSON = await mSupaBase
           .from('pujas_jugador')
@@ -110,25 +113,58 @@ class ServicioMercadoDiario {
           .eq('id_jugador', id_jugador)
           .order('puja', ascending: false)
           .single();
-      final int idUsuario = idUsuarioJSON as int;
-       await mSupaBase
-        .from('pujas_jugador')
-        .delete()
-        .eq('id_jugador', id_jugador).eq('id_mercado', id_mercado).eq('id_liga', id_liga);
-        final espacio = await mSupaBase
-        .from('liga_participantes').select().eq('id_usuario', idUsuario).eq('id_liga', id_liga).single();
-        final cont = await mSupaBase
-        .from('liga_participantes').select('equipo').eq('id_usuario', idUsuario).eq('id_liga', id_liga).count(CountOption.exact);
-        int contExact = cont.count;
-        Map<String, dynamic> jugador = espacio['equipo'] ?? {};
-        jugador['jugador $contExact'];
-        await mSupaBase.from('liga_participantes').update({
-        'equipo': jugador
-        }).eq('id_usuario', idUsuario).eq('id_liga', id_liga);
-
+       idUsuario = idUsuarioJSON as int;
+      await mSupaBase
+          .from('pujas_jugador')
+          .delete()
+          .eq('id_jugador', id_jugador)
+          .eq('id_mercado', id_mercado)
+          .eq('id_liga', id_liga);
+      final espacio = await mSupaBase
+          .from('liga_participantes')
+          .select()
+          .eq('id_usuario', idUsuario)
+          .eq('id_liga', id_liga)
+          .single();
+      final cont = await mSupaBase
+          .from('liga_participantes')
+          .select('equipo')
+          .eq('id_usuario', idUsuario)
+          .eq('id_liga', id_liga)
+          .count(CountOption.exact);
+      int contExact = cont.count;
+      List<dynamic> jugador = espacio['equipo'] ?? {};
+      jugador.add(jugador_id);
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'equipo': jugador})
+          .eq('id_usuario', idUsuario)
+          .eq('id_liga', id_liga);
     } catch (e) {
       print('Error al resolver la puja: $e');
     }
+    return idUsuario;
+  }
+
+  Future<double> getValorPuja(int id_mercado, int id_jugador, int id_liga) async {
+    final mSupaBase = Supabase.instance.client;
+    late Modelojugador jugador;
+    double puja = 0;
+    try {
+      final pujaJSON = await mSupaBase
+          .from('pujas_jugador')
+          .select('puja')
+          .eq('id_mercado', id_mercado)
+          .eq('id_jugador', id_jugador)
+          .order('puja', ascending: false)
+          .single();
+      puja = (pujaJSON as int).toDouble();
+      
+    } catch (e) {
+      print('Error al obtener valor de la puja: $e');
+    }
+    return puja;
+     
   }
 
   Future<int> getCountMercado() async {
