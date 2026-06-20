@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/liga.dart';
@@ -126,6 +127,7 @@ class Logicaligas {
       hayClausulazos: false,
     );
 
+
     // Añadir a listas locales para cache
     _listaLigas.add(ligali);
     _listaLigasNormales.add(ligali);
@@ -170,13 +172,16 @@ class Logicaligas {
 
       // 3. Mapeo del objeto Liga
       Liga liga = Liga(
-        id_liga: jsonLiga['id_liga'] as int,
+        id_liga: idliga,
         cod_invitacion: jsonLiga['cod_invitacion'] as int,
         nombreLiga: jsonLiga['nombre'],
         capDeParticipantes: jsonLiga['cap_de_participantes'] as int,
         propietario: propietarioUs,
         hayClausulazos: false,
       );
+
+        liga.mercado =  await ServicioMercadoDiario().obtenerMercadoHoy(liga.id_liga);
+
 
       var participantesJson = await mSupaBase.from('liga_participantes').select().eq('id_liga', idliga);
       for(var participanteJson in participantesJson) {
