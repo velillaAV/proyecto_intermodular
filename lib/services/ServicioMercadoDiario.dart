@@ -47,29 +47,27 @@ class ServicioMercadoDiario {
 
   Future<void> insertarMercadoDiario(int idLiga) async {
     final mSupaBase = Supabase.instance.client;
-    try {
-      
+   
       final List<Modelojugador> jugadores = await Logicajugadores()
-          .otorgarEquipo();
-          print('llega');
+          .rellenarMercado();
       final List<Map<String, dynamic>> jugadoresJSON = jugadores
           .map((jugador) => jugador.toJson())
           .toList();
-      print('mapeado');
-
+          print(jugadoresJSON.toString());
+ try {
+      
       await mSupaBase.from('mercado_diario').insert({
         'id_liga': idLiga,
         'jugadores_json': jugadoresJSON,
-        'fecha_proximo_cambio': DateTime.now().add(const Duration(hours: 4)),
+        'fecha_proximo_cambio': DateTime.now().add(const Duration(hours: 4)).toIso8601String(),
       });
-      print('insertado');
+
     } catch (e) {
       if (e is PostgrestException) {
-        print('Error al insertar mercado_diario: ${e.message}');
-        print('DETALLES: ${e.details}'); // Aquí suele decir qué campo falla
-        print('HINT: ${e.hint}');
+        print('Error POSTGRE al insertar mercado_diario: ${e.message}');
       } else {
-        print('Error al insertar mercado_diario: $e');
+        print('Error normal al insertar mercado_diario: $e');
+
       }
     }
   }
