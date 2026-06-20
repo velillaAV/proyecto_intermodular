@@ -53,68 +53,88 @@ class _MercadoState extends State<Mercado> {
   }
 
   Future<void> _pujar(Modelojugador jugador) async {
-    try {
-      final snackBarValidadorValor = SnackBar(
-        content: Text("Esa puja supera tu saldo"),
-      );
-      final snackBarValidadorValor2 = SnackBar(
-        content: Text("Ese valor es menor que el definido del jugador"),
-      );
-      double puja = jugador.valor_venta;
+    final snackBarValidadorValor = SnackBar(
+      content: Text("Esa puja supera tu saldo"),
+    );
+    final snackBarValidadorValor2 = SnackBar(
+      content: Text("Ese valor es menor que el definido del jugador"),
+    );
+    final snackBarConfirmador = SnackBar(
+      content: Text("Se ha hecho la puja correctamente", style: TextStyle(color: Colors.white),),
+      backgroundColor: Colors.green,
+    );
+    double puja = jugador.valor_venta;
 
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text("¿Quieres pujar por este jugador?"),
-          content: TextField(
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            onChanged: (value) => puja = double.parse(value),
-            decoration: InputDecoration(
-              hintText: jugador.valor_venta.toString(),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async => {
-                if (widget.usuario.saldo < puja)
-                  {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(snackBarValidadorValor),
-                  }
-                else if (puja < jugador.valor_venta)
-                  {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(snackBarValidadorValor2),
-                  }
-                else
-                  {
-                    jugador.pujas.add(Puja(widget.usuario, puja)),
-                    await servicio.insertarPuja(
-                      Logicausuario.getListaUsuarios()
-                          .singleWhere(
-                            (usuario) =>
-                                usuario.usuario_ligas.contains(widget.usuario),
-                          )
-                          .id_usuario!,
-                      widget.liga.mercado.idMercado,
-                      jugador.id_jugador,
-                      puja,
-                    ),
-                  },
-                Navigator.pop(context),
-              },
-
-              child: Text("Aceptar"),
-            ),
-          ],
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("¿Quieres pujar por este jugador?"),
+        content: TextField(
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          onChanged: (value) => puja = double.parse(value),
+          decoration: InputDecoration(hintText: jugador.valor_venta.toString()),
         ),
-      );
-    } catch (e) {
-      print('error a la hora de hacer la puja $e');
-    }
+        actions: [
+          TextButton(
+            onPressed: () async {
+              // El try/catch debe ir DENTRO de la acción asíncrona
+              try {
+                if (widget.usuario.saldo < puja) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor);
+                } else if (puja < jugador.valor_venta) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarValidadorValor2);
+                } else {
+                  jugador.pujas.add(Puja(widget.usuario, puja));
+
+                  // Buscamos el usuario de forma segura
+                  final usuarioLogica = Logicausuario.getUsuarioActual();
+
+                 
+                  print('--- DEBUG PUJA ---');
+                  print('ID Usuario: ${usuarioLogica.id_usuario}');
+                  print('Usuario: ${usuarioLogica.nombre}');
+                  print('Mercado: ${widget.liga.mercado}');
+                  print('ID Mercado: ${widget.liga.mercado.idMercado}');
+                  print('ID Jugador: ${jugador.id_jugador}');
+                  print('------------------');
+                  await servicio.insertarPuja(
+                    usuarioLogica.id_usuario!,
+                    widget.liga.mercado.idMercado,
+                    jugador.id_jugador,
+                    puja,
+                  );
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(snackBarConfirmador);
+                }
+
+                // Cerramos el diálogo usando su propio contexto
+              } catch (e) {
+                // Ahora sí capturamos si falla la base de datos o si falla el singleWhere/firstOrNull
+                String mensaje = e.toString();
+
+                print('Error a la hora de hacer la puja: $e');
+                print('Descripcion: $mensaje');
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Ocurrió un error al procesar la puja"),
+                    ),
+                  );
+                }
+              }
+            },
+
+            child: Text("Aceptar"),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> comprobarDuracion() async {

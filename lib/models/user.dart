@@ -90,20 +90,21 @@ class Usuario {
   
   factory Usuario.fromJson(Map<String, dynamic> json) {
     return Usuario(
-      id_usuario: json['id_usuario'] ?? json['id'] ?? null,
-      nombre: json['nombre'] ?? '',
-      contrasena: json['contrasena'] ?? json['password'] ?? '',
-      genero: json['genero'] ?? json['gender'] ?? '',
-      edad: json['edad'] != null ? (json['edad'] as num).toInt() : 0,
-      lugarNacimiento: json['lugarNacimiento'] ?? json['lugar_nacimiento'] ?? '',
-      fotoRuta: json['fotoRuta'] ?? json['foto_ruta'] ?? null,
-      isAdmin: json['isAdmin'] == true || json['is_admin'] == true,
-    )..isBlocked = json['isBlocked'] == true || json['is_blocked'] == true;
+      id_usuario: json['id'],
+      nombre: json['nombre'],
+      contrasena: json['contrasena'],
+      genero: json['genero'],
+      edad: json['edad'] as int ,
+      lugarNacimiento: json['lugarnacimiento'],
+      fotoRuta: json['fotoruta'],
+      isAdmin: json['isadmin'] as bool,
+      
+    )..isBlocked = json['isblocked'];
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id_usuario': id_usuario,
+      'id': id_usuario,
       'nombre': nombre,
       'contrasena': contrasena,
       'genero': genero,

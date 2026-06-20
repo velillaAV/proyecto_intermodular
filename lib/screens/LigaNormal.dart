@@ -43,6 +43,7 @@ class _LiganormalState extends State<Liganormal> {
     }
 
     final usuarioActual = Logicausuario.getUsuarioActual();
+    print(usuarioActual.id_usuario);
     final result = await Logicaligas.crearLigaNormal(nombre, usuarioActual, numParticipantes, clausulas);
     
 

@@ -74,6 +74,7 @@ class _PantallainiciosesionState extends State<Pantallainiciosesion> {
       }
 
       final usuarioActual = Usuario.fromJson(usuarioJson);
+      print(usuarioActual.id_usuario);
       final usuarioLocal = Logicausuario.buscarUsuarioPorNombre(
         usuarioActual.nombre,
       );

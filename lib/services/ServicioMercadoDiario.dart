@@ -62,7 +62,7 @@ class ServicioMercadoDiario {
         'id_liga': idLiga,
         'jugadores_json': jugadoresJSON,
         'fecha_proximo_cambio': DateTime.now()
-            .add(const Duration(hours: 4))
+            .add(const Duration(hours: 2))
             .toIso8601String(),
       });
     } catch (e) {
