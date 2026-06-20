@@ -4,9 +4,8 @@ import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'dart:async';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
-import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
-import 'package:proyecto_intermodular/widgets/CardFutbolista3.dart';
 
 class Mercado extends StatefulWidget {
   const Mercado({
@@ -24,24 +23,24 @@ class Mercado extends StatefulWidget {
 
 class _MercadoState extends State<Mercado> {
   late ServicioMercadoDiario servicio;
-  ModeloMercadoDiario? mercadoDiario;
   bool cargando = true;
   String? error;
   late Timer timerCuentaAtras;
   String cuentaAtras = '00:00:00';
   bool usarMercadoDiario = true;
-  
+
   @override
   void initState() {
     super.initState();
     servicio = ServicioMercadoDiario();
+    comprobarDuracion();
     cargarMercadoDiario();
 
     // Iniciar timer para actualizar cuenta atrás cada segundo
     timerCuentaAtras = Timer.periodic(Duration(seconds: 1), (_) {
-      if (mercadoDiario != null && mounted) {
+      if (mounted) {
         setState(() {
-          cuentaAtras = mercadoDiario!.cuentaAtrasFormato;
+          cuentaAtras = widget.liga.mercado.cuentaAtrasFormato;
         });
       }
     });
@@ -52,7 +51,8 @@ class _MercadoState extends State<Mercado> {
     timerCuentaAtras.cancel();
     super.dispose();
   }
-  void _pujar(Modelojugador jugador) {
+
+  Future<void> _pujar(Modelojugador jugador) async {
     final snackBarValidadorValor = SnackBar(
       content: Text("Esa puja supera tu saldo"),
     );
@@ -69,9 +69,7 @@ class _MercadoState extends State<Mercado> {
           keyboardType: TextInputType.number,
           textAlign: TextAlign.center,
           onChanged: (value) => puja = double.parse(value),
-          decoration: InputDecoration(
-            hintText: jugador.valor_venta.toString(),
-          ),
+          decoration: InputDecoration(hintText: jugador.valor_venta.toString()),
         ),
         actions: [
           TextButton(
@@ -91,6 +89,7 @@ class _MercadoState extends State<Mercado> {
               else
                 {
                   jugador.pujas.add(Puja(widget.usuario, puja)),
+                  servicio.insertarPuja(Logicausuario.getListaUsuarios().singleWhere((usuario) => usuario.usuario_ligas.contains(widget.usuario) ).id_usuario!, widget.liga.mercado.idMercado, jugador.id_jugador, puja),
                   Navigator.pop(context),
                 },
             },
@@ -101,6 +100,13 @@ class _MercadoState extends State<Mercado> {
     );
   }
 
+  Future<void> comprobarDuracion() async {
+
+    if(widget.liga.mercado.tiempoRestante == Duration.zero) {
+        widget.liga.comprobarSubastas();
+        servicio.insertarMercadoDiario(widget.liga.id_liga);
+    }
+  }
   Future<void> cargarMercadoDiario() async {
     try {
       setState(() {
@@ -114,7 +120,7 @@ class _MercadoState extends State<Mercado> {
 
       if (mounted) {
         setState(() {
-          mercadoDiario = nuevoMercado;
+          widget.liga.mercado = nuevoMercado;
           cuentaAtras = nuevoMercado.cuentaAtrasFormato;
           cargando = false;
           usarMercadoDiario = true;
@@ -131,14 +137,16 @@ class _MercadoState extends State<Mercado> {
       }
     }
   }
+
   String cambiarRutaImagen(String rutaImagen) {
-    String rutaNueva = 'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
+    String rutaNueva =
+        'https://ymdpeykhonejkkxncdig.supabase.co/storage/v1/object/public/$rutaImagen';
     return rutaNueva;
   }
 
   @override
   Widget build(BuildContext context) {
-    for (var jugador in widget.liga.mercado) {
+    for (var jugador in widget.liga.mercado.jugadores) {
       jugador.setIcono();
     }
     return Stack(
@@ -201,7 +209,7 @@ class _MercadoState extends State<Mercado> {
               ),
 
               // Cuenta atrás del mercado diario
-              if (usarMercadoDiario && !cargando && mercadoDiario != null)
+              if (!cargando)
                 Container(
                   margin: const EdgeInsets.symmetric(
                     horizontal: 22,
@@ -262,8 +270,8 @@ class _MercadoState extends State<Mercado> {
                   padding: const EdgeInsets.symmetric(horizontal: 22),
                   child: cargando && usarMercadoDiario
                       ? Center(child: CircularProgressIndicator())
-                      : error != null && usarMercadoDiario
-                      ? Center(
+                      : 
+                       Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -290,12 +298,13 @@ class _MercadoState extends State<Mercado> {
                                 onPressed: cargarMercadoDiario,
                                 child: Text('Reintentar'),
                               ),
+                              _construirMercadoDiario()
                             ],
                           ),
-                        )
-                      : usarMercadoDiario && mercadoDiario != null
-                      ? _construirMercadoDiario()
-                      : _construirMercadoLocal(),
+                        ),
+                     
+                       
+                      
                 ),
               ),
             ],
@@ -306,14 +315,14 @@ class _MercadoState extends State<Mercado> {
   }
 
   Widget _construirMercadoDiario() {
-    if (mercadoDiario!.jugadores.isEmpty) {
+    if (widget.liga.mercado.jugadores.isEmpty) {
       return Center(child: Text('No hay jugadores disponibles hoy'));
     }
 
     return ListView.builder(
-      itemCount: mercadoDiario!.jugadores.length,
+      itemCount: widget.liga.mercado.jugadores.length,
       itemBuilder: (context, index) {
-        final jugador = mercadoDiario!.jugadores[index];
+        final jugador = widget.liga.mercado.jugadores[index];
         return Card(
           margin: EdgeInsets.symmetric(vertical: 8),
           child: ListTile(
@@ -332,11 +341,10 @@ class _MercadoState extends State<Mercado> {
               },
             ),
             title: Text(jugador.nombre),
-            subtitle:  
-            Row(
+            subtitle: Row(
               children: [
                 Text(jugador.posicion),
-                SizedBox(width: 140,),
+                SizedBox(width: 140),
                 ElevatedButton(
                   onPressed: () => _pujar(jugador),
                   style: ElevatedButton.styleFrom(
@@ -346,40 +354,22 @@ class _MercadoState extends State<Mercado> {
                 ),
               ],
             ),
-            
-            trailing: 
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '\$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
+
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '\$${(jugador.valor_venta / 1000000).toStringAsFixed(1)}M',
+                  style: TextStyle(fontSize: 20),
                 ),
-              
-            
+              ],
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _construirMercadoLocal() {
-    return widget.liga.participantes.isEmpty
-        ? const Center(child: Text('No hay futbolistas en el Mercado'))
-        : ListView.builder(
-            itemCount: widget.liga.mercado.length,
-            itemBuilder: (context, index) {
-              widget.actualizar();
-              return CardFutbolista3(
-                usuario: widget.usuario,
-                jugador: widget.liga.mercado[index],
-                actualizar: () {},
-                liga: widget.liga,
-              );
-            },
-          );
-  }
+ 
 }

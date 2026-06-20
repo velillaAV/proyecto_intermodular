@@ -1,6 +1,8 @@
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
+import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/user.dart';
+import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
 
 class Liga {
   int id_liga;
@@ -11,104 +13,7 @@ class Liga {
   bool hayClausulazos = false;
   List<Usuario> participantes = [];
   final int capDeParticipantes;
-  List<Modelojugador> mercado = [
-    Modelojugador(
-      id_jugador: 1,
-      nombre: "Nikola Vasijl",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 14000000,
-      valor_venta: 4000000,
-      posicion: "POR",
-    ),
-    Modelojugador(
-      id_jugador: 2,
-      nombre: "Martin Zlomislic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 8000000,
-      valor_venta: 1000000,
-      posicion: "POR",
-    ),
-    Modelojugador(
-      id_jugador: 3,
-      nombre: "Sead Kolasinac",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 18000000,
-      valor_venta: 6000000,
-      posicion: "DEF",
-    ),
-    Modelojugador(
-      id_jugador: 4,
-      nombre: "Tarik Muharemovic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 40000000,
-      valor_venta: 20000000,
-      posicion: "DEF",
-    ),
-    Modelojugador(
-      id_jugador: 5,
-      nombre: "Amar Dedic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 38000000,
-      valor_venta: 18000000,
-      posicion: "DEF",
-    ),
-    Modelojugador(
-      id_jugador: 6,
-      nombre: "Nikola Katic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 8000000,
-      valor_venta: 2000000,
-      posicion: "DEF",
-    ),
-    Modelojugador(
-      id_jugador: 7,
-      nombre: "Benjamin Tahirovic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 12000000,
-      valor_venta: 4000000,
-      posicion: "CEN",
-    ),
-    Modelojugador(
-      id_jugador: 8,
-      nombre: "Amar Memic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 12000000,
-      valor_venta: 4000000,
-      posicion: "CEN",
-    ),
-    Modelojugador(
-      id_jugador: 9,
-      nombre: "Amir Hadziahmetovic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 12000000,
-      valor_venta: 4000000,
-      posicion: "CEN",
-    ),
-    Modelojugador(
-      id_jugador: 10,
-      nombre: "Ermedin Demirovic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 42000000,
-      valor_venta: 22000000,
-      posicion: "DEL",
-    ),
-    Modelojugador(
-      id_jugador: 11,
-      nombre: "Haris Tabakovic",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 11000000,
-      valor_venta: 3000000,
-      posicion: "DEL",
-    ),
-    Modelojugador(
-      id_jugador: 12,
-      nombre: "Edin Dzeko",
-      pais: "images/logoBosnia.png",
-      valor_clausula: 10000000,
-      valor_venta: 2000000,
-      posicion: "DEL",
-    ),
-  ];
+ late ModeloMercadoDiario mercado;
 
   Liga({
     required this.id_liga,
@@ -116,7 +21,7 @@ class Liga {
     required this.propietario,
     required this.nombreLiga,
     required this.capDeParticipantes,
-    required this.hayClausulazos
+    required this.hayClausulazos,
   });
 
   
@@ -141,9 +46,7 @@ class Liga {
     return participantes;
   }
 
-  List<Modelojugador> getMercado() {
-    return mercado;
-  }
+ 
 
   void setId_Liga(int id_liga) {
     this.id_liga = id_liga;
@@ -165,7 +68,7 @@ class Liga {
     this.participantes = participantes;
   }
 
-  void setMercado(List<Modelojugador> mercado) {
+  void setMercado(ModeloMercadoDiario mercado) {
     this.mercado = mercado;
   }
 
@@ -194,10 +97,11 @@ class Liga {
   }
 
   void comprobarSubastas() {
-    for (var jugador in mercado) {
-      if (DateTime.now().isAfter(jugador.fechaFinSubasta)) {
+    for (var jugador in mercado.jugadores) {
+      
         resolverSubasta(jugador);
-      }
+
+      
     }
   }
 
@@ -243,5 +147,9 @@ class Liga {
       final puntosB = datosB.isNotEmpty ? datosB.first.puntos : 0;
       return puntosB.compareTo(puntosA);
     });
+  }
+  
+  ModeloMercadoDiario getMercado() {
+   return ServicioMercadoDiario().obtenerMercadoHoy(id_liga) as ModeloMercadoDiario;
   }
 }

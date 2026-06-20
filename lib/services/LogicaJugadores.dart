@@ -25,51 +25,53 @@ class Logicajugadores {
   }
 
   Future<List<Modelojugador>> otorgarEquipo() async {
-    int portero = Random().nextInt(96);
+    int numRandom = Random().nextInt(96);
+    late List<Modelojugador> equipo;
+
+
+    try {
     final porteros = await mSupaBase
         .from('jugadores')
         .select()
         .eq('posicion', 'POR')
-        .range(portero, portero,);
+        .range(numRandom, numRandom);
     final defensas = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'DEF');
+        .eq('posicion', 'DEF').range(numRandom, numRandom + 5);
     final centrocampistas = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'CEN');
+        .eq('posicion', 'CEN').range(numRandom, numRandom + 4);
     final delanteros = await mSupaBase
         .from('jugadores')
         .select()
-        .eq('posicion', 'DEL');
+        .eq('posicion', 'DEL').range(numRandom, numRandom + 4);
+       
     List<Modelojugador> porterosList;
     List<Modelojugador> defensaList;
     List<Modelojugador> centrocampistasList;
     List<Modelojugador> delanterosList;
-    List<Modelojugador> equipo;
-    List<Modelojugador> defensaListFinal = [];
-    List<Modelojugador> centrocampistasListFinal = [];                                                           
-    List<Modelojugador> delanterosListFinal = [];
-
+   
     porterosList = porteros
         .map(
           (json) => Modelojugador(
-            id_jugador: json['id_jugador'],
+            id_jugador: json['id_jugador'] as int,
             nombre: json['nombre'],
-            pais: (json['pais']),
+            pais: json['pais'],
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
           ),
         )
         .toList();
+        
         defensaList = defensas
         .map(
           (json) => Modelojugador(
-            id_jugador: json['id_jugador'],
+            id_jugador: json['id_jugador'] as int,
             nombre: json['nombre'],
-            pais: (json['pais']),
+            pais: json['pais'],
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
@@ -79,9 +81,9 @@ class Logicajugadores {
         centrocampistasList = centrocampistas
         .map(
           (json) => Modelojugador(
-            id_jugador: json['id_jugador'],
+            id_jugador: json['id_jugador'] as int,
             nombre: json['nombre'],
-            pais: (json['pais']),
+            pais: json['pais'],
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
@@ -91,9 +93,9 @@ class Logicajugadores {
         delanterosList = delanteros
         .map(
           (json) => Modelojugador(
-            id_jugador: json['id_jugador'],
+            id_jugador: json['id_jugador'] as int,
             nombre: json['nombre'],
-            pais: (json['pais']),
+            pais: json['pais'],
             valor_clausula: (json['valor_clausula'] as num).toDouble(),
             valor_venta: (json['valor_venta'] as num).toDouble(),
             posicion: json['posicion'],
@@ -101,19 +103,17 @@ class Logicajugadores {
         )
         .toList();
 
-        for(int i = 0; i < 5; i++) {
-         defensaListFinal.add(defensaList.elementAt(Random().nextInt(defensaList.length)));
-        }
-        for(int i = 0; i < 4; i++) {
-          centrocampistasListFinal.add(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)));
-          print(centrocampistasList.elementAt(Random().nextInt(centrocampistasList.length)).toString());
-        } for(int i = 0; i < 4; i++) {
-          delanterosListFinal.add(delanterosList.elementAt(Random().nextInt(delanterosList.length)));
-          print(delanterosList.elementAt(Random().nextInt(delanterosList.length)).toString());
-        }
-        equipo = porterosList + defensaListFinal + centrocampistasListFinal + delanterosListFinal;
-        return equipo;
-        
+       
+        equipo = porterosList + defensaList + centrocampistasList + delanterosList;
+       
+    } catch (e) {
+  if (e is PostgrestException) {
+    print('ERROR AL OBTENER EQUIPO: ${e.message}');
+    print('DETALLES: ${e.details}'); // Aquí suele decir qué campo falla
+    print('HINT: ${e.hint}');
+  } 
+  } 
+  return equipo;
   }
 
   Future<List<Modelojugador>> rellenarSelecciones(String pais) async {

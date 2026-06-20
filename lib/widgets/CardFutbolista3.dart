@@ -65,6 +65,7 @@ class _CardFutbolista3State extends State<CardFutbolista3> {
               else
                 {
                   widget.jugador.pujas.add(Puja(widget.usuario, puja)),
+                  
                   Navigator.pop(context),
                 },
             },
