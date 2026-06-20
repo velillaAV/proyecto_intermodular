@@ -24,9 +24,13 @@ class Modelojugador {
     required this.valor_venta,
     required this.posicion,
   });
+  void puntuar(int puntuacion) {
+    puntos = puntuacion;
+  }
 
-
-
+  void guardarPuntuacion() {
+    puntos_fase.add(puntos);
+  }
 
   void aumentarClausula(double suma) {
     valor_clausula += suma;
@@ -50,17 +54,6 @@ class Modelojugador {
       isIcono = true;
       posicion = "DEL";
     }
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id_jugador': id_jugador,
-      'nombre': nombre,
-      'pais': pais,
-      'valor_clausula': valor_clausula,
-      'valor_venta': valor_venta,
-      'posicion': posicion,
-    };
   }
  
 }

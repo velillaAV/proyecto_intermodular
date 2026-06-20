@@ -255,7 +255,7 @@ class _CardFutbolista5State extends State<CardFutbolista5> {
                 {
                   setState(() {
                     widget.jugador.definirValorVenta(valorVenta);
-                  widget.liga.mercado.jugadores.add(widget.jugador);
+                  widget.liga.mercado.add(widget.jugador);
                   widget.usuario.equipo.equipo.remove(widget.jugador);
 
                   if (widget.usuario.alineacion.contains(widget.jugador))

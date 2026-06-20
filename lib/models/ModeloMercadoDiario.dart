@@ -1,14 +1,12 @@
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 
 class ModeloMercadoDiario {
-  final int idMercado;
   final int idLiga;
   final DateTime fechaActualizacion;
   final DateTime fechaProximoCambio;
   final List<Modelojugador> jugadores;
 
   ModeloMercadoDiario({
-    required this.idMercado,
     required this.idLiga,
     required this.fechaActualizacion,
     required this.fechaProximoCambio,

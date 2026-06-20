@@ -326,7 +326,7 @@ class Logicaligas {
  try {
       
     } catch (e) {
-      print('Error al insertar usuario en liga especial: $e');
+      print('Error al insertar usuario en liga: $e');
     }    
     _listaLigas.add(nuevaLiga);
     _listaLigasEspeciales.add(nuevaLiga);

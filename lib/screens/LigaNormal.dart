@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/config/utils/estiloBotones.dart';
-import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 import 'package:proyecto_intermodular/screens/PantallaOtorgacionDeEquipo.dart';
-import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/drawer.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
@@ -48,10 +46,7 @@ class _LiganormalState extends State<Liganormal> {
 
     final nuevaLiga = result['liga'] as Liga;
     final nuevoUsuarioLiga = usuarioActual.unirLiga();
-    print('preparado para insertar mercado diario');
-    ServicioMercadoDiario().insertarMercadoDiario(nuevaLiga.id_liga);
-    print('preparado para obtener mercado diario');
-    nuevaLiga.mercado = await ServicioMercadoDiario().obtenerMercadoHoy(nuevaLiga.id_liga);
+    Logicaligas.unirUsuarioALiga(nombre, Logicausuario.getUsuarioActual());
     nuevoUsuarioLiga.ligaPerteneciente = nuevaLiga;
 
     Navigator.push(
