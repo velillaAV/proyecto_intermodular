@@ -278,6 +278,7 @@ class Logicaligas {
 
     _listaLigas.add(nuevaLiga);
     _listaLigasNormales.add(nuevaLiga);
+    nuevaLiga.participantes.add(propietario);
 
     return {'success': true, 'liga': nuevaLiga};
   }
