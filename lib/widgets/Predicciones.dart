@@ -114,7 +114,7 @@ class _PrediccionesState extends State<Predicciones> {
                     actualizar: () {
                       setState(() {});
                     },
-                    posicion: index,
+                    posicion: index, id_liga: widget.liga.id_liga,
                   );
                 },
               ),

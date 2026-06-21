@@ -13,7 +13,7 @@ class Logicaligas {
   static final List<Liga> _listaLigas = [];
   static final List<Liga> _listaLigasNormales = [];
   static final List<Modeloligaespecial> _listaLigasEspeciales = [];
-
+  //comprueba que la liga exista, al contrario, sale false
   static Future<bool> existeLigaNombre(String nombre) async {
     final mSupaBase = Supabase.instance.client;
 
@@ -37,7 +37,7 @@ class Logicaligas {
   static List<Liga> getLigasEspeciales() {
     return _listaLigasEspeciales;
   }
-
+//Este metodo busca primeramente en la listaLocal, si no lo encuentra, lo busca en supabase
   static Future<Liga?> buscarLigaPorNombre(String nombre) async {
     final mSupaBase = Supabase.instance.client;
     int id_propietario;
@@ -88,14 +88,14 @@ class Logicaligas {
 
   /// Buscar liga por código de invitación (pregunta al backend si es necesario)
   static Future<Liga?> buscarLigaPorCodigo(int codigo) async {
-    // Primero buscar en caché
+    // Primero buscar en local
     final mSupaBase = Supabase.instance.client;
     int id_propietario;
     final coincidencias = _listaLigas.where((l) => l.cod_invitacion == codigo);
     if (coincidencias.isNotEmpty) return coincidencias.first;
 
     // Obtener todas las ligas y buscar código
-    // No está en caché; preguntar al backend
+    // No está en local; preguntar a supabase
     final propietario = await mSupaBase
         .from('ligas')
         .select('propietario_id')
@@ -213,7 +213,7 @@ class Logicaligas {
               participante.usuario_ligas.last.ligaPerteneciente = liga;
 
               List<Modelojugador> equipo = [];
-              List<Modelojugador> alineacion = [];
+              List<Modelojugador?> alineacion = [];
               List<Modelopredicciones> predicciones = [];
               List<int> listaIDS = (participanteJson['equipo'] as List<dynamic>)
                   .map((numero) => int.tryParse(numero.toString()) ?? 0)
@@ -267,6 +267,8 @@ class Logicaligas {
                     posicion: jugadorJSON['posicion'],
                   );
                   alineacion.add(jugador);
+                } else  {
+                  alineacion.add(null);
                 }
               }
 
@@ -361,7 +363,7 @@ class Logicaligas {
               participante.usuario_ligas.last.ligaPerteneciente = ligaEspecial;
 
               List<Modelojugador> equipo = [];
-              List<Modelojugador> alineacion = [];
+              List<Modelojugador?> alineacion = [];
               List<Modelopredicciones> predicciones = [];
               List<int> listaIDS = (participanteJson['equipo'] as List<dynamic>)
                   .map((numero) => int.tryParse(numero.toString()) ?? 0)
@@ -417,6 +419,8 @@ class Logicaligas {
                   );
 
                   alineacion.add(jugador);
+                } else  {
+                  alineacion.add(null);
                 }
               }
 
@@ -462,9 +466,16 @@ class Logicaligas {
                 }
                 contador++;
               }
-
-              participante.usuario_ligas.last.equipo.equipo = equipo;
-              participante.usuario_ligas.last.equipo.suplentes = equipo;
+              for (var jugadorTitular in alineacion) {
+                if(jugadorTitular != null) {
+                  equipo.removeWhere((jugador) => jugador.id_jugador == jugadorTitular.id_jugador);
+                  participante.usuario_ligas.last.equipo.equipo.add(jugadorTitular);
+                }
+                   
+              }
+             
+              participante.usuario_ligas.last.equipo.equipo += equipo.toSet().toList();
+              participante.usuario_ligas.last.equipo.suplentes = equipo.toSet().toList();
               participante.usuario_ligas.last.alineacion = alineacion;
               participante.usuario_ligas.last.predicciones = predicciones;
             }
@@ -626,7 +637,7 @@ class Logicaligas {
 
     return ligas;
   }
-
+//Esto sirve para mostrar que usuario ocupa cada seleccion en una liga especial
   static Future<void> guardarIdSeleccion(
     int id_seleccion,
     int id_usuario,
@@ -653,6 +664,7 @@ class Logicaligas {
       print('error a la hora de guardar seleccion: $e');
     }
   }
+  //con este metodo y el siguiente se asegura la persistencia de los jugadores en supabase
 
   static Future<void> guardarIdAlineacion(
     int id_hueco,
@@ -668,7 +680,7 @@ class Logicaligas {
           .eq('id_liga', id_liga)
           .eq('id_usuario', id_usuario)
           .single();
-      List<int> alineacion = (alineacionJSON['equipo'] as List<dynamic>)
+      List<int> alineacion = (alineacionJSON['alineacion'] as List<dynamic>)
                   .map((numero) => int.tryParse(numero.toString()) ?? 0)
                   .toList();
       alineacion[id_hueco] = id_jugador;
@@ -704,11 +716,86 @@ class Logicaligas {
 
       await mSupaBase
           .from('liga_participantes')
-          .update({'alineacion': equipo})
+          .update({'equipo': equipo})
           .eq('id_liga', id_liga)
           .eq('id_usuario', id_usuario);
     } catch (e) {
       print('error a la hora de guardar equipo: $e');
     }
   }
+  //con este metodo se guardan las predicciones en supabase
+
+  static Future<void> guardarIdPrediccion(
+    int id_hueco,
+    int id_usuario,
+    int id_liga,
+    int id_prediccion,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+      final ligaJSON = await mSupaBase
+          .from('liga_participantes')
+          .select()
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario)
+          .single();
+      List<int> predicciones = (ligaJSON['predicciones'] as List<dynamic>)
+                  .map((numero) => int.tryParse(numero.toString()) ?? 0)
+                  .toList();
+      predicciones[id_hueco] = id_prediccion;
+
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'predicciones': predicciones})
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario);
+    } catch (e) {
+      print('error a la hora de guardar equipo: $e');
+    }
+  }
+  //con este metodo se guardan los puntos en supabase
+  static Future<void> guardarPuntos(
+    int puntos,
+    int id_usuario,
+    int id_liga,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+    
+     
+
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'puntos': puntos})
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario);
+    } catch (e) {
+      print('error a la hora de guardar equipo: $e');
+    }
+  }
+//Con este metodo se resta el saldo sacando el actual y se guarda en supabase
+  static Future<void> guardarSaldo(
+    double saldo,
+    int id_usuario,
+    int id_liga,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+      final saldoActualJSON = await mSupaBase.from('liga_participantes').select().eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario).single();
+
+      double saldoActual = (saldoActualJSON['saldo'] as int).toDouble();
+      double saldoDefinitivo = saldoActual - saldo;
+     
+
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'saldo': saldoDefinitivo})
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario);
+    } catch (e) {
+      print('error a la hora de guardar equipo: $e');
+    }
+  }
+
 }

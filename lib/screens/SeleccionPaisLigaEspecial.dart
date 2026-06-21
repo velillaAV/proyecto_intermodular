@@ -3,6 +3,7 @@ import 'package:proyecto_intermodular/config/constantes/colors.dart';
 import 'package:proyecto_intermodular/config/constantes/dimensions.dart';
 import 'package:proyecto_intermodular/models/ModeloLigaEspecial.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaEspecial.dart';
+import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
 import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
@@ -116,7 +117,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                 child: Row(
                                   children: [
                                     Image.network(
-                                      seleccion.escudo!,
+                                     cambiarRutaImagen(seleccion.escudo!),
                                       width: 50,
                                       height: 50,
                                     ),
@@ -163,19 +164,19 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                 child: ElevatedButton(
                   onPressed: indexGeneral == -1
                       ? null
-                      : () {
+                      : () async {
                           widget.liga.listaSelecciones[indexGeneral].usuario =
                               Logicausuario.getUsuarioActual().unirLiga();
                               Logicaligas.unirUsuarioALiga(widget.liga.nombreLiga, Logicausuario.getUsuarioActual());
 
                           final seleccion =
                               widget.liga.listaSelecciones[indexGeneral];
-                          Logicaligas.guardarIdSeleccion(indexGeneral, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga);
+                         await Logicaligas.guardarIdSeleccion(indexGeneral, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga);
                           Logicausuario.getUsuarioActual()
                                   .usuario_ligas
                                   .last
-                                  .equipo =
-                              seleccion;
+                                  .equipo.equipo =
+                              await Logicajugadores().rellenarSelecciones(seleccion.escudo!);
                           int contador = 0;
                           for (var jugador
                               in Logicausuario.getUsuarioActual()
@@ -189,7 +190,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                 .equipo
                                 .suplentes
                                 .add(jugador);
-                          Logicaligas.guardarIdEquipo(contador, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga, jugador.id_jugador);
+                         await Logicaligas.guardarIdEquipo(contador, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga, jugador.id_jugador);
                           contador++;
                           }
                           Logicausuario.getUsuarioActual()

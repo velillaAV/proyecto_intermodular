@@ -2,6 +2,8 @@ import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloMercadoDiario.dart';
 import 'package:proyecto_intermodular/models/ModeloPuja.dart';
 import 'package:proyecto_intermodular/models/user.dart';
+import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/ServicioMercadoDiario.dart';
 
 class Liga {
@@ -104,6 +106,7 @@ class Liga {
         int id_pujador = await ServicioMercadoDiario().resolverPuja(mercado.idMercado, jugador.id_jugador, id_liga, jugador.id_jugador);
         double cantidad_pujada = await ServicioMercadoDiario().getValorPuja(mercado.idMercado, jugador.id_jugador, id_liga);
         resolverSubasta(jugador, id_pujador, cantidad_pujada);
+        await Logicaligas.guardarSaldo(cantidad_pujada, id_pujador, id_liga);
 
       
     }

@@ -58,5 +58,6 @@ class Modelojugador {
       'posicion': posicion,
     };
   }
+ //Esto evita que haya jugadores repetidos
  
 }

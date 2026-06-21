@@ -97,7 +97,7 @@ class _EquipoJugadorState extends State<EquipoJugador> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 22),
                     child: ListView.builder(
-                      itemCount: widget.usuario.equipo.equipo.length,
+                      itemCount: widget.usuario.equipo.equipo.toSet().length,
                       
                       itemBuilder: (context, index) {
                        
@@ -106,13 +106,13 @@ class _EquipoJugadorState extends State<EquipoJugador> {
                         return widget.liga.runtimeType == Liga
                             ? CardFutbolista5(
                                 usuario: widget.usuario,
-                                jugador: widget.usuario.equipo.equipo[index],
+                                jugador: widget.usuario.equipo.equipo.toSet().toList()[index],
                                 actualizar: widget.actualizar,
                                 liga: widget.liga,
                               )
                             : CardFutbolista6(
                                 usuario: widget.usuario,
-                                jugador: widget.usuario.equipo.equipo[index],
+                                jugador: widget.usuario.equipo.equipo.toSet().toList()[index],
                                 actualizar: widget.actualizar,
                                 liga: widget.liga,
                                 

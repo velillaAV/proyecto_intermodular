@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloPredicciones.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 class Prediccion extends StatefulWidget {
   const Prediccion({
@@ -8,11 +10,12 @@ class Prediccion extends StatefulWidget {
     required this.prediccion,
     required this.usuario,
     required this.actualizar,
-    required this.posicion,
+    required this.posicion, required this.id_liga,
   });
 
   final Modelopredicciones prediccion;
   final Modelousuario usuario;
+  final int id_liga;
   final int posicion;
   final void Function() actualizar;
 
@@ -39,9 +42,9 @@ class _PrediccionState extends State<Prediccion> {
     marcadorB = int.tryParse(_equipoVisitanteController.text) ?? 0;
   }
 
-  void _enviarPrediccion() {
+  Future<void> _enviarPrediccion() async {
     widget.prediccion.comprobacion(marcadorA, marcadorB);
-
+    
     if (widget.prediccion.verificarLocal) {
       if (widget.prediccion.verificarVisitante) {
         colorLocal = Colors.green;
@@ -62,7 +65,8 @@ class _PrediccionState extends State<Prediccion> {
         widget.usuario.puntuar(1);
       }
     }
-
+   await Logicaligas.guardarPuntos(widget.usuario.puntos, Logicausuario.getUsuarioActual().id_usuario!, widget.id_liga);
+   await  Logicaligas.guardarIdPrediccion(widget.posicion, Logicausuario.getUsuarioActual().id_usuario!, widget.id_liga, widget.prediccion.id_prediccion);
     widget.usuario.predicciones.add(widget.prediccion);
     widget.actualizar();
   }
@@ -152,7 +156,7 @@ class _PrediccionState extends State<Prediccion> {
 
           if (!widget.usuario.predicciones.contains(widget.prediccion))
             ElevatedButton(
-              onPressed: _enviarPrediccion,
+              onPressed:  _enviarPrediccion,
               child: const Text("Enviar predicción"),
             ),
         ],

@@ -42,16 +42,16 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
     }
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (widget.usuario.alineacion.elementAt(widget.posicion) == null) {
-        Logicaligas.guardarIdEquipo(widget.usuario.equipo.equipo.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, 0);
-        Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
+       await  Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
+      await Logicaligas.guardarIdEquipo(widget.usuario.equipo.suplentes.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, 0);
           widget.usuario.alineacion[widget.posicion] = widget.jugador;
           widget.usuario.equipo.suplentes.remove(widget.jugador);
           widget.actualizar();
         } else {
-        Logicaligas.guardarIdEquipo(widget.usuario.equipo.equipo.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.usuario.alineacion.elementAt(widget.posicion)!.id_jugador);
-        Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
+      await  Logicaligas.guardarIdEquipo(widget.usuario.equipo.suplentes.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.usuario.alineacion.elementAt(widget.posicion)!.id_jugador);
+       await Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
           Modelojugador cambiado = widget.usuario.alineacion.elementAt(
             widget.posicion,
           )!;

@@ -67,14 +67,14 @@ class _PantallaOtorgacionDeEquipoState
       valorEquipo += equipoOtorgado[i].valor_venta;
     }
 
-    void _aceptarEquipo() {
+    Future<void> _aceptarEquipo() async {
        widget.usuario.equipo.equipo = equipoOtorgado;
        int contador = 0;
       for(var jugador in widget.usuario.equipo.equipo) {
         int posicionUsuario = widget.liga.participantes.indexOf(Logicausuario.usuarioActual);
         jugador.idPropietario = widget.liga.participantes.elementAt(posicionUsuario).id_usuario!;
         widget.usuario.equipo.suplentes.add(jugador);
-        Logicaligas.guardarIdEquipo(contador, jugador.idPropietario, widget.liga.id_liga, jugador.id_jugador);
+        await Logicaligas.guardarIdEquipo(contador, jugador.idPropietario, widget.liga.id_liga, jugador.id_jugador);
         contador++;
       }
 
