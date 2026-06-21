@@ -136,7 +136,7 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                             ),
                                           ),
                                           SizedBox(height: 1),
-                                          SizedBox(width: 600),
+                                          SizedBox(width: 100),
                                           Flexible(
                                             child: Icon(
                                               Icons.lock,
