@@ -170,11 +170,13 @@ class _SeleccionPaisState extends State<SeleccionPais> {
 
                           final seleccion =
                               widget.liga.listaSelecciones[indexGeneral];
+                          Logicaligas.guardarIdSeleccion(indexGeneral, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga);
                           Logicausuario.getUsuarioActual()
                                   .usuario_ligas
                                   .last
                                   .equipo =
                               seleccion;
+                          int contador = 0;
                           for (var jugador
                               in Logicausuario.getUsuarioActual()
                                   .usuario_ligas
@@ -187,6 +189,8 @@ class _SeleccionPaisState extends State<SeleccionPais> {
                                 .equipo
                                 .suplentes
                                 .add(jugador);
+                          Logicaligas.guardarIdEquipo(contador, Logicausuario.getUsuarioActual().id_usuario!, widget.liga.id_liga, jugador.id_jugador);
+                          contador++;
                           }
                           Logicausuario.getUsuarioActual()
                                   .usuario_ligas

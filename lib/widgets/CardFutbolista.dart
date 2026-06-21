@@ -8,10 +8,11 @@ class CardFutbolista extends StatefulWidget {
   const CardFutbolista({
     super.key,
     required this.usuario,
-    required this.posicion,
+    required this.posicion, required this.id_liga,
   });
   final Modelousuario usuario;
   final int posicion;
+  final int id_liga;
   @override
   State<CardFutbolista> createState() => _CardFutbolistaState();
 }
@@ -54,7 +55,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -92,7 +93,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -130,7 +131,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -168,7 +169,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -221,7 +222,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -259,7 +260,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -297,7 +298,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),
@@ -335,7 +336,7 @@ class _CardFutbolistaState extends State<CardFutbolista> {
                                     setState(() {
                                       Navigator.pop(context);
                                     });
-                                  },
+                                  }, id_liga: widget.id_liga,
                                 );
                               },
                             ),

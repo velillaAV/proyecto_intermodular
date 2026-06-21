@@ -5,6 +5,7 @@ import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
 import 'package:proyecto_intermodular/models/liga.dart';
 import 'package:proyecto_intermodular/screens/PantallaLigaNormal.dart';
 import 'package:proyecto_intermodular/services/LogicaJugadores.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
 import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 import 'package:proyecto_intermodular/widgets/Appbar.dart';
 import 'package:proyecto_intermodular/widgets/CardFutbolista4.dart';
@@ -68,9 +69,13 @@ class _PantallaOtorgacionDeEquipoState
 
     void _aceptarEquipo() {
        widget.usuario.equipo.equipo = equipoOtorgado;
+       int contador = 0;
       for(var jugador in widget.usuario.equipo.equipo) {
-        jugador.idPropietario = widget.liga.participantes.indexOf(Logicausuario.usuarioActual);
+        int posicionUsuario = widget.liga.participantes.indexOf(Logicausuario.usuarioActual);
+        jugador.idPropietario = widget.liga.participantes.elementAt(posicionUsuario).id_usuario!;
         widget.usuario.equipo.suplentes.add(jugador);
+        Logicaligas.guardarIdEquipo(contador, jugador.idPropietario, widget.liga.id_liga, jugador.id_jugador);
+        contador++;
       }
 
       Navigator.push(

@@ -626,4 +626,89 @@ class Logicaligas {
 
     return ligas;
   }
+
+  static Future<void> guardarIdSeleccion(
+    int id_seleccion,
+    int id_usuario,
+    int id_liga,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+      final seleccionesJSON = await mSupaBase
+          .from('liga_especial')
+          .select()
+          .eq('id_liga', id_liga)
+          .single();
+      List<int> selecciones = (seleccionesJSON['selecciones'] as List<dynamic>)
+          .map((numero) => int.tryParse(numero.toString()) ?? 0)
+          .toList();
+
+      selecciones[id_seleccion] = id_usuario;
+
+      await mSupaBase
+          .from('liga_especial')
+          .update({'selecciones': selecciones})
+          .eq('id_liga', id_liga);
+    } catch (e) {
+      print('error a la hora de guardar seleccion: $e');
+    }
+  }
+
+  static Future<void> guardarIdAlineacion(
+    int id_hueco,
+    int id_usuario,
+    int id_liga,
+    int id_jugador,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+      final alineacionJSON = await mSupaBase
+          .from('liga_participantes')
+          .select()
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario)
+          .single();
+      List<int> alineacion = (alineacionJSON['equipo'] as List<dynamic>)
+                  .map((numero) => int.tryParse(numero.toString()) ?? 0)
+                  .toList();
+      alineacion[id_hueco] = id_jugador;
+
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'alineacion': alineacion})
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario);
+    } catch (e) {
+      print('error a la hora de guardar alineacion: $e');
+    }
+  }
+
+  static Future<void> guardarIdEquipo(
+    int id_hueco,
+    int id_usuario,
+    int id_liga,
+    int id_jugador,
+  ) async {
+    try {
+      final mSupaBase = Supabase.instance.client;
+      final equipoJSON = await mSupaBase
+          .from('liga_participantes')
+          .select()
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario)
+          .single();
+      List<int> equipo = (equipoJSON['equipo'] as List<dynamic>)
+                  .map((numero) => int.tryParse(numero.toString()) ?? 0)
+                  .toList();
+      equipo[id_hueco] = id_jugador;
+
+      await mSupaBase
+          .from('liga_participantes')
+          .update({'alineacion': equipo})
+          .eq('id_liga', id_liga)
+          .eq('id_usuario', id_usuario);
+    } catch (e) {
+      print('error a la hora de guardar equipo: $e');
+    }
+  }
 }

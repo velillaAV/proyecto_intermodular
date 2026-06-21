@@ -70,7 +70,7 @@ class _AlineacionState extends State<Alineacion> {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.22,
-                    child: CardFutbolista(usuario: widget.usuario, posicion: 0),
+                    child: CardFutbolista(usuario: widget.usuario, posicion: 0, id_liga: widget.liga.id_liga),
                   ),
                   SizedBox(height: 50),
                   Row(
@@ -80,28 +80,28 @@ class _AlineacionState extends State<Alineacion> {
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 1,
+                          posicion: 1, id_liga: widget.liga.id_liga,
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 2,
+                          posicion: 2, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 3,
+                          posicion: 3, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 4,
+                          posicion: 4, id_liga: widget.liga.id_liga
                         ),
                       ),
                     ],
@@ -114,21 +114,21 @@ class _AlineacionState extends State<Alineacion> {
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 5,
+                          posicion: 5, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 6,
+                          posicion: 6, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 7,
+                          posicion: 7, id_liga: widget.liga.id_liga
                         ),
                       ),
                     ],
@@ -141,21 +141,21 @@ class _AlineacionState extends State<Alineacion> {
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 8,
+                          posicion: 8, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 9,
+                          posicion: 9, id_liga: widget.liga.id_liga
                         ),
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.22,
                         child: CardFutbolista(
                           usuario: widget.usuario,
-                          posicion: 10,
+                          posicion: 10, id_liga: widget.liga.id_liga
                         ),
                       ),
                     ],

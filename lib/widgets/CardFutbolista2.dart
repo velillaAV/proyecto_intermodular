@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:proyecto_intermodular/models/ModeloJugador.dart';
 import 'package:proyecto_intermodular/models/ModeloUsuario.dart';
+import 'package:proyecto_intermodular/services/LogicaLigas.dart';
+import 'package:proyecto_intermodular/services/LogicaUsuarios.dart';
 
 //Carta que aparece al seleccionar un jugador para la plantilla
 
@@ -9,11 +11,13 @@ class CardFutbolista2 extends StatefulWidget {
     super.key,
     required this.posicion,
     required this.usuario,
+    
     required this.jugador,
-    required this.actualizar,
+    required this.actualizar, required this.id_liga,
   });
   final Modelousuario usuario;
   final int posicion;
+  final int id_liga;
   final Modelojugador jugador;
   final void Function() actualizar;
   @override
@@ -40,10 +44,14 @@ class _CardFutbolista2State extends State<CardFutbolista2> {
     return GestureDetector(
       onTap: () {
         if (widget.usuario.alineacion.elementAt(widget.posicion) == null) {
+        Logicaligas.guardarIdEquipo(widget.usuario.equipo.equipo.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, 0);
+        Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
           widget.usuario.alineacion[widget.posicion] = widget.jugador;
           widget.usuario.equipo.suplentes.remove(widget.jugador);
           widget.actualizar();
         } else {
+        Logicaligas.guardarIdEquipo(widget.usuario.equipo.equipo.indexOf(widget.jugador), Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.usuario.alineacion.elementAt(widget.posicion)!.id_jugador);
+        Logicaligas.guardarIdAlineacion(widget.posicion, Logicausuario.usuarioActual.id_usuario!, widget.id_liga, widget.jugador.id_jugador);
           Modelojugador cambiado = widget.usuario.alineacion.elementAt(
             widget.posicion,
           )!;
